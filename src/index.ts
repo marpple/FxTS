@@ -17,6 +17,7 @@ export {
   delay,
   groupBy,
   head,
+  head as first,
   indexBy,
   isArray,
   isString,
