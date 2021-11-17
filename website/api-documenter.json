@@ -1,0 +1,10 @@
+{
+  "outputTarget": "markdown",
+  "plugins": [
+    {
+      "packageName": "markdown-plugin",
+      "enabledFeatureNames": ["markdown-documenter"]
+    }
+  ],
+  "tableOfContents": {}
+}
