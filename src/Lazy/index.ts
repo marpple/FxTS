@@ -5,6 +5,7 @@ import concat from "./concat";
 import concurrent from "./concurrent";
 import drop from "./drop";
 import filter from "./filter";
+import flat from "./flat";
 import map from "./map";
 import range from "./range";
 import take from "./take";
@@ -18,6 +19,7 @@ export {
   concurrent,
   drop,
   filter,
+  flat,
   range,
   map,
   take,
