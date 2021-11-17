@@ -7,6 +7,7 @@ import isArray from "./isArray";
 import isString from "./isString";
 import last from "./last";
 import not from "./not";
+import partition from "./partition";
 import pipe from "./pipe";
 import reduce from "./reduce";
 import tap from "./tap";
@@ -23,6 +24,7 @@ export {
   isString,
   last,
   not,
+  partition,
   pipe,
   reduce,
   tap,
