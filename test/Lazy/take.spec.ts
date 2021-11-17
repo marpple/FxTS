@@ -1,4 +1,13 @@
-import { delay, range, take, toArray, toAsync } from "../../src/index";
+import {
+  delay,
+  filter,
+  map,
+  pipe,
+  range,
+  take,
+  toArray,
+  toAsync,
+} from "../../src/index";
 
 describe("take", () => {
   describe("sync", () => {
@@ -26,6 +35,18 @@ describe("take", () => {
 
       const res7 = toArray(take(-1, [1, 2, 3, 4]));
       expect(res7).toEqual([]);
+    });
+
+    it("should be able to be used as a curried function in the pipeline", () => {
+      const res1 = pipe(
+        [1, 2, 3, 4],
+        map((a) => a + 10),
+        filter((a) => a % 2 === 0),
+        take(2),
+        toArray,
+      );
+
+      expect(res1).toEqual([12, 14]);
     });
 
     it("should be able to take the rest element", async function () {
@@ -67,6 +88,17 @@ describe("take", () => {
       expect(res7).toEqual([]);
     });
 
+    it("should be able to be used as a curried function in the pipeline", async () => {
+      const res1 = await pipe(
+        toAsync([1, 2, 3, 4]),
+        map((a) => a + 10),
+        filter((a) => a % 2 === 0),
+        take(2),
+        toArray,
+      );
+
+      expect(res1).toEqual([12, 14]);
+    });
     it("should be able to take the element concurrently", async function () {
       const asyncIterator = take(
         3,
