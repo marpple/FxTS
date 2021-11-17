@@ -8,6 +8,7 @@ import filter from "./filter";
 import flat from "./flat";
 import flatMap from "./flatMap";
 import map from "./map";
+import peek from "./peek";
 import range from "./range";
 import take from "./take";
 import toAsync from "./toAsync";
@@ -24,6 +25,7 @@ export {
   flatMap,
   range,
   map,
+  peek,
   take,
   toAsync,
 };
