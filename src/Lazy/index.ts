@@ -14,6 +14,7 @@ import range from "./range";
 import reject from "./reject";
 import take from "./take";
 import takeUntil from "./takeUntil";
+import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
 
 export {
@@ -33,5 +34,6 @@ export {
   prepend,
   take,
   takeUntil,
+  takeWhile,
   toAsync,
 };
