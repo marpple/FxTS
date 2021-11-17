@@ -13,6 +13,7 @@ import prepend from "./prepend";
 import range from "./range";
 import reject from "./reject";
 import take from "./take";
+import takeUntil from "./takeUntil";
 import toAsync from "./toAsync";
 
 export {
@@ -31,5 +32,6 @@ export {
   peek,
   prepend,
   take,
+  takeUntil,
   toAsync,
 };
