@@ -6,6 +6,7 @@ import concurrent from "./concurrent";
 import drop from "./drop";
 import filter from "./filter";
 import flat from "./flat";
+import flatMap from "./flatMap";
 import map from "./map";
 import range from "./range";
 import take from "./take";
@@ -20,6 +21,7 @@ export {
   drop,
   filter,
   flat,
+  flatMap,
   range,
   map,
   take,
