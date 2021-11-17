@@ -8,5 +8,5 @@ npm run compile:types4-2
 mv ./src/types/Awaited.ts ./build/Awaited4-2.ts
 mv ./build/Awaited4-5.ts ./src/types/Awaited.ts
 
-npm i typescript@beta -D --legacy-peer-deps
+npm i typescript@rc -D --legacy-peer-deps
 npm run compile:types4-5
