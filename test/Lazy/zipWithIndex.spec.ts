@@ -1,8 +1,8 @@
 import { concurrent, delay, toAsync, zipWithIndex } from "../../src/index";
 
-describe("zipWithIndex", () => {
-  describe("sync", () => {
-    it("should be returned as a tuple ([index,value])", () => {
+describe("zipWithIndex", function () {
+  describe("sync", function () {
+    it("should be returned as a tuple ([index,value])", function () {
       const items = ["a", "b", "c", "d"];
       const res = zipWithIndex(items);
       let i = -1;
@@ -14,8 +14,8 @@ describe("zipWithIndex", () => {
     });
   });
 
-  describe("async", () => {
-    it("should be returned as a tuple ([index,value])", async () => {
+  describe("async", function () {
+    it("should be returned as a tuple ([index,value])", async function () {
       const items = ["a", "b", "c", "d"];
       const res = zipWithIndex(toAsync(items));
       let i = -1;
@@ -26,7 +26,7 @@ describe("zipWithIndex", () => {
       }
     });
 
-    it("should be returned as a tuple ([index,value]) concurrently", async () => {
+    it("should be returned as a tuple ([index,value]) concurrently", async function () {
       const items = ["a", "b", "c", "d"];
       const { length } = items;
       const iter = concurrent(

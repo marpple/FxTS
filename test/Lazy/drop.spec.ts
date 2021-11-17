@@ -11,9 +11,9 @@ import {
 
 import { callFuncAfterTime } from "../utils";
 
-describe("drop", () => {
-  describe("sync", () => {
-    it("should be discarded elements by length", () => {
+describe("drop", function () {
+  describe("sync", function () {
+    it("should be discarded elements by length", function () {
       const acc = [];
       for (const a of drop(2, [1, 2, 3, 4, 5])) {
         acc.push(a);
@@ -21,7 +21,7 @@ describe("drop", () => {
       expect(acc).toEqual([3, 4, 5]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         [1, 2, 3, 4, 5, 6, 7, 8],
         map((a) => a + 10),
@@ -34,8 +34,8 @@ describe("drop", () => {
     });
   });
 
-  describe("async", () => {
-    it("should be discarded elements by length", async () => {
+  describe("async", function () {
+    it("should be discarded elements by length", async function () {
       const acc = [];
       for await (const a of drop(2, toAsync([1, 2, 3, 4, 5]))) {
         acc.push(a);
@@ -43,7 +43,7 @@ describe("drop", () => {
       expect(acc).toEqual([3, 4, 5]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(
         toAsync([1, 2, 3, 4, 5, 6, 7, 8]),
         map((a) => a + 10),
@@ -55,7 +55,7 @@ describe("drop", () => {
       expect(res).toEqual([16, 18]);
     });
 
-    it("should be discarded elements by length concurrently", async () => {
+    it("should be discarded elements by length concurrently", async function () {
       const fn = jest.fn();
       callFuncAfterTime(fn, 400);
       const res = await pipe(
@@ -70,7 +70,7 @@ describe("drop", () => {
       expect(res).toEqual([6, 8, 10]);
     }, 450);
 
-    it("should be able to handle an error when asynchronous", async () => {
+    it("should be able to handle an error when asynchronous", async function () {
       await expect(
         pipe(
           toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
@@ -83,7 +83,7 @@ describe("drop", () => {
       ).rejects.toThrow("err");
     });
 
-    it("should be able to handle an error when working concurrent", async () => {
+    it("should be able to handle an error when working concurrent", async function () {
       await expect(
         pipe(
           toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
@@ -99,7 +99,7 @@ describe("drop", () => {
       ).rejects.toThrow("err");
     });
 
-    it("should be able to handle an error when working concurrent - Promise.reject", async () => {
+    it("should be able to handle an error when working concurrent - Promise.reject", async function () {
       await expect(
         pipe(
           toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),

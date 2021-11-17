@@ -18,15 +18,15 @@ const expected = [
   [10, 11],
 ];
 
-describe("chunk", () => {
-  describe("sync", () => {
-    it("should be chunked by the given number - number", () => {
+describe("chunk", function () {
+  describe("sync", function () {
+    it("should be chunked by the given number - number", function () {
       const res = toArray(chunk(3, range(1, 12)));
       expect(toArray(chunk(0, range(1, 12)))).toEqual([]);
       expect(res).toEqual(expected);
     });
 
-    it("should be chunked by the given number - string", () => {
+    it("should be chunked by the given number - string", function () {
       const res = toArray(chunk(3, "abcdefghijklmnopqrstuvwxyz"));
       expect(res).toEqual([
         ["a", "b", "c"],
@@ -41,19 +41,19 @@ describe("chunk", () => {
       ]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(range(1, 12), chunk(3), toArray);
       expect(res).toEqual(expected);
     });
   });
 
-  describe("async", () => {
-    it("should be chunked by the given number - number (empty)", async () => {
+  describe("async", function () {
+    it("should be chunked by the given number - number (empty)", async function () {
       const res = await toArray(chunk(0, toAsync(range(1, 12))));
       expect(res).toEqual([]);
     });
 
-    it("should be chunked by the given number - number", async () => {
+    it("should be chunked by the given number - number", async function () {
       const res = await toArray(chunk(3, toAsync(range(1, 12))));
       expect(res).toEqual(expected);
     });
@@ -135,7 +135,7 @@ describe("chunk", () => {
       ).rejects.toThrow("err");
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(range(1, 12), toAsync, chunk(3), toArray);
       expect(res).toEqual(expected);
     });

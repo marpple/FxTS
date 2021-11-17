@@ -3,25 +3,25 @@ import { filter, map, pipe, range, reduce, toAsync } from "../src/index";
 const addNumber = (a: number, b: number) => a + b;
 const addNumberAsync = async (a: number, b: number) => a + b;
 
-describe("reduce", () => {
-  describe("sync", () => {
-    it("should return initial value when the given `iterable` is empty array", () => {
+describe("reduce", function () {
+  describe("sync", function () {
+    it("should return initial value when the given `iterable` is empty array", function () {
       expect(reduce((a, b) => a + b, "seed", [])).toEqual("seed");
     });
 
-    it("should return 'undefined' when the given `iterable` is an empty array and initial value is absent", () => {
+    it("should return 'undefined' when the given `iterable` is an empty array and initial value is absent", function () {
       expect(reduce((a, b) => a + b, [])).toBeUndefined();
     });
 
-    it("should work given it is initial value", () => {
+    it("should work given it is initial value", function () {
       expect(reduce(addNumber, 10, range(1, 6))).toEqual(25);
     });
 
-    it("should use the first value as the initial value if initial value is absent", () => {
+    it("should use the first value as the initial value if initial value is absent", function () {
       expect(reduce(addNumber, range(1, 6))).toEqual(15);
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         ["1", "2", "3", "4", "5"],
         map((a) => Number(a)),
@@ -32,26 +32,26 @@ describe("reduce", () => {
     });
   });
 
-  describe("async", () => {
-    it("should reduce `iterable` by the callback", async () => {
+  describe("async", function () {
+    it("should reduce `iterable` by the callback", async function () {
       expect(await reduce(addNumber, 10, toAsync(range(1, 6)))).toEqual(25);
     });
 
-    it("should use the first value as the initial value if initial value is absent", async () => {
+    it("should use the first value as the initial value if initial value is absent", async function () {
       expect(await reduce(addNumber, toAsync(range(1, 6)))).toEqual(15);
     });
 
-    it("should reduce `AsyncIterable` by the callback with initial value", async () => {
+    it("should reduce `AsyncIterable` by the callback with initial value", async function () {
       expect(await reduce(addNumberAsync, 10, toAsync(range(1, 6)))).toEqual(
         25,
       );
     });
 
-    it("should reduce 'AsyncIterable' by the callback", async () => {
+    it("should reduce 'AsyncIterable' by the callback", async function () {
       expect(await reduce(addNumberAsync, toAsync(range(1, 6)))).toEqual(15);
     });
 
-    it("should return rejected 'Promise' if an error occurs in the callback", async () => {
+    it("should return rejected 'Promise' if an error occurs in the callback", async function () {
       await expect(
         reduce(
           () => {
@@ -78,7 +78,7 @@ describe("reduce", () => {
       ).rejects.toThrow("err");
     });
 
-    it("should return rejected 'Promise' if an error occurs in the callback", async () => {
+    it("should return rejected 'Promise' if an error occurs in the callback", async function () {
       await expect(
         reduce(() => Promise.reject(new Error("err")), 0, toAsync(range(1, 6))),
       ).rejects.toThrow("err");
@@ -95,7 +95,7 @@ describe("reduce", () => {
       ).rejects.toThrow("err");
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res1 = await pipe(
         toAsync(["1", "2", "3", "4", "5"]),
         map((a) => Number(a)),

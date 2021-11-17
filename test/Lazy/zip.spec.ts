@@ -10,8 +10,8 @@ import {
 import { callFuncAfterTime } from "../utils";
 
 describe("zip", function () {
-  describe("sync", () => {
-    it("should be merged values of each 'Iterable' with value at the corresponding position", () => {
+  describe("sync", function () {
+    it("should be merged values of each 'Iterable' with value at the corresponding position", function () {
       const res = toArray(
         zip(
           [1, 2, 3, 4], //
@@ -27,7 +27,7 @@ describe("zip", function () {
       ]);
     });
 
-    it("should be zipped if the iterables have different size", () => {
+    it("should be zipped if the iterables have different size", function () {
       const res1 = toArray(
         zip(
           [1, 2, 3, 4], //
@@ -57,7 +57,7 @@ describe("zip", function () {
       ]);
     });
 
-    it("should be able to be used in the pipeline", () => {
+    it("should be able to be used in the pipeline", function () {
       const res = pipe(
         [1, 2, 3, 4],
         (a) => zip(a, [5, 6, 7, 8]),
@@ -68,7 +68,7 @@ describe("zip", function () {
       expect(res).toEqual([[6], [8], [10], [12]]);
     });
 
-    it("should be zipped each 'Iterable' having a different type", () => {
+    it("should be zipped each 'Iterable' having a different type", function () {
       const res = pipe(
         ["a", "b", "c", "d"],
         (a) => zip(a, [1, 2, 3, 4]),
@@ -78,7 +78,7 @@ describe("zip", function () {
       expect(res).toEqual([{ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = pipe(
         // prettier-ignore
         [5, 6, 7, 8],
@@ -97,8 +97,8 @@ describe("zip", function () {
 
   const sum = (a: number, b: number) => a + b;
 
-  describe("async", () => {
-    it("should be merged values of each 'AsyncIterable' with value at the corresponding position", async () => {
+  describe("async", function () {
+    it("should be merged values of each 'AsyncIterable' with value at the corresponding position", async function () {
       const res = await toArray(
         zip(
           // prettier-ignore
@@ -115,7 +115,7 @@ describe("zip", function () {
       ]);
     });
 
-    it("should be zipped if the iterables have different size", async () => {
+    it("should be zipped if the iterables have different size", async function () {
       const res1 = await toArray(
         zip(
           // prettier-ignore
@@ -147,7 +147,7 @@ describe("zip", function () {
       ]);
     });
 
-    it("should be zipped 'Iterable' and 'AsyncIterable'", async () => {
+    it("should be zipped 'Iterable' and 'AsyncIterable'", async function () {
       const res = await toArray(
         zip(
           [1, 2, 3, 4],
@@ -164,7 +164,7 @@ describe("zip", function () {
       ]);
     });
 
-    it("should be able to be used in the pipeline", async () => {
+    it("should be able to be used in the pipeline", async function () {
       const res = await pipe(
         toAsync([1, 2, 3, 4]),
         (a) => zip(a, [5, 6, 7, 8]),
@@ -175,7 +175,7 @@ describe("zip", function () {
       expect(res).toEqual([[6], [8], [10], [12]]);
     });
 
-    it("should be zipped each 'AsyncIterable' having a different type", async () => {
+    it("should be zipped each 'AsyncIterable' having a different type", async function () {
       const res = await pipe(
         ["a", "b", "c", "d"],
         (a) => zip(a, toAsync([1, 2, 3, 4])),
@@ -185,7 +185,7 @@ describe("zip", function () {
       expect(res).toEqual([{ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }]);
     });
 
-    it("should be zipped sequentially", async () => {
+    it("should be zipped sequentially", async function () {
       const fn = jest.fn();
       callFuncAfterTime(fn, 4000);
 
@@ -205,7 +205,7 @@ describe("zip", function () {
       ]);
     }, 4050);
 
-    it("should be zipped concurrently: zip - map", async () => {
+    it("should be zipped concurrently: zip - map", async function () {
       const fn = jest.fn();
       callFuncAfterTime(fn, 1000);
 
@@ -226,7 +226,7 @@ describe("zip", function () {
       ]);
     }, 1050);
 
-    it("should be zipped concurrently: map - zip", async () => {
+    it("should be zipped concurrently: map - zip", async function () {
       const fn = jest.fn();
       callFuncAfterTime(fn, 1000);
 

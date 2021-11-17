@@ -8,9 +8,9 @@ import {
   toAsync,
 } from "../src/index";
 
-describe("pipe", () => {
-  describe("sync", () => {
-    it("should return the value evaluated by the composed function", () => {
+describe("pipe", function () {
+  describe("sync", function () {
+    it("should return the value evaluated by the composed function", function () {
       const res = pipe(
         0,
         (n) => String(n + 1),
@@ -20,7 +20,7 @@ describe("pipe", () => {
       expect(res).toEqual("3");
     });
 
-    it("should work when the composed function deals with 'Iterable'", () => {
+    it("should work when the composed function deals with 'Iterable'", function () {
       const res = pipe(
         [1, 2, 3, 4, 5],
         (n) => map((a) => a + 5, n),
@@ -31,8 +31,8 @@ describe("pipe", () => {
     });
   });
 
-  describe("async", () => {
-    it("should work when the composed function deals with 'AsyncIterable'", async () => {
+  describe("async", function () {
+    it("should work when the composed function deals with 'AsyncIterable'", async function () {
       const res1 = await pipe(
         toAsync([1, 2, 3, 4, 5]),
         (n) => map((a) => a + 5, n),
@@ -53,7 +53,7 @@ describe("pipe", () => {
       expect(res2).toEqual(24);
     });
 
-    it("should return rejected 'Promise' if an error occurs in the callback", async () => {
+    it("should return rejected 'Promise' if an error occurs in the callback", async function () {
       await expect(
         pipe(
           toAsync(range(1, 10)),

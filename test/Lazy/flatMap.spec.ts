@@ -1,8 +1,8 @@
 import { flatMap, map, pipe, toArray, toAsync } from "../../src/index";
 
-describe("flatMap", () => {
-  describe("sync", () => {
-    it("should be flat-mapped", () => {
+describe("flatMap", function () {
+  describe("sync", function () {
+    it("should be flat-mapped", function () {
       const acc = [];
       for (const a of flatMap(
         (s) => s.split(" "),
@@ -13,7 +13,7 @@ describe("flatMap", () => {
       expect(acc).toEqual(["It", "is", "a", "good", "day"]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         ["It is", "a good", "day"],
         flatMap((s) => s.split(" ")),
@@ -25,8 +25,8 @@ describe("flatMap", () => {
     });
   });
 
-  describe("async", () => {
-    it("should be flat-mapped", async () => {
+  describe("async", function () {
+    it("should be flat-mapped", async function () {
       const acc = [];
       // prettier-ignore
       for await (const a of flatMap((s) => s.split(" "), toAsync(["It is", "a good", "day"]))) {
@@ -35,7 +35,7 @@ describe("flatMap", () => {
       expect(acc).toEqual(["It", "is", "a", "good", "day"]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(
         toAsync(["It is", "a good", "day"]),
         flatMap((s) => s.split(" ")),

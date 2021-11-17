@@ -1,7 +1,7 @@
 import { filter, map, pipe, toArray, toAsync, uniqBy } from "../../src/index";
 
 describe("uniqBy", function () {
-  describe("sync", () => {
+  describe("sync", function () {
     it("should be removed duplicate values by the callback", function () {
       const res1 = uniqBy((a) => a, "marpple");
       expect([...res1]).toEqual(["m", "a", "r", "p", "l", "e"]);
@@ -42,7 +42,7 @@ describe("uniqBy", function () {
       expect([...res3]).toEqual([1, 2, 3, 4]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         [1, 2, 3, 4, 4, 2],
         map((a) => a + 10),
@@ -55,7 +55,7 @@ describe("uniqBy", function () {
     });
   });
 
-  describe("async", () => {
+  describe("async", function () {
     it("should be removed duplicate values by the callback", async function () {
       const res1 = await toArray(uniqBy((a) => a, toAsync("marpple")));
       expect(res1).toEqual(["m", "a", "r", "p", "l", "e"]);

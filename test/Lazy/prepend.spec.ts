@@ -11,7 +11,7 @@ import {
 import { callFuncAfterTime } from "../utils";
 
 describe("prepend", function () {
-  describe("sync", () => {
+  describe("sync", function () {
     it("should be prepended the contents of the given element", function () {
       expect([...prepend("a", ["b", "c"])]).toEqual(["a", "b", "c"]);
     });
@@ -37,7 +37,7 @@ describe("prepend", function () {
     });
   });
 
-  describe("async", () => {
+  describe("async", function () {
     it("should be prepended the contents of the given element", async function () {
       const res = await pipe(
         toAsync([2, 3, 4]),

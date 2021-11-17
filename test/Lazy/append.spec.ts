@@ -11,7 +11,7 @@ import {
 import { callFuncAfterTime } from "../utils";
 
 describe("append", function () {
-  describe("sync", () => {
+  describe("sync", function () {
     it("should be contained the contents of the given element", function () {
       expect([...append("c", ["a", "b"])]).toEqual(["a", "b", "c"]);
     });
@@ -26,7 +26,7 @@ describe("append", function () {
     });
   });
 
-  describe("async", () => {
+  describe("async", function () {
     it("should be contained the contents of the given element", async function () {
       const res = await toArray(append("c", toAsync(["a", "b"])));
       expect(res).toEqual(["a", "b", "c"]);

@@ -11,9 +11,9 @@ import {
 } from "../../src/index";
 import { callFuncAfterTime } from "../utils";
 
-describe("flat", () => {
-  describe("sync", () => {
-    it("should be flattened", () => {
+describe("flat", function () {
+  describe("sync", function () {
+    it("should be flattened", function () {
       const acc = [];
       for (const a of flat([[1, 2], 3, 4, 5, [6, 7]])) {
         acc.push(a);
@@ -24,7 +24,7 @@ describe("flat", () => {
       expect(res).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         [1, 2, 3, [4, 5]],
         flat,
@@ -36,8 +36,8 @@ describe("flat", () => {
     });
   });
 
-  describe("async", () => {
-    it("should be flattened", async () => {
+  describe("async", function () {
+    it("should be flattened", async function () {
       const acc = [];
       for await (const a of flat(toAsync([[1, 2], 3, 4, 5, [6, 7]]))) {
         acc.push(a);
@@ -50,7 +50,7 @@ describe("flat", () => {
       expect(res).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(
         toAsync([1, 2, 3, [4, 5]]),
         flat,

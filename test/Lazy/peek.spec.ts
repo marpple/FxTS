@@ -1,7 +1,7 @@
 import { map, peek, pipe, toArray, toAsync } from "../../src/index";
 
 describe("peek", function () {
-  describe("sync", () => {
+  describe("sync", function () {
     it("should be called the provided callback", function () {
       let sum = 0;
       const res = peek((a) => (sum = sum + a), [1, 2, 3, 4]);
@@ -44,7 +44,7 @@ describe("peek", function () {
       expect(res).toEqual([11, 12]);
     });
   });
-  describe("async", () => {
+  describe("async", function () {
     it("should be called the provided callback", async function () {
       let sum = 0;
       const res = peek((a) => (sum = sum + a), toAsync([1, 2, 3, 4]));

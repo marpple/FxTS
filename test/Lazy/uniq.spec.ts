@@ -17,7 +17,7 @@ describe("uniq", function () {
       expect(res1).toEqual([{ v: 1 }, { v: 1 }, { v: 1 }, { v: 1 }, { v: 1 }]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         [1, 2, 3, 4, 4, 2],
         map((a) => a + 10),

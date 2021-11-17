@@ -3,9 +3,9 @@ import { pipe, range, reject, toArray, toAsync } from "../../src/index";
 const mod = (a: number) => a % 2 === 0;
 const modAsync = async (a: number) => a % 2 === 0;
 
-describe("reject", () => {
-  describe("sync", () => {
-    it("should be rejected by the callback", () => {
+describe("reject", function () {
+  describe("sync", function () {
+    it("should be rejected by the callback", function () {
       const res = [...reject(mod, range(1, 10))];
       expect(res).toEqual([1, 3, 5, 7, 9]);
     });
@@ -20,7 +20,7 @@ describe("reject", () => {
       ).toThrow("err");
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res1 = pipe(
         [1, 2, 3, 4],
         reject((a) => a % 2 === 0),
@@ -38,8 +38,8 @@ describe("reject", () => {
       expect(res2).toEqual([null, undefined]);
     });
   });
-  describe("async", () => {
-    it("should be rejected by the callback", async () => {
+  describe("async", function () {
+    it("should be rejected by the callback", async function () {
       const res: number[] = [];
       const iter = reject(modAsync, toAsync(range(1, 10)));
       for await (const item of iter) {
@@ -48,7 +48,7 @@ describe("reject", () => {
       expect(res).toEqual([1, 3, 5, 7, 9]);
     });
 
-    it("should be able to handle an error", async () => {
+    it("should be able to handle an error", async function () {
       await expect(
         toArray(
           reject(() => {
@@ -58,7 +58,7 @@ describe("reject", () => {
       ).rejects.toThrow("err");
     });
 
-    it("should be able to handle an error when the callback is asynchronous", async () => {
+    it("should be able to handle an error when the callback is asynchronous", async function () {
       await expect(
         toArray(
           reject(() => Promise.reject(new Error("err")), toAsync(range(1, 10))),
@@ -66,7 +66,7 @@ describe("reject", () => {
       ).rejects.toThrow("err");
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(
         toAsync([1, 2, 3, 4]),
         reject((a) => a % 2 === 0),

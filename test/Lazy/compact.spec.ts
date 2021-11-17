@@ -1,7 +1,7 @@
 import { compact, filter, map, pipe, toArray, toAsync } from "../../src/index";
 
-describe("compact", () => {
-  describe("sync", () => {
+describe("compact", function () {
+  describe("sync", function () {
     it(`should be excluded 'null' 'undefined' - number`, () => {
       const acc = [];
       for (const a of compact([0, 1, undefined, 3, null, 5])) {
@@ -10,7 +10,7 @@ describe("compact", () => {
       expect(acc).toEqual([0, 1, 3, 5]);
     });
 
-    it("should be excluded 'null' 'undefined' - string", () => {
+    it("should be excluded 'null' 'undefined' - string", function () {
       const acc = [];
       for (const a of compact(["", "a", undefined, "b", null])) {
         acc.push(a);
@@ -18,7 +18,7 @@ describe("compact", () => {
       expect(acc).toEqual(["", "a", "b"]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         [1, undefined, 3, 4, 5, null, 7, 8],
         compact,
@@ -31,8 +31,8 @@ describe("compact", () => {
     });
   });
 
-  describe("async", () => {
-    it("should be excluded 'null' 'undefined' - number", async () => {
+  describe("async", function () {
+    it("should be excluded 'null' 'undefined' - number", async function () {
       const acc = [];
       for await (const a of compact(toAsync([0, 1, undefined, 3, null, 5]))) {
         acc.push(a);
@@ -40,7 +40,7 @@ describe("compact", () => {
       expect(acc).toEqual([0, 1, 3, 5]);
     });
 
-    it("should be excluded 'null' 'undefined' - string", async () => {
+    it("should be excluded 'null' 'undefined' - string", async function () {
       const acc = [];
       for await (const a of compact(toAsync(["", "a", undefined, "b", null]))) {
         acc.push(a);
@@ -48,7 +48,7 @@ describe("compact", () => {
       expect(acc).toEqual(["", "a", "b"]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(
         toAsync([1, undefined, 3, 4, 5, null, 7, 8]),
         compact,

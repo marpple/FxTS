@@ -11,9 +11,9 @@ import {
 } from "../../src/index";
 import { AsyncFunctionException } from "../../src/_internal/error";
 
-describe("takeUntil", () => {
-  describe("sync", () => {
-    it("should be able to take the element until the callback result is truthy", () => {
+describe("takeUntil", function () {
+  describe("sync", function () {
+    it("should be able to take the element until the callback result is truthy", function () {
       const res = [];
       for (const item of takeUntil((a) => a % 2 === 0, [1, 2, 3, 4])) {
         res.push(item);
@@ -27,12 +27,12 @@ describe("takeUntil", () => {
       expect(res2).toEqual([1, 2, 3, 4]);
     });
 
-    it("should throw an erorr when the callback is asynchronous", () => {
+    it("should throw an erorr when the callback is asynchronous", function () {
       const res = () => [...takeUntil(async (a) => a % 2 === 0, [1, 2, 3, 4])];
       expect(res).toThrowError(new AsyncFunctionException());
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         [1, 2, 3, 4],
         map((a) => a + 10),
@@ -45,13 +45,13 @@ describe("takeUntil", () => {
     });
   });
 
-  describe("async", () => {
-    it("should be able to take the element until the callback result is truthy", async () => {
+  describe("async", function () {
+    it("should be able to take the element until the callback result is truthy", async function () {
       const res = [];
       // prettier-ignore
       for await (const item of takeUntil((a) => a % 2 === 0, toAsync([1, 2, 3, 4]))) {
-        res.push(item);
-      }
+      res.push(item);
+    }
       expect(res).toEqual([1, 2]);
 
       // prettier-ignore
@@ -64,12 +64,12 @@ describe("takeUntil", () => {
       expect(res2).toEqual([1, 2, 3, 4]);
     });
 
-    it("should be able to take the element until the async callback result is truthy", async () => {
+    it("should be able to take the element until the async callback result is truthy", async function () {
       const res = [];
       // prettier-ignore
       for await (const item of takeUntil((a) => a % 2 === 0, toAsync([1, 2, 3, 4]))) {
-        res.push(item);
-      }
+      res.push(item);
+    }
       expect(res).toEqual([1, 2]);
 
       // prettier-ignore
@@ -81,7 +81,7 @@ describe("takeUntil", () => {
       expect(res2).toEqual([1, 2, 3, 4]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(
         toAsync([1, 2, 3, 4]),
         map((a) => a + 10),
@@ -93,7 +93,7 @@ describe("takeUntil", () => {
       expect(res).toEqual([12, 14]);
     });
 
-    it("should be able to take the element until the callback result is truthy concurrently", async () => {
+    it("should be able to take the element until the callback result is truthy concurrently", async function () {
       const res = await pipe(
         toAsync(range(1, 20)),
         takeUntil((a) => a > 12),

@@ -15,19 +15,19 @@ import { callFuncAfterTime } from "../utils";
 const mod = (a: number) => a % 2 === 0;
 const modAsync = async (a: number) => a % 2 === 0;
 
-describe("filter", () => {
-  describe("sync", () => {
-    it("should be filtered by the callback", () => {
+describe("filter", function () {
+  describe("sync", function () {
+    it("should be filtered by the callback", function () {
       const res = [...filter(mod, range(1, 10))];
       expect(res).toEqual([2, 4, 6, 8]);
     });
 
-    it("should throw an error when the callback is asynchronous", () => {
+    it("should throw an error when the callback is asynchronous", function () {
       const res = () => [...filter(modAsync, range(1, 10))];
       expect(res).toThrowError(new AsyncFunctionException());
     });
 
-    it("should be able to handle an error", () => {
+    it("should be able to handle an error", function () {
       try {
         filter(() => {
           throw "err";
@@ -37,7 +37,7 @@ describe("filter", () => {
       }
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         [1, 2, 3, 4],
         filter((a) => a % 2 === 0),
@@ -48,8 +48,8 @@ describe("filter", () => {
     });
   });
 
-  describe("async", () => {
-    it("should be filtered by the callback", async () => {
+  describe("async", function () {
+    it("should be filtered by the callback", async function () {
       const res: number[] = [];
       const iter = filter(modAsync, toAsync(range(1, 10)));
       for await (const item of iter) {
@@ -58,7 +58,7 @@ describe("filter", () => {
       expect(res).toEqual([2, 4, 6, 8]);
     });
 
-    it("should be able to handle an error", async () => {
+    it("should be able to handle an error", async function () {
       try {
         await toArray(
           filter(() => {
@@ -70,7 +70,7 @@ describe("filter", () => {
       }
     });
 
-    it("should be able to handle an error when the callback is asynchronous", async () => {
+    it("should be able to handle an error when the callback is asynchronous", async function () {
       try {
         await toArray(
           filter(() => Promise.reject("err"), toAsync(range(1, 10))),
@@ -252,7 +252,7 @@ describe("filter", () => {
         ),
       ).rejects.toThrow("err");
     });
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(
         toAsync([1, 2, 3, 4]),
         filter((a) => a % 2 === 0),

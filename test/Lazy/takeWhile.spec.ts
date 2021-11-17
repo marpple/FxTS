@@ -11,9 +11,9 @@ import {
 } from "../../src/index";
 import { AsyncFunctionException } from "../../src/_internal/error";
 
-describe("takeWhile", () => {
+describe("takeWhile", function () {
   describe("sync", function () {
-    it("should be able to take the element while the callback result is truthy", () => {
+    it("should be able to take the element while the callback result is truthy", function () {
       const res = [];
       for (const item of takeWhile((a) => a < 3, [1, 2, 3, 4])) {
         res.push(item);
@@ -27,12 +27,12 @@ describe("takeWhile", () => {
       expect(res2).toEqual([1, 2, 3, 4]);
     });
 
-    it("should throw an error when the callback is asynchronous", () => {
+    it("should throw an error when the callback is asynchronous", function () {
       const res = () => [...takeWhile(async (a) => a < 3, [1, 2, 3, 4])];
       expect(res).toThrowError(new AsyncFunctionException());
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res = pipe(
         range(1, 20),
         map((a) => a + 10),
@@ -46,12 +46,12 @@ describe("takeWhile", () => {
   });
 
   describe("async", function () {
-    it("should be able to take the element while the callback result is truthy", async () => {
+    it("should be able to take the element while the callback result is truthy", async function () {
       const res = [];
       // prettier-ignore
       for await (const item of takeWhile((a) => a < 3,toAsync( [1, 2, 3, 4]))) {
-          res.push(item);
-        }
+        res.push(item);
+      }
       expect(res).toEqual([1, 2]);
 
       // prettier-ignore
@@ -64,12 +64,12 @@ describe("takeWhile", () => {
       expect(res2).toEqual([1, 2, 3, 4]);
     });
 
-    it("should be able to take the element while the async callback result is truthy", async () => {
+    it("should be able to take the element while the async callback result is truthy", async function () {
       const res = [];
       // prettier-ignore
       for await (const item of takeWhile(async (a) => a < 3,toAsync( [1, 2, 3, 4]))) {
-          res.push(item);
-        }
+        res.push(item);
+      }
       expect(res).toEqual([1, 2]);
 
       // prettier-ignore
@@ -81,7 +81,7 @@ describe("takeWhile", () => {
       expect(res2).toEqual([1, 2, 3, 4]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(
         toAsync(range(1, 20)),
         map((a) => a + 10),

@@ -1,8 +1,8 @@
 import { delay, toAsync } from "../../src/index";
 
-describe("toAsync", () => {
+describe("toAsync", function () {
   describe("sync", function () {
-    it("should convert 'Iterable<A>' to 'AsyncIterable<A>'", async () => {
+    it("should convert 'Iterable<A>' to 'AsyncIterable<A>'", async function () {
       const asyncIter = toAsync([1, 2, 3, 4, 5]);
 
       let acc = 0;
@@ -14,7 +14,7 @@ describe("toAsync", () => {
   });
 
   describe("async", function () {
-    it("should convert 'Iterable<Promise<A>> to 'AsyncIterable<A>'", async () => {
+    it("should convert 'Iterable<Promise<A>> to 'AsyncIterable<A>'", async function () {
       const asyncIter = toAsync([
         Promise.resolve(1),
         Promise.resolve(2),
@@ -30,7 +30,7 @@ describe("toAsync", () => {
       expect(acc).toEqual(15);
     });
 
-    it("should be consumed 'AsyncIterable' as many times as called with 'next'", async () => {
+    it("should be consumed 'AsyncIterable' as many times as called with 'next'", async function () {
       const asyncIter = toAsync([
         Promise.resolve(1),
         Promise.resolve(2),

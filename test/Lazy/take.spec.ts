@@ -9,9 +9,9 @@ import {
   toAsync,
 } from "../../src/index";
 
-describe("take", () => {
-  describe("sync", () => {
-    it("should be able to take the element", () => {
+describe("take", function () {
+  describe("sync", function () {
+    it("should be able to take the element", function () {
       const res = [];
       for (const item of take(1, [1, 2, 3, 4])) {
         res.push(item);
@@ -37,7 +37,7 @@ describe("take", () => {
       expect(res7).toEqual([]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", () => {
+    it("should be able to be used as a curried function in the pipeline", function () {
       const res1 = pipe(
         [1, 2, 3, 4],
         map((a) => a + 10),
@@ -61,8 +61,8 @@ describe("take", () => {
     });
   });
 
-  describe("async", () => {
-    it("should be able to take the element", async () => {
+  describe("async", function () {
+    it("should be able to take the element", async function () {
       const res = [];
       for await (const item of take(1, toAsync([1, 2, 3, 4]))) {
         res.push(item);
@@ -88,7 +88,7 @@ describe("take", () => {
       expect(res7).toEqual([]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", async () => {
+    it("should be able to be used as a curried function in the pipeline", async function () {
       const res1 = await pipe(
         toAsync([1, 2, 3, 4]),
         map((a) => a + 10),
