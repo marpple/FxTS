@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.types.json",
+  "compilerOptions": {
+    "outDir": "./dist/types/ts4.2"
+  }
+}

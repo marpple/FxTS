@@ -1,0 +1,19 @@
+{
+  "include": ["./src/"],
+  "exclude": ["./node_modules/", "./test/"],
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "es2015",
+    "lib": ["es2020"],
+    "sourceMap": true,
+    "outDir": "./dist/esm/",
+    "rootDir": "./src/",
+    "downlevelIteration": true,
+    "isolatedModules": true,
+    "importsNotUsedAsValues": "remove",
+    "strict": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

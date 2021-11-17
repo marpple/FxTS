@@ -3,12 +3,45 @@
   "version": "0.0.1",
   "description": "",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/idnex.js",
+  "types": "dist/types/ts4.2/index.d.ts",
+  "typesVersions": {
+    ">= 4.5": {
+      "*": [
+        "dist/types/ts4.5/index.d.ts"
+      ]
+    },
+    ">= 4.2": {
+      "*": [
+        "dist/types/ts4.2/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "LICENSE",
+    "tsconfig*.json",
+    "dist/"
+  ],
   "scripts": {
-    "test": "jest test/*.spec.ts test/**/*.spec.ts",
+    "build": "npm-run-all compile webpack generate:exports cleanup",
+    "cleanup": "rm -rf dist/cjs/types/ dist/esm/types/ dist/esm5/types/ && prettier --write package.json",
+    "compile:types4-5": "tsc -p tsconfig.types4-5.json",
+    "compile:types4-2": "tsc -p tsconfig.types4-2.json",
+    "compile:types": "./build/compile-types.sh",
+    "compile:cjs": "tsc --project tsconfig.cjs.json",
+    "compile:esm5": "tsc --project tsconfig.esm5.json",
+    "compile:esm": "tsc --project tsconfig.esm.json",
+    "compile": "npm-run-all -p compile:cjs compile:esm compile:esm5 -s compile:types",
+    "compile:check": "tsc --project tsconfig.json",
+    "generate:exports": "NODE_OPTIONS='--es-module-specifier-resolution=node --loader ts-node/esm' node build/generateExports.ts",
+    "lint": "eslint . --ext .ts",
+    "pre-commit": "lint-staged",
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "prettier": "npx prettier --config .prettierrc --check .",
+    "prettier:fix": "npx prettier --config .prettierrc --write .",
+    "test": "jest test/*.spec.ts test/**/*.spec.ts",
+    "webpack": "webpack"
   },
   "repository": {
     "type": "git",
@@ -22,22 +55,38 @@
   },
   "homepage": "https://github.com/marpple/FxTS#readme",
   "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
+    "@babel/runtime-corejs3": "^7.16.3",
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
+    "@types/glob": "^7.2.0",
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
+    "babel-loader": "^8.2.3",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
+    "glob": "^7.2.0",
     "husky": "^7.0.4",
     "jest": "^27.3.1",
     "lint-staged": "^12.0.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
     "ts-jest": "^27.0.7",
-    "typescript": "^4.5.0-beta"
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.1-rc",
+    "webpack": "^5.64.1",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
   },
   "lint-staged": {
-    "*.(cjs|mjs|js|ts)": [
+    "*.(js|ts)": [
       "eslint",
       "prettier --write",
       "git add"
@@ -46,5 +95,7 @@
       "prettier --write",
       "git add"
     ]
-  }
+  },
+  "unpkg": "dist/",
+  "jsdelivr": "dist/"
 }
