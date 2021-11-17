@@ -19,9 +19,9 @@
     }
   },
   "files": [
-    "./LICENSE",
-    "./tsconfig*.json",
-    "./dist/"
+    "LICENSE",
+    "tsconfig*.json",
+    "dist/"
   ],
   "scripts": {
     "build": "npm-run-all compile webpack generate:exports cleanup",
