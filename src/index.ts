@@ -1,3 +1,4 @@
+import countBy from "./countBy";
 import delay from "./delay";
 import head from "./head";
 import isArray from "./isArray";
@@ -10,6 +11,7 @@ import tap from "./tap";
 import toArray from "./toArray";
 
 export {
+  countBy,
   delay,
   head,
   isArray,
