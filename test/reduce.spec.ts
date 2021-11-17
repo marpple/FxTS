@@ -1,4 +1,4 @@
-import { pipe, range, reduce, toAsync } from "../src/index";
+import { filter, map, pipe, range, reduce, toAsync } from "../src/index";
 
 const addNumber = (a: number, b: number) => a + b;
 const addNumberAsync = async (a: number, b: number) => a + b;
@@ -19,6 +19,16 @@ describe("reduce", () => {
 
     it("should use the first value as the initial value if initial value is absent", () => {
       expect(reduce(addNumber, range(1, 6))).toEqual(15);
+    });
+
+    it("should be able to be used as a curried function in the pipeline", () => {
+      const res = pipe(
+        ["1", "2", "3", "4", "5"],
+        map((a) => Number(a)),
+        filter((a) => a % 2),
+        reduce(addNumber),
+      );
+      expect(res).toEqual(1 + 3 + 5);
     });
   });
 
@@ -83,6 +93,24 @@ describe("reduce", () => {
           reduce(() => Promise.reject(new Error("err"))),
         ),
       ).rejects.toThrow("err");
+    });
+
+    it("should be able to be used as a curried function in the pipeline", async () => {
+      const res1 = await pipe(
+        toAsync(["1", "2", "3", "4", "5"]),
+        map((a) => Number(a)),
+        filter((a) => a % 2),
+        reduce(addNumber),
+      );
+      // async callback
+      const res2 = await pipe(
+        toAsync(["1", "2", "3", "4", "5"]),
+        map((a) => Number(a)),
+        filter((a) => a % 2),
+        reduce(addNumberAsync),
+      );
+      expect(res1).toEqual(1 + 3 + 5);
+      expect(res2).toEqual(1 + 3 + 5);
     });
   });
 });
