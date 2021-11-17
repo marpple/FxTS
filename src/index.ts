@@ -1,6 +1,7 @@
 import countBy from "./countBy";
 import delay from "./delay";
 import each from "./each";
+import every from "./every";
 import find from "./find";
 import groupBy from "./groupBy";
 import head from "./head";
@@ -19,6 +20,7 @@ export {
   countBy,
   delay,
   each,
+  every,
   find,
   groupBy,
   head,
