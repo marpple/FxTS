@@ -1,6 +1,7 @@
 import append from "./append";
 import chunk from "./chunk";
 import compact from "./compact";
+import concat from "./concat";
 import concurrent from "./concurrent";
 import drop from "./drop";
 import filter from "./filter";
@@ -13,6 +14,7 @@ export {
   append,
   chunk,
   compact,
+  concat,
   concurrent,
   drop,
   filter,
