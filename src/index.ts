@@ -1,5 +1,6 @@
 import countBy from "./countBy";
 import delay from "./delay";
+import groupBy from "./groupBy";
 import head from "./head";
 import isArray from "./isArray";
 import isString from "./isString";
@@ -13,6 +14,7 @@ import toArray from "./toArray";
 export {
   countBy,
   delay,
+  groupBy,
   head,
   isArray,
   isString,
