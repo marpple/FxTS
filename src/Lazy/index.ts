@@ -2,6 +2,7 @@ import append from "./append";
 import chunk from "./chunk";
 import compact from "./compact";
 import concurrent from "./concurrent";
+import drop from "./drop";
 import filter from "./filter";
 import map from "./map";
 import range from "./range";
@@ -13,6 +14,7 @@ export {
   chunk,
   compact,
   concurrent,
+  drop,
   filter,
   range,
   map,
