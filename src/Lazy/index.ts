@@ -11,6 +11,7 @@ import map from "./map";
 import peek from "./peek";
 import prepend from "./prepend";
 import range from "./range";
+import reject from "./reject";
 import take from "./take";
 import toAsync from "./toAsync";
 
@@ -25,6 +26,7 @@ export {
   flat,
   flatMap,
   range,
+  reject,
   map,
   peek,
   prepend,
