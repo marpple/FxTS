@@ -7,7 +7,7 @@ import Cast from "./Cast";
 
 type _ReturnZipValueType<
   T extends unknown[],
-  TEMP extends unknown[] = []
+  TEMP extends unknown[] = [],
 > = T extends [unknown, ...unknown[]]
   ? _ReturnZipValueType<
       Tail<T>,
@@ -18,7 +18,7 @@ type _ReturnZipValueType<
 type _ReturnZipType<
   T extends unknown[],
   R,
-  W = IterableIterator<R>
+  W = IterableIterator<R>,
 > = T extends [a: infer A, ...args: unknown[]]
   ? A extends Iterable<unknown>
     ? _ReturnZipType<Drop<1, T>, R, W>

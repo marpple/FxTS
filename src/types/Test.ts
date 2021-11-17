@@ -18,7 +18,7 @@ export type Fail = 0;
  * Check or test the validity of a type
  */
 export declare function check<Type, Expect, Outcome extends Pass | Fail>(
-  debug?: Type
+  debug?: Type,
 ): Equals<Equals<Type, Expect>, Outcome>;
 
 /**

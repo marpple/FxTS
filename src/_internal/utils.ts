@@ -1,19 +1,19 @@
 import { Iter } from "../types/Utils";
 
 export function isIterable<T = unknown>(
-  a: Iter<T> | unknown
+  a: Iter<T> | unknown,
 ): a is Iterable<T> | Iterable<Promise<T>> {
   return typeof (a as any)?.[Symbol.iterator] === "function";
 }
 
 export function isAsyncIterable<T = unknown>(
-  a: Iter<T> | unknown
+  a: Iter<T> | unknown,
 ): a is AsyncIterable<T> {
   return typeof (a as any)?.[Symbol.asyncIterator] === "function";
 }
 
 export function isIterator<T = unknown>(
-  a: Iter<T> | unknown
+  a: Iter<T> | unknown,
 ): a is Iterator<T> | Iterator<Promise<T>> | AsyncIterator<T> {
   return typeof (a as any)?.next === "function";
 }
@@ -28,7 +28,7 @@ export function toIterator<T>(iterable: Iterable<T> | AsyncIterable<T>) {
     return iterable[Symbol.asyncIterator]();
   }
   throw new TypeError(
-    "toIterator: iterable must be type of Iterable or AsyncIterable"
+    "toIterator: iterable must be type of Iterable or AsyncIterable",
   );
 }
 

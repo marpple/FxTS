@@ -39,12 +39,12 @@ function range(start: number, end: number): IterableIterator<number>;
 function range(
   start: number,
   end: number,
-  step: number
+  step: number,
 ): IterableIterator<number>;
 function* range(
   start: number,
   end?: number,
-  step = 1
+  step = 1,
 ): IterableIterator<number> {
   if (end === undefined) return yield* range(0, start);
   if (step < 0) {
