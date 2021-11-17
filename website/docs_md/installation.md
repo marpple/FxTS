@@ -7,7 +7,7 @@ id: installation
 Module Types(CJS/ES6/Typescript) via npm
 
 ```
-npm install @fxts
+npm install @marpple/fxts
 ```
 
 ## CDN
