@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "test": "jest test/*.spec.ts",
+    "test": "jest test/*.spec.ts test/**/*.spec.ts",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
