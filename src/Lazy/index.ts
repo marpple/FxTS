@@ -16,6 +16,7 @@ import take from "./take";
 import takeUntil from "./takeUntil";
 import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
+import uniqBy from "./uniqBy";
 
 export {
   append,
@@ -36,4 +37,5 @@ export {
   takeUntil,
   takeWhile,
   toAsync,
+  uniqBy,
 };
