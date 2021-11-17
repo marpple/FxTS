@@ -14,6 +14,7 @@ import not from "./not";
 import partition from "./partition";
 import pipe from "./pipe";
 import reduce from "./reduce";
+import some from "./some";
 import tap from "./tap";
 import toArray from "./toArray";
 
@@ -35,6 +36,7 @@ export {
   partition,
   pipe,
   reduce,
+  some,
   tap,
   toArray,
 };
