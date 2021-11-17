@@ -1,4 +1,12 @@
-import { pipe } from "../src/index";
+import {
+  filter,
+  map,
+  pipe,
+  range,
+  reduce,
+  toArray,
+  toAsync,
+} from "../src/index";
 
 describe("pipe", () => {
   describe("sync", () => {
@@ -10,6 +18,61 @@ describe("pipe", () => {
         (n) => String(n + 1),
       );
       expect(res).toEqual("3");
+    });
+
+    it("should work when the composed function deals with 'Iterable'", () => {
+      const res = pipe(
+        [1, 2, 3, 4, 5],
+        (n) => map((a) => a + 5, n),
+        (n) => filter((a) => a % 2 === 0, n),
+        (n) => reduce((a, b) => a + b, 0, n),
+      );
+      expect(res).toEqual(24);
+    });
+  });
+
+  describe("async", () => {
+    it("should work when the composed function deals with 'AsyncIterable'", async () => {
+      const res1 = await pipe(
+        toAsync([1, 2, 3, 4, 5]),
+        (n) => map((a) => a + 5, n),
+        (n) => filter((a) => a % 2 === 0, n),
+        (n) => reduce((a, b) => a + b, 0, n),
+      );
+
+      expect(res1).toEqual(24);
+
+      const res2 = await pipe(
+        toAsync([1, 2, 3, 4, 5]),
+        (n) => map((a) => a + 5, n),
+        (n) => filter((a) => a % 2 === 0, n),
+        (n) => toArray(n),
+        (n) => reduce((a, b) => a + b, 0, n),
+      );
+
+      expect(res2).toEqual(24);
+    });
+
+    it("should return rejected 'Promise' if an error occurs in the callback", async () => {
+      await expect(
+        pipe(
+          toAsync(range(1, 10)),
+          (a) =>
+            map(() => {
+              throw new Error("err");
+            }, a),
+          (a) => reduce((acc, a) => acc + a, a),
+        ),
+      ).rejects.toThrow("err");
+
+      // Promise reject
+      await expect(
+        pipe(
+          toAsync(range(1, 10)),
+          (a) => map(() => Promise.reject(new Error("err")), a),
+          (a) => reduce((acc, a) => acc + a, a),
+        ),
+      ).rejects.toThrow("err");
     });
   });
 });
