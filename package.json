@@ -1,6 +1,6 @@
 {
   "name": "@marpple/fxts",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "type": "module",
   "main": "dist/cjs/index.js",
@@ -19,9 +19,9 @@
     }
   },
   "files": [
-    "LICENSE",
-    "tsconfig*.json",
-    "dist/"
+    "./LICENSE",
+    "./tsconfig*.json",
+    "./dist/"
   ],
   "scripts": {
     "build": "npm-run-all compile webpack generate:exports cleanup",
