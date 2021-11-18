@@ -95,7 +95,7 @@ const config = {
         darkTheme: darkCodeTheme,
       },
       googleAnalytics: {
-        trackingID: "G-35YSFPSNRF",
+        trackingID: "G-BTGRJYWTNK",
         anonymizeIP: true,
       },
     }),
