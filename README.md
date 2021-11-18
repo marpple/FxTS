@@ -1,3 +1,5 @@
+💬 [Join the FxTS Slack community](https://join.slack.com/t/fx-ts/shared_invite/zt-yw1x81zq-pNa8nM40X6mQAsu2L4m1Fw)
+
 # ![fxts-icon](https://user-images.githubusercontent.com/10924072/141757649-cc715e62-21bb-441d-aeae-4732154ded10.png) FxTS
 
 FxTS is a functional library for TypeScript/Javascript programmers.
