@@ -20,7 +20,7 @@ export const isConcurrent = (concurrent: unknown): concurrent is Concurrent => {
 /**
  * Concurrent is used to balance the load of multiple asynchronous requests.
  * The first argument receives a number that controls the number of loads, and the second argument is an AsyncIterable.
- * See {@link https://github.com/ | toAsync} to create an AsyncIterable .
+ * See {@link https://fxts.dev/docs/toAsync | toAsync} to create an AsyncIterable .
  *
  * @example
  * ```ts
