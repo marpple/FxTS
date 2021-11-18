@@ -33,7 +33,7 @@ const sum = pipe(
 
 ### Javascript
 
-Usage is the same as the typescript, but there are several points to note.
+Usage is the same as typescript, but there are several points to note.
 
 #### ESM
 As shown in the example code below, the module imported by default was built targeting `es2018` and **does not include polyfill**.
@@ -54,4 +54,4 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-Note: **The `esm5` and `cjs` submodules were built with es5 targets, but also not include polyfill.**
+Note: **`esm5` and `cjs` submodules were built with es5 targets, but also not include polyfill.**
