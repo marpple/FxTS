@@ -1,20 +1,15 @@
 {
   "name": "@fxts/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/idnex.js",
-  "types": "dist/types/ts4.2/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "typesVersions": {
-    ">= 4.5": {
-      "*": [
-        "dist/types/ts4.5/index.d.ts"
-      ]
-    },
     ">= 4.2": {
       "*": [
-        "dist/types/ts4.2/index.d.ts"
+        "dist/types/index.d.ts"
       ]
     }
   },
@@ -26,9 +21,7 @@
   "scripts": {
     "build": "npm-run-all compile webpack generate:exports cleanup",
     "cleanup": "rm -rf dist/cjs/types/ dist/esm/types/ dist/esm5/types/ && prettier --write package.json",
-    "compile:types4-5": "tsc -p tsconfig.types4-5.json",
-    "compile:types4-2": "tsc -p tsconfig.types4-2.json",
-    "compile:types": "./build/compile-types.sh",
+    "compile:types": "tsc --project tsconfig.types.json ",
     "compile:cjs": "tsc --project tsconfig.cjs.json",
     "compile:esm5": "tsc --project tsconfig.esm5.json",
     "compile:esm": "tsc --project tsconfig.esm.json",
@@ -78,7 +71,7 @@
     "prettier": "^2.4.1",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.2",
+    "typescript": "4.5",
     "webpack": "^5.64.1",
     "webpack-cli": "^4.9.1"
   },
