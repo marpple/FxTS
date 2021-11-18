@@ -1,6 +1,6 @@
 {
-  "name": "@marpple/fxts",
-  "version": "0.1.2",
+  "name": "@fxts/core",
+  "version": "0.1.0",
   "description": "",
   "type": "module",
   "main": "dist/cjs/index.js",

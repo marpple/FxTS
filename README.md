@@ -12,7 +12,7 @@ FxTS is a functional library for TypeScript/Javascript programmers.
 ## Installation
 
 ```
-npm install @marpple/fxts
+npm install @fxts/core
 ```
 
 ## Documentation
@@ -22,7 +22,7 @@ Please review the [API documentation](https://fxts.dev/docs/index)
 ## Usage
 
 ```ts
-import { pipe, range, map, filter, take, each } from "@marpple/fxts";
+import { pipe, range, map, filter, take, each } from "@fxts/core";
 
 pipe(
   range(10),

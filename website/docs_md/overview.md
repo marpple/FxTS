@@ -28,7 +28,7 @@ to build the above, we have many features such as:
 We provide [lazy evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation).
 
 ```ts
-import { pipe, peek, range, map, filter, take, toArray } from "@marpple/fxts";
+import { pipe, peek, range, map, filter, take, toArray } from "@fxts/core";
 
 pipe(
   range(100),
@@ -48,7 +48,7 @@ Combinations of `Lazy` functions don't evaluate actual values like [generator](h
 It can be evaluate with a Strict(`toArray`) or [for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of), [await for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of). Strict functions can be found [here](https://fxts.dev/docs/index#strict)
 
 ```ts
-import { pipe, range, map, filter, take, toArray } from "@marpple/fxts";
+import { pipe, range, map, filter, take, toArray } from "@fxts/core";
 
 const nums = pipe(
   range(Infinity),
@@ -68,7 +68,7 @@ const result = pipe(
 When dealing with asynchronous values
 
 ```ts
-import { pipe, peek, range, map, filter, take, toArray } from "@marpple/fxts";
+import { pipe, peek, range, map, filter, take, toArray } from "@fxts/core";
 
 await pipe(
   Promise.resolve([1, 2, 3, 4]),
@@ -83,7 +83,7 @@ await pipe(
 When asynchronous values are contained in an array
 
 ```ts
-import { pipe, toAsync, peek, range, map, filter, take, toArray } from "@marpple/fxts";
+import { pipe, toAsync, peek, range, map, filter, take, toArray } from "@fxts/core";
 
 await pipe(
   toAsync([
@@ -103,7 +103,7 @@ await pipe(
 It handles multiple asynchronous requests and also controls the count of requests
 
 ```ts
-import { pipe, toAsync, delay, peek, range, map, filter, take } from "@marpple/fxts";
+import { pipe, toAsync, delay, peek, range, map, filter, take } from "@fxts/core";
 
 await pipe(
   toAsync(range(Infinity)),
@@ -133,7 +133,7 @@ Since FxTS follows the protocol of standard, you can easily handle errors with `
 - synchronous
 
 ```ts
-import { pipe, toAsync, toArray } from "@marpple/fxts";
+import { pipe, toAsync, toArray } from "@fxts/core";
 
 try {
   pipe(
@@ -151,7 +151,7 @@ try {
 - asynchronous
 
 ```ts
-import { pipe, toAsync, map, toArray } from "@marpple/fxts";
+import { pipe, toAsync, map, toArray } from "@fxts/core";
 
 try {
   await pipe(
