@@ -19,7 +19,7 @@ yarn add @fxts/core
 
 ## Usage
 
-### Typescript
+### TypeScript
 
 ```ts
 import { filter, map, pipe, range, reduce, take } from "@fxts/core";
@@ -37,7 +37,7 @@ const sum = pipe(
 
 ### JavaScript
 
-Usage is the same as typescript, but there are several points to note.
+Usage is the same as TypeScript, but there are several points to note.
 
 #### ESM
 As shown in the example code below, the module imported by default was built targeting `es2018` and **does not include polyfill**.
