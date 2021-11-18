@@ -35,7 +35,7 @@ const sum = pipe(
 
 **Note: It is recommended to enable [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) tsc option. If not, type inference does not work as we expected. For example, in the example above, `sum` is not inferred as a number type if the option is turned off.**
 
-### Javascript
+### JavaScript
 
 Usage is the same as typescript, but there are several points to note.
 
@@ -45,7 +45,7 @@ As shown in the example code below, the module imported by default was built tar
 import { filter, map, pipe, range, reduce, take } from "@fxts/core";
 ```
 
-If Javascript runtime you use does not support `es2018`, use `esm5` submodule instead as shown below.
+If JavaScript runtime you use does not support `es2018`, use `esm5` submodule instead as shown below.
 ```javascript
 import { filter, map, pipe, range, reduce, take } from "@fxts/core/esm5";
 ```
