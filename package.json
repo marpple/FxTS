@@ -19,7 +19,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "npm-run-all compile webpack generate:exports cleanup",
+    "build": "npm-run-all compile webpack generate:exports generate:extensions cleanup",
     "cleanup": "rm -rf dist/cjs/types/ dist/esm/types/ dist/esm5/types/ && prettier --write package.json",
     "compile:types": "tsc --project tsconfig.types.json ",
     "compile:cjs": "tsc --project tsconfig.cjs.json",
@@ -27,6 +27,7 @@
     "compile:esm": "tsc --project tsconfig.esm.json",
     "compile": "npm-run-all -p compile:cjs compile:esm compile:esm5 -s compile:types",
     "compile:check": "tsc --project tsconfig.json",
+    "generate:extensions": "NODE_OPTIONS='--es-module-specifier-resolution=node --loader ts-node/esm' node build/generateExtensions.ts",
     "generate:exports": "NODE_OPTIONS='--es-module-specifier-resolution=node --loader ts-node/esm' node build/generateExports.ts",
     "lint": "eslint . --ext .ts",
     "pre-commit": "lint-staged",
