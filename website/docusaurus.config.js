@@ -7,7 +7,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "FxTS",
-  tagline: "A functional library for TypeScript/Javascript programmers.",
+  tagline: "A functional library for TypeScript/JavaScript programmers.",
   url: "https://fxts.dev",
   baseUrl: "/",
   onBrokenLinks: "throw",

@@ -2,7 +2,7 @@
 
 # ![fxts-icon](https://user-images.githubusercontent.com/10924072/141757649-cc715e62-21bb-441d-aeae-4732154ded10.png) FxTS
 
-FxTS is a functional library for TypeScript/Javascript programmers.
+FxTS is a functional library for TypeScript/JavaScript programmers.
 
 ### Why FxTS?
 
