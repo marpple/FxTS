@@ -1,5 +1,5 @@
-import glob from "glob";
 import { readFile, writeFile } from "fs/promises";
+import { searchFiles } from "./util";
 import { drop, map, not, pipe, reduce } from "../src/index";
 
 const SOURCE_DIR = "./src";
@@ -33,14 +33,6 @@ const defaultSubPathExports = {
   "./esm5/Lazy/index": `${ESM5_ROOT_DIR}/Lazy/index.js`,
   "./esm5/Lazy/index.js": `${ESM5_ROOT_DIR}/Lazy/index.js`,
 };
-
-const searchFiles = (pattern: string): Promise<string[]> =>
-  new Promise((resolve, reject) => {
-    glob(pattern, function (err, files) {
-      if (err) reject(err);
-      else resolve(files);
-    });
-  });
 
 async function generateExports() {
   const fileNames = await Promise.all([
