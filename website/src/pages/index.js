@@ -14,12 +14,22 @@ function HomepageHeader() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/index"
-          >
-            API DODC
-          </Link>
+          <div className={styles.button}>
+            <Link
+              className="button button--secondary button--lg"
+              to="/docs/getting-started"
+            >
+              GETTING STARTED
+            </Link>
+          </div>
+          <div className={styles.button}>
+            <Link
+              className="button button--secondary button--lg"
+              to="/docs/index"
+            >
+              API DODC
+            </Link>
+          </div>
         </div>
       </div>
     </header>
