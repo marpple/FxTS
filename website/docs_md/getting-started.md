@@ -31,6 +31,10 @@ const sum = pipe(
 ); // typeof 'sum' inffered as the number
 ```
 
+Note: It is recommended to enable 'strictFunctionTypes' tsc option. If not, type inference does not work as we expected. For example, in the example above, `sum` is not inferred as a number type if the option is turned off.
+
+
+
 ### Javascript
 
 Usage is the same as typescript, but there are several points to note.
