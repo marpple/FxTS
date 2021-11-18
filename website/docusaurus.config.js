@@ -102,6 +102,12 @@ const config = {
     clientModules:[
       require.resolve('./analytics.js'),
     ],
+    scripts: [ 
+      {
+        src: 'https://cdn.jsdelivr.net/npm/@fxts/core@0.1.4/dist/fx.min.js',
+        async: true,
+      },
+    ],
 };
 
 module.exports = config;

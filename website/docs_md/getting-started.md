@@ -6,10 +6,12 @@ id: getting-started
 
 ## Installation
 
-### NPM / Yarn
+### NPM
 ```shell
 npm install @fxts/core
 ```
+
+### Yarn
 
 ```shell
 yarn add @fxts/core
@@ -31,9 +33,7 @@ const sum = pipe(
 ); // typeof 'sum' inffered as the number
 ```
 
-Note: It is recommended to enable 'strictFunctionTypes' tsc option. If not, type inference does not work as we expected. For example, in the example above, `sum` is not inferred as a number type if the option is turned off.
-
-
+**Note: It is recommended to enable [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) tsc option. If not, type inference does not work as we expected. For example, in the example above, `sum` is not inferred as a number type if the option is turned off.**
 
 ### Javascript
 
@@ -58,4 +58,12 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-Note: **`esm5` and `cjs` submodules were built with es5 targets, but also not include polyfill.**
+**Note: `esm5` and `cjs` submodules were built with es5 targets, but also not include polyfill.**
+
+### CDN
+
+This script was built with an es5 target and contains polyfill.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@fxts/core@0.1.4/dist/fx.min.js"></script>
+```
