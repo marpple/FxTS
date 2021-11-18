@@ -8,7 +8,6 @@
     "sourceMap": true,
     "outDir": "./dist/esm/",
     "rootDir": "./src/",
-    "downlevelIteration": true,
     "isolatedModules": true,
     "importsNotUsedAsValues": "remove",
     "strict": true,
