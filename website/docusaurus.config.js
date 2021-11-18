@@ -8,7 +8,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "FxTS",
   tagline: "A functional library for TypeScript/Javascript programmers.",
-  url: "https://marpple.github.io",
+  url: "https://fxts.dev",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -96,7 +96,7 @@ const config = {
       },
       googleAnalytics: {
         trackingID: "G-35YSFPSNRF",
-        anonymizeIP: false,
+        anonymizeIP: true,
       },
     }),
 };
