@@ -94,11 +94,14 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-      googleAnalytics: {
+      gtag:{
         trackingID: "G-BTGRJYWTNK",
         anonymizeIP: true,
       },
     }),
+    clientModules:[
+      require.resolve('./analytics.js'),
+    ],
 };
 
 module.exports = config;
