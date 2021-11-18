@@ -49,8 +49,8 @@ const sidebars = {
     },
     {
       type: "doc",
-      id: "installation",
-      label: "Installation",
+      id: "getting-started",
+      label: "Getting Started",
     },
   ],
 };

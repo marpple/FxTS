@@ -1,12 +1,12 @@
 ---
-id: Getting Started
+id: getting-started
 ---
 
 # Getting Started
 
 ## Installation
 
-### NPM
+### NPM / Yarn
 ```shell
 npm install @fxts/core
 ```
@@ -37,12 +37,12 @@ Usage is the same as the typescript, but there are several points to note.
 
 #### ESM
 As shown in the example code below, the module imported by default was built targeting `es2018` and **does not include polyfill**.
-```ecmascript 6
+```javascript
 import { filter, map, pipe, range, reduce, take } from "@fxts/core";
 ```
 
-If the javascript runtime you use does not support `es2018`, use `esm5` submodule instead as shown below.
-```ecmascript 6
+If Javascript runtime you use does not support `es2018`, use `esm5` submodule instead as shown below.
+```javascript
 import { filter, map, pipe, range, reduce, take } from "@fxts/core/esm5";
 ```
 
