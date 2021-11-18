@@ -4,6 +4,7 @@
     "target": "es5",
     "module": "es2015",
     "lib": ["es2020"],
+    "importHelpers": true,
     "downlevelIteration": true,
     "strict": true,
     "moduleResolution": "node",
