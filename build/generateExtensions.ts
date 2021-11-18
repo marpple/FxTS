@@ -21,11 +21,14 @@ async function main() {
     ])
     .map(async (promise) => {
       const [path, file] = await promise;
-      const importRegex = /import [\w,{}\s\n_]+ from "[\w,{}\s\n./_]+";/gi;
-      const statements = file.match(importRegex);
+      const importRegex = /import [\w,{}\s\n_*]+ from "[\w,{}\s\n./_]+";/gi;
+      const exportRegex = /export [\w,{}\s\n_*]+ from "[\w,{}\s\n./_]+";/gi;
+      const statements = (file.match(importRegex) || []).concat(
+        file.match(exportRegex) || [],
+      );
 
       let acc = file;
-      if (statements?.length) {
+      if (statements.length > 0) {
         for (const statement of statements) {
           const { length } = statement;
           acc = acc.replace(
