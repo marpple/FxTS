@@ -30,6 +30,14 @@ import IterableInfer from "../types/IterableInfer";
  *  toArray,
  * ); // [1, 2, 3, 4] // log 1,2,3,4
  *
+ * // if you want to use asynchronous callback
+ * await pipe(
+ *  Promise.resolve([1, 2, 3, 4]),
+ *  toAsync,
+ *  peek(async (a) => console.log(a)),
+ *  toArray,
+ * ); // [1, 2, 3, 4] // log 1,2,3,4
+ *
  * // with toAsync
  * await pipe(
  *  [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],

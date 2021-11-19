@@ -23,11 +23,35 @@ async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
  * ); // [12, 14]
  *
  * await pipe(
- *  Promise.resolve([1, 2, 3, 4, 5])
+ *  Promise.resolve([1, 2, 3, 4, 5]),
  *  map(a => a + 10),
  *  filter(a => a % 2 === 0),
  *  toArray,
  * ); // [12, 14]
+ *
+ * // if you want to use asynchronous callback
+ * await pipe(
+ *  Promise.resolve([1, 2, 3, 4, 5]),
+ *  toAsync,
+ *  map(async (a) => a + 10),
+ *  filter(a => a % 2 === 0),
+ *  toArray,
+ * ); // [12, 14]
+ *
+ * // with toAsync
+ * await pipe(
+ *  [
+ *    Promise.resolve(1),
+ *    Promise.resolve(2),
+ *    Promise.resolve(3),
+ *    Promise.resolve(4),
+ *    Promise.resolve(5)
+ *  ],
+ *  toAsync,
+ *  map((a) => a + 10),
+ *  filter((a) => a % 2 === 0),
+ *  toArray
+ *);
  * ```
  *
  * {@link https://codesandbox.io/s/fxts-toarray-fy84i | Try It}

@@ -189,10 +189,19 @@ function* sync<A>(f: (a: A) => unknown, iterable: Iterable<A>) {
  *  toArray,
  * ); // [0, 2, 4, 6]
  *
+ * // if you want to use asynchronous callback
+ * await pipe(
+ *  Promise.resolve([0, 1, 2, 3, 4, 5, 6]),
+ *  toAsync,
+ *  filter(async a => a % 2 === 0),
+ *  toArray,
+ * ); // [0, 2, 4, 6]
+ *
  * // toAsync
  * await pipe(
- *  toAsync([Promise.resolve(0), Promise.resolve(1), Promise.resolve(2), Promise.resolve(3),
- *   Promise.resolve(4), Promise.resolve(5), Promise.resolve(6)]),
+ *  [Promise.resolve(0), Promise.resolve(1), Promise.resolve(2), Promise.resolve(3),
+ *   Promise.resolve(4), Promise.resolve(5), Promise.resolve(6)],
+ *  toAsync,
  *  filter(a => a % 2 === 0),
  *  toArray,
  * ); // [0, 2, 4, 6]

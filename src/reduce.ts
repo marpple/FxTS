@@ -40,9 +40,26 @@ async function async<A, B>(
  *  reduce(sum),
  * ); // 26
  *
+ * await pipe(
+ *  Promise.resolve([1, 2, 3, 4]),
+ *  map((a) => a + 10),
+ *  filter(a => a % 2 === 0),
+ *  reduce(sum),
+ * ); // 26
+ *
+ * // if you want to use asynchronous callback
+ * await pipe(
+ *  Promise.resolve([1, 2, 3, 4]),
+ *  toAsync,
+ *  map(async (a) => a + 10),
+ *  filter(a => a % 2 === 0),
+ *  reduce(sum),
+ * ); // 26
+ *
  * // with toAsync
  * await pipe(
- *  toAsync([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)]),
+ *  [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ *  toAsync,
  *  map(a => a + 10),
  *  filter(a => a % 2 === 0),
  *  reduce(sum),

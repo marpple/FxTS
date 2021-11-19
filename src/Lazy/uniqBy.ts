@@ -30,6 +30,14 @@ import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
  *  toArray,
  * ); // [{age: 21}, {age: 23}, {age: 34}]
  *
+ * // if you want to use asynchronous callback
+ * await pipe(
+ *  Promise.resolve([{age: 21}, {age: 23}, {age: 21}, {age: 34}]),
+ *  toAsync,
+ *  uniqBy(async (a) => a.age),
+ *  toArray,
+ * ); // [{age: 21}, {age: 23}, {age: 34}]
+ *
  * // toAsync
  * await pipe(
  *  [Promise.resolve({age: 21}), Promise.resolve({age: 23}), Promise.resolve({age: 21}), Promise.resolve({age: 34})],

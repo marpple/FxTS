@@ -22,6 +22,12 @@ import Arrow from "./types/Arrow";
  *  some(age => age > 40),
  * ); // true
  *
+ * await pipe(
+ *  Promise.resolve([{id:1, age: 27}, {id:2, age: 36}, {id:3, age: 42}]),
+ *  map(user => user.age),
+ *  some(age => age > 40),
+ * ); // true
+ *
  * // with toAsync
  * await pipe(
  *  [Promise.resolve({id:1, age: 27}), Promise.resolve({id:2, age: 36}), Promise.resolve({id:3, age: 42})],

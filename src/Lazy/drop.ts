@@ -81,7 +81,8 @@ function async<A>(
  *
  * // with toAsync
  * await pipe(
- *  toAsync([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)]),
+ *  [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ *  toAsync,
  *  drop(2),
  *  toArray,
  * ); // [3, 4]

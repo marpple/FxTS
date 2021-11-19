@@ -83,9 +83,18 @@ function async<A, B>(
  *  toArray,
  * ); // [11, 12, 13, 14]
  *
+ * // if you want to use asynchronous callback
+ * await pipe(
+ *  Promise.resolve([1, 2, 3, 4]),
+ *  toAsync,
+ *  map(async (a) => a + 10),
+ *  toArray,
+ * ); // [11, 12, 13, 14]
+ *
  * // with toAsync
  * await pipe(
- *  toAsync([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)]),
+ *  [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ *  toAsync,
  *  map(a => a + 10),
  *  toArray,
  * ); // [11, 12, 13, 14]
