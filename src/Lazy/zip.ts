@@ -54,8 +54,8 @@ function async(
 }
 
 /**
- * Merges together the values of each of the arrays with the values at the corresponding position.
- * Useful when you have separate data sources that are coordinated through matching array indexes.
+ * Merges the values of each of the arrays with the values at the corresponding position together.
+ * Useful when you have separate data sources that are coordinated through matching array indices.
  *
  * @example
  * ```ts

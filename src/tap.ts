@@ -1,6 +1,6 @@
 /**
  * This method invokes interceptor and returns a value.
- * The interceptor is invoked with one argument
+ * The interceptor is invoked with one argument.
  *
  * @example
  * ```ts

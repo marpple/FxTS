@@ -9,7 +9,7 @@ id: overview
 FxTS is a library for functional programming using iterable/asyncIterable.
 It provides users to write more declarative code, as well as to handle asynchronous data and functions.
 
-to build the above, we have many features such as:
+To build the above, we have many features such as:
 
 - Lazy evaluation
   - It is a useful way to represent large or possibly infinite enumerable data.
@@ -45,7 +45,7 @@ Even if you do `filter` after `map`, it doesn't matter. 2 items are extracted, (
 ### Function composition
 
 Combinations of `Lazy` functions don't evaluate actual values like [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator).
-It can be evaluate with a Strict(`toArray`) or [for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of), [await for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of). Strict functions can be found [here](https://fxts.dev/docs/index#strict)
+It can be evaluated with a Strict(`toArray`) or [for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of), [await for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of). Strict functions can be found [here](https://fxts.dev/docs/index#strict)
 
 ```ts
 import { pipe, range, map, filter, take, toArray } from "@fxts/core";
