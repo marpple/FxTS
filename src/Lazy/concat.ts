@@ -73,6 +73,13 @@ function toAsyncIterable<T>(
  *  concat([1, 2]),
  *  toArray,
  * ); // [1, 2, 3, 4]
+ *
+ *  await pipe(
+ *  [Promise.resolve(3), Promise.resolve(4)],
+ *  toAsync,
+ *  concat([1, 2]),
+ *  toArray,
+ * ); // [1, 2, 3, 4]
  * ```
  *
  * {@link https://codesandbox.io/s/fxts-concat-mhd7d | Try It}

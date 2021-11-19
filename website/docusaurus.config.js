@@ -104,7 +104,7 @@ const config = {
     ],
     scripts: [ 
       {
-        src: 'https://cdn.jsdelivr.net/npm/@fxts/core@0.1.4/dist/fx.min.js',
+        src: 'https://cdn.jsdelivr.net/npm/@fxts/core/dist/fx.min.js',
         async: true,
       },
     ],

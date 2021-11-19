@@ -197,13 +197,13 @@ function async<A>(
  *
  * // with pipe
  * pipe(
- *  [1,[2,3],[[4,5]]],
+ *  [1,[2, 3],[[4, 5]]],
  *  flat,
  *  toArray,
  * ); // [1, 2, 3, [4, 5]]
  *
  * await pipe(
- *  Promise.resolve([1,[2,3],[[4,5]]]),
+ *  Promise.resolve([1,[2, 3],[[4, 5]]]),
  *  flat,
  *  toArray,
  * ); // [1, 2, 3, [4, 5]]

@@ -29,8 +29,9 @@ import filter from "./filter";
  *
  * // with toAsync
  * await pipe(
- *  toAsync([Promise.resolve(0), Promise.resolve(1), Promise.resolve(undefined),
- *    Promise.resolve(3), Promise.resolve(null)]),
+ *  [Promise.resolve(0), Promise.resolve(1), Promise.resolve(undefined),
+ *    Promise.resolve(3), Promise.resolve(null)],
+ *  toAsync,
  *  compact,
  *  toArray,
  * ); // [0, 1, 3]

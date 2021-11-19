@@ -72,30 +72,31 @@ function async<T>(
  *
  * @example
  * ```ts
- * const iter = chunk(2, [1,2,3,4]);
- * iter.next() // {done:false, value:[1,2]}
- * iter.next() // {done:false, value:[3,4]}
+ * const iter = chunk(2, [1, 2, 3, 4]);
+ * iter.next() // {done:false, value:[1, 2]}
+ * iter.next() // {done:false, value:[3, 4]}
  * iter.next() // {done:true, value: undefined}
  *
  * // with pipe
  * pipe(
- *  [1,2,3,4],
+ *  [1, 2, 3, 4],
  *  chunk(2),
  *  toArray,
- * ); // [[1,2],[3,4]]
+ * ); // [[1, 2],[3, 4]]
  *
  * await pipe(
- *  Promise.resolve([1,2,3,4]),
+ *  Promise.resolve([1, 2, 3 ,4]),
  *  chunk(2),
  *  toArray,
- * ); // [[1,2],[3,4]]
+ * ); // [[1, 2],[3, 4]]
  *
  * // with toAsync
  * await pipe(
- *  toAsync([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)]),
+ *  [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ *  toAsync,
  *  chunk(2),
  *  toArray,
- * ); // [[1,2],[3,4]]
+ * ); // [[1, 2],[3, 4]]
  * ```
  *
  * {@link https://codesandbox.io/s/fxts-chunk-gksly | Try It}

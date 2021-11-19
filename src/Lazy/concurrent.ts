@@ -25,7 +25,8 @@ export const isConcurrent = (concurrent: unknown): concurrent is Concurrent => {
  * @example
  * ```ts
  * await pipe(
- *   toAsync([1, 2, 3, 4, 5, 6]),
+ *   [1, 2, 3, 4, 5, 6],
+ *   toAsync,
  *   map((a) => delay(1000, a)),
  *   concurrent(3),
  *   each(console.log), // log 1, 2, 3, 4, 5, 6
@@ -41,7 +42,8 @@ export const isConcurrent = (concurrent: unknown): concurrent is Concurrent => {
  * //                 ▼        ▼        ▼        ▼        ▼        ▼
  *
  * await pipe(
- *   toAsync([1, 2, 3, 4, 5, 6]),
+ *   [1, 2, 3, 4, 5, 6],
+ *   toAsync,
  *   map((a) => delay(1000, a)),
  *   each(console.log), // log 1, 2, 3, 4, 5, 6
  * ); // 6 seconds

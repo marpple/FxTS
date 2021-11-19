@@ -17,9 +17,18 @@ import ReturnPipeType from "./types/ReturnPipeType";
  * ); // [12, 14]
  *
  * await pipe(
- *  Promise.resolve([1, 2, 3, 4, 5])
+ *  Promise.resolve([1, 2, 3, 4, 5]),
  *  map(a => a + 10),
  *  filter(a => a % 2 === 0),
+ *  toArray,
+ * ); // [12, 14]
+ *
+ * // if you want to use asynchronous callback
+ * await pipe(
+ *  Promise.resolve([1, 2, 3, 4, 5]),
+ *  toAsync,
+ *  map(async (a) => a + 10),
+ *  filter((a) => a % 2 === 0),
  *  toArray,
  * ); // [12, 14]
  *

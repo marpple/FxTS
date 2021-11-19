@@ -78,17 +78,18 @@ function async<A>(
  * ); // [1,2,3,4]
  *
  * await pipe(
- *  Promise.resolve([1,2,3]),
+ *  Promise.resolve([1, 2, 3]),
  *  append(4),
  *  toArray,
- * ); // [1,2,3,4]
+ * ); // [1, 2, 3, 4]
  *
  * // with toAsync
  * await pipe(
- *  toAsync([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]),
+ *  [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
+ *  toAsync,
  *  append(4),
  *  toArray,
- * ); // [1,2,3,4]
+ * ); // [1, 2, 3, 4]
  * ```
  *
  * {@link https://codesandbox.io/s/fxts-append-civf7 | Try It}

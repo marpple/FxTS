@@ -23,6 +23,13 @@ import { AsyncFunctionException } from "./_internal/error";
  *   partition((a) => a % 2 === 0), // [[2, 4], [1, 3, 5]]
  * );
  *
+ * // if you want to use asynchronous callback
+ * await pipe(
+ *   Promise.resolve([1, 2, 3, 4, 5]),
+ *   toAsync,
+ *   partition(async (a) => a % 2 === 0), // [[2, 4], [1, 3, 5]]
+ * );
+ *
  * // with toAsync
  * await pipe(
  *   [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4), Promise.resolve(5)],

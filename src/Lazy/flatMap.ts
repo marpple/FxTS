@@ -37,6 +37,14 @@ type FlatMapValue<
  *  flatMap(s => s.split(" ")),
  *  toArray,
  * ); // ["It", "is", "a", "good", "day"]
+ *
+ * // if you want to use asynchronous callback
+ * await pipe(
+ *  Promise.resolve(["It is", "a good", "day"]),
+ *  toAsync,
+ *  flatMap(async (s) => s.split(" ")),
+ *  toArray,
+ * ); // ["It", "is", "a", "good", "day"]
  * ```
  *
  * {@link https://codesandbox.io/s/fxts-flatmap-3g9k8 | Try It}

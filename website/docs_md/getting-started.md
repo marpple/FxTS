@@ -65,5 +65,5 @@ const take = require("@fxts/core/Lazy/take").default;
 This script was built with an es5 target and contains polyfill.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@fxts/core@0.1.4/dist/fx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fxts/core/dist/fx.min.js"></script>
 ```
