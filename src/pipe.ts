@@ -5,7 +5,7 @@ import ReturnPipeType from "./types/ReturnPipeType";
 
 /**
  * Performs left to right function composition.
- * The first argument have any value; the remaining arguments must be unary.
+ * The first argument can have any value; the remaining arguments must be unary.
  *
  * @example
  * ```ts

@@ -6,7 +6,7 @@ import { AsyncFunctionException } from "./_internal/error";
 
 /**
  * Split Iterable/AsyncIterable into two arrays:
- * one whose elements all satisfy `f` and one whose elements all do not satisfy `f`.
+ * one with all elements which satisfies `f` and the other with all elements that does not.
  *
  * @example
  * ```ts

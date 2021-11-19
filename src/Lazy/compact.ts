@@ -4,7 +4,7 @@ import { isAsyncIterable, isIterable, isNotNullable } from "../_internal/utils";
 import filter from "./filter";
 
 /**
- * Returns Iterable/AsyncIterable with all `null` `undefined` values removed.
+ * Returns Iterable/AsyncIterable with all `null` and `undefined` values removed.
  *
  * @example
  * ```ts

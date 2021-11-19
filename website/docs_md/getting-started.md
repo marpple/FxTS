@@ -58,11 +58,11 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-**Note: `esm5` and `cjs` submodules were built with es5 targets, but also not include polyfill.**
+**Note: `esm5` and `cjs` submodules were built targeting `es5`, and also does not include polyfill.**
 
 ### CDN
 
-This script was built with an es5 target and contains polyfill.
+This script was built targeting `es5` and contains polyfill.
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@fxts/core/dist/fx.min.js"></script>

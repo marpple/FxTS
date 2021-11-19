@@ -13,7 +13,7 @@ function incSel<B extends Key>(parent: { [K in B]: number }, k: B) {
 /**
  * Returns a count for the number of objects in each group.
  * Similar to groupBy, but instead of returning a list of values,
- * returns a count for the number of values in that group.
+ * it returns a count for the number of values in that group.
  *
  * @example
  * ```ts

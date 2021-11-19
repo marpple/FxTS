@@ -1,5 +1,5 @@
 /**
- * Returns the same value the is used as the argument.
+ * Returns the same value as the given argument.
  *
  * @example
  * ```ts
