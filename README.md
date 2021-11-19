@@ -46,6 +46,10 @@ you can also handle asynchronous data, see the [example](https://fxts.dev/docs/o
 
 - `npm test`
 
+## Running Type Test
+
+- `npm run compile:check`
+
 ## License
 
 Apache License 2.0
