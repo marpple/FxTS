@@ -72,8 +72,9 @@ import { pipe, peek, range, map, filter, take, toArray } from "@fxts/core";
 
 await pipe(
   Promise.resolve([1, 2, 3, 4]),
+  toAsync,
   map((a) => a + 10),
-  map(async (a) => a + 10), // also possible
+  // map(async (a) => a + 10), // also possible
   filter((a) => a % 2 === 0),
   take(2),
   toArray,
@@ -85,13 +86,13 @@ When asynchronous values are contained in an array
 ```ts
 import { pipe, toAsync, peek, range, map, filter, take, toArray } from "@fxts/core";
 
-await pipe(
-  toAsync([
+await pipe([
     Promise.resolve(1),
     Promise.resolve(2),
     Promise.resolve(3),
     Promise.resolve(4),
   ]),
+  toAsync,
   map((a) => a + 10),
   filter((a) => a % 2 === 0),
   take(2),
@@ -155,7 +156,30 @@ import { pipe, toAsync, map, toArray } from "@fxts/core";
 
 try {
   await pipe(
-    [1, 2, 3, 4, 5],
+    Promise.resolve([1, 2, 3, 4, 5]),
+    toAsync,
+    map(async (a) => {
+      throw "err";
+    }),
+    toArray,
+  );
+} catch (err) {
+  // handle err
+}
+```
+
+
+```ts
+import { pipe, toAsync, map, toArray } from "@fxts/core";
+
+try {
+  await pipe(
+    toAsync([
+      Promise.resolve(1),
+      Promise.resolve(2),
+      Promise.resolve(3),
+      Promise.resolve(4),
+    ]),
     map(async (a) => {
       throw "err";
     }),
