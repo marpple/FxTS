@@ -1,4 +1,5 @@
-💬 [Join the FxTS Slack community](https://join.slack.com/t/fx-ts/shared_invite/zt-yw1x81zq-pNa8nM40X6mQAsu2L4m1Fw)
+💬 [Join the FxTS Slack community(ko)](https://join.slack.com/t/fx-ts/shared_invite/zt-yw1x81zq-pNa8nM40X6mQAsu2L4m1Fw)
+💬 [Join the FxTS Slack community(en)](https://join.slack.com/t/fx-ts-en/shared_invite/zt-z3heqgyc-al69EU_l95xnjeMRfvdoMA)
 
 # ![fxts-icon](https://user-images.githubusercontent.com/10924072/141757649-cc715e62-21bb-441d-aeae-4732154ded10.png) FxTS
 
