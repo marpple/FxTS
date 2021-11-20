@@ -22,6 +22,13 @@ describe("filter", function () {
       expect(res).toEqual([2, 4, 6, 8]);
     });
 
+    it("should be filtered by the boolean constructor", function () {
+      const res = [
+        ...filter(Boolean, [undefined, null, 0, "", false, -0, 123]),
+      ];
+      expect(res).toEqual([123]);
+    });
+
     it("should throw an error when the callback is asynchronous", function () {
       const res = () => [...filter(modAsync, range(1, 10))];
       expect(res).toThrowError(new AsyncFunctionException());
@@ -56,6 +63,18 @@ describe("filter", function () {
         res.push(item);
       }
       expect(res).toEqual([2, 4, 6, 8]);
+    });
+
+    it("should be filtered by the boolean constructor", async function () {
+      const res: unknown[] = [];
+      const iter = filter(
+        Boolean,
+        toAsync([undefined, null, 0, "", false, -0, 123]),
+      );
+      for await (const item of iter) {
+        res.push(item);
+      }
+      expect(res).toEqual([123]);
     });
 
     it("should be able to handle an error", async function () {
@@ -252,6 +271,7 @@ describe("filter", function () {
         ),
       ).rejects.toThrow("err");
     });
+
     it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(
         toAsync([1, 2, 3, 4]),

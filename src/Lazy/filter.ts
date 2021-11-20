@@ -3,6 +3,7 @@ import concurrent, { Concurrent, isConcurrent } from "./concurrent";
 import pipe1 from "../pipe1";
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import TruthyTypesOf from "../types/TrutyTypesOf";
 import { Reject, Resolve } from "../types/Utils";
 import { AsyncFunctionException } from "../_internal/error";
 
@@ -212,15 +213,31 @@ function* sync<A>(f: (a: A) => unknown, iterable: Iterable<A>) {
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/toArray | toArray}
  */
+function filter<A>(
+  f: BooleanConstructor,
+  iterable: Iterable<A>,
+): IterableIterator<TruthyTypesOf<A>>;
+
 function filter<A, B = unknown>(
   f: (a: A) => B,
   iterable: Iterable<A>,
 ): IterableIterator<A>;
 
+function filter<A>(
+  f: BooleanConstructor,
+  iterable: AsyncIterable<A>,
+): AsyncIterableIterator<TruthyTypesOf<A>>;
+
 function filter<A, B = unknown>(
   f: (a: A) => B,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
+
+function filter<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+  f: BooleanConstructor,
+): (
+  iterable: A,
+) => ReturnIterableIteratorType<A, TruthyTypesOf<IterableInfer<A>>>;
 
 function filter<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
@@ -237,8 +254,13 @@ function filter<
   iterable?: A,
 ):
   | IterableIterator<IterableInfer<A>>
+  | IterableIterator<TruthyTypesOf<IterableInfer<A>>>
   | AsyncIterableIterator<IterableInfer<A>>
-  | ((iterable: A) => ReturnIterableIteratorType<A, IterableInfer<A>>) {
+  | AsyncIterableIterator<TruthyTypesOf<IterableInfer<A>>>
+  | ((iterable: A) => ReturnIterableIteratorType<A, IterableInfer<A>>)
+  | ((
+      iterable: A,
+    ) => ReturnIterableIteratorType<A, TruthyTypesOf<IterableInfer<A>>>) {
   if (iterable === undefined) {
     return (iterable: A): ReturnIterableIteratorType<A, IterableInfer<A>> =>
       filter(f, iterable as any) as ReturnIterableIteratorType<
