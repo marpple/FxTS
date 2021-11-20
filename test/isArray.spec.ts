@@ -1,7 +1,7 @@
 import { isArray } from "../src/index";
 
-describe("isString", function () {
-  it.each([2, true, "a"])(
+describe("isArray", function () {
+  it.each([undefined, null, true, 1, "a", Symbol("a"), () => null])(
     "given non array then should return false",
     function (s) {
       const result = isArray(s);
