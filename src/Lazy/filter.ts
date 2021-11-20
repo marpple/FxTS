@@ -218,6 +218,11 @@ function filter<A>(
   iterable: Iterable<A>,
 ): IterableIterator<TruthyTypesOf<A>>;
 
+function filter<A, B extends A>(
+  f: (a: A) => a is B,
+  iterable: Iterable<A>,
+): IterableIterator<B>;
+
 function filter<A, B = unknown>(
   f: (a: A) => B,
   iterable: Iterable<A>,
@@ -227,6 +232,11 @@ function filter<A>(
   f: BooleanConstructor,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<TruthyTypesOf<A>>;
+
+function filter<A, B extends A>(
+  f: (a: A) => a is B,
+  iterable: AsyncIterable<A>,
+): AsyncIterableIterator<B>;
 
 function filter<A, B = unknown>(
   f: (a: A) => B,
@@ -238,6 +248,13 @@ function filter<A extends Iterable<unknown> | AsyncIterable<unknown>>(
 ): (
   iterable: A,
 ) => ReturnIterableIteratorType<A, TruthyTypesOf<IterableInfer<A>>>;
+
+function filter<
+  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  B extends IterableInfer<A>,
+>(
+  f: (a: IterableInfer<A>) => a is B,
+): (iterable: A) => ReturnIterableIteratorType<A, B>;
 
 function filter<
   A extends Iterable<unknown> | AsyncIterable<unknown>,

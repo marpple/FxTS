@@ -92,14 +92,14 @@ function uniqBy<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
 
   if (isIterable(iterable)) {
     return pipe(
-      iterable as Iterable<IterableInfer<A>>,
+      iterable,
       filter((a) => pipe1(f(a), checkAndAdd)),
     ) as IterableIterator<A>;
   }
 
   if (isAsyncIterable(iterable)) {
     return pipe(
-      iterable as AsyncIterable<IterableInfer<A>>,
+      iterable,
       filter((a) => pipe1(f(a), checkAndAdd)),
     ) as AsyncIterableIterator<A>;
   }
