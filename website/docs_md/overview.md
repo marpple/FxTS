@@ -112,7 +112,7 @@ await pipe(
   filter((a) => a % 2 === 0),
   take(3), // 0,2,4
   concurrent(3),
-  toArray, // 1 seconds
+  toArray, // 2 seconds
 );
 ```
 
