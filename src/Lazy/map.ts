@@ -3,7 +3,6 @@ import Awaited from "../types/Awaited";
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { AsyncFunctionException } from "../_internal/error";
-import concurrent, { isConcurrent } from "./concurrent";
 
 function sync<A, B>(
   f: (a: A) => B,
