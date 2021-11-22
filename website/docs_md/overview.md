@@ -108,11 +108,11 @@ import { pipe, toAsync, delay, peek, range, map, filter, take } from "@fxts/core
 
 await pipe(
   toAsync(range(Infinity)),
-  map((page) => delay(1000, page)), // 1,2,3,4,5,6
-  filter((a) => a % 2 === 0), // 2,4,6
+  map((page) => delay(1000, page)), // 0,1,2,3,4,5
+  filter((a) => a % 2 === 0),
+  take(3), // 0,2,4
   concurrent(3),
-  take(2),
-  toArray, // 2 seconds
+  toArray, // 1 seconds
 );
 ```
 
