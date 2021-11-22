@@ -7,7 +7,8 @@ import {
   toAsync,
   zip,
 } from "../../src/index";
-import { callFuncAfterTime } from "../utils";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("zip", function () {
   describe("sync", function () {
@@ -246,5 +247,14 @@ describe("zip", function () {
         [4, 8],
       ]);
     }, 1050);
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = zip([1, 2, 3], mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
+    });
   });
 });

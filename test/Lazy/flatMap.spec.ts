@@ -1,4 +1,6 @@
 import { flatMap, map, pipe, toArray, toAsync } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { generatorMock } from "../utils";
 
 describe("flatMap", function () {
   describe("sync", function () {
@@ -44,6 +46,15 @@ describe("flatMap", function () {
       );
 
       expect(res).toEqual(["IT", "IS", "A", "GOOD", "DAY"]);
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = flatMap((a) => a, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });

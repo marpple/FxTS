@@ -1,9 +1,9 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import pipe1 from "../pipe1";
 import Awaited from "../types/Awaited";
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { AsyncFunctionException } from "../_internal/error";
+import concurrent, { isConcurrent } from "./concurrent";
 
 function sync<A, B>(
   f: (a: A) => B,
@@ -37,7 +37,7 @@ function sync<A, B>(
   };
 }
 
-function async<A, B>(
+function asyncSequential<A, B>(
   f: (a: A) => B,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<B> {
@@ -45,12 +45,32 @@ function async<A, B>(
 
   return {
     async next(_concurrent) {
-      return pipe1(iterator.next(_concurrent), ({ done, value }) => {
-        if (done) return { done, value } as IteratorReturnResult<undefined>;
-        return pipe1(value, (value) =>
-          pipe1(f(value), (value) => ({ done: false, value })),
-        ) as IteratorYieldResult<B>;
-      });
+      const { done, value } = await iterator.next(_concurrent);
+      if (done) return { done, value } as IteratorReturnResult<void>;
+      return {
+        done: false,
+        value: await f(value),
+      };
+    },
+    [Symbol.asyncIterator]() {
+      return this;
+    },
+  };
+}
+
+function async<A, B>(
+  f: (a: A) => B,
+  iterable: AsyncIterable<A>,
+): AsyncIterableIterator<B> {
+  let _iterator: AsyncIterator<B>;
+  return {
+    async next(_concurrent: any) {
+      if (_iterator === undefined) {
+        _iterator = isConcurrent(_concurrent)
+          ? asyncSequential(f, concurrent(_concurrent.length, iterable))
+          : asyncSequential(f, iterable);
+      }
+      return _iterator.next(_concurrent);
     },
     [Symbol.asyncIterator]() {
       return this;

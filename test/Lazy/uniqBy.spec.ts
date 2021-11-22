@@ -1,4 +1,6 @@
 import { filter, map, pipe, toArray, toAsync, uniqBy } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { generatorMock } from "../utils";
 
 describe("uniqBy", function () {
   describe("sync", function () {
@@ -108,6 +110,15 @@ describe("uniqBy", function () {
       );
 
       expect(res).toEqual([12, 14]);
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = uniqBy((a) => a, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });

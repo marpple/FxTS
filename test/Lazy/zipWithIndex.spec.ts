@@ -1,4 +1,6 @@
 import { concurrent, delay, toAsync, zipWithIndex } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { generatorMock } from "../utils";
 
 describe("zipWithIndex", function () {
   describe("sync", function () {
@@ -42,6 +44,15 @@ describe("zipWithIndex", function () {
       const {value: [i4, v4]} = await iter.next(); // prettier-ignore
       expect(v1 + v2 + v3 + v4).toEqual("abcd");
       expect([i1, i2, i3, i4]).toEqual([0, 1, 2, 3]);
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = zipWithIndex(mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });

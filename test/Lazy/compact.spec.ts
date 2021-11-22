@@ -1,4 +1,6 @@
 import { compact, filter, map, pipe, toArray, toAsync } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { generatorMock } from "../utils";
 
 describe("compact", function () {
   describe("sync", function () {
@@ -58,6 +60,15 @@ describe("compact", function () {
       );
 
       expect(res).toEqual([14, 18]);
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = compact(mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });

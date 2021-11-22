@@ -9,7 +9,9 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { AsyncFunctionException } from "../../src/_internal/error";
+import { generatorMock } from "../utils";
 
 describe("takeUntil", function () {
   describe("sync", function () {
@@ -134,5 +136,14 @@ describe("takeUntil", function () {
       );
       expect(res).toEqual([12, 14, 16, 18, 20, 22]);
     }, 850);
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = takeUntil((a) => a, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
+    });
   });
 });
