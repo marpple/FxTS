@@ -18,6 +18,7 @@ import reduce from "./reduce";
 import some from "./some";
 import tap from "./tap";
 import toArray from "./toArray";
+import join from "./join";
 
 export {
   countBy,
@@ -41,6 +42,7 @@ export {
   some,
   tap,
   toArray,
+  join,
 };
 
 export * from "./Lazy/index";
