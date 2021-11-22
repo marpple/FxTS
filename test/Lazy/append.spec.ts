@@ -8,7 +8,8 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
-import { callFuncAfterTime } from "../utils";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("append", function () {
   describe("sync", function () {
@@ -83,5 +84,14 @@ describe("append", function () {
       expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 1050);
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = append(1, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
+    });
   });
 });

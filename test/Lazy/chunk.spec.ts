@@ -9,7 +9,8 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
-import { callFuncAfterTime } from "../utils";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { callFuncAfterTime, generatorMock } from "../utils";
 
 const expected = [
   [1, 2, 3],
@@ -138,6 +139,15 @@ describe("chunk", function () {
     it("should be able to be used as a curried function in the pipeline", async function () {
       const res = await pipe(range(1, 12), toAsync, chunk(3), toArray);
       expect(res).toEqual(expected);
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = chunk(3, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });

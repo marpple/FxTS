@@ -1,4 +1,6 @@
 import { map, peek, pipe, toArray, toAsync } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { generatorMock } from "../utils";
 
 describe("peek", function () {
   describe("sync", function () {
@@ -87,6 +89,15 @@ describe("peek", function () {
       ).rejects.toThrow("err");
 
       expect(res).toEqual([11, 12]);
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = peek((a) => a, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });

@@ -9,8 +9,9 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { AsyncFunctionException } from "../../src/_internal/error";
-import { callFuncAfterTime } from "../utils";
+import { callFuncAfterTime, generatorMock } from "../utils";
 
 const mod = (a: number) => a % 2 === 0;
 const modAsync = async (a: number) => a % 2 === 0;
@@ -308,5 +309,14 @@ describe("filter", function () {
       const { value: v6 } = await iterator.next();
       expect(v6).toEqual(13);
     }, 4050);
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = filter((a) => a, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
+    });
   });
 });

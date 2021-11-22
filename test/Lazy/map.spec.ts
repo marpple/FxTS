@@ -1,5 +1,7 @@
 import { map, pipe, range, toArray, toAsync } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { AsyncFunctionException } from "../../src/_internal/error";
+import { generatorMock } from "../utils";
 
 describe("map", function () {
   const add10 = (a: number) => a + 10;
@@ -79,6 +81,15 @@ describe("map", function () {
       );
 
       expect(res).toEqual(["1", "2", "3", "4"]);
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = map((a) => a, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });

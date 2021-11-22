@@ -33,10 +33,10 @@ function async(
     [Symbol.asyncIterator]() {
       return this;
     },
-    async next() {
+    async next(_concurrent) {
       const headIterators = await pipe(
         toAsync(iterators),
-        map((it) => it.next()),
+        map((it) => it.next(_concurrent)),
         toArray,
       );
 

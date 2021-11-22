@@ -8,8 +8,9 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 
-import { callFuncAfterTime } from "../utils";
+import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("drop", function () {
   describe("sync", function () {
@@ -112,6 +113,15 @@ describe("drop", function () {
           toArray,
         ),
       ).rejects.toThrow("err");
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = drop(2, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });

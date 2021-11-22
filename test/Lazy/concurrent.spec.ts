@@ -1,5 +1,6 @@
 import { concurrent, delay, map, pipe, range, toAsync } from "../../src/index";
-import { callFuncAfterTime } from "../utils";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("concurrent", function () {
   it("should be consumed 'AsyncIterable' concurrently", async function () {

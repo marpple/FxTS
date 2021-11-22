@@ -108,8 +108,8 @@ function toFilterIterator<A>(
     [Symbol.asyncIterator]() {
       return this;
     },
-    async next() {
-      const { done, value } = await iterator.next();
+    async next(_concurrent) {
+      const { done, value } = await iterator.next(_concurrent);
       if (done) {
         return {
           done: true,

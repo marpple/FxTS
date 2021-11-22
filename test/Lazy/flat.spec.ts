@@ -2,6 +2,7 @@ import {
   chunk,
   concurrent,
   delay,
+  filter,
   flat,
   map,
   pipe,
@@ -9,7 +10,8 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
-import { callFuncAfterTime } from "../utils";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("flat", function () {
   describe("sync", function () {
@@ -342,6 +344,15 @@ describe("flat", function () {
           toArray,
         ),
       ).rejects.toThrow("err");
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = flat(mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });
