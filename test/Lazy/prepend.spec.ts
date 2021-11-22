@@ -8,8 +8,7 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
-import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { callFuncAfterTime } from "../utils";
 
 describe("prepend", function () {
   describe("sync", function () {
