@@ -82,6 +82,11 @@ function reduce<A, B>(f: (a: B, b: A) => B, iterable: Iterable<A>): B;
 
 function reduce<A, B>(f: (a: B, b: A) => B, seed: B, iterable: Iterable<A>): B;
 
+function reduce<A>(
+  f: (a: A, b: A) => A,
+  iterable: AsyncIterable<A>,
+): Promise<A>;
+
 function reduce<A, B>(
   f: (a: B, b: A) => B | Promise<B>,
   seed: B | Promise<B>,
