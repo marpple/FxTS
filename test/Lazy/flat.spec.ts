@@ -2,10 +2,12 @@ import {
   chunk,
   concurrent,
   delay,
+  filter,
   flat,
   map,
   pipe,
   range,
+  take,
   toArray,
   toAsync,
 } from "../../src/index";
@@ -305,6 +307,21 @@ describe("flat", function () {
       expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 2050);
+
+    it("should be flattened concurrently with filter", async function () {
+      const res = await pipe(
+        [[1], [2], [3], [4]],
+        toAsync,
+        (iter) => flat(iter, 2),
+        map((a) => delay(1000, a)),
+        filter((a) => a % 2 === 0),
+        take(2),
+        concurrent(4),
+        toArray,
+      );
+
+      expect(res).toEqual([2, 4]);
+    });
 
     it("should be able to handle an error", async function () {
       await expect(
