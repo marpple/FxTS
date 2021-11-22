@@ -61,7 +61,7 @@ describe("pipe", function () {
             map(() => {
               throw new Error("err");
             }, a),
-          (a) => reduce((acc, a) => acc + a, a),
+          (a) => reduce((acc: number, a) => acc + a, a),
         ),
       ).rejects.toThrow("err");
 
@@ -70,7 +70,7 @@ describe("pipe", function () {
         pipe(
           toAsync(range(1, 10)),
           (a) => map(() => Promise.reject(new Error("err")), a),
-          (a) => reduce((acc, a) => acc + a, a),
+          (a) => reduce((acc: number, a) => acc + a, a),
         ),
       ).rejects.toThrow("err");
     });
