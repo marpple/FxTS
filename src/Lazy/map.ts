@@ -37,7 +37,7 @@ function sync<A, B>(
   };
 }
 
-function asyncSequential<A, B>(
+function async<A, B>(
   f: (a: A) => B,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<B> {
@@ -51,26 +51,6 @@ function asyncSequential<A, B>(
         done: false,
         value: await f(value),
       };
-    },
-    [Symbol.asyncIterator]() {
-      return this;
-    },
-  };
-}
-
-function async<A, B>(
-  f: (a: A) => B,
-  iterable: AsyncIterable<A>,
-): AsyncIterableIterator<B> {
-  let _iterator: AsyncIterator<B>;
-  return {
-    async next(_concurrent: any) {
-      if (_iterator === undefined) {
-        _iterator = isConcurrent(_concurrent)
-          ? asyncSequential(f, concurrent(_concurrent.length, iterable))
-          : asyncSequential(f, iterable);
-      }
-      return _iterator.next(_concurrent);
     },
     [Symbol.asyncIterator]() {
       return this;
