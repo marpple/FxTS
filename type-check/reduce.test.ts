@@ -11,8 +11,9 @@ const res5 = reduce((a, b) => a + b, "0", [1, 2, 3]);
 const res6 = reduce((a: string, b) => String(Number(a) + Number(b)), [1, 2, 3]);
 
 // const res7 = reduce((a, b) => a + b, Promise.resolve(0), [1, 2, 3]); // error
-// const res8 = reduce((a, b) => Promise.resolve(a + b), 0, [1, 2, 3]); // error
+// const res7 = reduce((a, b) => Promise.resolve(a + b), 0, [1, 2, 3]); // error
 
+const res8 = reduce((a, b) => a + b, toAsync([1, 2, 3]));
 const res9 = reduce((a, b) => a + b, 0, toAsync([1, 2, 3]));
 const res10 = reduce((a, b) => a + b, Promise.resolve(0), toAsync([1, 2, 3]));
 
@@ -59,8 +60,9 @@ checks([
   check<typeof res6, string, Test.Pass>(),
 
   // check<typeof res7, Promise<number>, Test.Pass>(),
-  // check<typeof res8, Promise<number>, Test.Pass>(),
+  // check<typeof res7, Promise<number>, Test.Pass>(),
 
+  check<typeof res8, Promise<number>, Test.Pass>(),
   check<typeof res9, Promise<number>, Test.Pass>(),
   check<typeof res10, Promise<number>, Test.Pass>(),
 
