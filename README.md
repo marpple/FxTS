@@ -36,37 +36,29 @@ pipe(
 );
 ```
 
-Concurrency
+## Usage(concurrent)
 
 ```ts
-// prettier-ignore
-import { pipe, range, toAsync, map, takeWhile, flat, concurrent, countBy } from "@fxts/core";
+import { pipe, toAsync, map, flat, concurrent, countBy } from "@fxts/core";
 
-const delay1000 = () => new Promise((resolve) => setTimeout(resolve, 1000));
-const words = ["html", "css", "javascript", "typescript"];
-const fetchWords = (a: number) => delay1000().then(() => (a < 9 ? words : []));
+// maybe 1 seconds api
+const fetchWiki = (page: string) =>
+  fetch(`https://en.wikipedia.org/w/api.php?action=parse&page=${page}`);
 
 const countWords = async (concurrency = 1) =>
   pipe(
-    range(Infinity),
+    ["html", "css", "javascript", "typescript"],
     toAsync,
-    map(fetchWords),
-    takeWhile(({ length }) => length > 0),
+    map(fetchWiki),
+    map((res) => res.text()),
+    map((words) => words.split(" ")),
     flat,
     concurrent(concurrency),
     countBy((word) => word),
-    console.log,
   );
 
-async function main() {
-  try {
-    await countWords(); // 10 seconds
-    await countWords(5); // 2 seconds
-  } catch (e) {
-    // error handle
-  }
-}
-main();
+await countWords(); // 4 seconds
+await countWords(2); // 2 seconds
 ```
 
 you can also handle asynchronous data, see the [example](https://fxts.dev/docs/overview#examples)
