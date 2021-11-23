@@ -145,5 +145,46 @@ describe("takeUntil", function () {
       await iter.next(concurrent);
       expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
+
+    it("should be able to handle an error when asynchronous", async function () {
+      await expect(
+        pipe(
+          range(Infinity),
+          toAsync,
+          map((a) => delay(100, a + 10)),
+          filter((a) => a % 2 === 0),
+          takeUntil((a) => {
+            if (a > 15) {
+              throw new Error("err");
+            }
+            return false;
+          }),
+          concurrent(5),
+          toArray,
+        ),
+      ).rejects.toThrow("err");
+    }, 350);
+
+    it("should be controlled the order when concurrency", async function () {
+      const res = await pipe(
+        toAsync(
+          (function* () {
+            yield delay(500, 1);
+            yield delay(400, 2);
+            yield delay(300, 3);
+            yield delay(200, 4);
+            yield delay(100, 5);
+            yield delay(500, 6);
+            yield delay(400, 7);
+            yield delay(300, 8);
+            yield delay(200, 9);
+          })(),
+        ),
+        takeUntil((a) => a > 8),
+        concurrent(5),
+        toArray,
+      );
+      expect(res).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    }, 1050);
   });
 });
