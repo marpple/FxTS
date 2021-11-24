@@ -3,4 +3,5 @@ dist
 lib
 
 # docs site
-website
+website/build
+website/.docusaurus
