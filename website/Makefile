@@ -1,12 +1,20 @@
 SHELL=/bin/sh
 EXEC_PATH=./scripts
 
-all: install build
+all: install plugin build
 
 .PHONY: install
 install:
-	cd $(EXEC_PATH) && ./install.sh
+	sh $(EXEC_PATH)/install.sh
+
+.PHONY: plugin
+plugin:
+	sh $(EXEC_PATH)/plugin.sh
 
 .PHONY: build
 build:
-	cd $(EXEC_PATH) && ./build.sh
+	sh $(EXEC_PATH)/build.sh
+
+.PHONY: clean
+clean:
+	sh $(EXEC_PATH)/clean.sh
