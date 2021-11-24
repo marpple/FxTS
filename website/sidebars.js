@@ -73,6 +73,19 @@ const sidebars = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "FAQ",
+      collapsible: true,
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "to-async",
+          label: "When to use the `toAsync` function?",
+        },
+      ],
+    },
   ],
 };
 
