@@ -48,7 +48,7 @@ const config = {
           src: "img/fxts.png",
         },
         items: [
-          { to: "/docs/overview", label: "Overview", position: "left" },
+          { to: "/docs/getting-started", label: "Docs", position: "left" },
           { to: "/docs/index", label: "API", position: "left" },
           {
             href: "https://github.com/marpple/fxts",
@@ -94,20 +94,18 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-      gtag:{
+      gtag: {
         trackingID: "G-BTGRJYWTNK",
         anonymizeIP: true,
       },
     }),
-    clientModules:[
-      require.resolve('./analytics.js'),
-    ],
-    scripts: [ 
-      {
-        src: 'https://cdn.jsdelivr.net/npm/@fxts/core/dist/fx.min.js',
-        async: true,
-      },
-    ],
+  clientModules: [require.resolve("./analytics.js")],
+  scripts: [
+    {
+      src: "https://cdn.jsdelivr.net/npm/@fxts/core/dist/fx.min.js",
+      async: true,
+    },
+  ],
 };
 
 module.exports = config;

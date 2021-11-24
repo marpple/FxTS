@@ -61,7 +61,7 @@ await countWords(); // 4 seconds
 await countWords(2); // 2 seconds
 ```
 
-you can also handle asynchronous data, see the [example](https://fxts.dev/docs/overview#examples)
+you can start [here](http://fxts.dev/docs/getting-started)
 
 ## Build
 

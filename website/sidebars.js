@@ -27,7 +27,6 @@ const sidebars = {
     },
   ],
    */
-
   docs: [
     { type: "doc", id: "index", label: "Index" },
     ...Object.keys(func).map((key) => {
@@ -40,17 +39,39 @@ const sidebars = {
       };
     }),
   ],
-
-  oveview: [
-    {
-      type: "doc",
-      id: "overview",
-      label: "Overview",
-    },
+  overview: [
     {
       type: "doc",
       id: "getting-started",
       label: "Getting Started",
+    },
+    {
+      type: "category",
+      label: "Guide",
+      collapsible: true,
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "function-composition",
+          label: "Function Composition",
+        },
+        {
+          type: "doc",
+          id: "lazy-evaluation",
+          label: "Lazy Evaluation",
+        },
+        {
+          type: "doc",
+          id: "handle-concurrency",
+          label: "Handle Concurrency",
+        },
+        {
+          type: "doc",
+          id: "error-handling",
+          label: "Error handling",
+        },
+      ],
     },
   ],
 };

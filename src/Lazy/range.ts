@@ -26,7 +26,7 @@
  * await pipe(
  *  range(4),
  *  toAsync,
- *  toArray, // examples https://fxts.dev/docs/overview#concurrent
+ *  toArray,
  * ); // [0, 1, 2, 3]
  * ```
  *
