@@ -4,31 +4,29 @@ id: handle-concurrency
 
 # Handle Concurrency
 
-It handles multiple asynchronous requests and also controls the count of requests
+In javascript, there is a function to evaluate multiple promise values at the same time with [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all).
+However, it cannot handle the load of concurrent requests and cannot handle requests for infinite enumerable data sets.
+[concurrent](https://fxts.dev/docs/concurrent) can handle asynchronous requests of infinite datasets and can control the request size of the load.
 
 ```ts
-import {
-  pipe,
-  toAsync,
-  delay,
-  peek,
-  range,
-  map,
-  filter,
-  take,
-} from "@fxts/core";
+// prettier-ignore
+import { pipe, toAsync, range, map, filter, take, each, concurrent } from "@fxts/core";
+
+const fetchApi = (page) =>
+  new Promise((resolve) => setTimeout(() => resolve(page), 1000));
 
 await pipe(
-  toAsync(range(Infinity)),
-  map((page) => delay(1000, page)), // 0,1,2,3,4,5
+  range(Infinity),
+  toAsync,
+  map(fetchApi), // 0,1,2,3,4,5
   filter((a) => a % 2 === 0),
   take(3), // 0,2,4
   concurrent(3),
-  toArray, // 2 seconds
+  each(console.log), // 2 seconds
 );
 ```
 
-You can see that it takes 6 seconds when requesting one by one but takes 2 seconds when requesting using [concurrent](https://fxts.dev/docs/concurrent)
+You can see that it takes 6 seconds when requesting one by one but takes 2 seconds when requesting using `concurrent`
 
 A more practical code is below.
 
