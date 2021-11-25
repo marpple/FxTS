@@ -84,6 +84,11 @@ const sidebars = {
           id: "to-async",
           label: "When to use the `toAsync` function?",
         },
+        {
+          type: "doc",
+          id: "how-to-debug",
+          label: "How to debug in pipeline easily?",
+        },
       ],
     },
   ],
