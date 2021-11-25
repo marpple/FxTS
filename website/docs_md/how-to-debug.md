@@ -4,20 +4,20 @@ id: how-to-debug
 
 # How to debug in pipeline easily?
 
-## Strictly evaluation
+## Strict evaluation
 
 In strictly-evaluated pipeline, you can track changing of the value in the middle of the pipeline by using the `tap` function.
-If you want to know more about the 'tap' function, see [here](https://fxts.dev/docs/tap).
+If you want to know more about the `tap` function, see [here](https://fxts.dev/docs/tap).
 
 ```typescript
 pipe(
   "2021/11/25",
   (str) => str.split("/"),
-  tap(console.log), // ['2021', '11', '25']
+  tap((a) => console.log(a)), // ['2021', '11', '25']
   (date) => date.map(Number),
-  tap(console.log), // [2021, 11, 25]
+  tap((a) => console.log(a)), // [2021, 11, 25]
   (date) => date.map((n) => (n === 1 ? 1 : n - 1)),
-  tap(console.log), // [2020, 10, 24]
+  tap((a) => console.log(a)), // [2020, 10, 24]
   (date) => new Date(...date),
 );
 ```
@@ -81,3 +81,5 @@ pipe(
 ```
 
 [The entire code is here.](https://codesandbox.io/s/how-to-debug-t2tmb?file=/src/index.ts)
+
+For more information, see the [Lazy evaluation](https://fxts.dev/docs/lazy-evaluation)
