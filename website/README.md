@@ -11,10 +11,11 @@
   npm install -g @microsoft/api-documenter@7
   ```
 
-## Install or Update plugin markdown-plugin
+## Install / Update plugin markdown-plugin
 
 ```
 $ make install
+$ make plugin
 ```
 
 ## Document build

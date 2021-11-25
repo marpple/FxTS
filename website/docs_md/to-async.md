@@ -4,7 +4,7 @@ id: to-async
 
 # When to use the `toAsync` function?
 
-Many functions in `fxts` can handle both `Iterable` and `AsyncIterable`. For example, the `find` function can be used as follows.
+Many functions in FxTS can handle both `Iterable` and `AsyncIterable`. For example, the `find` function can be used as follows.
 
 ```typescript
 const numbers = function* () {
@@ -22,7 +22,8 @@ find((num) => num === 2, numbers()); // 2
 find((num) => num === 2, asyncNumbers()); // Promise<2>
 ```
 
-However, there is a special point to note. `AsyncIterable` can work fine whether the callback function is running synchronously/asynchronously, but You cannot iterate over `Iterable` using asynchronous callback functions or manipulate types `Iterable<Promise<T>>`.
+There is a special point to note. `AsyncIterable` can work fine whether the callback function is running synchronously/asynchronously,
+but **You can not iterate over `Iterable` using asynchronous callback functions or manipulate types `Iterable<Promise<T>>`.**
 
 ```typescript
 const promiseNumbers = function* () {
@@ -35,7 +36,7 @@ find((num) => Promise.resolve(num === 2), numbers()); // not work
 find((num) => num === 2, promiseNumbers()); // not work
 ```
 
-In order to handle async using `fxts`, the value to iterate must be type of `AsyncIterable`.
+In order to handle async using FxTS, the value to iterate must be type of `AsyncIterable`.
 If the callback function is asynchronous or should handle `Iterable<Promise<T>>`, use the `toAsync` function to convert it to `AsyncIterable`.
 
 ```typescript
