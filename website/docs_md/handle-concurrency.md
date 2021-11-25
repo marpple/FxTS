@@ -21,12 +21,14 @@ await pipe(
   map(fetchApi), // 0,1,2,3,4,5
   filter((a) => a % 2 === 0),
   take(3), // 0,2,4
-  concurrent(3),
+  concurrent(3), // If this line does not exist, it will take a total of 6 seconds.
   each(console.log), // 2 seconds
 );
 ```
 
 You can see that it takes 6 seconds when requesting one by one but takes 2 seconds when requesting using `concurrent`
+
+### Useful Example
 
 A more practical code is below.
 

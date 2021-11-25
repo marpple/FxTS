@@ -13,7 +13,7 @@ so it is good to use with [sentry](https://sentry.io/) or various 3rd party erro
 
 ### Synchronous error handling
 
-```ts
+```typescript
 import { pipe, toAsync, take, map, toArray } from "@fxts/core";
 
 const syncError = (a) => {
@@ -34,7 +34,7 @@ try {
 
 ### Asynchronous error handling
 
-```ts
+```typescript
 import { pipe, toAsync, map, filter, toArray } from "@fxts/core";
 
 const fetchAsyncError = (a) => Promise.reject(`err ${a}`);
@@ -50,12 +50,6 @@ try {
 } catch (err) {
   // handle err
 }
-```
-
-```ts
-import { pipe, toAsync, map, filter, toArray } from "@fxts/core";
-
-const fetchAsyncError = (a) => Promise.reject(`err ${a}`);
 
 try {
   await pipe(
@@ -81,7 +75,7 @@ In the state of concurrent requests, `AsyncIterable` is evaluated as many as the
 This is the same case where asynchronous requests are executed with [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all),
 `Promise.all` is all executed even if one fails.
 
-```ts
+```typescript
 import { pipe, toAsync, map, filter, concurrent, toArray } from "@fxts/core";
 
 const fetchAsyncError = (a) => {

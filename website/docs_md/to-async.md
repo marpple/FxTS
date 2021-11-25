@@ -12,6 +12,7 @@ const numbers = function* () {
   yield 2;
   yield 3;
 };
+
 const asyncNumbers = async function* () {
   yield 1;
   yield 2;
