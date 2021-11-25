@@ -6,7 +6,7 @@ id: how-to-debug
 
 ## Strictly evaluation
 
-In the strictly-evaluated pipeline, you can track changing of the value in the middle of the pipeline by using the `tap` function.
+In strictly-evaluated pipeline, you can track changing of the value in the middle of the pipeline by using the `tap` function.
 If you want to know more about the 'tap' function, see [here](https://fxts.dev/docs/tap).
 
 ```typescript

@@ -27,7 +27,7 @@ const sidebars = {
     },
   ],
    */
-  docs: [
+  api: [
     { type: "doc", id: "index", label: "Index" },
     ...Object.keys(func).map((key) => {
       return {
@@ -39,7 +39,7 @@ const sidebars = {
       };
     }),
   ],
-  overview: [
+  docs: [
     {
       type: "doc",
       id: "getting-started",

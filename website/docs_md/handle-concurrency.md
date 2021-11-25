@@ -4,6 +4,8 @@ id: handle-concurrency
 
 # Handle Concurrency
 
+> `concurrent` is a function that can handle multiple asynchronous values at once.
+
 In javascript, there is a function to evaluate multiple promise values at the same time with [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all).
 However, it cannot handle the load of concurrent requests and cannot handle requests for infinite enumerable data sets.
 [concurrent](https://fxts.dev/docs/concurrent) can handle asynchronous requests of infinite datasets and can control the request size of the load.
@@ -56,7 +58,8 @@ await pipe(
 );
 ```
 
-If you want to sequentially evaluate up to `map` one by one, and evaluate the asynchronous predicate of `filter` three at the same time, you should write the code below:
+If you want to sequentially evaluate up to `map` one by one,
+and evaluate the asynchronous predicate of `filter` three at the same time, you should write the code below:
 
 ```ts
 await pipe(
