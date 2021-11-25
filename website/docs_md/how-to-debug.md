@@ -4,9 +4,9 @@ id: how-to-debug
 
 # How to debug in pipeline easily?
 
-## In the synchronous pipeline
+## Strictly evaluation
 
-In the synchronous pipeline, you can track changing of the value in the middle of the pipeline by using the `tap` function.
+In the strictly-evaluated pipeline, you can track changing of the value in the middle of the pipeline by using the `tap` function.
 If you want to know more about the 'tap' function, see [here](https://fxts.dev/docs/tap).
 
 ```typescript
@@ -22,7 +22,7 @@ pipe(
 );
 ```
 
-## In the asynchronous pipeline
+## Lazy evaluation
 
 The code below creates a list of the 13th of Fridays, starting from January 1, 2000. Each function in the pipeline returns an `IterableIterator`, Which means nothing happens until the `toArray` function iterates through the `iterable` and evaluates the value.
 
