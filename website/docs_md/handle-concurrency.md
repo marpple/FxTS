@@ -38,3 +38,35 @@ A more practical code is below.
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
+
+### Note
+
+If the position of `concurrent` in the code above is as follows, would the result be different?
+No, It would be same! Note that `concurrent` always applies to `Iterable` before the length is changed.
+
+```ts
+await pipe(
+  range(Infinity),
+  toAsync,
+  map(fetchApi),
+  concurrent(3),
+  filter((a) => a % 2 === 0),
+  take(3),
+  each(console.log),
+);
+```
+
+If you want to sequentially evaluate up to `map` one by one, and evaluate the asynchronous predicate of `filter` three at the same time, you should write the code below:
+
+```ts
+await pipe(
+  range(Infinity),
+  toAsync,
+  map(fetchApi),
+  toArray,
+  filter((a) => delay(100, a % 2 === 0)),
+  take(3),
+  concurrent(3),
+  each(console.log),
+);
+```
