@@ -9,6 +9,7 @@ import identity from "./identity";
 import indexBy from "./indexBy";
 import isArray from "./isArray";
 import isString from "./isString";
+import join from "./join";
 import last from "./last";
 import not from "./not";
 import partition from "./partition";
@@ -18,7 +19,6 @@ import reduce from "./reduce";
 import some from "./some";
 import tap from "./tap";
 import toArray from "./toArray";
-import join from "./join";
 
 export {
   countBy,
@@ -33,6 +33,7 @@ export {
   indexBy,
   isArray,
   isString,
+  join,
   last,
   not,
   partition,
@@ -42,7 +43,6 @@ export {
   some,
   tap,
   toArray,
-  join,
 };
 
 export * from "./Lazy/index";

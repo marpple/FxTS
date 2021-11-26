@@ -1,4 +1,4 @@
-import { join, pipe, filter, map, toAsync } from "../src/index";
+import { filter, join, map, pipe, toAsync } from "../src/index";
 
 describe("join", function () {
   describe("sync", function () {

@@ -57,7 +57,7 @@ function join<A extends Iterable<unknown> | AsyncIterable<unknown>>(
 function join<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   sep: string,
   iterable?: A,
-): string | Promise<string> | ((iterable: A) => ReturnJoinType<A>) | "" {
+): string | Promise<string> | ((iterable: A) => ReturnJoinType<A>) {
   if (iterable === undefined) {
     return (iterable: A): ReturnJoinType<A> => {
       return join(sep, iterable as any) as ReturnJoinType<A>;
