@@ -13,7 +13,8 @@ A function named `pipe` is already provided by several libraries, so you may be 
 - pipe in [rxjs](https://rxjs.dev/).
 
 `pipe` is a function that connects functions by passing the output of a function to the arguments of another function.
-In FxTS, `pipe` is used as a more important function.
+
+<br/>
 
 Let's take a moment to see why we need `pipe`.
 
@@ -39,8 +40,7 @@ reduce(
 )
 ```
 
-We are providing `pipe` to solve the above problem. Make the above code in human-readable order as shown below.
-Check out [this article](https://fxts.dev/docs/lazy-evaluation) for a comparison with `Array.prototype.[Function]`
+We are providing `pipe` to solve the above problem.
 
 ```typescript
 import { pipe, filter, map } from "@fxts/core";
@@ -53,6 +53,11 @@ pipe(
 );
 ```
 
+It looks easy to read when used with `pipe`.
+
+> Check out [this article](https://fxts.dev/docs/lazy-evaluation) for a comparison with `Array.prototype.[Function]`
+
+<br/>
 Also, you don't have to deal with `Promise` values directly.
 
 ```typescript

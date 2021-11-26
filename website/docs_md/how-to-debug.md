@@ -38,6 +38,7 @@ const is13thOfFriday = (date: Date) =>
 const formatYYYYMMDD = (date: Date) => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 };
+
 pipe(
   range(1, Infinity),
   map(addDateFrom(new Date(2000, 0, 1))),
@@ -82,4 +83,4 @@ pipe(
 
 [The entire code is here.](https://codesandbox.io/s/how-to-debug-t2tmb?file=/src/index.ts)
 
-For more information, see the [Lazy evaluation](https://fxts.dev/docs/lazy-evaluation)
+To check for lazy evaluation in FxTS, see the [Lazy evaluation](https://fxts.dev/docs/lazy-evaluation)
