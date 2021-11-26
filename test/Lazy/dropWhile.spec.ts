@@ -16,10 +16,10 @@ describe("dropWhile", function () {
   describe("sync", function () {
     it("should be dropped elements until the value applied to callback returns falsey", function () {
       const acc = [];
-      for (const a of dropWhile((a) => a < 3, [1, 2, 3, 4, 5])) {
+      for (const a of dropWhile((a) => a < 3, [1, 2, 3, 1, 5])) {
         acc.push(a);
       }
-      expect(acc).toEqual([3, 4, 5]);
+      expect(acc).toEqual([3, 1, 5]);
     });
 
     it("should be able to be used as a curried function in the pipeline", function () {
@@ -43,10 +43,10 @@ describe("dropWhile", function () {
   describe("async", function () {
     it("should be dropped elements until the value applied to callback returns falsey", async function () {
       const acc = [];
-      for await (const a of dropWhile((a) => a < 3, toAsync([1, 2, 3, 4, 5]))) {
+      for await (const a of dropWhile((a) => a < 3, toAsync([1, 2, 3, 1, 5]))) {
         acc.push(a);
       }
-      expect(acc).toEqual([3, 4, 5]);
+      expect(acc).toEqual([3, 1, 5]);
     });
 
     it("should be able to be used as a curried function in the pipeline", async function () {
@@ -106,7 +106,7 @@ describe("dropWhile", function () {
             yield delay(500, 6);
             yield delay(400, 7);
             yield delay(300, 8);
-            yield delay(200, 9);
+            yield delay(200, 1);
             yield delay(100, 10);
           })(),
         ),
@@ -115,7 +115,7 @@ describe("dropWhile", function () {
         toArray,
       );
       expect(fn).toBeCalled();
-      expect(res).toEqual([7, 8, 9, 10]);
+      expect(res).toEqual([7, 8, 1, 10]);
     }, 1050);
 
     it("should be able to handle an error when working concurrent", async function () {

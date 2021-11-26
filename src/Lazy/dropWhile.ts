@@ -5,7 +5,14 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync<A, B>(f: (a: A) => B, iterable: Iterable<A>) {
-  for (const a of iterable) {
+  const iterator = iterable[Symbol.iterator]();
+  const iterableIterator = {
+    [Symbol.iterator]() {
+      return iterator;
+    },
+  };
+
+  for (const a of iterableIterator) {
     const res = f(a);
     if (res instanceof Promise) {
       throw new AsyncFunctionException();
@@ -15,6 +22,7 @@ function* sync<A, B>(f: (a: A) => B, iterable: Iterable<A>) {
       continue;
     }
     yield a;
+    yield* iterableIterator;
   }
 }
 
@@ -22,12 +30,20 @@ async function* asyncSequential<A, B>(
   f: (a: A) => B,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A> {
-  for await (const a of iterable) {
+  const iterator = iterable[Symbol.asyncIterator]();
+  const iterableIterator = {
+    [Symbol.asyncIterator]() {
+      return iterator;
+    },
+  };
+
+  for await (const a of iterableIterator) {
     if (await f(a)) {
       continue;
     }
 
     yield a;
+    yield* iterableIterator;
   }
 }
 
