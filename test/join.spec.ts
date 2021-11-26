@@ -19,6 +19,10 @@ describe("join", function () {
       );
       expect(res).toEqual("12-14-16");
     });
+
+    it("should return an empty string when it is an empty array", function () {
+      expect(join("~", [])).toEqual("");
+    });
   });
 
   describe("async", function () {
@@ -48,6 +52,17 @@ describe("join", function () {
           join("!"),
         ),
       ).rejects.toThrow("err");
+    });
+
+    it("should return the empty string when it is an empty array, even asynchronous", async function () {
+      const res = await pipe(
+        toAsync([]),
+        map((a) => a + 10),
+        filter((a) => a % 2 === 0),
+        join("-"),
+      );
+
+      expect(res).toEqual("");
     });
   });
 });
