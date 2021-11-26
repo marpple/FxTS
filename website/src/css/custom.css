@@ -14,7 +14,8 @@
   --ifm-color-primary-lighter: #ae82fb;
   --ifm-color-primary-lightest: #ceb3fd;
   --ifm-code-font-size: 95%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', Pretendard, Roboto, 'Noto Sans KR', 'Segoe UI', 'Malgun Gothic', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", sans-serif;
 }
 
 .docusaurus-highlight-code-line {

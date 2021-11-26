@@ -5,3 +5,4 @@ lib
 # docs site
 website/build
 website/.docusaurus
+website/tsdoc-metadata.json
