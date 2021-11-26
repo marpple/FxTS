@@ -12,7 +12,7 @@ import { Concurrent } from "../../src/Lazy/concurrent";
 import { AsyncFunctionException } from "../../src/_internal/error";
 import { callFuncAfterTime, generatorMock } from "../utils";
 
-describe("drop", function () {
+describe("dropWhile", function () {
   describe("sync", function () {
     it("should be dropped elements until the value applied to callback returns falsey", function () {
       const acc = [];
