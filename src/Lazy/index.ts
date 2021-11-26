@@ -5,6 +5,7 @@ import concat from "./concat";
 import concurrent from "./concurrent";
 import drop from "./drop";
 import dropWhile from "./dropWhile";
+import dropUntil from "./dropUntil";
 import filter from "./filter";
 import flat from "./flat";
 import flatMap from "./flatMap";
@@ -30,6 +31,7 @@ export {
   concurrent,
   drop,
   dropWhile,
+  dropUntil,
   filter,
   flat,
   flatMap,
