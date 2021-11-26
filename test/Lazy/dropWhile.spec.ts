@@ -1,4 +1,4 @@
-import { dropWhile } from "../../src/index";
+import { dropWhile, filter, map, pipe, toArray } from "../../src/index";
 
 describe("drop", function () {
   describe("sync", function () {
@@ -8,6 +8,18 @@ describe("drop", function () {
         acc.push(a);
       }
       expect(acc).toEqual([3, 4, 5]);
+    });
+
+    it("should be able to be used as a curried function in the pipeline", function () {
+      const res = pipe(
+        [1, 2, 3, 4, 5, 6, 7, 8],
+        map((a) => a + 10),
+        filter((a) => a % 2 === 0),
+        dropWhile((a) => a < 16),
+        toArray,
+      );
+
+      expect(res).toEqual([16, 18]);
     });
   });
 });
