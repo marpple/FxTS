@@ -100,28 +100,28 @@ Lazy functions can be found [here](https://fxts.dev/docs/index#lazy)
 The code below shows a more useful situation.
 
 ```typescript
-// {userId: number, id: number, title: string, complate: boolean}
-const fetchTodo = async (page: number) =>
-  fetch(`https://jsonplaceholder.typicode.com/todos/${page}`);
+/**
+ * [{
+ *   title: string,
+ *   director: string,
+ *   language: string,
+ *   genre: string,
+ *   rating: number,
+ *   ...
+ * }]
+ */
+const fetchMovie = async (year: number) =>
+  fetch(`https://api.movie.xxx/${year}`);
 
-const todoLists = async (pages: Iterable<number>) =>
+const recommendMovie = async (year: number, rating: number) =>
   pipe(
-    pages,
+    range(year, Infinity),
     toAsync,
-    map(fetchTodo),
+    map(fetchMovie),
     map((res) => res.json()),
+    filter((movie) => movie.rating >= rating),
+    head,
   );
 
-const wordCount = async (start: number, end: number) =>
-  pipe(
-    range(start, end),
-    todoLists,
-    // // If you want to get only complated todo / Composition of Functions is easy
-    // filter((todo) => todo.completed),
-    map((todo) => todo.title.split(" ")),
-    flat,
-    countBy((word) => word),
-  );
-
-await wordCount(1, 5);
+await recommendMovie(2020, 9);
 ```
