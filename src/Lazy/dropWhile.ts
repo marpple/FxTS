@@ -1,9 +1,15 @@
 import IterableInfer from "../types/IterableInfer";
+import { AsyncFunctionException } from "../_internal/error";
 import { isIterable } from "../_internal/utils";
 
 function* sync<A, B>(f: (a: A) => B, iterable: Iterable<A>) {
   for (const a of iterable) {
-    if (f(a)) {
+    const res = f(a);
+    if (res instanceof Promise) {
+      throw new AsyncFunctionException();
+    }
+
+    if (res) {
       continue;
     }
     yield a;

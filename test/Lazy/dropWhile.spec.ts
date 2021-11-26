@@ -1,4 +1,5 @@
 import { dropWhile, filter, map, pipe, toArray } from "../../src/index";
+import { AsyncFunctionException } from "../../src/_internal/error";
 
 describe("drop", function () {
   describe("sync", function () {
@@ -20,6 +21,11 @@ describe("drop", function () {
       );
 
       expect(res).toEqual([16, 18]);
+    });
+
+    it("should throw an error when the callback is asynchronous", function () {
+      const res = () => [...dropWhile(async (a) => a > 5, [1, 2, 3, 4, 5])];
+      expect(res).toThrowError(new AsyncFunctionException());
     });
   });
 });
