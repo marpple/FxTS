@@ -1,4 +1,6 @@
 import {
+  concurrent,
+  delay,
   dropWhile,
   filter,
   map,
@@ -6,7 +8,9 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { AsyncFunctionException } from "../../src/_internal/error";
+import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("drop", function () {
   describe("sync", function () {
@@ -70,6 +74,89 @@ describe("drop", function () {
           toArray,
         ),
       ).rejects.toThrow("err");
+    });
+
+    it("should be dropped elements concurrently", async function () {
+      const fn = jest.fn();
+      callFuncAfterTime(fn, 400);
+      const res = await pipe(
+        toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+        map((a) => delay(100, a)),
+        filter((a) => a % 2 === 0),
+        dropWhile((a) => a < 6),
+        concurrent(3),
+        toArray,
+      );
+      expect(fn).toBeCalled();
+      expect(res).toEqual([6, 8, 10]);
+    }, 450);
+
+    it("should be controlled the order when concurrency", async function () {
+      const fn = jest.fn();
+      callFuncAfterTime(fn, 1000);
+
+      const res = await pipe(
+        toAsync(
+          (function* () {
+            yield delay(500, 1);
+            yield delay(400, 2);
+            yield delay(300, 3);
+            yield delay(200, 4);
+            yield delay(100, 5);
+            yield delay(500, 6);
+            yield delay(400, 7);
+            yield delay(300, 8);
+            yield delay(200, 9);
+            yield delay(100, 10);
+          })(),
+        ),
+        dropWhile((a) => a < 7),
+        concurrent(5),
+        toArray,
+      );
+      expect(fn).toBeCalled();
+      expect(res).toEqual([7, 8, 9, 10]);
+    }, 1050);
+
+    it("should be able to handle an error when working concurrent", async function () {
+      await expect(
+        pipe(
+          toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+          dropWhile((a) => {
+            if (a > 5) {
+              throw new Error("err");
+            }
+            return true;
+          }),
+          concurrent(3),
+          toArray,
+        ),
+      ).rejects.toThrow("err");
+    });
+
+    it("should be able to handle an error when working concurrent - Promise.reject", async function () {
+      await expect(
+        pipe(
+          toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+          dropWhile((a) => {
+            if (a > 5) {
+              return Promise.reject(new Error("err"));
+            }
+            return true;
+          }),
+          concurrent(3),
+          toArray,
+        ),
+      ).rejects.toThrow("err");
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = dropWhile((a) => a, mock);
+      const concurrent = Concurrent.of(2) as any;
+
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });
