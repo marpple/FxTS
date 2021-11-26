@@ -8,12 +8,12 @@ type ReturnJoinType<T extends Iterable<unknown> | AsyncIterable<unknown>> =
     ? Promise<string>
     : never;
 
-function sync<A>(sep: string, acc: string, iterable: Iterable<A>) {
-  return reduce((a: string, b) => `${a}${sep}${b}`, acc, iterable);
+function sync<A>(sep: string, iterable: Iterable<A>) {
+  return reduce((a: string, b) => `${a}${sep}${b}`, iterable);
 }
 
-function async<A>(sep: string, acc: string, iterable: AsyncIterable<A>) {
-  return reduce((a: string, b) => `${a}${sep}${b}`, acc, iterable);
+function async<A>(sep: string, iterable: AsyncIterable<A>) {
+  return reduce((a: string, b) => `${a}${sep}${b}`, iterable);
 }
 
 /**
@@ -44,7 +44,7 @@ function async<A>(sep: string, acc: string, iterable: AsyncIterable<A>) {
  * ); // '1-2-3-4'
  * ```
  */
-function join<A extends readonly []>(sep: string, iterable: A): string;
+function join<A extends readonly []>(sep: string, iterable: A): "";
 
 function join<A>(sep: string, iterable: Iterable<A>): string;
 
@@ -57,38 +57,21 @@ function join<A extends Iterable<unknown> | AsyncIterable<unknown>>(
 function join<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   sep: string,
   iterable?: A,
-): string | Promise<string> | ((iterable: A) => ReturnJoinType<A>) {
+): string | Promise<string> | ((iterable: A) => ReturnJoinType<A>) | "" {
   if (iterable === undefined) {
     return (iterable: A): ReturnJoinType<A> => {
       return join(sep, iterable as any) as ReturnJoinType<A>;
     };
   }
 
+  if (Array.isArray(iterable) && iterable.length === 0) return "";
+
   if (isIterable(iterable)) {
-    const iterator = iterable[Symbol.iterator]();
-    const { done, value } = iterator.next();
-    if (done) {
-      return "";
-    }
-    return sync(sep, value, {
-      [Symbol.iterator]() {
-        return iterator;
-      },
-    }) as string;
+    return sync(sep, iterable) as string;
   }
 
   if (isAsyncIterable(iterable)) {
-    const iterator = iterable[Symbol.asyncIterator]();
-    return iterator.next().then(({ done, value }) => {
-      if (done) {
-        return "";
-      }
-      return async(sep, value, {
-        [Symbol.asyncIterator]() {
-          return iterator;
-        },
-      });
-    }) as Promise<string>;
+    return async(sep, iterable) as Promise<string>;
   }
 
   throw new TypeError("iterable must be type of Iterable or AsyncIterable");
