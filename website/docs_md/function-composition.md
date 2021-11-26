@@ -4,10 +4,18 @@ id: function-composition
 
 # Function Composition
 
-Functions for `function composition` are provided by most functional libraries.
-flow in [lodash](https://lodash.com/), pipe in [ramda](https://ramdajs.com/), pipe in [rxjs](https://rxjs.dev/).
+We are going to introduce [pipe](https://fxts.dev/docs/pipe).
 
-FxTS provides [pipe](https://fxts.dev/docs/pipe). Let's take a moment to see why we need `pipe`.
+A function named `pipe` is already provided by several libraries, so you may be familiar with it.
+
+- flow in [lodash](https://lodash.com/)
+- pipe in [ramda](https://ramdajs.com/)
+- pipe in [rxjs](https://rxjs.dev/).
+
+`pipe` is a function that connects functions by passing the output of a function to the arguments of another function.
+In FxTS, `pipe` is used as a more important function.
+
+Let's take a moment to see why we need `pipe`.
 
 There is an array, and you want to get the final result by doing `filter` -> `map` -> `reduce` on this array.
 
@@ -31,10 +39,8 @@ reduce(
 )
 ```
 
-We are providing `pipe` to solve the above problem.
-`pipe` is a function that connects functions by passing the output of a function to the arguments of another function.
-
-Make the above code in human-readable order as shown below.
+We are providing `pipe` to solve the above problem. Make the above code in human-readable order as shown below.
+Check out [this article](https://fxts.dev/docs/lazy-evaluation) for a comparison with `Array.prototype.[Function]`
 
 ```typescript
 import { pipe, filter, map } from "@fxts/core";
@@ -49,9 +55,6 @@ pipe(
 
 Also, you don't have to deal with `Promise` values directly.
 
-- a: `a` is inferred as number, and the actual value is also number, not `Promise<number>`.
-- c: Even if the previous function is an asynchronous function, the argument is not a `Promise<any>`.
-
 ```typescript
 await pipe(
   Promise.resolve(1),
@@ -61,7 +64,8 @@ await pipe(
 ); // 4
 ```
 
-If you're not dealing with async values directly, it doesn't mean that errors can not be handled when occur.
-For more information, see the [Error Handling](https://fxts.dev/docs/error-handling)
+- a : `a` is inferred as number, and the actual value is also number, not `Promise<number>`.
+- c : Even if the previous function is an asynchronous function, the argument is not c `Promise<number>`.
 
-We strongly recommend using `pipe`.
+If you're not dealing with async values directly, it doesn't mean that errors can not be handled when occur.
+To check for error handling, see the [Error Handling](https://fxts.dev/docs/error-handling)
