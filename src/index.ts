@@ -1,4 +1,5 @@
 import countBy from "./countBy";
+import curry from "./curry";
 import delay from "./delay";
 import each from "./each";
 import every from "./every";
@@ -24,6 +25,7 @@ import toArray from "./toArray";
 
 export {
   countBy,
+  curry,
   delay,
   each,
   every,
