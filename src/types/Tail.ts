@@ -1,9 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-type Tail<T extends unknown[]> = ((...args: T) => any) extends (
-  a: any,
-  ...args: infer U
-) => any
-  ? U
-  : [];
+type Tail<T extends unknown[]> = T extends [any, ...infer B] ? B : [];
 
 export default Tail;
