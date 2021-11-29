@@ -1,9 +1,9 @@
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 
-function* sync(sep: string, str: Iterable<string>) {
+function* sync(sep: string, iterable: Iterable<string>) {
   let acc = [];
-  for (const chr of str) {
+  for (const chr of iterable) {
     if (chr === sep) {
       yield acc.join("");
       acc = [];
@@ -17,12 +17,14 @@ function* sync(sep: string, str: Iterable<string>) {
 
   if (acc.length > 0) {
     yield acc.join("");
+  } else if (sep !== "") {
+    yield "";
   }
 }
 
-async function* async(sep: string, str: AsyncIterable<string>) {
+async function* async(sep: string, iterable: AsyncIterable<string>) {
   let acc = [];
-  for await (const chr of str) {
+  for await (const chr of iterable) {
     if (chr === sep) {
       yield acc.join("");
       acc = [];
@@ -36,6 +38,8 @@ async function* async(sep: string, str: AsyncIterable<string>) {
 
   if (acc.length > 0) {
     yield acc.join("");
+  } else if (sep !== "") {
+    yield "";
   }
 }
 

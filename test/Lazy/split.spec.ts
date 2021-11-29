@@ -17,6 +17,11 @@ describe("split", function () {
       expect([...iter]).toEqual(["a", "b", "c", "d", "e", "f", "g"]);
     });
 
+    it("should be appended empty string if there is a separator at the end", function () {
+      const iter = split(",", "a,b,c,d,e,f,g,");
+      expect([...iter]).toEqual(["a", "b", "c", "d", "e", "f", "g", ""]);
+    });
+
     it("should be splited by separator(unicode)", function () {
       const iter = split(",", "👍,😀,🙇‍♂️,🤩,🎉");
       expect([...iter]).toEqual(["👍", "😀", "🙇‍♂️", "🤩", "🎉"]);
@@ -58,6 +63,14 @@ describe("split", function () {
         acc.push(a);
       }
       expect(acc).toEqual(["a", "b", "c", "d", "e", "f", "g"]);
+    });
+
+    it("should be appended empty string if there is a separator at the end", async function () {
+      const acc = [];
+      for await (const a of split(",", "a,b,c,d,e,f,g,")) {
+        acc.push(a);
+      }
+      expect(acc).toEqual(["a", "b", "c", "d", "e", "f", "g", ""]);
     });
 
     it("should be splited by separator(unicode)", async function () {
