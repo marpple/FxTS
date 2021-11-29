@@ -1,5 +1,6 @@
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync(sep: string, iterable: Iterable<string>) {
   let acc = [];
@@ -22,7 +23,7 @@ function* sync(sep: string, iterable: Iterable<string>) {
   }
 }
 
-async function* async(sep: string, iterable: AsyncIterable<string>) {
+async function* asyncSequential(sep: string, iterable: AsyncIterable<string>) {
   let acc = [];
   for await (const chr of iterable) {
     if (chr === sep) {
@@ -41,6 +42,26 @@ async function* async(sep: string, iterable: AsyncIterable<string>) {
   } else if (sep !== "") {
     yield "";
   }
+}
+
+function async(
+  sep: string,
+  iterable: AsyncIterable<string>,
+): AsyncIterableIterator<string> {
+  let _iterator: AsyncIterator<string>;
+  return {
+    async next(_concurrent: any) {
+      if (_iterator === undefined) {
+        _iterator = isConcurrent(_concurrent)
+          ? asyncSequential(sep, concurrent(_concurrent.length, iterable))
+          : asyncSequential(sep, iterable);
+      }
+      return _iterator.next(_concurrent);
+    },
+    [Symbol.asyncIterator]() {
+      return this;
+    },
+  };
 }
 
 function split(
