@@ -1,4 +1,5 @@
 import { dropUntil, toAsync } from "../../src";
+import { AsyncFunctionException } from "../../src/_internal/error";
 
 describe("dropUntil", function () {
   describe("sync", function () {
@@ -9,6 +10,11 @@ describe("dropUntil", function () {
         acc.push(a);
       }
       expect(acc).toEqual([5, 1, 2]);
+    });
+
+    it("should throw an error when the callback is asynchronous", function () {
+      const res = () => [...dropUntil(async (a) => a > 5, [1, 2, 3, 4, 5])];
+      expect(res).toThrowError(new AsyncFunctionException());
     });
   });
 

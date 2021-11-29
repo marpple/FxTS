@@ -1,3 +1,4 @@
+import { AsyncFunctionException } from "../_internal/error";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 
 function* sync<A, B>(f: (a: A) => B, iterable: Iterable<A>) {
@@ -9,7 +10,12 @@ function* sync<A, B>(f: (a: A) => B, iterable: Iterable<A>) {
   };
 
   for (const a of iterableIterator) {
-    if (!f(a)) {
+    const res = f(a);
+    if (res instanceof Promise) {
+      throw new AsyncFunctionException();
+    }
+
+    if (!res) {
       continue;
     } else {
       break;
