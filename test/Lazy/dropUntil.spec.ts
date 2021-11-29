@@ -1,4 +1,4 @@
-import { dropUntil, toAsync } from "../../src";
+import { dropUntil, filter, map, pipe, toArray, toAsync } from "../../src";
 import { AsyncFunctionException } from "../../src/_internal/error";
 
 describe("dropUntil", function () {
@@ -15,6 +15,18 @@ describe("dropUntil", function () {
     it("should throw an error when the callback is asynchronous", function () {
       const res = () => [...dropUntil(async (a) => a > 5, [1, 2, 3, 4, 5])];
       expect(res).toThrowError(new AsyncFunctionException());
+    });
+
+    it("should be able to be used as a curried function in the pipeline", function () {
+      const res = pipe(
+        [1, 2, 3, 4, 5, 1, 2],
+        map((a) => a + 10),
+        filter((a) => a % 2 === 1),
+        dropUntil((a) => a > 13),
+        toArray,
+      );
+
+      expect(res).toEqual([11]);
     });
   });
 
@@ -35,6 +47,34 @@ describe("dropUntil", function () {
         acc.push(a);
       }
       expect(acc).toEqual([5, 1, 2]);
+    });
+
+    it("should be able to be used as a curried function in the pipeline", async function () {
+      const res = await pipe(
+        [1, 2, 3, 4, 5, 1, 2],
+        toAsync,
+        map((a) => a + 10),
+        filter((a) => a % 2 === 1),
+        dropUntil((a) => a > 13),
+        toArray,
+      );
+
+      expect(res).toEqual([11]);
+    });
+
+    it("should be able to handle an error when asynchronous", async function () {
+      await expect(
+        pipe(
+          toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+          dropUntil((a) => {
+            if (a > 5) {
+              throw new Error("err");
+            }
+            return false;
+          }),
+          toArray,
+        ),
+      ).rejects.toThrow("err");
     });
   });
 });
