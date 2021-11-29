@@ -1,3 +1,4 @@
+import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 
 function* sync(sep: string, str: Iterable<string>) {
@@ -48,16 +49,32 @@ function split(
   iterable: AsyncIterable<string>,
 ): AsyncIterableIterator<string>;
 
-function split(
+function split<A extends Iterable<string> | AsyncIterable<string>>(
   sep: string,
-  str: Iterable<string> | AsyncIterable<string>,
-): IterableIterator<string> | AsyncIterableIterator<string> {
-  if (isIterable(str)) {
-    return sync(sep, str);
+): (iterable: A) => ReturnIterableIteratorType<A, string>;
+
+function split<A extends Iterable<string> | AsyncIterable<string>>(
+  sep: string,
+  iterable?: A,
+):
+  | IterableIterator<string>
+  | AsyncIterableIterator<string>
+  | ((iterable: A) => ReturnIterableIteratorType<A, string>) {
+  if (iterable === undefined) {
+    return (iterable: A): ReturnIterableIteratorType<A, string> => {
+      return split(sep, iterable as any) as ReturnIterableIteratorType<
+        A,
+        string
+      >;
+    };
   }
 
-  if (isAsyncIterable(str)) {
-    return async(sep, str);
+  if (isIterable(iterable)) {
+    return sync(sep, iterable as Iterable<string>);
+  }
+
+  if (isAsyncIterable(iterable)) {
+    return async(sep, iterable as AsyncIterable<string>);
   }
 
   throw new TypeError("iterable must be type of Iterable or AsyncIterable");

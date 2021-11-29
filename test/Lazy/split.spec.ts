@@ -1,4 +1,4 @@
-import { split, toAsync } from "../../src";
+import { pipe, split, toAsync, map, toArray, filter } from "../../src";
 
 describe("split", function () {
   describe("sync", function () {
@@ -20,6 +20,18 @@ describe("split", function () {
     it("should be splited by separator(unicode)", function () {
       const iter = split(",", "👍,😀,🙇‍♂️,🤩,🎉");
       expect([...iter]).toEqual(["👍", "😀", "🙇‍♂️", "🤩", "🎉"]);
+    });
+
+    it("should be able to be used as a curried function in the pipeline", function () {
+      const res = pipe(
+        "1,2,3,4,5,6,7,8,9,10",
+        split(","),
+        map((a) => Number(a)),
+        filter((a) => a % 2 === 0),
+        toArray,
+      );
+
+      expect(res).toEqual([2, 4, 6, 8, 10]);
     });
   });
 
@@ -54,6 +66,18 @@ describe("split", function () {
         acc.push(a);
       }
       expect(acc).toEqual(["👍", "😀", "🙇‍♂️", "🤩", "🎉"]);
+    });
+
+    it("should be able to be used as a curried function in the pipeline", async function () {
+      const res = await pipe(
+        toAsync("1,2,3,4,5,6,7,8,9,10"),
+        split(","),
+        map((a) => Number(a)),
+        filter((a) => a % 2 === 0),
+        toArray,
+      );
+
+      expect(res).toEqual([2, 4, 6, 8, 10]);
     });
   });
 });
