@@ -3,44 +3,49 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync(sep: string, iterable: Iterable<string>) {
-  let acc = [];
-  for (const chr of iterable) {
+  if (sep === "") {
+    return yield* iterable;
+  }
+
+  let acc = "";
+  let chr = "";
+  for (chr of iterable) {
     if (chr === sep) {
-      yield acc.join("");
-      acc = [];
-    } else if (sep === "") {
-      yield chr;
-      acc = [];
+      yield acc;
+      acc = "";
     } else {
-      acc.push(chr);
+      acc += chr;
     }
   }
 
-  if (acc.length > 0) {
-    yield acc.join("");
-  } else if (sep !== "") {
+  if (chr === sep) {
     yield "";
+  } else if (acc.length > 0) {
+    yield acc;
   }
 }
 
 async function* asyncSequential(sep: string, iterable: AsyncIterable<string>) {
-  let acc = [];
-  for await (const chr of iterable) {
+  if (sep === "") {
+    return yield* iterable;
+  }
+
+  let acc = "";
+  let chr = "";
+
+  for await (chr of iterable) {
     if (chr === sep) {
-      yield acc.join("");
-      acc = [];
-    } else if (sep === "") {
-      yield chr;
-      acc = [];
+      yield acc;
+      acc = "";
     } else {
-      acc.push(chr);
+      acc += chr;
     }
   }
 
-  if (acc.length > 0) {
-    yield acc.join("");
-  } else if (sep !== "") {
+  if (chr === sep) {
     yield "";
+  } else if (acc.length > 0) {
+    yield acc;
   }
 }
 
