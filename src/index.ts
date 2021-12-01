@@ -12,6 +12,7 @@ import isString from "./isString";
 import join from "./join";
 import last from "./last";
 import not from "./not";
+import omit from "./omit";
 import partition from "./partition";
 import pick from "./pick";
 import pipe from "./pipe";
@@ -37,6 +38,7 @@ export {
   join,
   last,
   not,
+  omit,
   partition,
   pick,
   pipe,
