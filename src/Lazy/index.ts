@@ -10,6 +10,7 @@ import flat from "./flat";
 import flatMap from "./flatMap";
 import map from "./map";
 import peek from "./peek";
+import pluck from "./pluck";
 import prepend from "./prepend";
 import range from "./range";
 import reject from "./reject";
@@ -35,6 +36,7 @@ export {
   flatMap,
   map,
   peek,
+  pluck,
   prepend,
   range,
   reject,
