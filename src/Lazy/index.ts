@@ -22,6 +22,7 @@ import toAsync from "./toAsync";
 import uniq from "./uniq";
 import uniqBy from "./uniqBy";
 import zip from "./zip";
+import zipWith from "./zipWith";
 import zipWithIndex from "./zipWithIndex";
 
 export {
@@ -49,5 +50,6 @@ export {
   uniq,
   uniqBy,
   zip,
+  zipWith,
   zipWithIndex,
 };
