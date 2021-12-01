@@ -22,6 +22,11 @@ async function async<T extends object, U extends AsyncIterable<keyof T>>(
   ) as any;
 }
 
+function pick<T extends object, U extends readonly []>(
+  iterable: U,
+  obj: T,
+): Record<string, never>;
+
 function pick<T extends object, U extends Iterable<keyof T>>(
   iterable: U,
   obj: T,
@@ -53,7 +58,7 @@ function pick<
       obj: T,
     ) => Promise<Pick<T, IterableInfer<U>>> | Pick<T, IterableInfer<U>>) {
   if (obj === undefined) {
-    return (obj: T) => pick(iterable as any, obj);
+    return (obj: T) => pick(iterable as any, obj) as any;
   }
   if (isAsyncIterable(iterable)) {
     return async(iterable, obj);
