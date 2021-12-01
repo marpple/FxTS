@@ -7,6 +7,7 @@ const obj1 = {
   a: 1,
   b: "2",
   c: true,
+  d: Symbol("d"),
 };
 
 type OptionalObj = {
@@ -14,22 +15,16 @@ type OptionalObj = {
   b?: string;
 };
 
-const res0 = pick([], obj1);
-const res1 = pick(["a", "b"], obj1);
-const res2 = pick(["a", "c"], obj1);
-const res3 = pick(toAsync(["a", "b"] as const), obj1);
-const res4 = pick(["a", "b"], { a: 1 } as OptionalObj);
-const res5 = pick(["b", "c"], {
-  a: 1,
-  b: Symbol("b"),
-  c: Symbol.iterator,
-});
+const res1 = pick([], obj1);
+const res2 = pick(["a", "b", "d"], obj1);
+const res3 = pick(["a", "c"], obj1);
+const res4 = pick(toAsync(["a", "b"] as const), obj1);
+const res5 = pick(["a", "b"], { a: 1 } as OptionalObj);
 
 checks([
-  check<typeof res0, Record<string, never>, Test.Pass>(),
-  check<typeof res1, { a: number; b: string }, Test.Pass>(),
-  check<typeof res2, { a: number; c: boolean }, Test.Pass>(),
-  check<typeof res3, Promise<{ a: number; b: string }>, Test.Pass>(),
-  check<typeof res4, { a: number; b?: string }, Test.Pass>(),
-  check<typeof res5, { b: symbol; c: symbol }, Test.Pass>(),
+  check<typeof res1, Record<string, never>, Test.Pass>(),
+  check<typeof res2, { a: number; b: string; d: symbol }, Test.Pass>(),
+  check<typeof res3, { a: number; c: boolean }, Test.Pass>(),
+  check<typeof res4, Promise<{ a: number; b: string }>, Test.Pass>(),
+  check<typeof res5, { a: number; b?: string }, Test.Pass>(),
 ]);
