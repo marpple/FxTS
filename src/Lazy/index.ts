@@ -13,6 +13,7 @@ import peek from "./peek";
 import prepend from "./prepend";
 import range from "./range";
 import reject from "./reject";
+import split from "./split";
 import take from "./take";
 import takeUntil from "./takeUntil";
 import takeWhile from "./takeWhile";
@@ -38,6 +39,7 @@ export {
   prepend,
   range,
   reject,
+  split,
   take,
   takeUntil,
   takeWhile,
