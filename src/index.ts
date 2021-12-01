@@ -13,6 +13,7 @@ import join from "./join";
 import last from "./last";
 import not from "./not";
 import partition from "./partition";
+import pick from "./pick";
 import pipe from "./pipe";
 import pipe1 from "./pipe1";
 import reduce from "./reduce";
@@ -37,6 +38,7 @@ export {
   last,
   not,
   partition,
+  pick,
   pipe,
   pipe1,
   reduce,
