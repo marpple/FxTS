@@ -24,6 +24,40 @@ async function async<T extends object, U extends AsyncIterable<keyof T>>(
   return inner(obj, keys) as Omit<T, IterableInfer<U>>;
 }
 
+/**
+ * omit
+ *
+ * Returns a partial copy of an object omitting the keys specified.
+ *
+ * @example
+ * ```ts
+ * const person = {
+ *   name: "james",
+ *   age: 40,
+ *   numberOfKids: 2,
+ *   team: "Software Development",
+ *   preferredLanguage: "Rust",
+ * };
+ *
+ * const dad = omit(["team", "preferredLanguage"], person);
+ * // { name: "james", age: 40, numberOfKids: 2 }
+ *
+ * const developer = omit(["age", "numberOfKids"], person);
+ * // { name: "james", team: "Software Development", preferredLanguage: "Rust" }
+ *
+ * // with pipe
+ * pipe(
+ *  person,
+ *  omit(["team", "preferredLanguage"]),
+ * );
+ *
+ * // if you want to use AsyncIterable as the list of property names
+ * const anonymous = await omit(toAsync(["name"] as const), person);
+ * ```
+ * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
+ * {@link https://fxts.dev/docs/pick | pick},
+ */
+
 function omit<T extends object, U extends Iterable<keyof T>>(
   iterable: U,
   obj: T,

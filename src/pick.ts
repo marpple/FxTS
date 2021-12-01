@@ -24,6 +24,40 @@ async function async<T extends object, U extends AsyncIterable<keyof T>>(
   return inner(obj, keys) as Pick<T, IterableInfer<U>>;
 }
 
+/**
+ * pick
+ *
+ * Returns a partial copy of an object containing given keys.
+ *
+ * @example
+ * ```ts
+ * const person = {
+ *   name: "james",
+ *   age: 40,
+ *   numberOfKids: 2,
+ *   team: "Software Development",
+ *   preferredLanguage: "Rust",
+ * };
+ *
+ * const dad = pick(["name", "age", "numberOfKids"], person);
+ * // { name: "james", age: 40, numberOfKids: 2 }
+ *
+ * const developer = pick(["name", "team", "preferredLanguage"], person);
+ * // { name: "james", team: "Software Development", preferredLanguage: "Rust" }
+ *
+ * // with pipe
+ * pipe(
+ *  person,
+ *  pick(["name", "age", "numberOfKids"]),
+ * );
+ *
+ * // if you want to use AsyncIterable as the list of property names
+ * const anonymousDeveloper = await pick(toAsync(["preferredLanguage"] as const), person);
+ * ```
+ * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
+ * {@link https://fxts.dev/docs/omit | omit},
+ */
+
 function pick<T extends object, U extends readonly []>(
   iterable: U,
   obj: T,
