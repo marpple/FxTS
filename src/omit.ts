@@ -91,12 +91,12 @@ function omit<
   if (obj === undefined) {
     return (obj: T) => omit(iterable as any, obj) as any;
   }
-  if (isAsyncIterable(iterable)) {
-    return async(iterable, obj) as Promise<Omit<T, IterableInfer<U>>>;
-  } else if (isIterable(iterable)) {
+  if (isIterable(iterable)) {
     return sync(iterable, obj) as Omit<T, IterableInfer<U>>;
+  } else if (isAsyncIterable(iterable)) {
+    return async(iterable, obj) as Promise<Omit<T, IterableInfer<U>>>;
   }
-  throw new TypeError("`iterable` must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default omit;
