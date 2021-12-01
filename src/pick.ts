@@ -96,12 +96,12 @@ function pick<
   if (obj === undefined) {
     return (obj: T) => pick(iterable as any, obj) as any;
   }
-  if (isAsyncIterable(iterable)) {
-    return async(iterable, obj);
-  } else if (isIterable(iterable)) {
+  if (isIterable(iterable)) {
     return sync(iterable, obj);
+  } else if (isAsyncIterable(iterable)) {
+    return async(iterable, obj);
   }
-  throw new TypeError("`iterable` must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default pick;
