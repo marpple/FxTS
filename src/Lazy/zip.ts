@@ -112,7 +112,7 @@ function zip<TS extends UniversalIterable[]>(
   }
 
   if (iterables.some((a) => !isIterable(a) && !isAsyncIterable(a))) {
-    throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+    throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
   }
 
   const hasAsyncIterable = iterables.some((iterable) =>

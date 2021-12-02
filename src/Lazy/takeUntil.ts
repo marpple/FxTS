@@ -150,7 +150,7 @@ function takeUntil<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
     return async(f, iterable) as AsyncIterableIterator<IterableInfer<A>>;
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default takeUntil;

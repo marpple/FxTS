@@ -107,7 +107,7 @@ function split<A extends Iterable<string> | AsyncIterable<string>>(
     return async(sep, iterable as AsyncIterable<string>);
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default split;

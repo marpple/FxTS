@@ -55,7 +55,7 @@ function head<A>(iterable: Iterable<A> | AsyncIterable<A>) {
     return pipe(take(1, iterable), toArray, ([a]) => a);
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default head;

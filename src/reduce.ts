@@ -151,7 +151,7 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
       });
     }
 
-    throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+    throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
   }
 
   if (isIterable(iterable)) {
@@ -162,7 +162,7 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
     return async(f, Promise.resolve(seed as B), iterable);
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default reduce;

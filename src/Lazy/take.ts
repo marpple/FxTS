@@ -100,7 +100,7 @@ function take<A extends Iterable<unknown> | AsyncIterable<unknown>>(
     return async(l, iterable) as AsyncIterableIterator<IterableInfer<A>>;
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default take;

@@ -53,7 +53,7 @@ function uniq<A extends Iterable<unknown> | AsyncIterable<unknown>>(
     return uniqueBy(identity, iterable) as ReturnIterableIteratorType<A>;
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default uniq;

@@ -101,7 +101,7 @@ function flatMap<
     return flat(map(f, iterable as AsyncIterable<Awaited<IterableInfer<A>>>));
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default flatMap;
