@@ -91,39 +91,41 @@ function toAsyncIterable<T>(
 function concat<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Iterable<unknown> | AsyncIterable<unknown>
->(a: A, b: B): ReturnConcatType<A, B>;
+>(iterable1: A, iterable2: B): ReturnConcatType<A, B>;
 
 function concat<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Iterable<unknown> | AsyncIterable<unknown>,
->(a: A): (b: B) => ReturnConcatType<A, B>;
+>(iterable1: A): (iterable2: B) => ReturnConcatType<A, B>;
 
 function concat<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Iterable<unknown> | AsyncIterable<unknown>,
 >(
-  a: A,
-  b?: B,
+  iterable1: A,
+  iterable2?: B,
 ):
   | IterableIterator<IterableInfer<A> | IterableInfer<B>>
   | AsyncIterableIterator<IterableInfer<A> | IterableInfer<B>>
-  | ((b: B) => ReturnConcatType<A, B>) {
-  if (b === undefined) {
-    return (b: B): ReturnConcatType<A, B> => {
-      return concat(a, b) as ReturnConcatType<A, B>;
+  | ((iterable2: B) => ReturnConcatType<A, B>) {
+  if (iterable2 === undefined) {
+    return (iterable2: B): ReturnConcatType<A, B> => {
+      return concat(iterable1, iterable2) as ReturnConcatType<A, B>;
     };
   }
 
-  if (isAsyncIterable(a) || isAsyncIterable(b)) {
+  if (isAsyncIterable(iterable1) || isAsyncIterable(iterable2)) {
     // prettier-ignore
-    return async(toAsyncIterable(a), toAsyncIterable(b)) as ReturnConcatType<A, B>;
+    return async(toAsyncIterable(iterable1), toAsyncIterable(iterable2)) as ReturnConcatType<A, B>;
   }
 
-  if (isIterable(a) && isIterable(b)) {
-    return sync(a, b) as ReturnConcatType<A, B>;
+  if (isIterable(iterable1) && isIterable(iterable2)) {
+    return sync(iterable1, iterable2) as ReturnConcatType<A, B>;
   }
 
-  throw new TypeError("a,b must be type of Iterable or AsyncIterable");
+  throw new TypeError(
+    "'iterable1','iterable2' must be type of Iterable or AsyncIterable",
+  );
 }
 
 export default concat;

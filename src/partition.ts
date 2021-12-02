@@ -85,7 +85,7 @@ function partition<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
     return group.then((group) => [group["true"] || [], group["false"] || []]);
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default partition;

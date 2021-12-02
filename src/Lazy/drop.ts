@@ -122,7 +122,7 @@ function drop<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   }
 
   if (length < 1) {
-    throw new TypeError("length must be greater than 1");
+    throw new TypeError("'length' must be greater than 1");
   }
 
   if (isIterable(iterable)) {
@@ -133,7 +133,7 @@ function drop<A extends Iterable<unknown> | AsyncIterable<unknown>>(
     return async(length, iterable) as AsyncIterableIterator<A>;
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default drop;

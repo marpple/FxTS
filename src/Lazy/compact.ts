@@ -57,7 +57,7 @@ function compact<T extends Iterable<unknown> | AsyncIterable<unknown>>(
     return filter(isNotNullable, iterable);
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default compact;

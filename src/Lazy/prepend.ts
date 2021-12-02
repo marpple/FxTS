@@ -97,7 +97,7 @@ function prepend<A, B extends Iterable<A> | AsyncIterable<Awaited<A>>>(
     return sync(a, iterable);
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default prepend;

@@ -93,7 +93,7 @@ function peek<T extends Iterable<unknown> | AsyncIterable<unknown>>(
     ) as ReturnIterableIteratorType<T, IterableInfer<T>>;
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default peek;

@@ -145,7 +145,7 @@ function chunk<T extends Iterable<unknown> | AsyncIterable<unknown>>(
     }
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default chunk;

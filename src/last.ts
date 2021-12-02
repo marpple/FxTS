@@ -57,7 +57,7 @@ function last<A>(iterable: Iterable<A> | AsyncIterable<A>) {
     return reduce((_, a) => a, iterable);
   }
 
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default last;

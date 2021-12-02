@@ -51,7 +51,7 @@ function find<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   if (isAsyncIterable(iterable)) {
     return head(filter(f, iterable as AsyncIterable<IterableInfer<T>>));
   }
-  throw new TypeError("iterable must be type of Iterable or AsyncIterable");
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default find;
