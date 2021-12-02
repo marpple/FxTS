@@ -30,6 +30,10 @@ function asyncSequential<A, B>(
       return this;
     },
     async next(_concurrent) {
+      if (end) {
+        return { done: true, value: undefined };
+      }
+
       const { done, value } = await iterator.next(_concurrent);
       if (done || end) {
         return { done: true, value: undefined };

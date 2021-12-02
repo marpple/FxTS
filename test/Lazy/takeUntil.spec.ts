@@ -3,6 +3,7 @@ import {
   delay,
   filter,
   map,
+  peek,
   pipe,
   range,
   takeUntil,
@@ -94,6 +95,20 @@ describe("takeUntil", function () {
 
       expect(res).toEqual([12, 14]);
     });
+
+    it("should be able to take the element", async function () {
+      const fn = jest.fn();
+      const res = await pipe(
+        toAsync([3, 3, 1, 0, 0]),
+        peek(fn),
+        map((a) => delay(100, a)),
+        takeUntil((a) => a < 3),
+        toArray,
+      );
+
+      expect(fn).toHaveBeenCalledTimes(3);
+      expect(res).toEqual([3, 3, 1]);
+    }, 350);
 
     it("should be able to take the element until the callback result is truthy concurrently", async function () {
       const res = await pipe(
