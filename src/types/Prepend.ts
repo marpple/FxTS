@@ -1,3 +1,3 @@
-type Prepend<ARR extends any[], T> = [T, ...ARR];
+type Prepend<ARR extends unknown[], T> = [T, ...ARR];
 
 export default Prepend;
