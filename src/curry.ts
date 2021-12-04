@@ -1,3 +1,5 @@
+import Curry from "./types/Curry";
+
 /**
  * Returns a curried function of `f`
  *
@@ -11,7 +13,8 @@
  * console.log(curried(3, 4)) // 7
  * ```
  */
-function curry<F extends (...arg: any) => any>(f: F) {
+
+function curry<F extends (...args: any[]) => any>(f: F): Curry<F> {
   const arity = f.length;
 
   return (function resolver(...args: unknown[]) {
@@ -23,7 +26,7 @@ function curry<F extends (...arg: any) => any>(f: F) {
 
       return next(...local);
     };
-  })();
+  })() as any;
 }
 
 export default curry;
