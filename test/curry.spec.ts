@@ -14,7 +14,6 @@ describe("curry", function () {
     expect(curried(1, 2)(3)).toBe(6);
     expect(curried(1)(2, 3)).toBe(6);
     expect(curried(1, 2, 3)).toBe(6);
-    expect(curried(1, 2, 3)).toBe(6);
     expect(curried()(1, 2, 3)).toBe(6);
     expect(curried(1)()(2, 3)).toBe(6);
   });
