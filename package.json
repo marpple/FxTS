@@ -1,7 +1,7 @@
 {
   "name": "@fxts/core",
   "version": "0.2.3",
-  "description": "",
+  "description": "A functional library for TypeScript/JavaScript programmers.",
   "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/idnex.js",
@@ -40,15 +40,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marpple/FxTS.git"
+    "url": "https://github.com/marpple/FxTS.git"
   },
-  "keywords": [],
+  "keywords": [
+    "fp",
+    "lazy",
+    "concurrency"
+  ],
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/marpple/FxTS/issues"
   },
-  "homepage": "https://github.com/marpple/FxTS#readme",
+  "homepage": "https://fxts.dev",
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
