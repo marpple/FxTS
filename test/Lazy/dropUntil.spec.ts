@@ -90,11 +90,11 @@ describe("dropUntil", function () {
 
     it("should be dropped elements concurrently", async function () {
       const fn = jest.fn();
-      callFuncAfterTime(fn, 300);
+      callFuncAfterTime(fn, 1500);
       const res = await pipe(
         [1, 2, 3, 4, 5, 1, 2],
         toAsync,
-        map((a) => delay(100, a + 10)),
+        map((a) => delay(500, a + 10)),
         filter((a) => a % 2 === 1),
         dropUntil((a) => a > 13),
         concurrent(3),
@@ -102,25 +102,25 @@ describe("dropUntil", function () {
       );
       expect(fn).toBeCalled();
       expect(res).toEqual([11]);
-    }, 350);
+    }, 1550);
 
     it("should be controlled the order when concurrency", async function () {
       const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
+      callFuncAfterTime(fn, 2000);
 
       const res = await pipe(
         toAsync(
           (function* () {
-            yield delay(500, 1);
-            yield delay(400, 2);
-            yield delay(300, 3);
-            yield delay(200, 4);
-            yield delay(100, 5);
-            yield delay(500, 11);
-            yield delay(400, 12);
-            yield delay(300, 13);
-            yield delay(200, 8);
-            yield delay(100, 9);
+            yield delay(1000, 1);
+            yield delay(900, 2);
+            yield delay(800, 3);
+            yield delay(700, 4);
+            yield delay(600, 5);
+            yield delay(1000, 11);
+            yield delay(900, 12);
+            yield delay(800, 13);
+            yield delay(700, 8);
+            yield delay(600, 9);
           })(),
         ),
         dropUntil((a) => a > 12),
@@ -129,7 +129,7 @@ describe("dropUntil", function () {
       );
       expect(fn).toBeCalled();
       expect(res).toEqual([8, 9]);
-    }, 1050);
+    }, 2050);
 
     it("should be able to handle an error when working concurrent", async function () {
       await expect(

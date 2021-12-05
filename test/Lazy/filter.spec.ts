@@ -194,11 +194,11 @@ describe("filter", function () {
 
     it("should be filtered by the callback 'filter' - 'take' - 'concurrent'", async function () {
       const fn = jest.fn();
-      callFuncAfterTime(fn, 2000);
+      callFuncAfterTime(fn, 1000);
 
       const res = await pipe(
         toAsync(range(1, 51)),
-        filter((a) => delay(1000, a % 2 === 0)),
+        filter((a) => delay(500, a % 2 === 0)),
         take(10),
         concurrent(10),
         toArray,
@@ -206,15 +206,15 @@ describe("filter", function () {
 
       expect(fn).toBeCalled();
       expect(res).toEqual([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]);
-    }, 2050);
+    }, 1050);
 
     it("should be filtered by the callback 'map' - 'filter' - 'concurrent'", async function () {
       const fn = jest.fn();
-      callFuncAfterTime(fn, 2000);
+      callFuncAfterTime(fn, 1000);
 
       const res = await pipe(
         toAsync(range(1, 21)),
-        map((a) => delay(1000, a + 10)),
+        map((a) => delay(500, a + 10)),
         filter((a) => a % 2 === 0),
         concurrent(10),
         toArray,
@@ -222,15 +222,15 @@ describe("filter", function () {
 
       expect(fn).toBeCalled();
       expect(res).toEqual([12, 14, 16, 18, 20, 22, 24, 26, 28, 30]);
-    }, 2050);
+    }, 1050);
 
     it("should be filtered by the callback 'map' - 'filter' - 'concurrent' - 'take'", async function () {
       const fn = jest.fn();
-      callFuncAfterTime(fn, 200);
+      callFuncAfterTime(fn, 1000);
 
       const res = await pipe(
         toAsync(range(1, 10)),
-        map((a) => delay(100, a)),
+        map((a) => delay(500, a)),
         filter((a) => a),
         concurrent(5),
         take(8),
@@ -239,13 +239,13 @@ describe("filter", function () {
 
       expect(fn).toBeCalled();
       expect(res).toEqual([...range(1, 9)]);
-    }, 210);
+    }, 1050);
 
     it("should be able to handle an error when the callback is asynchronous", async function () {
       await expect(
         pipe(
           toAsync(range(1, 1000)),
-          map((a) => delay(100, a + 10)),
+          map((a) => delay(500, a + 10)),
           filter((a) => {
             if (a === 14) {
               throw new Error("err");
@@ -256,7 +256,7 @@ describe("filter", function () {
           toArray,
         ),
       ).rejects.toThrow("err");
-    }, 250);
+    }, 1050);
 
     it("should be able to handle errors when the callback is asynchronous", async function () {
       await expect(
@@ -285,11 +285,11 @@ describe("filter", function () {
 
     it("should be consumed 'AsyncIterable' as many times as called with 'next'", async function () {
       const fn = jest.fn();
-      callFuncAfterTime(fn, 4000);
+      callFuncAfterTime(fn, 2000);
       const iterator = toAsync(range(1, 21));
       const res = pipe(
         iterator,
-        map((a) => delay(1000, a)),
+        map((a) => delay(500, a)),
         filter((a) => a % 2 === 0),
         concurrent(3),
       );
@@ -308,7 +308,7 @@ describe("filter", function () {
 
       const { value: v6 } = await iterator.next();
       expect(v6).toEqual(13);
-    }, 4050);
+    }, 2050);
 
     it("should be passed concurrent object when job works concurrently", async function () {
       const mock = generatorMock();

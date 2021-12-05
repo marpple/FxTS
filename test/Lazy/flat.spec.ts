@@ -66,7 +66,7 @@ describe("flat", function () {
 
     it("should be flattened concurrently", async function () {
       const fn = jest.fn();
-      callFuncAfterTime(fn, 2000);
+      callFuncAfterTime(fn, 1000);
       const iterator = toAsync([
         [1],
         [2],
@@ -82,7 +82,7 @@ describe("flat", function () {
 
       const res = pipe(
         iterator,
-        map((a) => delay(1000, a)),
+        map((a) => delay(500, a)),
         flat,
         concurrent(3),
       );
@@ -103,7 +103,7 @@ describe("flat", function () {
 
       const { value: v7 } = await iterator.next();
       expect(v7).toEqual([13]);
-    }, 2050);
+    }, 1050);
 
     type FlatTest = {
       input: Array<any>;
@@ -123,7 +123,7 @@ describe("flat", function () {
         ],
         depth: 1,
         size: 1,
-        timeout: 2000,
+        timeout: 1000,
         expected: [1, 2, 3, 4, 5, 6, 7, 8],
       },
       {
@@ -135,7 +135,7 @@ describe("flat", function () {
         ],
         depth: 1,
         size: 3,
-        timeout: 2000,
+        timeout: 1000,
         expected: [1, 2, 3, 4, 5, 6, 7, 8],
       },
       {
@@ -147,7 +147,7 @@ describe("flat", function () {
         ],
         depth: 1,
         size: 4,
-        timeout: 1000,
+        timeout: 500,
         expected: [1, 2, 3, 4, 5, 6, 7, 8],
       },
       {
@@ -159,7 +159,7 @@ describe("flat", function () {
         ],
         depth: 1,
         size: 4,
-        timeout: 1000,
+        timeout: 500,
         expected: [1, [2], 3, [4], 5, [6], 7, [8]],
       },
       {
@@ -171,94 +171,54 @@ describe("flat", function () {
         ],
         depth: 2,
         size: 4,
-        timeout: 1000,
+        timeout: 500,
         expected: [1, 2, 3, 4, 5, 6, 7, 8],
       },
       {
-        input: [
-          [1], //
-          [2, 3],
-          [4],
-          [5, 6],
-          [7],
-          [8, 9],
-        ],
+        input: [[1], [2, 3], [4], [5, 6], [7], [8, 9]],
         depth: 1,
         size: 2,
-        timeout: 3000,
+        timeout: 1500,
         expected: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       },
       {
-        input: [
-          [1], //
-          [2, 3],
-          [4],
-          [5, 6],
-          [7],
-          [8, 9],
-          [10],
-        ],
+        input: [[1], [2, 3], [4], [5, 6], [7], [8, 9], [10]],
         depth: 1,
         size: 2,
-        timeout: 4000,
+        timeout: 2000,
         expected: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       },
       {
-        input: [
-          [1], //
-          [2, 3],
-          [4],
-          [5, 6],
-          [7],
-          [8, 9],
-        ],
+        input: [[1], [2, 3], [4], [5, 6], [7], [8, 9]],
         depth: 1,
         size: 3,
-        timeout: 2000,
+        timeout: 1000,
         expected: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       },
       {
-        input: [
-          [1], //
-          [2, 3, 4],
-          [5, 6],
-          [7, 8, 9, 10],
-          [11, 12],
-        ],
+        input: [[1], [2, 3, 4], [5, 6], [7, 8, 9, 10], [11, 12]],
         depth: 1,
         size: 3,
-        timeout: 2000,
+        timeout: 1000,
         expected: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
       },
       {
-        input: [
-          [1], //
-          [2, 3, 4],
-          [5, 6],
-          [7, 8, 9, 10],
-          [11, 12],
-        ],
+        input: [[1], [2, 3, 4], [5, 6], [7, 8, 9, 10], [11, 12]],
         depth: 1,
         size: 3,
-        timeout: 2000,
+        timeout: 1000,
         expected: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
       },
       {
-        input: [
-          [1], //
-          [[[2]], 3, 4],
-          [5, [[[6]]]],
-          [7, 8, 9, 10],
-          [11, 12],
-        ],
+        input: [[1], [[[2]], 3, 4], [5, [[[6]]]], [7, 8, 9, 10], [11, 12]],
         depth: 2,
         size: 3,
-        timeout: 2000,
+        timeout: 1000,
         expected: [1, [2], 3, 4, 5, [[6]], 7, 8, 9, 10, 11, 12],
       },
       {
         input: [
-          [1], //
+          [1],
           [[[2]], 3, [[[[4]]]]],
           [5, [[[6]]]],
           [7, 8, 9, 10],
@@ -266,13 +226,13 @@ describe("flat", function () {
         ],
         depth: 2,
         size: 5,
-        timeout: 1000,
+        timeout: 500,
         expected: [1, [2], 3, [[[4]]], 5, [[6]], 7, 8, 9, 10, 11, 12],
       },
     ];
 
     it.each(testParameters)(
-      `should be flattened concurrently`,
+      "should be flattened concurrently",
       async ({ timeout, input, depth, size, expected }: FlatTest) => {
         const fn = jest.fn();
         jest.setTimeout(timeout + 100);
@@ -280,7 +240,7 @@ describe("flat", function () {
 
         const res = await pipe(
           toAsync(input),
-          map((a) => delay(1000, a)),
+          map((a) => delay(500, a)),
           (a) => flat(a, depth),
           concurrent(size),
           toArray,
@@ -293,11 +253,11 @@ describe("flat", function () {
 
     it("should be flattened concurrently with chuck", async function () {
       const fn = jest.fn();
-      callFuncAfterTime(fn, 2000);
+      callFuncAfterTime(fn, 1000);
 
       const res = await pipe(
         toAsync(range(1, 7)),
-        map((a) => delay(1000, a)),
+        map((a) => delay(500, a)),
         chunk(2),
         flat,
         concurrent(3),
@@ -306,7 +266,7 @@ describe("flat", function () {
 
       expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
-    }, 2050);
+    }, 1050);
 
     it("should be flattened concurrently with filter", async function () {
       const res = await pipe(

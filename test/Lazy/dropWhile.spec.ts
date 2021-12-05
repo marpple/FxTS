@@ -93,21 +93,21 @@ describe("dropWhile", function () {
 
     it("should be controlled the order when concurrency", async function () {
       const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
+      callFuncAfterTime(fn, 2000);
 
       const res = await pipe(
         toAsync(
           (function* () {
-            yield delay(500, 1);
-            yield delay(400, 2);
-            yield delay(300, 3);
-            yield delay(200, 4);
-            yield delay(100, 5);
-            yield delay(500, 6);
-            yield delay(400, 7);
-            yield delay(300, 8);
-            yield delay(200, 1);
-            yield delay(100, 10);
+            yield delay(1000, 1);
+            yield delay(900, 2);
+            yield delay(800, 3);
+            yield delay(700, 4);
+            yield delay(600, 5);
+            yield delay(1000, 6);
+            yield delay(900, 7);
+            yield delay(800, 8);
+            yield delay(700, 1);
+            yield delay(600, 10);
           })(),
         ),
         dropWhile((a) => a < 7),
@@ -116,7 +116,7 @@ describe("dropWhile", function () {
       );
       expect(fn).toBeCalled();
       expect(res).toEqual([7, 8, 1, 10]);
-    }, 1050);
+    }, 2050);
 
     it("should be able to handle an error when working concurrent", async function () {
       await expect(
