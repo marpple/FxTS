@@ -54,7 +54,7 @@ function zipWith<A, B, C>(
   }
 
   throw new TypeError(
-    "'iterable1' 'iterable2' must be type of Iterable or AsyncIterable",
+    "'iterable1' and 'iterable2' must be type of Iterable or AsyncIterable",
   );
 }
 
