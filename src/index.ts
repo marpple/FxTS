@@ -18,6 +18,7 @@ import last from "./last";
 import not from "./not";
 import nth from "./nth";
 import omit from "./omit";
+import omitBy from "./omitBy";
 import partition from "./partition";
 import pick from "./pick";
 import pickBy from "./pickBy";
@@ -51,6 +52,7 @@ export {
   not,
   nth,
   omit,
+  omitBy,
   partition,
   pick,
   pickBy,
