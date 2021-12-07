@@ -9,6 +9,7 @@ import head from "./head";
 import identity from "./identity";
 import indexBy from "./indexBy";
 import isArray from "./isArray";
+import isNil from "./isNil";
 import isString from "./isString";
 import join from "./join";
 import last from "./last";
@@ -36,6 +37,7 @@ export {
   identity,
   indexBy,
   isArray,
+  isNil,
   isString,
   join,
   last,
