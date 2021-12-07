@@ -14,6 +14,7 @@ import isString from "./isString";
 import join from "./join";
 import last from "./last";
 import not from "./not";
+import nth from "./nth";
 import omit from "./omit";
 import partition from "./partition";
 import pick from "./pick";
@@ -42,6 +43,7 @@ export {
   join,
   last,
   not,
+  nth,
   omit,
   partition,
   pick,
