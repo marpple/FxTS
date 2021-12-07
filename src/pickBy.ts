@@ -1,23 +1,13 @@
+import {
+  AsyncEntryPredicate,
+  ConditionalAsyncEntryPredicate,
+  EntryPredicate,
+} from "./types/EntryPredicate";
 import toArray from "./toArray";
 import filter from "./Lazy/filter";
 import toAsync from "./Lazy/toAsync";
 import pipe from "./pipe";
 import { map, zip } from "./Lazy";
-
-type AsyncEntryFunction<T extends object> = ([key, value]: [
-  keyof T,
-  T[keyof T],
-]) => Promise<boolean>;
-
-type EntryFunction<T extends object> = ([key, value]: [
-  keyof T,
-  T[keyof T],
-]) => boolean;
-
-type ConditionalAsyncEntryFunction<T extends object> = ([key, value]: [
-  keyof T,
-  T[keyof T],
-]) => boolean | Promise<boolean>;
 
 /**
  * pickBy
@@ -42,39 +32,38 @@ type ConditionalAsyncEntryFunction<T extends object> = ([key, value]: [
  *   obj,
  *   pickBy(async ([key, value]) => key === "a" || value === true)
  * );
- *
  * ```
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/pick | pick},
  */
 
-function pickBy<T extends object, F extends AsyncEntryFunction<T>>(
+function pickBy<T extends object, F extends AsyncEntryPredicate<T>>(
   f: F,
   obj: T,
 ): Promise<Partial<T>>;
 
-function pickBy<T extends object, F extends AsyncEntryFunction<T>>(
+function pickBy<T extends object, F extends AsyncEntryPredicate<T>>(
   f: F,
 ): (obj: T) => Promise<Partial<T>>;
 
-function pickBy<T extends object, F extends EntryFunction<T>>(
+function pickBy<T extends object, F extends EntryPredicate<T>>(
   f: F,
   obj: T,
 ): Partial<T>;
 
-function pickBy<T extends object, F extends EntryFunction<T>>(
+function pickBy<T extends object, F extends EntryPredicate<T>>(
   f: F,
 ): (obj: T) => Partial<T>;
 
-function pickBy<T extends object, F extends ConditionalAsyncEntryFunction<T>>(
+function pickBy<T extends object, F extends ConditionalAsyncEntryPredicate<T>>(
   f: F,
   obj: T,
 ): Partial<T> | Promise<Partial<T>>;
 
-function pickBy<T extends object, F extends ConditionalAsyncEntryFunction<T>>(
+function pickBy<T extends object, F extends ConditionalAsyncEntryPredicate<T>>(
   f: F,
 ): (obj: T) => Partial<T> | Promise<Partial<T>>;
 
-function pickBy<T extends object, F extends ConditionalAsyncEntryFunction<T>>(
+function pickBy<T extends object, F extends ConditionalAsyncEntryPredicate<T>>(
   f: F,
   obj?: T,
 ):

@@ -1,23 +1,13 @@
+import {
+  AsyncEntryPredicate,
+  ConditionalAsyncEntryPredicate,
+  EntryPredicate,
+} from "./types/EntryPredicate";
 import toArray from "./toArray";
 import reject from "./Lazy/reject";
 import toAsync from "./Lazy/toAsync";
 import pipe from "./pipe";
 import { map, zip } from "./Lazy";
-
-type AsyncEntryFunction<T extends object> = ([key, value]: [
-  keyof T,
-  T[keyof T],
-]) => Promise<boolean>;
-
-type EntryFunction<T extends object> = ([key, value]: [
-  keyof T,
-  T[keyof T],
-]) => boolean;
-
-type ConditionalAsyncEntryFunction<T extends object> = ([key, value]: [
-  keyof T,
-  T[keyof T],
-]) => boolean | Promise<boolean>;
 
 /**
  * omitBy
@@ -46,34 +36,34 @@ type ConditionalAsyncEntryFunction<T extends object> = ([key, value]: [
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/omit | omit},
  */
 
-function omitBy<T extends object, F extends AsyncEntryFunction<T>>(
+function omitBy<T extends object, F extends AsyncEntryPredicate<T>>(
   f: F,
   obj: T,
 ): Promise<Partial<T>>;
 
-function omitBy<T extends object, F extends AsyncEntryFunction<T>>(
+function omitBy<T extends object, F extends AsyncEntryPredicate<T>>(
   f: F,
 ): (obj: T) => Promise<Partial<T>>;
 
-function omitBy<T extends object, F extends EntryFunction<T>>(
+function omitBy<T extends object, F extends EntryPredicate<T>>(
   f: F,
   obj: T,
 ): Partial<T>;
 
-function omitBy<T extends object, F extends EntryFunction<T>>(
+function omitBy<T extends object, F extends EntryPredicate<T>>(
   f: F,
 ): (obj: T) => Partial<T>;
 
-function omitBy<T extends object, F extends ConditionalAsyncEntryFunction<T>>(
+function omitBy<T extends object, F extends ConditionalAsyncEntryPredicate<T>>(
   f: F,
   obj: T,
 ): Partial<T> | Promise<Partial<T>>;
 
-function omitBy<T extends object, F extends ConditionalAsyncEntryFunction<T>>(
+function omitBy<T extends object, F extends ConditionalAsyncEntryPredicate<T>>(
   f: F,
 ): (obj: T) => Partial<T> | Promise<Partial<T>>;
 
-function omitBy<T extends object, F extends ConditionalAsyncEntryFunction<T>>(
+function omitBy<T extends object, F extends ConditionalAsyncEntryPredicate<T>>(
   f: F,
   obj?: T,
 ):
