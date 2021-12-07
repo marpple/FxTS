@@ -4,6 +4,7 @@ import delay from "./delay";
 import each from "./each";
 import every from "./every";
 import find from "./find";
+import findIndex from "./findIndex";
 import groupBy from "./groupBy";
 import head from "./head";
 import identity from "./identity";
@@ -31,6 +32,7 @@ export {
   each,
   every,
   find,
+  findIndex,
   groupBy,
   head,
   head as first,
