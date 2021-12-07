@@ -20,6 +20,7 @@ import nth from "./nth";
 import omit from "./omit";
 import partition from "./partition";
 import pick from "./pick";
+import pickBy from "./pickBy";
 import pipe from "./pipe";
 import pipe1 from "./pipe1";
 import reduce from "./reduce";
@@ -52,6 +53,7 @@ export {
   omit,
   partition,
   pick,
+  pickBy,
   pipe,
   pipe1,
   reduce,
