@@ -1,14 +1,8 @@
 import filter from "./Lazy/filter";
 import head from "./head";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import ReturnValueType from "./types/ReturnValueType";
 import IterableInfer from "./types/IterableInfer";
-
-type FindReturnType<T extends Iterable<unknown> | AsyncIterable<unknown>> =
-  T extends AsyncIterable<infer A>
-    ? Promise<A | undefined>
-    : T extends Iterable<infer A>
-    ? A | undefined
-    : never;
 
 /**
  * Looks through each value in Iterable/AsyncIterable, returning the first one that passes a truth test `f`,
@@ -33,7 +27,7 @@ function find<T>(
 function find<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   f: (a: IterableInfer<T>) => unknown,
   iterable?: T,
-): (iterable: T) => FindReturnType<T>;
+): (iterable: T) => ReturnValueType<T, IterableInfer<T> | undefined>;
 
 function find<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   f: (a: IterableInfer<T>) => unknown,
@@ -41,9 +35,10 @@ function find<T extends Iterable<unknown> | AsyncIterable<unknown>>(
 ):
   | (IterableInfer<T> | undefined)
   | Promise<IterableInfer<T> | undefined>
-  | ((iterable: T) => FindReturnType<T>) {
+  | ((iterable: T) => ReturnValueType<T, IterableInfer<T> | undefined>) {
   if (iterable === undefined) {
-    return (iterable: T) => find(f, iterable) as any;
+    return (iterable: T) =>
+      find(f, iterable) as ReturnValueType<T, IterableInfer<T> | undefined>;
   }
   if (isIterable(iterable)) {
     return head(filter(f, iterable as Iterable<IterableInfer<T>>));
