@@ -10,7 +10,6 @@ import pipe from "./pipe";
 import { map, zip } from "./Lazy";
 
 /**
- * pickBy
  *
  * Returns a partial copy of an object containing only the keys that satisfy the supplied predicate.
  *
@@ -85,7 +84,7 @@ function pickBy<T extends object, F extends ConditionalAsyncEntryPredicate<T>>(
       entries,
       zip(toAsync(conditions)),
       filter(([cond]) => cond),
-      map(([_cond, entry]) => entry),
+      map(([, entry]) => entry),
       toArray,
       Object.fromEntries,
     ) as Promise<Partial<T>>;
@@ -94,7 +93,7 @@ function pickBy<T extends object, F extends ConditionalAsyncEntryPredicate<T>>(
       entries,
       zip(conditions),
       filter(([cond]) => cond),
-      map(([_cond, entry]) => entry),
+      map(([, entry]) => entry),
       Object.fromEntries,
     ) as Partial<T>;
   }
