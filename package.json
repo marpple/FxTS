@@ -34,7 +34,7 @@
     "prepare": "husky install",
     "prettier": "npx prettier --config .prettierrc --check .",
     "prettier:fix": "npx prettier --config .prettierrc --write .",
-    "release": "npx np --no-tests --no-publish --message",
+    "release": "npx np --no-tests --no-publish --message 'v%s'",
     "test": "jest test/*.spec.ts test/**/*.spec.ts",
     "webpack": "webpack"
   },
