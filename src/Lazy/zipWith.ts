@@ -6,11 +6,13 @@ import zip from "./zip";
  * Returns Iterable/AsyncIterable out of the two supplied by applying `f` to each same positioned pair in Iterable/AsyncIterable.
  *
  * @example
+ * ```ts
  * const iter = zipWith((a,b) => [a,b], [1,2,3], ['a','b','c']);
  * iter.next(); // {value: [1, 'a'] , done: false}
  * iter.next(); // {value: [2, 'b'] , done: false}
  * iter.next(); // {value: [3, 'c'] , done: false}
  * iter.next(); // {value: undefined , done: true}
+ * ```
  */
 function zipWith<A, B, C>(
   f: (a: A, b: B) => C,
