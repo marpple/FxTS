@@ -24,6 +24,7 @@ import pipe from "./pipe";
 import pipe1 from "./pipe1";
 import reduce from "./reduce";
 import some from "./some";
+import sort from "./sort";
 import tap from "./tap";
 import toArray from "./toArray";
 
@@ -56,6 +57,7 @@ export {
   pipe1,
   reduce,
   some,
+  sort,
   tap,
   toArray,
 };
