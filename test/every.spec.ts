@@ -3,11 +3,8 @@ import { AsyncFunctionException } from "../src/_internal/error";
 
 describe("every", function () {
   describe("sync", function () {
-    it("should return 'false' if given 'Iterable' is an empty array", function () {
-      expect(every((a) => a, [])).toEqual(false);
-    });
-
     it.each([
+      [(a: number) => a % 2 === 0, [], true],
       [(a: number) => a % 2 === 0, [2, 4, 6, 8, 10], true],
       [(a: number) => a % 2 === 0, [1, 4, 6, 8, 10], false],
       [(a: number) => a % 2 === 0, [2, 4, 7, 8, 10], false],

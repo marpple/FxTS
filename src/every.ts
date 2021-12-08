@@ -23,7 +23,7 @@ import Arrow from "./types/Arrow";
  * {@link https://codesandbox.io/s/fxts-every-g91dh | Try It}
  */
 
-function every<A extends readonly []>(f: Arrow, iterable: A): false;
+function every<A extends readonly []>(f: Arrow, iterable: A): true;
 
 // prettier-ignore
 function every<A, B = unknown>(
@@ -59,6 +59,7 @@ function every<
       map(f, iterable as Iterable<IterableInfer<A>>),
       takeUntil(not),
       reduce((a, b) => a && b),
+      (a) => a ?? true,
       Boolean,
     );
   }
@@ -68,6 +69,7 @@ function every<
       map(f, iterable as AsyncIterable<IterableInfer<A>>),
       takeUntil(not),
       reduce((a, b) => a && b),
+      (a) => a ?? true,
       Boolean,
     );
   }

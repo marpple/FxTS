@@ -16,7 +16,7 @@ const res3 = pipe(
 );
 
 checks([
-  check<typeof res0, false, Test.Pass>(),
+  check<typeof res0, true, Test.Pass>(),
   check<typeof res1, boolean, Test.Pass>(),
   check<typeof res2, boolean, Test.Pass>(),
   check<typeof res3, Promise<boolean>, Test.Pass>(),
