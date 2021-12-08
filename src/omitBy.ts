@@ -6,8 +6,9 @@ import {
 import toArray from "./toArray";
 import reject from "./Lazy/reject";
 import toAsync from "./Lazy/toAsync";
+import map from "./Lazy/map";
+import zip from "./Lazy/zip";
 import pipe from "./pipe";
-import { map, zip } from "./Lazy";
 
 /**
  *
