@@ -12,6 +12,7 @@ import includes from "./includes";
 import indexBy from "./indexBy";
 import isArray from "./isArray";
 import isNil from "./isNil";
+import isObject from "./isObject";
 import isString from "./isString";
 import join from "./join";
 import last from "./last";
@@ -46,6 +47,7 @@ export {
   indexBy,
   isArray,
   isNil,
+  isObject,
   isString,
   join,
   last,
