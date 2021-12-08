@@ -1,6 +1,7 @@
 import tap from "../tap";
 import map from "./map";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import Awaited from "../types/Awaited";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import IterableInfer from "../types/IterableInfer";
 
@@ -63,15 +64,15 @@ function peek<T>(
 ): AsyncIterableIterator<T>;
 
 function peek<T extends Iterable<unknown> | AsyncIterable<unknown>>(
-  f: (a: IterableInfer<T>) => unknown,
+  f: (a: Awaited<IterableInfer<T>>) => unknown,
 ): (iterable: T) => ReturnIterableIteratorType<T>;
 
 function peek<T extends Iterable<unknown> | AsyncIterable<unknown>>(
-  f: (a: IterableInfer<T>) => unknown,
+  f: (a: Awaited<IterableInfer<T>>) => unknown,
   iterable?: T,
 ):
-  | IterableIterator<IterableInfer<T>>
-  | AsyncIterableIterator<IterableInfer<T>>
+  | IterableIterator<Awaited<IterableInfer<T>>>
+  | AsyncIterableIterator<Awaited<IterableInfer<T>>>
   | ((iterable: T) => ReturnIterableIteratorType<T>) {
   if (iterable === undefined) {
     return (iterable: T) => {
@@ -82,15 +83,15 @@ function peek<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   if (isIterable(iterable)) {
     return map(
       tap(f),
-      iterable as Iterable<IterableInfer<T>>,
-    ) as ReturnIterableIteratorType<T, IterableInfer<T>>;
+      iterable as Iterable<Awaited<IterableInfer<T>>>,
+    ) as ReturnIterableIteratorType<T, Awaited<IterableInfer<T>>>;
   }
 
   if (isAsyncIterable(iterable)) {
     return map(
       tap(f),
-      iterable as AsyncIterable<IterableInfer<T>>,
-    ) as ReturnIterableIteratorType<T, IterableInfer<T>>;
+      iterable as AsyncIterable<Awaited<IterableInfer<T>>>,
+    ) as ReturnIterableIteratorType<T, Awaited<IterableInfer<T>>>;
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
