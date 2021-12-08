@@ -86,11 +86,11 @@ function concurrent<A>(
   }
 
   if (length === Infinity) {
-    throw new TypeError("'length' cannot be infinite");
+    throw new RangeError("'length' cannot be infinite");
   }
 
   if (length <= 0) {
-    throw new TypeError("'length' must be over 0");
+    throw new RangeError("'length' must be over 0");
   }
 
   if (!isAsyncIterable(iterable)) {
