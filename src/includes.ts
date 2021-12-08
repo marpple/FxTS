@@ -1,4 +1,4 @@
-import { some } from ".";
+import some from "./some";
 import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
@@ -17,7 +17,7 @@ function includes<T extends readonly []>(value: unknown, iterable: T): false;
 
 // prettier-ignore
 function includes<T>(
-    value: unknown, 
+    value: unknown,
     iterable: Iterable<T>
 ): boolean;
 

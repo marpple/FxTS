@@ -1,5 +1,6 @@
-import { map, zip } from ".";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import map from "./map";
+import zip from "./zip";
 
 /**
  * Returns Iterable/AsyncIterable out of the two supplied by applying `f` to each same positioned pair in Iterable/AsyncIterable.

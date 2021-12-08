@@ -1,4 +1,4 @@
-import { map } from ".";
+import map from "./map";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 
 /**

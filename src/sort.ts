@@ -1,7 +1,9 @@
-import { isArray, pipe1, toArray } from ".";
 import IterableInfer from "./types/IterableInfer";
 import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import isArray from "./isArray";
+import pipe1 from "./pipe1";
+import toArray from "./toArray";
 
 /**
  * Returns an array which sorted according to the `f`
@@ -14,13 +16,13 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
  */
 // prettier-ignore
 function sort(
-    f: (a: any, b: any) => unknown, 
+    f: (a: any, b: any) => unknown,
     iterable: readonly []
   ): any[];
 
 // prettier-ignore
 function sort<T>(
-  f: (a: T, b: T) => unknown, 
+  f: (a: T, b: T) => unknown,
   iterable: Iterable<T>
 ): T[];
 
