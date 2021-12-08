@@ -25,8 +25,6 @@ async function async<T extends object, U extends AsyncIterable<keyof T>>(
 }
 
 /**
- * omit
- *
  * Returns a partial copy of an object omitting the keys specified.
  *
  * @example
