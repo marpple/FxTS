@@ -7,6 +7,7 @@ import find from "./find";
 import groupBy from "./groupBy";
 import head from "./head";
 import identity from "./identity";
+import includes from "./includes";
 import indexBy from "./indexBy";
 import isArray from "./isArray";
 import isNil from "./isNil";
@@ -35,6 +36,8 @@ export {
   head,
   head as first,
   identity,
+  includes,
+  includes as contains,
   indexBy,
   isArray,
   isNil,
