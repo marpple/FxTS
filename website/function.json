@@ -29,6 +29,7 @@
   ],
   "Strict": [
     "countBy",
+    "curry",
     "delay",
     "each",
     "every",
