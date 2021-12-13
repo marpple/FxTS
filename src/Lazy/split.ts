@@ -69,6 +69,27 @@ function async(
   };
 }
 
+/**
+ * Splits string by separator.
+ *
+ * @example
+ * ```ts
+ * const iter = split(',', '1,2,3,4');
+ * iter.next(); // 1
+ * iter.next(); // 2
+ * iter.next(); // 3
+ * iter.next(); // 4
+ * iter.next(); // undefined
+ *
+ * // with pipe
+ * pipe(
+ *  "👍,😀,🙇‍♂️,🤩,🎉",
+ *  split(',')
+ * ); // ["👍", "😀", "🙇‍♂️", "🤩", "🎉"]
+ *
+ * see {@link https://fxts.dev/docs/pipe | pipe}
+ * ```
+ */
 function split(
   sep: string,
   iterable: Iterable<string>,
