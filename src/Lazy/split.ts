@@ -86,9 +86,9 @@ function async(
  *  "👍,😀,🙇‍♂️,🤩,🎉",
  *  split(',')
  * ); // ["👍", "😀", "🙇‍♂️", "🤩", "🎉"]
+ * ```
  *
  * see {@link https://fxts.dev/docs/pipe | pipe}
- * ```
  */
 function split(
   sep: string,
