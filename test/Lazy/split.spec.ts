@@ -62,7 +62,7 @@ describe("split", function () {
 
     it("should be splited by empty string", async function () {
       const acc = [];
-      for await (const a of split("", "abcdefg")) {
+      for await (const a of split("", toAsync("abcdefg"))) {
         acc.push(a);
       }
       expect(acc).toEqual(["a", "b", "c", "d", "e", "f", "g"]);
@@ -70,7 +70,7 @@ describe("split", function () {
 
     it("should be splited by separator", async function () {
       const acc = [];
-      for await (const a of split(",", "a,b,c,d,e,f,g")) {
+      for await (const a of split(",", toAsync("a,b,c,d,e,f,g"))) {
         acc.push(a);
       }
       expect(acc).toEqual(["a", "b", "c", "d", "e", "f", "g"]);
@@ -78,7 +78,7 @@ describe("split", function () {
 
     it("should be appended empty string if there is a separator at the end", async function () {
       const acc = [];
-      for await (const a of split(",", "a,b,c,d,e,f,g,")) {
+      for await (const a of split(",", toAsync("a,b,c,d,e,f,g,"))) {
         acc.push(a);
       }
       expect(acc).toEqual(["a", "b", "c", "d", "e", "f", "g", ""]);
@@ -86,7 +86,7 @@ describe("split", function () {
 
     it("should be splited by separator(unicode)", async function () {
       const acc = [];
-      for await (const a of split(",", "👍,😀,🙇‍♂️,🤩,🎉")) {
+      for await (const a of split(",", toAsync("👍,😀,🙇‍♂️,🤩,🎉"))) {
         acc.push(a);
       }
       expect(acc).toEqual(["👍", "😀", "🙇‍♂️", "🤩", "🎉"]);
