@@ -16,6 +16,7 @@ import isObject from "./isObject";
 import isString from "./isString";
 import join from "./join";
 import last from "./last";
+import noop from "./noop";
 import not from "./not";
 import nth from "./nth";
 import omit from "./omit";
@@ -52,6 +53,7 @@ export {
   isString,
   join,
   last,
+  noop,
   not,
   nth,
   omit,
