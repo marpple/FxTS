@@ -17,7 +17,7 @@ To build the above, we have many features such as:
   - It can handle multiple asynchronous requests and also control the count of requests.
 - Type inference
   - Function composition can be inferred.
-- Follow [iteration protocal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) Iterable / AsyncIterable
+- Follow [iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) Iterable / AsyncIterable
   - FxTS follows the protocol of the language standard.
     This means that it matches well with existing functions and functions that will be added in the future.
 

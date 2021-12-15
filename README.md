@@ -10,7 +10,7 @@ FxTS is a functional library for TypeScript/JavaScript programmers.
 - Lazy evaluation
 - Handling concurrent requests
 - Type inference
-- Follow [iteration protocal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) Iterable / AsyncIterable
+- Follow [iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) Iterable / AsyncIterable
 
 ## Installation
 
