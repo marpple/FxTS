@@ -1,3 +1,4 @@
+import consume from "./consume";
 import countBy from "./countBy";
 import curry from "./curry";
 import delay from "./delay";
@@ -33,6 +34,7 @@ import tap from "./tap";
 import toArray from "./toArray";
 
 export {
+  consume,
   countBy,
   curry,
   delay,
