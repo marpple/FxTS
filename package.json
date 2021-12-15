@@ -35,7 +35,7 @@
     "prettier": "npx prettier --config .prettierrc --check .",
     "prettier:fix": "npx prettier --config .prettierrc --write .",
     "release": "npx np --no-tests --no-publish --message 'v%s'",
-    "test": "jest test/*.spec.ts test/**/*.spec.ts",
+    "test": "jest",
     "webpack": "webpack"
   },
   "repository": {
