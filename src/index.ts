@@ -11,6 +11,7 @@ import identity from "./identity";
 import includes from "./includes";
 import indexBy from "./indexBy";
 import isArray from "./isArray";
+import isEmpty from "./isEmpty";
 import isNil from "./isNil";
 import isObject from "./isObject";
 import isString from "./isString";
@@ -47,6 +48,7 @@ export {
   includes as contains,
   indexBy,
   isArray,
+  isEmpty,
   isNil,
   isObject,
   isString,
