@@ -1,7 +1,7 @@
 import Arrow from "./types/Arrow";
 
 /**
- * Applies function `fn` to the argument list `args`.
+ * Applies function `f` to the argument list `args`.
  *
  * @example
  * ```ts
