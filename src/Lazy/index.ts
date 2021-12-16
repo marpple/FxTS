@@ -3,6 +3,7 @@ import chunk from "./chunk";
 import compact from "./compact";
 import concat from "./concat";
 import concurrent from "./concurrent";
+import cycle from "./cycle";
 import drop from "./drop";
 import dropWhile from "./dropWhile";
 import dropUntil from "./dropUntil";
@@ -32,6 +33,7 @@ export {
   compact,
   concat,
   concurrent,
+  cycle,
   drop,
   dropWhile,
   dropUntil,
