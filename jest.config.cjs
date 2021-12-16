@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require("path");
 
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
