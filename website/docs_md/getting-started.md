@@ -48,7 +48,7 @@ const sum = pipe(
   map((a) => a * 10),
   take(10),
   reduce((a, b) => a + b),
-); // typeof 'sum' inffered as the number
+); // typeof 'sum' inferred as the number
 ```
 
 **Note: It is recommended to enable [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) tsc option. If not, type inference does not work as we expected. For example, in the example above, `sum` is not inferred as a number type if the option is turned off.**
