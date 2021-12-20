@@ -8,7 +8,7 @@ describe("difference", function () {
     it.each([
       [
         [1, 2, 3, 4],
-        [3, 4, 5, 6],
+        [3, 4, 5, 6, 5, 3],
         [5, 6],
       ],
       ["abcd", "cdefg", ["e", "f", "g"]],
@@ -28,7 +28,7 @@ describe("difference", function () {
 
   describe("async", function () {
     it.each([
-      [toAsync([1, 2, 3, 4]), toAsync([3, 4, 5, 6]), [5, 6]],
+      [toAsync([1, 2, 3, 4]), toAsync([3, 4, 5, 6, 5, 3]), [5, 6]],
       [[1, 2, 3, 4], toAsync([3, 4, 5, 6]), [5, 6]],
       [toAsync([1, 2, 3, 4]), [3, 4, 5, 6], [5, 6]],
       ["abcd", "cdefg", ["e", "f", "g"]],

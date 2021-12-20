@@ -3,6 +3,8 @@ import reject from "./reject";
 import pipe1 from "../pipe1";
 import toAsync from "./toAsync";
 import toArray from "../toArray";
+import uniq from "./uniq";
+import pipe from "../pipe";
 import concurrent, { isConcurrent } from "./concurrent";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 
@@ -16,7 +18,12 @@ function* sync<T>(
   iterable2: Iterable<T>,
 ) {
   const set = new Set(map(f, iterable1));
-  yield* reject((a) => hasValue(set, f(a)), iterable2);
+
+  yield* pipe(
+    iterable2,
+    reject((a) => hasValue(set, f(a))),
+    uniq,
+  );
 }
 
 async function* asyncSequential<T>(
@@ -25,7 +32,12 @@ async function* asyncSequential<T>(
   iterable2: AsyncIterable<T>,
 ) {
   const set = new Set(await toArray(map(f, iterable1)));
-  yield* reject((a) => hasValue(set, f(a)), iterable2);
+
+  yield* pipe(
+    iterable2,
+    reject((a) => hasValue(set, f(a))),
+    uniq,
+  );
 }
 
 function async<T>(
