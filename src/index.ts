@@ -20,6 +20,7 @@ import isString from "./isString";
 import join from "./join";
 import last from "./last";
 import max from "./max";
+import min from "./min";
 import noop from "./noop";
 import not from "./not";
 import nth from "./nth";
@@ -61,6 +62,7 @@ export {
   join,
   last,
   max,
+  min,
   noop,
   not,
   nth,
