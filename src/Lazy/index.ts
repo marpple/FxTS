@@ -16,6 +16,7 @@ import pluck from "./pluck";
 import prepend from "./prepend";
 import range from "./range";
 import reject from "./reject";
+import repeat from "./repeat";
 import split from "./split";
 import take from "./take";
 import takeUntil from "./takeUntil";
@@ -46,6 +47,7 @@ export {
   prepend,
   range,
   reject,
+  repeat,
   split,
   take,
   takeUntil,
