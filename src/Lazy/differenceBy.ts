@@ -10,13 +10,13 @@ const hasValue = (set: Set<unknown>, a: unknown) => {
   return pipe1(a, (b) => set.has(b));
 };
 
-function sync<T>(
+function* sync<T>(
   f: (a: T) => unknown,
   iterable1: Iterable<T>,
   iterable2: Iterable<T>,
 ) {
   const set = new Set(map(f, iterable1));
-  return reject((a) => hasValue(set, f(a)), iterable2);
+  yield* reject((a) => hasValue(set, f(a)), iterable2);
 }
 
 async function* asyncSequential<T>(
