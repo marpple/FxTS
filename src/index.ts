@@ -30,6 +30,7 @@ import pickBy from "./pickBy";
 import pipe from "./pipe";
 import pipe1 from "./pipe1";
 import reduce from "./reduce";
+import reverse from "./reverse";
 import some from "./some";
 import sort from "./sort";
 import tap from "./tap";
@@ -70,6 +71,7 @@ export {
   pipe,
   pipe1,
   reduce,
+  reverse,
   some,
   sort,
   tap,
