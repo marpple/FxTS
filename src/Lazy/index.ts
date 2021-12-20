@@ -4,6 +4,7 @@ import compact from "./compact";
 import concat from "./concat";
 import concurrent from "./concurrent";
 import cycle from "./cycle";
+import difference from "./difference";
 import differenceBy from "./differenceBy";
 import drop from "./drop";
 import dropWhile from "./dropWhile";
@@ -35,6 +36,7 @@ export {
   concat,
   concurrent,
   cycle,
+  difference,
   differenceBy,
   drop,
   dropWhile,
