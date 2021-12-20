@@ -19,6 +19,7 @@ import isObject from "./isObject";
 import isString from "./isString";
 import join from "./join";
 import last from "./last";
+import max from "./max";
 import noop from "./noop";
 import not from "./not";
 import nth from "./nth";
@@ -59,6 +60,7 @@ export {
   isString,
   join,
   last,
+  max,
   noop,
   not,
   nth,
