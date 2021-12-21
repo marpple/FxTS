@@ -18,7 +18,7 @@ import toArray from "./toArray";
 function sort(
     f: (a: any, b: any) => unknown,
     iterable: readonly []
-  ): any[];
+): any[];
 
 // prettier-ignore
 function sort<T>(
