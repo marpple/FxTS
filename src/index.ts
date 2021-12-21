@@ -1,3 +1,4 @@
+import add from "./add";
 import apply from "./apply";
 import consume from "./consume";
 import countBy from "./countBy";
@@ -40,6 +41,7 @@ import tap from "./tap";
 import toArray from "./toArray";
 
 export {
+  add,
   apply,
   consume,
   countBy,
