@@ -6,9 +6,7 @@ function sync(iterable: Iterable<number>) {
   for (const a of iterable) {
     if (Number.isNaN(a)) {
       return a;
-    } else if (Number.isNaN(n)) {
-      n = a;
-    } else if (a < n) {
+    } else if (a < n || Number.isNaN(n)) {
       n = a;
     }
   }
@@ -25,9 +23,7 @@ async function async(iterable: AsyncIterable<number>) {
   for await (const a of iterable) {
     if (Number.isNaN(a)) {
       return a;
-    } else if (Number.isNaN(n)) {
-      n = a;
-    } else if (a < n) {
+    } else if (a < n || Number.isNaN(n)) {
       n = a;
     }
   }
