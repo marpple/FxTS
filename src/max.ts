@@ -14,7 +14,7 @@ function sync(iterable: Iterable<number>) {
   }
 
   if (Number.isNaN(n)) {
-    return 0;
+    return -Infinity;
   }
 
   return n;
@@ -33,7 +33,7 @@ async function async(iterable: AsyncIterable<number>) {
   }
 
   if (Number.isNaN(n)) {
-    return 0;
+    return -Infinity;
   }
 
   return n;

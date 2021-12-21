@@ -8,7 +8,7 @@ describe("min", function () {
       [[0, -Infinity, 3], -Infinity],
       [[0, Infinity, 3, NaN], NaN],
       [[0, 2, 3, NaN], NaN],
-      [[], 0],
+      [[], Infinity],
     ])("should the smallest of given iterable %s %s", function (input, result) {
       expect(min(input)).toEqual(result);
     });
@@ -21,7 +21,7 @@ describe("min", function () {
       [[0, -Infinity, 3], -Infinity],
       [[0, Infinity, 3, NaN], NaN],
       [[0, 2, 3, NaN], NaN],
-      [[], 0],
+      [[], Infinity],
     ])(
       "should the smallest of given asyncIterable %s %s",
       async function (input, result) {
