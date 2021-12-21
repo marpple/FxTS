@@ -20,6 +20,7 @@ import isNumber from "./isNumber";
 import isObject from "./isObject";
 import isString from "./isString";
 import join from "./join";
+import juxt from "./juxt";
 import last from "./last";
 import max from "./max";
 import min from "./min";
@@ -67,6 +68,7 @@ export {
   isObject,
   isString,
   join,
+  juxt,
   last,
   max,
   min,
