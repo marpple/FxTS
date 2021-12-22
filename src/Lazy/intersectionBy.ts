@@ -1,12 +1,12 @@
 import map from "./map";
-import reject from "./reject";
-import pipe1 from "../pipe1";
+import filter from "./filter";
 import toAsync from "./toAsync";
 import toArray from "../toArray";
-import uniq from "./uniq";
-import pipe from "../pipe";
 import concurrent, { isConcurrent } from "./concurrent";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import pipe1 from "../pipe1";
+import pipe from "../pipe";
+import uniq from "./uniq";
 
 function* sync<T>(
   f: (a: T) => unknown,
@@ -17,7 +17,7 @@ function* sync<T>(
 
   yield* pipe(
     iterable2,
-    reject((a) => pipe1(f(a), (b) => set.has(b))),
+    filter((a) => pipe1(f(a), (b) => set.has(b))),
     uniq,
   );
 }
@@ -31,7 +31,7 @@ async function* asyncSequential<T>(
 
   yield* pipe(
     iterable2,
-    reject((a) => pipe1(f(a), (b) => set.has(b))),
+    filter((a) => pipe1(f(a), (b) => set.has(b))),
     uniq,
   );
 }
@@ -63,42 +63,41 @@ function async<T>(
 }
 
 /**
- * Returns Iterable/AsyncIterable(i.e no duplicate) of all elements in the `iterable2` not contained in the `iterable1`.
+ * Returns Iterable/AsyncIterable(i.e no duplicate) of all elements in the `iterable2` contained in the `iterable1`.
  * Duplication is determined according to the value returned by applying the supplied `f` to `iterable2`.
  *
  * @example
  * ```ts
- * const iter = differenceBy(a => a.x, [{ x: 1 }, { x: 4 }], [{ x: 1 },  { x: 2 },  { x: 3 }])
- * iter.next(); // {value: {x: 2}, done: false}
- * iter.next(); // {value: {x: 3}, done: false}
+ * const iter = intersectionBy(a => a.x, [{ x: 1 }, { x: 4 }], [{ x: 1 },  { x: 2 },  { x: 3 }])
+ * iter.next(); // {value: {x: 1, done: false}
  * iter.next(); // {value: undefined, done: true}
  * ```
  */
-function differenceBy<A, B = unknown>(
+function intersectionBy<A, B = unknown>(
   f: (a: A) => B,
   iterable1: Iterable<A>,
   iterable2: Iterable<A>,
 ): IterableIterator<A>;
 
-function differenceBy<A, B = unknown>(
+function intersectionBy<A, B = unknown>(
   f: (a: A) => B,
   iterable1: AsyncIterable<A>,
   iterable2: Iterable<A>,
 ): AsyncIterableIterator<A>;
 
-function differenceBy<A, B = unknown>(
+function intersectionBy<A, B = unknown>(
   f: (a: A) => B,
   iterable1: Iterable<A>,
   iterable2: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function differenceBy<A, B = unknown>(
+function intersectionBy<A, B = unknown>(
   f: (a: A) => B,
   iterable1: AsyncIterable<A>,
   iterable2: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function differenceBy<A, B = unknown>(
+function intersectionBy<A, B = unknown>(
   f: (a: A) => B,
   iterable1: Iterable<A> | AsyncIterable<A>,
   iterable2: Iterable<A> | AsyncIterable<A>,
@@ -121,4 +120,4 @@ function differenceBy<A, B = unknown>(
   );
 }
 
-export default differenceBy;
+export default intersectionBy;

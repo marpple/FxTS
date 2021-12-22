@@ -4,7 +4,7 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import differenceBy from "./differenceBy";
 
 /**
- * Returns Iterable/AsyncIterable of all elements in the iterable2 not contained in the iterable1.
+ * Returns Iterable/AsyncIterable of all elements in the `iterable2` not contained in the `iterable1`.
  *
  * @example
  * ```ts
