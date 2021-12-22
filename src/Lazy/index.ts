@@ -12,6 +12,7 @@ import dropUntil from "./dropUntil";
 import filter from "./filter";
 import flat from "./flat";
 import flatMap from "./flatMap";
+import intersection from "./intersection";
 import intersectionBy from "./intersectionBy";
 import map from "./map";
 import peek from "./peek";
@@ -46,6 +47,7 @@ export {
   filter,
   flat,
   flatMap,
+  intersection,
   intersectionBy,
   map,
   peek,
