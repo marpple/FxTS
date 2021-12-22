@@ -3,6 +3,7 @@ import { sum, pipe, toAsync } from "../src";
 
 const { checks, check } = Test;
 
+// const res0 = sum([1, 'a']); // error
 const res1 = sum([1, 2]);
 const res2 = sum(["a", "b"]);
 const res3 = sum(toAsync([1, 2]));
