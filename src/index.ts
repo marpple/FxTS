@@ -38,6 +38,7 @@ import reverse from "./reverse";
 import size from "./size";
 import some from "./some";
 import sort from "./sort";
+import sum from "./sum";
 import tap from "./tap";
 import toArray from "./toArray";
 
@@ -84,6 +85,7 @@ export {
   size,
   some,
   sort,
+  sum,
   tap,
   toArray,
 };
