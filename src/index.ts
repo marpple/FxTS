@@ -37,6 +37,7 @@ import reduce from "./reduce";
 import reverse from "./reverse";
 import some from "./some";
 import sort from "./sort";
+import sum from "./sum";
 import tap from "./tap";
 import toArray from "./toArray";
 
@@ -82,6 +83,7 @@ export {
   reverse,
   some,
   sort,
+  sum,
   tap,
   toArray,
 };
