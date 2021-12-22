@@ -5,8 +5,8 @@ const { checks, check } = Test;
 
 declare function f1(a: number, b: string): string;
 declare function f2(a: number, b: string): boolean;
-declare function f3(a: number, b: boolean): number;
-declare function f4(a: number, b: string, c: boolean): number;
+// declare function f3(a: number, b: boolean): number;
+// declare function f4(a: number, b: string, c: boolean): number;
 
 const res1 = juxt([])();
 const res2 = juxt([f1, f2])(1, "2");
