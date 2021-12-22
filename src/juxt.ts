@@ -26,6 +26,29 @@ type JuxtReturnTypes<ARGS, FS extends Arrow[]> = ARGS extends undefined
   ? void
   : ReturnTuples<FS>;
 
+/**
+ * `juxt` applies a list of functions to a list of values.
+ *
+ * @example
+ * ```ts
+ * const range = juxt([Math.min, Math.max], [1, 2, 3, 4]); // [1, 4]
+ *
+ * // with pipe
+ * const entries = (obj: { a: number; b: number }) =>
+ *   pipe(
+ *     [Object.keys, Object.values] as const,
+ *     juxt,
+ *     (f) => f(obj),
+ *     apply(zip),
+ *     toArray,
+ *   );
+ *
+ * entries({ a: 1, b: 2 }); // [ ["a", 1], ["b", 2] ]
+ * ```
+ *
+ * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/apply | apply}
+ */
+
 function juxt<FS extends Arrow[]>(
   fs: [...FS] | readonly [...FS],
 ): (...args: JuxtArgs<FS>) => JuxtReturnTypes<JuxtArgs<FS>, FS> {
