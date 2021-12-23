@@ -1,4 +1,6 @@
 import { pipe, slice, toArray, toAsync } from "../../src";
+import { Concurrent } from "../../src/Lazy/concurrent";
+import { generatorMock } from "../utils";
 
 describe("slice", function () {
   describe("sync", function () {
@@ -80,6 +82,14 @@ describe("slice", function () {
 
       const res2 = await pipe([1, 2, 3, 4, 5], toAsync, slice(1, 3), toArray);
       expect(res2).toEqual([2, 3]);
+    });
+
+    it("should be passed concurrent object when job works concurrently", async function () {
+      const mock = generatorMock();
+      const iter = slice(1, 2, mock);
+      const concurrent = Concurrent.of(2) as any;
+      await iter.next(concurrent);
+      expect((mock as any).getConcurrent()).toEqual(concurrent);
     });
   });
 });

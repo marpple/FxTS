@@ -1,6 +1,7 @@
 import isNumber from "../isNumber";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync<T>(
   start = 0,
@@ -16,7 +17,7 @@ function* sync<T>(
   }
 }
 
-async function* async<T>(
+async function* asyncSequential<T>(
   start = 0,
   end = Infinity,
   iterable: AsyncIterable<T>,
@@ -28,6 +29,30 @@ async function* async<T>(
     }
     i += 1;
   }
+}
+
+function async<T>(
+  start = 0,
+  end = Infinity,
+  iterable: AsyncIterable<T>,
+): AsyncIterableIterator<T> {
+  let iterator: AsyncIterator<T>;
+  return {
+    [Symbol.asyncIterator]() {
+      return this;
+    },
+
+    async next(_concurrent: any) {
+      if (iterator === undefined) {
+        // prettier-ignore
+        iterator = isConcurrent(_concurrent)
+          ? asyncSequential(start, end, concurrent(_concurrent.length, iterable))
+          : asyncSequential(start, end, iterable);
+      }
+
+      return iterator.next(_concurrent);
+    },
+  };
 }
 
 function _slice<T extends Iterable<unknown> | AsyncIterable<unknown>>(
