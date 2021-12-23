@@ -19,6 +19,7 @@ import prepend from "./prepend";
 import range from "./range";
 import reject from "./reject";
 import repeat from "./repeat";
+import reverse from "./reverse";
 import split from "./split";
 import take from "./take";
 import takeUntil from "./takeUntil";
@@ -52,6 +53,7 @@ export {
   range,
   reject,
   repeat,
+  reverse,
   split,
   take,
   takeUntil,
