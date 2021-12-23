@@ -1,6 +1,5 @@
-import { toArray, toAsync } from "../../src";
+import { toArray, toAsync, intersectionBy } from "../../src";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import intersectionBy from "../../src/Lazy/intersectionBy";
 import { generatorMock } from "../utils";
 
 describe("intersectionBy", function () {
