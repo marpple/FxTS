@@ -6,7 +6,7 @@ import pipe1 from "./pipe1";
 import toArray from "./toArray";
 
 /**
- * Returns an array which sorted according to the `f`
+ * Returns an array which is sorted by function `f`.
  *
  * @example
  * ```ts

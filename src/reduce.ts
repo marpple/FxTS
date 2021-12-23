@@ -24,7 +24,7 @@ async function async<A, B>(
 }
 
 /**
- * Also known as foldl, reduce boils down a list of values into a single value.
+ * Also known as foldl, this method boils down a list of values into a single value.
  *
  * @example
  * ```ts

@@ -10,8 +10,8 @@ async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
 }
 
 /**
- * Take item from Iterable/AsyncIterable and returns an array
- * It is recommended to use {@link https://fxts.dev/docs/pipe | pipe} together
+ * Takes item from Iterable/AsyncIterable and returns an array.
+ * It is recommended to use {@link https://fxts.dev/docs/pipe | pipe} together.
  *
  * @example
  * ```ts
