@@ -25,11 +25,30 @@ function* sync<T>(iterable: Iterable<T>) {
   }
 }
 
-async function* async<T>(iterable: AsyncIterable<T>) {
+async function* asyncSequential<T>(iterable: AsyncIterable<T>) {
   const arr = await toArray(iterable);
   for (let i = arr.length - 1; i >= 0; i--) {
     yield arr[i];
   }
+}
+
+function async<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<T> {
+  let iterator: AsyncIterator<T>;
+  return {
+    [Symbol.asyncIterator]() {
+      return this;
+    },
+
+    async next(_concurrent: any) {
+      if (iterator === undefined) {
+        iterator = isConcurrent(_concurrent)
+          ? asyncSequential(concurrent(_concurrent.length, iterable))
+          : asyncSequential(iterable);
+      }
+
+      return iterator.next(_concurrent);
+    },
+  };
 }
 
 /**
