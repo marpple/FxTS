@@ -1,6 +1,5 @@
-import { delay, map, pipe, toArray, toAsync } from "../../src";
+import { delay, map, pipe, toArray, toAsync, intersection } from "../../src";
 import concurrent, { Concurrent } from "../../src/Lazy/concurrent";
-import intersection from "../../src/Lazy/intersection";
 import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("intersection", function () {
