@@ -2,8 +2,7 @@ import type Append from "./types/Append";
 import type Arrow from "./types/Arrow";
 import type Cast from "./types/Cast";
 import type Tail from "./types/Tail";
-
-type HasItem<T extends any[]> = T extends [any, ...any] ? true : false;
+import type HasItem from "./types/HasItem";
 
 type ParameterTuples<FS extends Arrow[], T = []> = HasItem<FS> extends true
   ? ParameterTuples<Tail<FS>, Append<Cast<T, any[]>, Parameters<FS[0]>>>
