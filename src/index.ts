@@ -6,6 +6,7 @@ import curry from "./curry";
 import delay from "./delay";
 import each from "./each";
 import every from "./every";
+import evolve from "./evolve";
 import find from "./find";
 import findIndex from "./findIndex";
 import groupBy from "./groupBy";
@@ -51,6 +52,7 @@ export {
   delay,
   each,
   every,
+  evolve,
   find,
   findIndex,
   groupBy,
