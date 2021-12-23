@@ -4,8 +4,8 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync<T>(
-  start = 0,
-  end = Infinity,
+  start: number,
+  end: number,
   iterable: Iterable<T>,
 ): IterableIterator<T> {
   let i = 0;
@@ -18,8 +18,8 @@ function* sync<T>(
 }
 
 async function* asyncSequential<T>(
-  start = 0,
-  end = Infinity,
+  start: number,
+  end: number,
   iterable: AsyncIterable<T>,
 ): AsyncIterableIterator<T> {
   let i = 0;
@@ -32,8 +32,8 @@ async function* asyncSequential<T>(
 }
 
 function async<T>(
-  start = 0,
-  end = Infinity,
+  start: number,
+  end: number,
   iterable: AsyncIterable<T>,
 ): AsyncIterableIterator<T> {
   let iterator: AsyncIterator<T>;
@@ -107,6 +107,8 @@ function _slice<T extends Iterable<unknown> | AsyncIterable<unknown>>(
  *  slice(1, 3),
  *  toArray,
  * ); // [2, 3]
+ *
+ * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toArray | toArray}
  * ```
  */
 // prettier-ignore
