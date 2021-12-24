@@ -22,6 +22,7 @@ import range from "./range";
 import reject from "./reject";
 import repeat from "./repeat";
 import reverse from "./reverse";
+import scan from "./scan";
 import split from "./split";
 import take from "./take";
 import takeUntil from "./takeUntil";
@@ -58,6 +59,7 @@ export {
   reject,
   repeat,
   reverse,
+  scan,
   split,
   take,
   takeUntil,
