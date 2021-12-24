@@ -2,6 +2,18 @@ type Entries<T extends Record<string, any>, K extends keyof T> = K extends any
   ? [K, T[K]]
   : never;
 
+/**
+ *
+ * Creates an array of own enumerable string keyed-value pairs.
+ *
+ * @example
+ * ```ts
+ *
+ * [...entries({ a: 1, b: "2", c: true })]
+ * // [["a", 1], ["b", "2"], ["c", true]]
+ * ```
+ */
+
 function* entries<T extends Record<string, any>>(
   obj: T,
 ): Generator<Entries<T, keyof T>, void> {
