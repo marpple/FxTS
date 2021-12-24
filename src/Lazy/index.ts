@@ -1,6 +1,7 @@
 import append from "./append";
 import chunk from "./chunk";
 import compact from "./compact";
+import compress from "./compress";
 import concat from "./concat";
 import concurrent from "./concurrent";
 import cycle from "./cycle";
@@ -37,6 +38,7 @@ export {
   append,
   chunk,
   compact,
+  compress,
   concat,
   concurrent,
   cycle,
