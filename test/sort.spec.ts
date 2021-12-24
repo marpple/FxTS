@@ -12,10 +12,15 @@ describe("sort", function () {
   };
 
   describe("sync", function () {
-    it("should return 'false' if given iterable is an empty array", function () {
-      expect(sort(sortFn, [])).toEqual([]);
-      expect(sort(sortFn, [3, 4, 1, 2, 5, 2])).toEqual([1, 2, 2, 3, 4, 5]);
-      expect(sort(sortFn, "bcdaef")).toEqual(["a", "b", "c", "d", "e", "f"]);
+    it.each([
+      [[], []],
+      [
+        [3, 4, 1, 2, 5, 2],
+        [1, 2, 2, 3, 4, 5],
+      ],
+      ["bcdaef", ["a", "b", "c", "d", "e", "f"]],
+    ])("should sort the elements", function (iterable, result) {
+      expect(sort(sortFn, iterable as Iterable<any>)).toEqual(result);
     });
 
     it("should be able to be used as a curried function in the pipeline", function () {
@@ -29,29 +34,16 @@ describe("sort", function () {
   });
 
   describe("async", function () {
-    it("should return 'false' if given iterable is an empty array", async function () {
-      const sortFn = (a: number | string, b: number | string) => {
-        if (a === b) {
-          return 0;
-        }
-        if (a > b) {
-          return 1;
-        }
-        return -1;
-      };
-
-      expect(await sort(sortFn, toAsync([]))).toEqual([]);
-      expect(await sort(sortFn, toAsync([3, 4, 1, 2, 5, 2]))).toEqual([
-        1, 2, 2, 3, 4, 5,
-      ]);
-      expect(await sort(sortFn, toAsync("bcdaef"))).toEqual([
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-      ]);
+    it.each([
+      [[], []],
+      [
+        [3, 4, 1, 2, 5, 2],
+        [1, 2, 2, 3, 4, 5],
+      ],
+      ["bcdaef", ["a", "b", "c", "d", "e", "f"]],
+    ])("should sort the elements", async function (iterable, result) {
+      const res = await sort(sortFn, toAsync(iterable as Iterable<any>));
+      expect(res).toEqual(result);
     });
 
     it("should be able to be used as a curried function in the pipeline", async function () {
