@@ -32,6 +32,7 @@ import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
 import uniq from "./uniq";
 import uniqBy from "./uniqBy";
+import values from "./values";
 import zip from "./zip";
 import zipWith from "./zipWith";
 import zipWithIndex from "./zipWithIndex";
@@ -71,6 +72,7 @@ export {
   toAsync,
   uniq,
   uniqBy,
+  values,
   zip,
   zipWith,
   zipWithIndex,
