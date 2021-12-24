@@ -7,13 +7,14 @@ import cycle from "./cycle";
 import difference from "./difference";
 import differenceBy from "./differenceBy";
 import drop from "./drop";
-import dropWhile from "./dropWhile";
 import dropUntil from "./dropUntil";
+import dropWhile from "./dropWhile";
 import filter from "./filter";
 import flat from "./flat";
 import flatMap from "./flatMap";
 import intersection from "./intersection";
 import intersectionBy from "./intersectionBy";
+import keys from "./keys";
 import map from "./map";
 import peek from "./peek";
 import pluck from "./pluck";
@@ -45,13 +46,14 @@ export {
   difference,
   differenceBy,
   drop,
-  dropWhile,
   dropUntil,
+  dropWhile,
   filter,
   flat,
   flatMap,
   intersection,
   intersectionBy,
+  keys,
   map,
   peek,
   pluck,
