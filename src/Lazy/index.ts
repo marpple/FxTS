@@ -9,6 +9,7 @@ import differenceBy from "./differenceBy";
 import drop from "./drop";
 import dropUntil from "./dropUntil";
 import dropWhile from "./dropWhile";
+import entries from "./entries";
 import filter from "./filter";
 import flat from "./flat";
 import flatMap from "./flatMap";
@@ -49,6 +50,7 @@ export {
   drop,
   dropUntil,
   dropWhile,
+  entries,
   filter,
   flat,
   flatMap,
