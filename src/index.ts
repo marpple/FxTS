@@ -39,6 +39,7 @@ import reduce from "./reduce";
 import size from "./size";
 import some from "./some";
 import sort from "./sort";
+import sortBy from "./sortBy";
 import sum from "./sum";
 import tap from "./tap";
 import toArray from "./toArray";
@@ -87,6 +88,7 @@ export {
   size,
   some,
   sort,
+  sortBy,
   sum,
   tap,
   toArray,
