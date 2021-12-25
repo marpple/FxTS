@@ -1,4 +1,6 @@
-import { peek, pipe, sum } from ".";
+import peek from "./Lazy/peek";
+import pipe from "./pipe";
+import sum from "./sum";
 import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
