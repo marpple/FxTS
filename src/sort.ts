@@ -6,7 +6,7 @@ import pipe1 from "./pipe1";
 import toArray from "./toArray";
 
 /**
- * Returns an array which is sorted by function `f`.
+ * Returns an array, sorted according to the comparator `f`, which should accept two values
  *
  * @example
  * ```ts
@@ -36,7 +36,7 @@ function sort<T extends Iterable<unknown> | AsyncIterable<unknown>>(
 ): (iterable: T) => ReturnValueType<T, IterableInfer<T>[]>;
 
 function sort<T extends Iterable<unknown> | AsyncIterable<unknown>>(
-  f: (a: T, b: T) => unknown,
+  f: (a: IterableInfer<T>, b: IterableInfer<T>) => unknown,
   iterable?: T,
 ):
   | IterableInfer<T>[]
