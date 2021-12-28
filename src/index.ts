@@ -1,5 +1,6 @@
 import add from "./add";
 import apply from "./apply";
+import average from "./average";
 import consume from "./consume";
 import countBy from "./countBy";
 import curry from "./curry";
@@ -47,6 +48,8 @@ import toArray from "./toArray";
 export {
   add,
   apply,
+  average,
+  average as mean,
   consume,
   countBy,
   curry,
