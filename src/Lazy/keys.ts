@@ -1,6 +1,6 @@
 /**
  *
- * Creates an array of the own enumerable property names of object.
+ * Returns an iterator of the own enumerable property names of object.
  *
  * @example
  * ```ts

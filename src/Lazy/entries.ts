@@ -4,7 +4,7 @@ type Entries<T extends Record<string, any>, K extends keyof T> = K extends any
 
 /**
  *
- * Creates an array of own enumerable string keyed-value pairs.
+ * Returns an iterator of the own enumerable string keyed-value pairs.
  *
  * @example
  * ```ts
