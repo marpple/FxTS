@@ -5,7 +5,7 @@ import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**
- * Returns the average of the given (Iterable/AsyncIterable)<number> (mean)
+ * Returns the average of the given (Iterable/AsyncIterable) (mean)
  *
  * @example
  * ```ts
