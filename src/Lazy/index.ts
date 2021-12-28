@@ -8,13 +8,15 @@ import cycle from "./cycle";
 import difference from "./difference";
 import differenceBy from "./differenceBy";
 import drop from "./drop";
-import dropWhile from "./dropWhile";
 import dropUntil from "./dropUntil";
+import dropWhile from "./dropWhile";
+import entries from "./entries";
 import filter from "./filter";
 import flat from "./flat";
 import flatMap from "./flatMap";
 import intersection from "./intersection";
 import intersectionBy from "./intersectionBy";
+import keys from "./keys";
 import map from "./map";
 import peek from "./peek";
 import pluck from "./pluck";
@@ -32,6 +34,7 @@ import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
 import uniq from "./uniq";
 import uniqBy from "./uniqBy";
+import values from "./values";
 import zip from "./zip";
 import zipWith from "./zipWith";
 import zipWithIndex from "./zipWithIndex";
@@ -47,13 +50,15 @@ export {
   difference,
   differenceBy,
   drop,
-  dropWhile,
   dropUntil,
+  dropWhile,
+  entries,
   filter,
   flat,
   flatMap,
   intersection,
   intersectionBy,
+  keys,
   map,
   peek,
   pluck,
@@ -71,6 +76,7 @@ export {
   toAsync,
   uniq,
   uniqBy,
+  values,
   zip,
   zipWith,
   zipWithIndex,
