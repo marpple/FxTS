@@ -51,7 +51,8 @@ type JuxtReturnTypes<ARGS, FS extends Arrow[]> = ARGS extends undefined
 function juxt<FS extends Arrow[]>(
   fs: [...FS] | readonly [...FS],
 ): (...args: JuxtArgs<FS>) => JuxtReturnTypes<JuxtArgs<FS>, FS> {
-  return (...args: JuxtArgs<FS>) => fs.map((f: Arrow) => f(...args)) as any;
+  return (...args: JuxtArgs<FS>) =>
+    fs.map((f: Arrow) => f(...(args as any))) as any;
 }
 
 export default juxt;
