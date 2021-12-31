@@ -26,18 +26,18 @@ function average<T extends Iterable<number> | AsyncIterable<number>>(
 ): ReturnValueType<T> {
   let size = 0;
 
-  if (isIterable(iterable)) {
+  if (isIterable<number>(iterable)) {
     return pipe(
-      iterable as Iterable<number>,
+      iterable,
       peek(() => size++),
       sum,
       (a) => (size === 0 ? NaN : a / size),
     ) as ReturnValueType<T>;
   }
 
-  if (isAsyncIterable(iterable)) {
+  if (isAsyncIterable<number>(iterable)) {
     return pipe(
-      iterable as AsyncIterable<number>,
+      iterable,
       peek(() => size++),
       sum,
       (a) => (size === 0 ? NaN : a / size),
