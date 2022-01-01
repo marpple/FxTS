@@ -40,11 +40,11 @@ function find<T extends Iterable<unknown> | AsyncIterable<unknown>>(
     return (iterable: T) =>
       find(f, iterable) as ReturnValueType<T, IterableInfer<T> | undefined>;
   }
-  if (isIterable(iterable)) {
-    return head(filter(f, iterable as Iterable<IterableInfer<T>>));
+  if (isIterable<IterableInfer<T>>(iterable)) {
+    return head(filter(f, iterable));
   }
-  if (isAsyncIterable(iterable)) {
-    return head(filter(f, iterable as AsyncIterable<IterableInfer<T>>));
+  if (isAsyncIterable<IterableInfer<T>>(iterable)) {
+    return head(filter(f, iterable));
   }
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }

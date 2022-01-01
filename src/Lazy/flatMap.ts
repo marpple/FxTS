@@ -91,14 +91,14 @@ function flatMap<
     };
   }
 
-  if (isIterable(iterable)) {
-    return flat(
-      map(f, iterable as Iterable<IterableInfer<A>>),
-    ) as IterableIterator<DeepFlat<FlatMapValue<B, A>, 1>>;
+  if (isIterable<IterableInfer<A>>(iterable)) {
+    return flat(map(f, iterable)) as IterableIterator<
+      DeepFlat<FlatMapValue<B, A>, 1>
+    >;
   }
 
-  if (isAsyncIterable(iterable)) {
-    return flat(map(f, iterable as AsyncIterable<Awaited<IterableInfer<A>>>));
+  if (isAsyncIterable<Awaited<IterableInfer<A>>>(iterable)) {
+    return flat(map(f, iterable));
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

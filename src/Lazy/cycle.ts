@@ -79,11 +79,11 @@ function cycle<T extends Iterable<unknown> | AsyncIterable<unknown>>(
 ):
   | IterableIterator<IterableInfer<T>>
   | AsyncIterableIterator<IterableInfer<T>> {
-  if (isIterable(iterable)) {
-    return sync(iterable as Iterable<IterableInfer<T>>);
+  if (isIterable<IterableInfer<T>>(iterable)) {
+    return sync(iterable);
   }
-  if (isAsyncIterable(iterable)) {
-    return async(iterable as AsyncIterable<IterableInfer<T>>);
+  if (isAsyncIterable<IterableInfer<T>>(iterable)) {
+    return async(iterable);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

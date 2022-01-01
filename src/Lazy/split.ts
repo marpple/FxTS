@@ -120,12 +120,12 @@ function split<A extends Iterable<string> | AsyncIterable<string>>(
     };
   }
 
-  if (isIterable(iterable)) {
-    return sync(sep, iterable as Iterable<string>);
+  if (isIterable<string>(iterable)) {
+    return sync(sep, iterable);
   }
 
-  if (isAsyncIterable(iterable)) {
-    return async(sep, iterable as AsyncIterable<string>);
+  if (isAsyncIterable<string>(iterable)) {
+    return async(sep, iterable);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

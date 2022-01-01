@@ -139,12 +139,12 @@ function dropWhile<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
     };
   }
 
-  if (isIterable(iterable)) {
-    return sync(f, iterable as Iterable<IterableInfer<A>>);
+  if (isIterable<IterableInfer<A>>(iterable)) {
+    return sync(f, iterable);
   }
 
-  if (isAsyncIterable(iterable)) {
-    return async(f, iterable as AsyncIterable<IterableInfer<A>>);
+  if (isAsyncIterable<IterableInfer<A>>(iterable)) {
+    return async(f, iterable);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

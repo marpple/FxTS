@@ -67,7 +67,7 @@ function indexBy<
   }
 
   const obj = {} as { [K in B]: IterableInfer<A> };
-  if (isIterable(iterable)) {
+  if (isIterable<IterableInfer<A>>(iterable)) {
     return reduce(
       (group, a) => {
         const key = f(a);
@@ -77,18 +77,18 @@ function indexBy<
         return (group[key] = a), group;
       },
       obj,
-      iterable as Iterable<IterableInfer<A>>,
+      iterable,
     );
   }
 
-  if (isAsyncIterable(iterable)) {
+  if (isAsyncIterable<IterableInfer<A>>(iterable)) {
     return reduce(
       async (group, a) => {
         const key = await f(a);
         return (group[key] = a), group;
       },
       obj,
-      iterable as AsyncIterable<IterableInfer<A>>,
+      iterable,
     );
   }
 

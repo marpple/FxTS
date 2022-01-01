@@ -80,18 +80,18 @@ function peek<T extends Iterable<unknown> | AsyncIterable<unknown>>(
     };
   }
 
-  if (isIterable(iterable)) {
-    return map(
-      tap(f),
-      iterable as Iterable<Awaited<IterableInfer<T>>>,
-    ) as ReturnIterableIteratorType<T, Awaited<IterableInfer<T>>>;
+  if (isIterable<Awaited<IterableInfer<T>>>(iterable)) {
+    return map(tap(f), iterable) as ReturnIterableIteratorType<
+      T,
+      Awaited<IterableInfer<T>>
+    >;
   }
 
-  if (isAsyncIterable(iterable)) {
-    return map(
-      tap(f),
-      iterable as AsyncIterable<Awaited<IterableInfer<T>>>,
-    ) as ReturnIterableIteratorType<T, Awaited<IterableInfer<T>>>;
+  if (isAsyncIterable<Awaited<IterableInfer<T>>>(iterable)) {
+    return map(tap(f), iterable) as ReturnIterableIteratorType<
+      T,
+      Awaited<IterableInfer<T>>
+    >;
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

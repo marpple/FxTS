@@ -90,18 +90,12 @@ function reject<
     };
   }
 
-  if (isIterable(iterable)) {
-    return filter(
-      (a) => pipe1(f(a), not),
-      iterable as Iterable<IterableInfer<A>>,
-    );
+  if (isIterable<IterableInfer<A>>(iterable)) {
+    return filter((a) => pipe1(f(a), not), iterable);
   }
 
-  if (isAsyncIterable(iterable)) {
-    return filter(
-      (a) => pipe1(f(a), not),
-      iterable as AsyncIterable<IterableInfer<A>>,
-    );
+  if (isAsyncIterable<IterableInfer<A>>(iterable)) {
+    return filter((a) => pipe1(f(a), not), iterable);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

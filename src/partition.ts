@@ -66,22 +66,19 @@ function partition<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
     };
   }
 
-  if (isIterable(iterable)) {
+  if (isIterable<IterableInfer<A>>(iterable)) {
     const group = groupBy((a) => {
-      const key = f(a as IterableInfer<A>);
+      const key = f(a);
       if (key instanceof Promise) {
         throw new AsyncFunctionException();
       }
       return `${Boolean(key)}`;
-    }, iterable as Iterable<IterableInfer<A>>);
+    }, iterable);
     return [group["true"] || [], group["false"] || []];
   }
 
-  if (isAsyncIterable(iterable)) {
-    const group = groupBy(
-      async (a) => `${Boolean(await f(a as IterableInfer<A>))}`,
-      iterable as AsyncIterable<IterableInfer<A>>,
-    );
+  if (isAsyncIterable<IterableInfer<A>>(iterable)) {
+    const group = groupBy(async (a) => `${Boolean(await f(a))}`, iterable);
     return group.then((group) => [group["true"] || [], group["false"] || []]);
   }
 

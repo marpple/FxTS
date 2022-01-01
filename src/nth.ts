@@ -78,11 +78,11 @@ function nth<T extends Iterable<unknown> | AsyncIterable<unknown>>(
     throw new RangeError("'index' must be over 0");
   }
 
-  if (isIterable(iterable)) {
-    return sync(index, iterable as Iterable<IterableInfer<T>>);
+  if (isIterable<IterableInfer<T>>(iterable)) {
+    return sync(index, iterable);
   }
-  if (isAsyncIterable(iterable)) {
-    return async(index, iterable as AsyncIterable<IterableInfer<T>>);
+  if (isAsyncIterable<IterableInfer<T>>(iterable)) {
+    return async(index, iterable);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

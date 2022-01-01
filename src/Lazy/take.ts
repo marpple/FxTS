@@ -92,12 +92,12 @@ function take<A extends Iterable<unknown> | AsyncIterable<unknown>>(
     };
   }
 
-  if (isIterable(iterable)) {
-    return sync(l, iterable) as IterableIterator<IterableInfer<A>>;
+  if (isIterable<IterableInfer<A>>(iterable)) {
+    return sync(l, iterable);
   }
 
-  if (isAsyncIterable(iterable)) {
-    return async(l, iterable) as AsyncIterableIterator<IterableInfer<A>>;
+  if (isAsyncIterable<IterableInfer<A>>(iterable)) {
+    return async(l, iterable);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

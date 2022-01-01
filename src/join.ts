@@ -67,11 +67,11 @@ function join<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   if (Array.isArray(iterable) && iterable.length === 0) return "";
 
   if (isIterable(iterable)) {
-    return sync(sep, iterable) as string;
+    return sync(sep, iterable);
   }
 
   if (isAsyncIterable(iterable)) {
-    return async(sep, iterable) as Promise<string>;
+    return async(sep, iterable);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
