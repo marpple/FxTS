@@ -4,6 +4,7 @@ import IterableInfer from "./types/IterableInfer";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import { AsyncFunctionException } from "./_internal/error";
 import reduce from "./reduce";
+import iterableInfer from "./types/IterableInfer";
 
 /**
  * Splits Iterable/AsyncIterable into sets, grouped by the result of running each value through `f`.
@@ -74,7 +75,7 @@ function groupBy<
   }
 
   const obj = {} as { [K in B]: IterableInfer<A>[] };
-  if (isIterable(iterable)) {
+  if (isIterable<IterableInfer<A>>(iterable)) {
     return reduce(
       (group, a) => {
         const key = f(a);
@@ -84,18 +85,18 @@ function groupBy<
         return (group[key] || (group[key] = [])).push(a), group;
       },
       obj,
-      iterable as Iterable<IterableInfer<A>>,
+      iterable,
     );
   }
 
-  if (isAsyncIterable(iterable)) {
+  if (isAsyncIterable<iterableInfer<A>>(iterable)) {
     return reduce(
       async (group, a) => {
         const key = await f(a);
         return (group[key] || (group[key] = [])).push(a), group;
       },
       obj,
-      iterable as AsyncIterable<IterableInfer<A>>,
+      iterable,
     );
   }
 

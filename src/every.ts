@@ -54,9 +54,9 @@ function every<
     };
   }
 
-  if (isIterable(iterable)) {
+  if (isIterable<IterableInfer<A>>(iterable)) {
     return pipe(
-      map(f, iterable as Iterable<IterableInfer<A>>),
+      map(f, iterable),
       takeUntil(not),
       reduce((a, b) => a && b),
       (a) => a ?? true,
@@ -64,9 +64,9 @@ function every<
     );
   }
 
-  if (isAsyncIterable(iterable)) {
+  if (isAsyncIterable<IterableInfer<A>>(iterable)) {
     return pipe(
-      map(f, iterable as AsyncIterable<IterableInfer<A>>),
+      map(f, iterable),
       takeUntil(not),
       reduce((a, b) => a && b),
       (a) => a ?? true,

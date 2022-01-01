@@ -125,12 +125,12 @@ function drop<A extends Iterable<unknown> | AsyncIterable<unknown>>(
     throw new TypeError("'length' must be greater than 1");
   }
 
-  if (isIterable(iterable)) {
-    return sync(length, iterable) as IterableIterator<A>;
+  if (isIterable<A>(iterable)) {
+    return sync(length, iterable);
   }
 
-  if (isAsyncIterable(iterable)) {
-    return async(length, iterable) as AsyncIterableIterator<A>;
+  if (isAsyncIterable<A>(iterable)) {
+    return async(length, iterable);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

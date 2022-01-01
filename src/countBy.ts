@@ -74,7 +74,7 @@ function countBy<
 
   const obj = {} as { [K in B]: number };
 
-  if (isIterable(iterable)) {
+  if (isIterable<IterableInfer<A>>(iterable)) {
     return reduce(
       (group, a) => {
         const key = f(a);
@@ -84,18 +84,18 @@ function countBy<
         return incSel(group, key);
       },
       obj,
-      iterable as Iterable<IterableInfer<A>>,
+      iterable,
     );
   }
 
-  if (isAsyncIterable(iterable)) {
+  if (isAsyncIterable<IterableInfer<A>>(iterable)) {
     return reduce(
       async (group, a) => {
         const key = await f(a);
         return incSel(group, key);
       },
       obj,
-      iterable as AsyncIterable<IterableInfer<A>>,
+      iterable,
     );
   }
 

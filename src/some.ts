@@ -74,18 +74,18 @@ function some<
     };
   }
 
-  if (isIterable(iterable)) {
+  if (isIterable<IterableInfer<A>>(iterable)) {
     return pipe(
-      map(f, iterable as Iterable<IterableInfer<A>>),
+      map(f, iterable),
       takeUntil(identity),
       reduce((a, b) => a || b),
       Boolean,
     );
   }
 
-  if (isAsyncIterable(iterable)) {
+  if (isAsyncIterable<IterableInfer<A>>(iterable)) {
     return pipe(
-      map(f, iterable as AsyncIterable<IterableInfer<A>>),
+      map(f, iterable),
       takeUntil(identity),
       reduce((a, b) => a || b),
       Boolean,

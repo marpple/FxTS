@@ -53,9 +53,9 @@ function min<A extends Iterable<number> | AsyncIterable<number>>(
 
 function min(iterable: Iterable<number> | AsyncIterable<number>) {
   if (isIterable(iterable)) {
-    return sync(iterable as Iterable<number>);
+    return sync(iterable);
   } else if (isAsyncIterable(iterable)) {
-    return async(iterable as AsyncIterable<number>);
+    return async(iterable);
   }
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
