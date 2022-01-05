@@ -36,6 +36,7 @@
     "prettier:fix": "npx prettier --config .prettierrc --write .",
     "release": "npx np --no-tests --no-publish --message 'v%s'",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "webpack": "webpack"
   },
   "repository": {
