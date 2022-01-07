@@ -31,9 +31,7 @@ function tap<T, U>(
   | Promise<T>
   | ((v: T) => U extends Promise<any> ? Promise<Awaited<T>> : T) {
   if (v === undefined) {
-    return (v: T) =>
-      (v instanceof Promise ? v.then(f) : f(v as Awaited<T>),
-      v) as U extends Promise<any> ? Promise<Awaited<T>> : T;
+    return (v: T) => tap(f, v);
   }
 
   const res = v instanceof Promise ? v.then(f) : f(v as Awaited<T>);
