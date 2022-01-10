@@ -104,10 +104,9 @@ function async<A, B>(
  *  dropUntil((a) => a > 3),
  *  toArray,
  * ); // [5, 1, 2]
- *
+ * ```
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/toArray | toArray}
- * ```
  */
 function dropUntil<A, B = unknown>(
   f: (a: A) => B,

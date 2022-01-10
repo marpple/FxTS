@@ -108,9 +108,9 @@ function async<A, B>(
  *  toArray,
  * ); // [3, 4, 5]
  *
+ * ```
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/toArray | toArray}
- * ```
  */
 function dropWhile<A, B = unknown>(
   f: (a: A) => B,
