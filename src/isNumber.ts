@@ -3,8 +3,8 @@
  *
  * @example
  * ```ts
- * isNumber("a"); // true
- * isNumber(2); // false
+ * isNumber(2); // true
+ * isNumber("a"); // false
  * ```
  */
 function isNumber(n: unknown): n is number {

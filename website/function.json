@@ -62,6 +62,7 @@
     "isArray",
     "isEmpty",
     "isNil",
+    "isNumber",
     "isObject",
     "isString",
     "join",
