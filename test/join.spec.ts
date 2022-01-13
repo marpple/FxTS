@@ -1,7 +1,14 @@
+import { asyncEmpty, empty } from "../src/_internal/utils";
 import { filter, join, map, pipe, toAsync } from "../src/index";
 
 describe("join", function () {
   describe("sync", function () {
+    it("should return an empty string if there are no iterable items", function () {
+      expect(join(", ", "")).toEqual("");
+      expect(join(", ", [])).toEqual("");
+      expect(join(", ", empty())).toEqual("");
+    });
+
     it("should be joined with separator", function () {
       expect(join(", ", "hello")).toEqual("h, e, l, l, o");
     });
@@ -26,6 +33,10 @@ describe("join", function () {
   });
 
   describe("async", function () {
+    it("should return an empty string if there are no iterable items", async function () {
+      expect(await join(", ", asyncEmpty())).toEqual("");
+    });
+
     it("should be discarded elements by length", async function () {
       const res = await join("-", toAsync([1, 2, 3, 4, 5]));
       expect(res).toEqual("1-2-3-4-5");
