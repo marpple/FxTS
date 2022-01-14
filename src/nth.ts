@@ -28,11 +28,11 @@ async function async<T>(
  *
  * @example
  * ```ts
- * nth(2, [1,2,3,4]); // 1
+ * nth(2, [1,2,3,4]); // 3
  * nth(5, [1,2,3,4]); // undefined
  * nth(2, ['name', 'gender', 'age']); // 'age'
  * nth(3, ['name', 'gender', 'age']); // undefined
- * nth(2, 'abcdefg'); // 'b'
+ * nth(2, 'abcdefg'); // 'c'
  * nth(10, 'abcdefg'); // undefined
  * ```
  */
