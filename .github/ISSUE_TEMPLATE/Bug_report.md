@@ -31,7 +31,7 @@ assignees: ""
 
 ---
 
-### Version Infomation
+### Version Information
 
 <!-- Please let me know your environment -->
 
