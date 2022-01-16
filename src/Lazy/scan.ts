@@ -90,7 +90,7 @@ function asyncWithoutSeed<A, B>(
  * // with pipe
  * pipe(
  *   [1, 2, 3, 4],
- *   scan,
+ *   scan((acc, cur) => acc * cur),
  *   toArray,
  * ); // [1, 2, 6, 24]
  * ```
