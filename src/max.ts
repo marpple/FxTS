@@ -43,7 +43,7 @@ async function async(iterable: AsyncIterable<number>) {
  * max([1, 3, 5]); // 5;
  * max([1, NaN, 2]); // NaN;
  * max([1, Infinity, 2]); // Infinity;
- * max([]); // 0
+ * max([]); // -Infinity
  * ```
  */
 function max<A extends Iterable<number> | AsyncIterable<number>>(

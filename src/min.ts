@@ -44,7 +44,7 @@ async function async(iterable: AsyncIterable<number>) {
  * min([1, NaN, 2]); // NaN;
  * min([1, Infinity, 3]); // 1;
  * min([1, -Infinity, 3]); // -Infinity;
- * min([]); // 0
+ * min([]); // Infinity
  * ```
  */
 function min<A extends Iterable<number> | AsyncIterable<number>>(
