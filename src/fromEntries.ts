@@ -1,8 +1,9 @@
 import IterableInfer from "./types/IterableInfer";
+import Key from "./types/Key";
 import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
-async function async<T extends [string, any]>(
+async function async<T extends [Key, any]>(
   iterable: AsyncIterable<T>,
 ): Promise<{
   [K in T as K[0]]: K[1];
@@ -38,7 +39,7 @@ async function async<T extends [string, any]>(
  */
 
 function fromEntries<
-  U extends [string, any] | readonly [string, any],
+  U extends [Key, any] | readonly [Key, any],
   T extends Iterable<U> | AsyncIterable<U>,
 >(
   iterable: T,
@@ -48,7 +49,7 @@ function fromEntries<
     [K in IterableInfer<T> as K[0]]: K[1];
   }
 >;
-function fromEntries<T extends [string, any]>(
+function fromEntries<T extends [Key, any]>(
   iter: Iterable<T> | AsyncIterable<T>,
 ) {
   if (isAsyncIterable(iter)) {
