@@ -10,6 +10,7 @@ import every from "./every";
 import evolve from "./evolve";
 import find from "./find";
 import findIndex from "./findIndex";
+import fromEntries from "./fromEntries";
 import groupBy from "./groupBy";
 import head from "./head";
 import identity from "./identity";
@@ -59,6 +60,7 @@ export {
   evolve,
   find,
   findIndex,
+  fromEntries,
   groupBy,
   head,
   head as first,
