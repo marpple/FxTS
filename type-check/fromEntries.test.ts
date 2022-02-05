@@ -1,5 +1,5 @@
 import * as Test from "../src/types/Test";
-import { fromEntries, entries, pipe } from "../src";
+import { fromEntries, entries, pipe, toAsync } from "../src";
 
 const { checks, check } = Test;
 
@@ -24,8 +24,10 @@ const arr = [
 
 const res1 = fromEntries(arr);
 const res2 = pipe(obj, entries, fromEntries);
+const res3 = pipe(obj, entries, toAsync, fromEntries);
 
 checks([
   check<typeof res1, typeof obj, Test.Pass>(),
-  check<typeof res2, typeof res1, Test.Pass>(),
+  check<typeof res2, typeof obj, Test.Pass>(),
+  check<typeof res3, Promise<typeof obj>, Test.Pass>(),
 ]);
