@@ -1,19 +1,8 @@
+import reduce from "./reduce";
 import IterableInfer from "./types/IterableInfer";
 import Key from "./types/Key";
 import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
-
-async function async<T extends [Key, any]>(
-  iterable: AsyncIterable<T>,
-): Promise<{
-  [K in T as K[0]]: K[1];
-}> {
-  const a = {} as any;
-  for await (const i of iterable) {
-    a[i[0]] = i[1];
-  }
-  return a;
-}
 
 /**
  * Returns an object from string keyed-value pairs.
@@ -52,17 +41,18 @@ function fromEntries<
 function fromEntries<T extends [Key, any]>(
   iter: Iterable<T> | AsyncIterable<T>,
 ) {
-  if (isAsyncIterable(iter)) {
-    return async(iter);
-  } else if (isIterable(iter)) {
-    return [...iter].reduce((obj, [key, val]) => {
-      obj[key] = val;
-      return obj;
-    }, {} as any);
-  }
-  return {} as {
-    [K in T as K[0]]: K[1];
+  const obj: Record<Key, any> = {};
+  const reducer = (obj: Record<Key, any>, [key, val]: T): Record<Key, any> => {
+    obj[key] = val;
+    return obj;
   };
+  if (isAsyncIterable(iter)) {
+    return reduce(reducer, obj, iter);
+  } else if (isIterable(iter)) {
+    return reduce(reducer, obj, iter);
+  }
+
+  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
 }
 
 export default fromEntries;
