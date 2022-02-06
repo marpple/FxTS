@@ -24,10 +24,14 @@ const arr = [
 
 const res1 = fromEntries(arr);
 const res2 = pipe(obj, entries, fromEntries);
-const res3 = pipe(obj, entries, toAsync, fromEntries);
+const res3 = pipe(obj, entries, (iter) => fromEntries(iter));
+const res4 = pipe(obj, entries, toAsync, fromEntries);
+const res5 = pipe(obj, entries, toAsync, (iter) => fromEntries(iter));
 
 checks([
   check<typeof res1, typeof obj, Test.Pass>(),
   check<typeof res2, typeof obj, Test.Pass>(),
-  check<typeof res3, Promise<typeof obj>, Test.Pass>(),
+  check<typeof res3, typeof obj, Test.Pass>(),
+  check<typeof res4, Promise<typeof obj>, Test.Pass>(),
+  check<typeof res5, Promise<typeof obj>, Test.Pass>(),
 ]);
