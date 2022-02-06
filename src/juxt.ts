@@ -30,7 +30,7 @@ type JuxtReturnTypes<ARGS, FS extends Arrow[]> = ARGS extends undefined
  *
  * @example
  * ```ts
- * const range = juxt([Math.min, Math.max], [1, 2, 3, 4]); // [1, 4]
+ * const range = juxt([Math.min, Math.max])(1, 2, 3, 4); // [1, 4]
  *
  * // with pipe
  * const entries = (obj: { a: number; b: number }) =>
