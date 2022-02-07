@@ -54,6 +54,7 @@
     "evolve",
     "find",
     "findIndex",
+    "fromEntries",
     "groupBy",
     "head",
     "identity",
