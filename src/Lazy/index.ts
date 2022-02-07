@@ -8,6 +8,7 @@ import cycle from "./cycle";
 import difference from "./difference";
 import differenceBy from "./differenceBy";
 import drop from "./drop";
+import dropRight from "./dropRight";
 import dropUntil from "./dropUntil";
 import dropWhile from "./dropWhile";
 import entries from "./entries";
@@ -50,6 +51,7 @@ export {
   difference,
   differenceBy,
   drop,
+  dropRight,
   dropUntil,
   dropWhile,
   entries,

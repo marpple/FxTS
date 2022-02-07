@@ -8,6 +8,7 @@
     "concurrent",
     "cycle",
     "drop",
+    "dropRight",
     "difference",
     "differenceBy",
     "dropUntil",
