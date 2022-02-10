@@ -4,7 +4,12 @@ import pipe1 from "../pipe1";
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import TruthyTypesOf from "../types/TrutyTypesOf";
-import { Reject, Resolve } from "../types/Utils";
+import {
+  Reject,
+  Resolve,
+  UniversalIterable,
+  UniversalIterator,
+} from "../types/Utils";
 import { AsyncFunctionException } from "../_internal/error";
 
 async function* asyncSequential<A>(
@@ -243,37 +248,29 @@ function filter<A, B = unknown>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function filter<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function filter<A extends UniversalIterable<unknown>>(
   f: BooleanConstructor,
 ): (
   iterable: A,
 ) => ReturnIterableIteratorType<A, TruthyTypesOf<IterableInfer<A>>>;
 
 function filter<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  A extends UniversalIterable<unknown>,
   B extends IterableInfer<A>,
 >(
   f: (a: IterableInfer<A>) => a is B,
 ): (iterable: A) => ReturnIterableIteratorType<A, B>;
 
-function filter<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B = unknown,
->(
+function filter<A extends UniversalIterable<unknown>, B = unknown>(
   f: (a: IterableInfer<A>) => B,
 ): (iterable: A) => ReturnIterableIteratorType<A, IterableInfer<A>>;
 
-function filter<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B = unknown,
->(
+function filter<A extends UniversalIterable<unknown>, B = unknown>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ):
-  | IterableIterator<IterableInfer<A>>
-  | IterableIterator<TruthyTypesOf<IterableInfer<A>>>
-  | AsyncIterableIterator<IterableInfer<A>>
-  | AsyncIterableIterator<TruthyTypesOf<IterableInfer<A>>>
+  | UniversalIterator<IterableInfer<A>>
+  | UniversalIterator<TruthyTypesOf<IterableInfer<A>>>
   | ((iterable: A) => ReturnIterableIteratorType<A, IterableInfer<A>>)
   | ((
       iterable: A,

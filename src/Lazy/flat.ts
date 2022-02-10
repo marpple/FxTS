@@ -4,7 +4,7 @@ import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import DeepFlat from "../types/DeepFlat";
 import { empty, isAsyncIterable, isIterable } from "../_internal/utils";
-import { Reject, Resolve } from "../types/Utils";
+import { Reject, Resolve, UniversalIterable } from "../types/Utils";
 import append from "./append";
 import concat from "./concat";
 
@@ -216,14 +216,14 @@ function async<A>(
  */
 // prettier-ignore
 function flat<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  A extends UniversalIterable<unknown>,
   B extends number = 1
 >(
   iterator: A,
   depth?: B
 ): ReturnIterableIteratorType<A, DeepFlat<IterableInfer<A>, B>>;
 
-function flat<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function flat<A extends UniversalIterable<unknown>>(
   iterable: Iterable<A> | AsyncIterable<A>,
   depth = 1,
 ) {

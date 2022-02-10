@@ -1,6 +1,7 @@
 import add from "./add";
 import reduce from "./reduce";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**
@@ -14,13 +15,9 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
  * await sum(toAsync(['a', 'b', 'c'])); // 'abc'
  * ```
  */
-function sum<
-  A extends
-    | Iterable<number>
-    | AsyncIterable<number>
-    | Iterable<string>
-    | AsyncIterable<string>,
->(iterable: A): ReturnValueType<A> {
+function sum<A extends UniversalIterable<number> | UniversalIterable<string>>(
+  iterable: A,
+): ReturnValueType<A> {
   if (isIterable(iterable)) {
     return reduce(add, iterable) as ReturnValueType<A>;
   }

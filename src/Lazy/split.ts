@@ -1,4 +1,5 @@
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 
@@ -100,16 +101,15 @@ function split(
   iterable: AsyncIterable<string>,
 ): AsyncIterableIterator<string>;
 
-function split<A extends Iterable<string> | AsyncIterable<string>>(
+function split<A extends UniversalIterable<string>>(
   sep: string,
 ): (iterable: A) => ReturnIterableIteratorType<A, string>;
 
-function split<A extends Iterable<string> | AsyncIterable<string>>(
+function split<A extends UniversalIterable<string>>(
   sep: string,
   iterable?: A,
 ):
-  | IterableIterator<string>
-  | AsyncIterableIterator<string>
+  | UniversalIterator<string>
   | ((iterable: A) => ReturnIterableIteratorType<A, string>) {
   if (iterable === undefined) {
     return (iterable: A): ReturnIterableIteratorType<A, string> => {

@@ -1,5 +1,6 @@
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 
@@ -70,15 +71,13 @@ function async<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<T> {
  * ); // [1,2,3,4,1]
  * ```
  */
-function cycle<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function cycle<A extends UniversalIterable<unknown>>(
   iter: A,
 ): ReturnIterableIteratorType<A>;
 
-function cycle<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function cycle<T extends UniversalIterable<unknown>>(
   iterable: T,
-):
-  | IterableIterator<IterableInfer<T>>
-  | AsyncIterableIterator<IterableInfer<T>> {
+): UniversalIterator<IterableInfer<T>> {
   if (isIterable<IterableInfer<T>>(iterable)) {
     return sync(iterable);
   }

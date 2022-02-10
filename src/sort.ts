@@ -4,6 +4,7 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
 import isArray from "./isArray";
 import pipe1 from "./pipe1";
 import toArray from "./toArray";
+import { UniversalIterable } from "./types/Utils";
 
 /**
  * Returns an array, sorted according to the comparator `f`, which should accept two values
@@ -31,11 +32,11 @@ function sort<T>(
   iterable: AsyncIterable<T>,
 ): Promise<T[]>;
 
-function sort<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function sort<T extends UniversalIterable<unknown>>(
   f: (a: IterableInfer<T>, b: IterableInfer<T>) => unknown,
 ): (iterable: T) => ReturnValueType<T, IterableInfer<T>[]>;
 
-function sort<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function sort<T extends UniversalIterable<unknown>>(
   f: (a: IterableInfer<T>, b: IterableInfer<T>) => unknown,
   iterable?: T,
 ):

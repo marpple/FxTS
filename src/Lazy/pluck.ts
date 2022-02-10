@@ -1,5 +1,6 @@
 import map from "./map";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 /**
  * Returns Iterable/AsyncIterable by plucking the same named property off all objects in Iterable/AsyncIterable supplied.
@@ -57,10 +58,9 @@ function pluck<O extends object, K extends keyof O>(
 
 function pluck<O extends object, K extends keyof O>(
   key: K,
-  iterable?: Iterable<O> | AsyncIterable<O>,
+  iterable?: UniversalIterable<O>,
 ):
-  | IterableIterator<O[K]>
-  | AsyncIterableIterator<O[K]>
+  | UniversalIterator<O[K]>
   | ((iterable: Iterable<O>) => IterableIterator<O[K]>)
   | ((iterable: AsyncIterable<O>) => AsyncIterableIterator<O[K]>) {
   if (iterable === undefined) {

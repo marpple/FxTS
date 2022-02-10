@@ -1,4 +1,5 @@
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 function sync(iterable: Iterable<number>) {
@@ -46,11 +47,11 @@ async function async(iterable: AsyncIterable<number>) {
  * max([]); // -Infinity
  * ```
  */
-function max<A extends Iterable<number> | AsyncIterable<number>>(
+function max<A extends UniversalIterable<number>>(
   iterable: A,
 ): ReturnValueType<A, number>;
 
-function max(iterable: Iterable<number> | AsyncIterable<number>) {
+function max(iterable: UniversalIterable<number>) {
   if (isIterable(iterable)) {
     return sync(iterable);
   } else if (isAsyncIterable(iterable)) {

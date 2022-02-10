@@ -1,3 +1,4 @@
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import map from "./map";
 import zip from "./zip";
@@ -40,9 +41,9 @@ function zipWith<A, B, C>(
 
 function zipWith<A, B, C>(
   f: (a: A, b: B) => C,
-  iterable1: Iterable<A> | AsyncIterable<A>,
-  iterable2: Iterable<B> | AsyncIterable<B>,
-): IterableIterator<C> | AsyncIterableIterator<C> {
+  iterable1: UniversalIterable<A>,
+  iterable2: UniversalIterable<B>,
+): UniversalIterator<C> {
   if (isIterable(iterable1) && isIterable(iterable2)) {
     return map(([a, b]) => f(a, b), zip(iterable1, iterable2));
   }

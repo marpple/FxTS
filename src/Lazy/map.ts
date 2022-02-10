@@ -3,6 +3,7 @@ import Awaited from "../types/Awaited";
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { AsyncFunctionException } from "../_internal/error";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 function sync<A, B>(
   f: (a: A) => B,
@@ -115,17 +116,14 @@ function map<A, B>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<Awaited<B>>;
 
-function map<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function map<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
 ): (iterable: A) => ReturnIterableIteratorType<A, B>;
 
-function map<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function map<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
-):
-  | IterableIterator<B>
-  | AsyncIterableIterator<B>
-  | ((iterable: A) => ReturnIterableIteratorType<A, B>) {
+): UniversalIterator<B> | ((iterable: A) => ReturnIterableIteratorType<A, B>) {
   if (iterable === undefined) {
     return (iterable: A): ReturnIterableIteratorType<A, B> => {
       return map(f, iterable as any) as ReturnIterableIteratorType<A, B>;

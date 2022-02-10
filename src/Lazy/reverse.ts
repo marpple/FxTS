@@ -4,6 +4,7 @@ import isString from "../isString";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import concurrent, { isConcurrent } from "./concurrent";
+import { UniversalIterable } from "../types/Utils";
 
 function* stringReverse(str: string) {
   const arr = Array.from(str);
@@ -85,13 +86,11 @@ function async<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<T> {
  *
  * see {@link https://fxts.dev/docs/pipe | pipe} {@link https://fxts.dev/docs/toArray | toArray}
  */
-function reverse<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function reverse<T extends UniversalIterable<unknown>>(
   iterable: T,
 ): ReturnIterableIteratorType<T>;
 
-function reverse<T extends Iterable<unknown> | AsyncIterable<unknown>>(
-  iterable: T,
-) {
+function reverse<T extends UniversalIterable<unknown>>(iterable: T) {
   if (isArray(iterable)) {
     return arrayReverse(iterable);
   }

@@ -3,6 +3,7 @@ import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { AsyncFunctionException } from "../_internal/error";
 import concurrent, { isConcurrent } from "./concurrent";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 function* sync<A, B>(f: (a: A) => B, iterable: Iterable<A>) {
   for (const item of iterable) {
@@ -129,16 +130,15 @@ function takeUntil<A, B>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function takeUntil<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function takeUntil<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
 ): (iterable: A) => ReturnIterableIteratorType<A>;
 
-function takeUntil<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function takeUntil<A extends UniversalIterable<unknown>, B>(
   f: (a: A) => B,
   iterable?: Iterable<A> | AsyncIterable<A>,
 ):
-  | IterableIterator<IterableInfer<A>>
-  | AsyncIterableIterator<IterableInfer<A>>
+  | UniversalIterator<IterableInfer<A>>
   | ((iterable: A) => ReturnIterableIteratorType<A>) {
   if (iterable === undefined) {
     return (iterable: A) => {

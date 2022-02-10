@@ -4,6 +4,7 @@ import IterableInfer from "./types/IterableInfer";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import reduce from "./reduce";
 import { AsyncFunctionException } from "./_internal/error";
+import { UniversalIterable } from "./types/Utils";
 
 /**
  * Given `f` that generates a key,
@@ -38,17 +39,11 @@ function indexBy<A, B extends Key>(
   iterable: AsyncIterable<A>,
 ): Promise<{ [K in B]: A }>;
 
-function indexBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Key,
->(
+function indexBy<A extends UniversalIterable<unknown>, B extends Key>(
   f: (a: IterableInfer<A>) => B | Promise<B>,
 ): (iterable: A) => ReturnValueType<A, { [K in B]: IterableInfer<A> }>;
 
-function indexBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Key,
->(
+function indexBy<A extends UniversalIterable<unknown>, B extends Key>(
   f: (a: IterableInfer<A>) => B | Promise<B>,
   iterable?: A,
 ):

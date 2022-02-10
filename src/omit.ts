@@ -1,6 +1,7 @@
 import IterableInfer from "./types/IterableInfer";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import toArray from "./toArray";
+import { UniversalIterable } from "./types/Utils";
 
 function inner<T>(obj: T, keys: Set<keyof T>) {
   return Object.fromEntries(
@@ -74,10 +75,7 @@ function omit<T extends object, U extends AsyncIterable<keyof T>>(
   iterable: U,
 ): (obj: T) => Promise<Omit<T, IterableInfer<U>>>;
 
-function omit<
-  T extends object,
-  U extends AsyncIterable<keyof T> | Iterable<keyof T>,
->(
+function omit<T extends object, U extends UniversalIterable<keyof T>>(
   iterable: U,
   obj?: T,
 ):

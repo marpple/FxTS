@@ -1,5 +1,6 @@
 import isNumber from "../isNumber";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable } from "../types/Utils";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 
@@ -55,7 +56,7 @@ function async<T>(
   };
 }
 
-function _slice<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function _slice<T extends UniversalIterable<unknown>>(
   start: number,
   end: number,
   iterable: T,
@@ -134,16 +135,16 @@ function slice<T>(
   iterable: AsyncIterable<T>,
 ): AsyncIterableIterator<T>;
 
-function slice<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function slice<A extends UniversalIterable<unknown>>(
   start: number,
 ): (iterable: A) => ReturnIterableIteratorType<A>;
 
-function slice<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function slice<A extends UniversalIterable<unknown>>(
   start: number,
   end: number,
 ): (iterable: A) => ReturnIterableIteratorType<A>;
 
-function slice<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function slice<T extends UniversalIterable<unknown>>(
   start: number | T,
   end?: number | T,
   iterable?: T,

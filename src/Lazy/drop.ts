@@ -1,4 +1,5 @@
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 
@@ -104,17 +105,14 @@ function drop<A>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function drop<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function drop<A extends UniversalIterable<unknown>>(
   length: number,
 ): (iterable: A) => ReturnIterableIteratorType<A>;
 
-function drop<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function drop<A extends UniversalIterable<unknown>>(
   length: number,
   iterable?: A,
-):
-  | IterableIterator<A>
-  | AsyncIterableIterator<A>
-  | ((iterable: A) => ReturnIterableIteratorType<A>) {
+): UniversalIterator<A> | ((iterable: A) => ReturnIterableIteratorType<A>) {
   if (iterable === undefined) {
     return (iterable: A): ReturnIterableIteratorType<A> => {
       return drop(length, iterable as any) as ReturnIterableIteratorType<A>;

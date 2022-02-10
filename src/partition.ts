@@ -3,6 +3,7 @@ import ReturnPartitionType from "./types/ReturnPartitionType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import groupBy from "./groupBy";
 import { AsyncFunctionException } from "./_internal/error";
+import { UniversalIterable } from "./types/Utils";
 
 /**
  * Split Iterable/AsyncIterable into two arrays:
@@ -49,11 +50,11 @@ function partition<A, B>(
   iterable: AsyncIterable<A>,
 ): Promise<[A[], A[]]>;
 
-function partition<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function partition<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
 ): (iterable: A) => ReturnPartitionType<A>;
 
-function partition<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function partition<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ):

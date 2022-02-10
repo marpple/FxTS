@@ -1,5 +1,6 @@
 import identity from "../identity";
 import IterableInfer from "../types/IterableInfer";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import intersectionBy from "./intersectionBy";
 
@@ -34,8 +35,8 @@ function intersection<T>(
 ): AsyncIterableIterator<T>;
 
 function intersection<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Iterable<unknown> | AsyncIterable<unknown>,
+  A extends UniversalIterable<unknown>,
+  B extends UniversalIterable<unknown>,
 >(
   iterable1: A,
 ): (
@@ -47,14 +48,11 @@ function intersection<
   : IterableIterator<IterableInfer<B>>;
 
 function intersection<T>(
-  iterable1: Iterable<T> | AsyncIterable<T>,
-  iterable2?: Iterable<T> | AsyncIterable<T>,
+  iterable1: UniversalIterable<T>,
+  iterable2?: UniversalIterable<T>,
 ):
-  | IterableIterator<T>
-  | AsyncIterableIterator<T>
-  | ((
-      iterable2: Iterable<T> | AsyncIterable<T>,
-    ) => IterableIterator<T> | AsyncIterableIterator<T>) {
+  | UniversalIterator<T>
+  | ((iterable2: UniversalIterable<T>) => UniversalIterator<T>) {
   if (iterable2 === undefined) {
     return (iterable2: any) => {
       return intersection(iterable1 as any, iterable2);

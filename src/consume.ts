@@ -1,6 +1,7 @@
 import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import range from "./Lazy/range";
+import { UniversalIterable } from "./types/Utils";
 
 function sync<T>(iterable: Iterable<T>, n: number) {
   const iterator = iterable[Symbol.iterator]();
@@ -45,12 +46,12 @@ async function async<T>(iterable: AsyncIterable<T>, n: number) {
  * );
  * ```
  */
-function consume<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends number,
->(iterator: A, n?: B): ReturnValueType<A, void>;
+function consume<A extends UniversalIterable<unknown>, B extends number>(
+  iterator: A,
+  n?: B,
+): ReturnValueType<A, void>;
 
-function consume<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function consume<A extends UniversalIterable<unknown>>(
   iterable: A,
   n = Infinity,
 ) {

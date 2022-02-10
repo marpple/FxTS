@@ -2,8 +2,9 @@ import map from "./map";
 import concurrent, { isConcurrent } from "./concurrent";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import ReturnZipWithIndexType from "../types/ReturnZipWithIndexType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
-function _zipWithIndex<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function _zipWithIndex<T extends UniversalIterable<unknown>>(
   iterable: T,
 ): ReturnZipWithIndexType<T> {
   let i = -1;
@@ -67,13 +68,13 @@ function async<T>(iterable: AsyncIterable<T>) {
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/toArray | toArray}
  */
-function zipWithIndex<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function zipWithIndex<T extends UniversalIterable<unknown>>(
   iterable: T,
 ): ReturnZipWithIndexType<T>;
 
 function zipWithIndex<T>(
-  iterable: Iterable<T> | AsyncIterable<T>,
-): IterableIterator<[number, T]> | AsyncIterableIterator<[number, T]> {
+  iterable: UniversalIterable<T>,
+): UniversalIterator<[number, T]> {
   if (isAsyncIterable(iterable)) {
     return async(iterable);
   }

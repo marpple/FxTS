@@ -3,6 +3,7 @@ import pipe from "../pipe";
 import filter from "./filter";
 import map from "./map";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable } from "../types/Utils";
 
 /**
  * Returns Iterable/AsyncIterable that filters elements from 'iterable' returning only those that have a corresponding element in 'selectors' that evaluates to 'true'.
@@ -40,11 +41,11 @@ function compress<A, B>(
   iterable: AsyncIterable<B>,
 ): AsyncIterableIterator<B>;
 
-function compress<A, B extends Iterable<unknown> | AsyncIterable<unknown>>(
+function compress<A, B extends UniversalIterable<unknown>>(
   selector: Array<A>,
 ): (iterable: B) => ReturnIterableIteratorType<B>;
 
-function compress<A, B extends Iterable<unknown> | AsyncIterable<unknown>>(
+function compress<A, B extends UniversalIterable<unknown>>(
   selectors: Array<A>,
   iterable?: B,
 ):

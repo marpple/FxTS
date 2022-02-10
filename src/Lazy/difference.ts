@@ -1,5 +1,6 @@
 import identity from "../identity";
 import IterableInfer from "../types/IterableInfer";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import differenceBy from "./differenceBy";
 
@@ -35,8 +36,8 @@ function difference<T>(
 ): AsyncIterableIterator<T>;
 
 function difference<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Iterable<unknown> | AsyncIterable<unknown>,
+  A extends UniversalIterable<unknown>,
+  B extends UniversalIterable<unknown>,
 >(
   iterable1: A,
 ): (
@@ -48,14 +49,12 @@ function difference<
   : IterableIterator<IterableInfer<B>>;
 
 function difference<T>(
-  iterable1: Iterable<T> | AsyncIterable<T>,
-  iterable2?: Iterable<T> | AsyncIterable<T>,
+  iterable1: UniversalIterable<T>,
+  iterable2?: UniversalIterable<T>,
 ):
   | IterableIterator<T>
   | AsyncIterableIterator<T>
-  | ((
-      iterable2: Iterable<T> | AsyncIterable<T>,
-    ) => IterableIterator<T> | AsyncIterableIterator<T>) {
+  | ((iterable2: UniversalIterable<T>) => UniversalIterator<T>) {
   if (iterable2 === undefined) {
     return (iterable2: any) => {
       return difference(iterable1 as any, iterable2);

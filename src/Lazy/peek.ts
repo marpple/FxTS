@@ -4,6 +4,7 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import Awaited from "../types/Awaited";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import IterableInfer from "../types/IterableInfer";
+import { UniversalIterable } from "../types/Utils";
 
 /**
  * Iterate over an input list,
@@ -63,11 +64,11 @@ function peek<T>(
   iterable: AsyncIterable<T>,
 ): AsyncIterableIterator<T>;
 
-function peek<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function peek<T extends UniversalIterable<unknown>>(
   f: (a: Awaited<IterableInfer<T>>) => unknown,
 ): (iterable: T) => ReturnIterableIteratorType<T>;
 
-function peek<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function peek<T extends UniversalIterable<unknown>>(
   f: (a: Awaited<IterableInfer<T>>) => unknown,
   iterable?: T,
 ):

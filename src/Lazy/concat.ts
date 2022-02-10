@@ -1,5 +1,6 @@
 import IterableInfer from "../types/IterableInfer";
 import ReturnConcatType from "../types/ReturnConcatType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 
 function* sync<A>(a: Iterable<A>, b: Iterable<A>): IterableIterator<A> {
@@ -34,9 +35,7 @@ function async<A>(
   };
 }
 
-function toAsyncIterable<T>(
-  iterable: Iterable<T> | AsyncIterable<T>,
-): AsyncIterable<T> {
+function toAsyncIterable<T>(iterable: UniversalIterable<T>): AsyncIterable<T> {
   if (isAsyncIterable(iterable)) {
     return iterable;
   }
@@ -89,24 +88,23 @@ function toAsyncIterable<T>(
  */
 // prettier-ignore
 function concat<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Iterable<unknown> | AsyncIterable<unknown>
+  A extends UniversalIterable<unknown>,
+  B extends UniversalIterable<unknown>
 >(iterable1: A, iterable2: B): ReturnConcatType<A, B>;
 
 function concat<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Iterable<unknown> | AsyncIterable<unknown>,
+  A extends UniversalIterable<unknown>,
+  B extends UniversalIterable<unknown>,
 >(iterable1: A): (iterable2: B) => ReturnConcatType<A, B>;
 
 function concat<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Iterable<unknown> | AsyncIterable<unknown>,
+  A extends UniversalIterable<unknown>,
+  B extends UniversalIterable<unknown>,
 >(
   iterable1: A,
   iterable2?: B,
 ):
-  | IterableIterator<IterableInfer<A> | IterableInfer<B>>
-  | AsyncIterableIterator<IterableInfer<A> | IterableInfer<B>>
+  | UniversalIterator<IterableInfer<A> | IterableInfer<B>>
   | ((iterable2: B) => ReturnConcatType<A, B>) {
   if (iterable2 === undefined) {
     return (iterable2: B): ReturnConcatType<A, B> => {

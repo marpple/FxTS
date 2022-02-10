@@ -2,6 +2,7 @@ import reduce from "./reduce";
 import IterableInfer from "./types/IterableInfer";
 import Key from "./types/Key";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**
@@ -29,7 +30,7 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 function fromEntries<
   U extends [Key, any] | readonly [Key, any],
-  T extends Iterable<U> | AsyncIterable<U>,
+  T extends UniversalIterable<U>,
 >(
   iterable: T,
 ): ReturnValueType<

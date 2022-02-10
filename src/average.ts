@@ -2,6 +2,7 @@ import peek from "./Lazy/peek";
 import pipe from "./pipe";
 import sum from "./sum";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**
@@ -22,7 +23,7 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
  *
  * see {@link https://fxts.dev/docs/pipe | pipe}
  */
-function average<T extends Iterable<number> | AsyncIterable<number>>(
+function average<T extends UniversalIterable<number>>(
   iterable: T,
 ): ReturnValueType<T> {
   let size = 0;

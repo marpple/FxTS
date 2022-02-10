@@ -9,6 +9,7 @@ import {
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import concurrent, { isConcurrent } from "./concurrent";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 function* sync<T>(size: number, iterable: Iterable<T>): IterableIterator<T[]> {
   const iterator = iterable[Symbol.iterator]();
@@ -110,16 +111,15 @@ function chunk<T>(
   iterable: AsyncIterable<T>,
 ): AsyncIterableIterator<T[]>;
 
-function chunk<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function chunk<T extends UniversalIterable<unknown>>(
   size: number,
 ): (iterable: T) => ReturnIterableIteratorType<T, IterableInfer<T>[]>;
 
-function chunk<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function chunk<T extends UniversalIterable<unknown>>(
   size: number,
   iterable?: T,
 ):
-  | IterableIterator<IterableInfer<T>[]>
-  | AsyncIterableIterator<IterableInfer<T>[]>
+  | UniversalIterator<IterableInfer<T>[]>
   | ((iterable: T) => ReturnIterableIteratorType<T, IterableInfer<T>[]>) {
   if (iterable === undefined) {
     return (iterable: T) =>

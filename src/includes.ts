@@ -1,5 +1,6 @@
 import some from "./some";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**
@@ -26,11 +27,11 @@ function includes<T>(
   iterable: AsyncIterable<T>,
 ): Promise<boolean>;
 
-function includes<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function includes<T extends UniversalIterable<unknown>>(
   value: unknown,
 ): (iterable: T) => ReturnValueType<T, boolean>;
 
-function includes<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function includes<T extends UniversalIterable<unknown>>(
   value: unknown,
   iterable?: T,
 ): boolean | Promise<boolean> | ((iterable: T) => ReturnValueType<T, boolean>) {

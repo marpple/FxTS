@@ -1,5 +1,6 @@
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable } from "../types/Utils";
 import { isAsyncIterable, isIterable, isNotNullable } from "../_internal/utils";
 import filter from "./filter";
 
@@ -42,13 +43,11 @@ import filter from "./filter";
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/toArray | toArray}
  */
-function compact<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function compact<T extends UniversalIterable<unknown>>(
   iterable: T,
 ): ReturnIterableIteratorType<T, NonNullable<IterableInfer<T>>>;
 
-function compact<T extends Iterable<unknown> | AsyncIterable<unknown>>(
-  iterable: T,
-) {
+function compact<T extends UniversalIterable<unknown>>(iterable: T) {
   if (isIterable(iterable)) {
     return filter(isNotNullable, iterable);
   }

@@ -3,6 +3,7 @@ import head from "./head";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import ReturnValueType from "./types/ReturnValueType";
 import IterableInfer from "./types/IterableInfer";
+import { UniversalIterable } from "./types/Utils";
 
 /**
  * Looks through each value in Iterable/AsyncIterable, returning the first one that passes a truth test `f`,
@@ -24,12 +25,12 @@ function find<T>(
   iterable: AsyncIterable<T>,
 ): Promise<T | undefined>;
 
-function find<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function find<T extends UniversalIterable<unknown>>(
   f: (a: IterableInfer<T>) => unknown,
   iterable?: T,
 ): (iterable: T) => ReturnValueType<T, IterableInfer<T> | undefined>;
 
-function find<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function find<T extends UniversalIterable<unknown>>(
   f: (a: IterableInfer<T>) => unknown,
   iterable?: T,
 ):

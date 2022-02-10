@@ -2,6 +2,7 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 import Awaited from "../types/Awaited";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 function* sync<A>(a: A, iterable: Iterable<A>) {
   yield* iterable;
@@ -108,13 +109,10 @@ function append<A>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function append<A, B extends Iterable<A> | AsyncIterable<A>>(
+function append<A, B extends UniversalIterable<A>>(
   a: A,
-  iterable?: Iterable<A> | AsyncIterable<A>,
-):
-  | IterableIterator<A>
-  | AsyncIterableIterator<A>
-  | ((iterable: B) => ReturnIterableIteratorType<B, A>) {
+  iterable?: UniversalIterable<A>,
+): UniversalIterator<A> | ((iterable: B) => ReturnIterableIteratorType<B, A>) {
   if (iterable === undefined) {
     return (iterable: B) =>
       append(a, iterable as any) as ReturnIterableIteratorType<B, A>;

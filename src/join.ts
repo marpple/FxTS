@@ -1,7 +1,8 @@
 import reduce from "./reduce";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
-type ReturnJoinType<T extends Iterable<unknown> | AsyncIterable<unknown>> =
+type ReturnJoinType<T extends UniversalIterable<unknown>> =
   T extends Iterable<unknown>
     ? string
     : T extends AsyncIterable<unknown>
@@ -52,11 +53,11 @@ function join<A>(sep: string, iterable: Iterable<A>): string;
 
 function join<A>(sep: string, iterable: AsyncIterable<A>): Promise<string>;
 
-function join<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function join<A extends UniversalIterable<unknown>>(
   sep: string,
 ): (iterable: A) => ReturnJoinType<A>;
 
-function join<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function join<A extends UniversalIterable<unknown>>(
   sep: string,
   iterable?: A,
 ): string | Promise<string> | ((iterable: A) => ReturnJoinType<A>) {

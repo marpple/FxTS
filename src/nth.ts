@@ -1,5 +1,6 @@
 import IterableInfer from "./types/IterableInfer";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 function sync<T>(index: number, iterable: Iterable<T>): T | undefined {
@@ -53,11 +54,11 @@ function nth<T>(
   iterable: AsyncIterable<T>,
 ): Promise<T | undefined>;
 
-function nth<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function nth<T extends UniversalIterable<unknown>>(
   index: number,
 ): (iterable: T) => ReturnValueType<T, IterableInfer<T> | undefined>;
 
-function nth<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function nth<T extends UniversalIterable<unknown>>(
   index: number,
   iterable?: T,
 ):

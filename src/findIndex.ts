@@ -5,6 +5,7 @@ import pipe1 from "./pipe1";
 import Arrow from "./types/Arrow";
 import IterableInfer from "./types/IterableInfer";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**
@@ -27,12 +28,12 @@ function findIndex<T>(
   iterable: AsyncIterable<T>,
 ): Promise<number>;
 
-function findIndex<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function findIndex<T extends UniversalIterable<unknown>>(
   f: (a: IterableInfer<T>) => unknown,
   iterable?: T,
 ): (iterable: T) => ReturnValueType<T, number>;
 
-function findIndex<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function findIndex<T extends UniversalIterable<unknown>>(
   f: (a: IterableInfer<T>) => unknown,
   iterable?: T,
 ): number | Promise<number> | ((iterable: T) => ReturnValueType<T, number>) {

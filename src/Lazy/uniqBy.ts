@@ -4,6 +4,7 @@ import filter from "./filter";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 /**
  * Unlike {@link https://fxts.dev/docs/uniq | uniq} returns Iterable/AsyncIterable
@@ -62,18 +63,15 @@ function uniqBy<A, B>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function uniqBy<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function uniqBy<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ): (iterable: A) => ReturnIterableIteratorType<A>;
 
-function uniqBy<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function uniqBy<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
-):
-  | IterableIterator<A>
-  | AsyncIterableIterator<A>
-  | ((iterable: A) => ReturnIterableIteratorType<A>) {
+): UniversalIterator<A> | ((iterable: A) => ReturnIterableIteratorType<A>) {
   if (iterable === undefined) {
     return (iterable) => {
       return uniqBy(f, iterable as any) as ReturnIterableIteratorType<A>;

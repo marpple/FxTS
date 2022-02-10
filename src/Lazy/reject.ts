@@ -4,6 +4,7 @@ import not from "../not";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 /**
  * The opposite of {@link https://fxts.dev/docs/filter | filter}
@@ -63,23 +64,16 @@ function reject<A, B = unknown>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function reject<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B = unknown,
->(
+function reject<A extends UniversalIterable<unknown>, B = unknown>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ): (iterable: A) => ReturnIterableIteratorType<A, IterableInfer<A>>;
 
-function reject<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B = unknown,
->(
+function reject<A extends UniversalIterable<unknown>, B = unknown>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ):
-  | IterableIterator<IterableInfer<A>>
-  | AsyncIterableIterator<IterableInfer<A>>
+  | UniversalIterator<IterableInfer<A>>
   | ((iterable: A) => ReturnIterableIteratorType<A, IterableInfer<A>>) {
   if (iterable === undefined) {
     return (iterable: A): ReturnIterableIteratorType<A, IterableInfer<A>> => {

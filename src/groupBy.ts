@@ -5,6 +5,7 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
 import { AsyncFunctionException } from "./_internal/error";
 import reduce from "./reduce";
 import iterableInfer from "./types/IterableInfer";
+import { UniversalIterable } from "./types/Utils";
 
 /**
  * Splits Iterable/AsyncIterable into sets, grouped by the result of running each value through `f`.
@@ -46,17 +47,11 @@ function groupBy<A, B extends Key>(
   iterable: AsyncIterable<A>,
 ): Promise<{ [K in B]: A[] }>;
 
-function groupBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Key,
->(
+function groupBy<A extends UniversalIterable<unknown>, B extends Key>(
   f: (a: IterableInfer<A>) => B | Promise<B>,
 ): (iterable: A) => ReturnValueType<A, { [K in B]: IterableInfer<A>[] }>;
 
-function groupBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Key,
->(
+function groupBy<A extends UniversalIterable<unknown>, B extends Key>(
   f: (a: IterableInfer<A>) => B | Promise<B>,
   iterable?: A,
 ):

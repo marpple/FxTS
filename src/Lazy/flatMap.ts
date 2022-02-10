@@ -5,10 +5,11 @@ import Awaited from "../types/Awaited";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import IterableInfer from "../types/IterableInfer";
 import DeepFlat from "../types/DeepFlat";
+import { UniversalIterable } from "../types/Utils";
 
 type FlatMapValue<
   T,
-  I extends Iterable<unknown> | AsyncIterable<unknown>,
+  I extends UniversalIterable<unknown>,
 > = I extends AsyncIterable<any> ? Awaited<T> : T;
 
 /**
@@ -62,20 +63,14 @@ function flatMap<A, B = unknown>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<DeepFlat<Awaited<B>, 1>>;
 
-function flatMap<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B = unknown,
->(
+function flatMap<A extends UniversalIterable<unknown>, B = unknown>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ): (
   iterable: A,
 ) => ReturnIterableIteratorType<A, DeepFlat<FlatMapValue<B, A>, 1>>;
 
-function flatMap<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B = unknown,
->(
+function flatMap<A extends UniversalIterable<unknown>, B = unknown>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ):

@@ -1,6 +1,7 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import IterableInfer from "../types/IterableInfer";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
   const iterator = iterable[Symbol.iterator]();
@@ -75,16 +76,15 @@ function take<A>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function take<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function take<A extends UniversalIterable<unknown>>(
   l: number,
 ): (iterable: A) => ReturnIterableIteratorType<A>;
 
-function take<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function take<A extends UniversalIterable<unknown>>(
   l: number,
   iterable?: A,
 ):
-  | IterableIterator<IterableInfer<A>>
-  | AsyncIterableIterator<IterableInfer<A>>
+  | UniversalIterator<IterableInfer<A>>
   | ((iterable: A) => ReturnIterableIteratorType<A>) {
   if (iterable === undefined) {
     return (iterable: A) => {

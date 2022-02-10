@@ -2,6 +2,7 @@ import pipe1 from "./pipe1";
 import Arrow from "./types/Arrow";
 import IterableInfer from "./types/IterableInfer";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 function sync<A, B>(f: (a: B, b: A) => B, acc: B, iterable: Iterable<A>): B {
@@ -98,21 +99,21 @@ function reduce<A, B>(
   iterable: AsyncIterable<A>,
 ): Promise<B>;
 
-function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function reduce<A extends UniversalIterable<unknown>>(
   f: (
     a: IterableInfer<A>,
     b: IterableInfer<A>,
   ) => IterableInfer<A> | Promise<IterableInfer<A>>,
 ): (iterable: A) => ReturnValueType<A, IterableInfer<A>>;
 
-function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function reduce<A extends UniversalIterable<unknown>, B>(
   f: (a: B, b: IterableInfer<A>) => B | Promise<B>,
 ): (iterable: A) => ReturnValueType<A, B>;
 
-function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function reduce<A extends UniversalIterable<unknown>, B>(
   f: (a: B, b: IterableInfer<A>) => B,
-  seed?: B | Iterable<IterableInfer<A>> | AsyncIterable<IterableInfer<A>>,
-  iterable?: Iterable<IterableInfer<A>> | AsyncIterable<IterableInfer<A>>,
+  seed?: B | UniversalIterable<IterableInfer<A>>,
+  iterable?: UniversalIterable<IterableInfer<A>>,
 ):
   | B
   | undefined

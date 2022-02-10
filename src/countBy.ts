@@ -4,6 +4,7 @@ import IterableInfer from "./types/IterableInfer";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import { AsyncFunctionException } from "./_internal/error";
 import reduce from "./reduce";
+import { UniversalIterable } from "./types/Utils";
 
 function incSel<B extends Key>(parent: { [K in B]: number }, k: B) {
   parent[k] ? parent[k]++ : (parent[k] = 1);
@@ -46,17 +47,11 @@ function countBy<A, B extends Key>(
   iterable: AsyncIterable<A>,
 ): Promise<{ [K in B]: number }>;
 
-function countBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Key,
->(
+function countBy<A extends UniversalIterable<unknown>, B extends Key>(
   f: (a: IterableInfer<A>) => B | Promise<B>,
 ): (iterable: A) => ReturnValueType<A, { [K in B]: number }>;
 
-function countBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B extends Key,
->(
+function countBy<A extends UniversalIterable<unknown>, B extends Key>(
   f: (a: IterableInfer<A>) => B | Promise<B>,
   iterable?: A,
 ):

@@ -1,5 +1,6 @@
 import each from "./each";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 function sync<A extends Iterable<unknown>>(iterable: A) {
@@ -25,13 +26,11 @@ async function async<A extends AsyncIterable<unknown>>(iterable: A) {
  * await size(toAsync([1, 2, 3, 4])); // 4
  * ```
  */
-function size<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function size<A extends UniversalIterable<unknown>>(
   iterable: A,
 ): ReturnValueType<A, number>;
 
-function size<A extends Iterable<unknown> | AsyncIterable<unknown>>(
-  iterable: A,
-) {
+function size<A extends UniversalIterable<unknown>>(iterable: A) {
   if (isIterable(iterable)) {
     return sync(iterable);
   }

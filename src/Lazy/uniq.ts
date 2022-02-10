@@ -2,6 +2,7 @@ import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import uniqueBy from "./uniqBy";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import identity from "../identity";
+import { UniversalIterable } from "../types/Utils";
 
 /**
  * Returns Iterable/AsyncIterable with duplicate values removed inside the given Iterable/AsyncIterable.
@@ -42,7 +43,7 @@ import identity from "../identity";
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/toArray | toArray}
  */
-function uniq<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function uniq<A extends UniversalIterable<unknown>>(
   iterable: A,
 ): ReturnIterableIteratorType<A> {
   if (isIterable(iterable)) {

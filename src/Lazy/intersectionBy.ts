@@ -7,6 +7,7 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import pipe1 from "../pipe1";
 import pipe from "../pipe";
 import uniq from "./uniq";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 function* sync<T>(
   f: (a: T) => unknown,
@@ -99,9 +100,9 @@ function intersectionBy<A, B = unknown>(
 
 function intersectionBy<A, B = unknown>(
   f: (a: A) => B,
-  iterable1: Iterable<A> | AsyncIterable<A>,
-  iterable2: Iterable<A> | AsyncIterable<A>,
-): IterableIterator<A> | AsyncIterableIterator<A> {
+  iterable1: UniversalIterable<A>,
+  iterable2: UniversalIterable<A>,
+): UniversalIterator<A> {
   if (isIterable(iterable1) && isIterable(iterable2)) {
     return sync(f, iterable1, iterable2);
   }

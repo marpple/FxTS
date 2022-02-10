@@ -7,6 +7,7 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
 import IterableInfer from "./types/IterableInfer";
 import ReturnValueType from "./types/ReturnValueType";
 import Arrow from "./types/Arrow";
+import { UniversalIterable } from "./types/Utils";
 
 /**
  * Returns true if all of the values in Iterable/AsyncIterable pass the `f` truth test.
@@ -36,15 +37,11 @@ function every<A, B = unknown>(
   iterable: AsyncIterable<A>,
 ): Promise<boolean>;
 
-function every<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B = unknown,
->(f: (a: IterableInfer<A>) => B): (a: A) => ReturnValueType<A, boolean>;
+function every<A extends UniversalIterable<unknown>, B = unknown>(
+  f: (a: IterableInfer<A>) => B,
+): (a: A) => ReturnValueType<A, boolean>;
 
-function every<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B = unknown,
->(
+function every<A extends UniversalIterable<unknown>, B = unknown>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ): boolean | Promise<boolean> | ((iterable: A) => ReturnValueType<A, boolean>) {

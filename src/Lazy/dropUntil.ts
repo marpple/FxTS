@@ -1,5 +1,6 @@
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 import { AsyncFunctionException } from "../_internal/error";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
@@ -118,16 +119,15 @@ function dropUntil<A, B = unknown>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A>;
 
-function dropUntil<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function dropUntil<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
 ): (iterable: A) => ReturnIterableIteratorType<A>;
 
-function dropUntil<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function dropUntil<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ):
-  | IterableIterator<IterableInfer<A>>
-  | AsyncIterableIterator<IterableInfer<A>>
+  | UniversalIterator<IterableInfer<A>>
   | ((iterable: A) => ReturnIterableIteratorType<A>) {
   if (iterable === undefined) {
     return (iterable: A) => {

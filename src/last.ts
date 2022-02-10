@@ -1,6 +1,7 @@
 import isArray from "./isArray";
 import isString from "./isString";
 import reduce from "./reduce";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 type LastReturnType<T> = T extends readonly [...rest: any[], a: infer L]
@@ -43,11 +44,11 @@ type LastReturnType<T> = T extends readonly [...rest: any[], a: infer L]
  *
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync}
  */
-function last<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function last<T extends UniversalIterable<unknown>>(
   iterable: T,
 ): LastReturnType<T>;
 
-function last<A>(iterable: Iterable<A> | AsyncIterable<A>) {
+function last<A>(iterable: UniversalIterable<A>) {
   if (isArray(iterable) || isString(iterable)) {
     return iterable[iterable.length - 1];
   }

@@ -6,6 +6,7 @@ import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { empty, isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 import head from "../head";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 
 function* sync<A, B>(
   f: (a: B, b: A) => B,
@@ -138,14 +139,14 @@ function scan<A, B>(
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<Awaited<B>>;
 
-function scan<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function scan<A extends UniversalIterable<unknown>>(
   f: (
     a: IterableInfer<A>,
     b: IterableInfer<A>,
   ) => IterableInfer<A> | Promise<IterableInfer<A>>,
 ): (iterable: A) => ReturnIterableIteratorType<A, IterableInfer<A>>;
 
-function scan<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function scan<A extends UniversalIterable<unknown>, B>(
   f: (a: B, b: IterableInfer<A>) => B | Promise<B>,
 ): (iterable: A) => ReturnIterableIteratorType<A, B>;
 
@@ -153,10 +154,7 @@ function scan<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
   f: (a: B, b: IterableInfer<A>) => B,
   seed?: B | Iterable<IterableInfer<A>> | AsyncIterable<IterableInfer<A>>,
   iterable?: Iterable<IterableInfer<A>> | AsyncIterable<IterableInfer<A>>,
-):
-  | IterableIterator<B>
-  | AsyncIterableIterator<B>
-  | ((iterable: A) => ReturnIterableIteratorType<A, B>) {
+): UniversalIterator<B> | ((iterable: A) => ReturnIterableIteratorType<A, B>) {
   if (iterable === undefined) {
     if (seed === undefined) {
       return (iterable: A) => {

@@ -3,6 +3,7 @@ import pipe1 from "./pipe1";
 import toArray from "./toArray";
 import IterableInfer from "./types/IterableInfer";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**
@@ -25,11 +26,11 @@ function sortBy<T>(
   iterable: AsyncIterable<T>,
 ): Promise<T[]>;
 
-function sortBy<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function sortBy<T extends UniversalIterable<unknown>>(
   f: (a: IterableInfer<T>) => unknown,
 ): (iterable: T) => ReturnValueType<T, IterableInfer<T>[]>;
 
-function sortBy<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function sortBy<T extends UniversalIterable<unknown>>(
   f: (a: IterableInfer<T>) => unknown,
   iterable?: T,
 ):

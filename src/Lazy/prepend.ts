@@ -1,5 +1,6 @@
 import Awaited from "../types/Awaited";
 import ReturnPrependType from "../types/ReturnPrependType";
+import { UniversalIterable, UniversalIterator } from "../types/Utils";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 
 function* sync<A>(a: A, iterable: Iterable<A>): IterableIterator<A> {
@@ -79,11 +80,8 @@ function prepend<A>(
 
 function prepend<A, B extends Iterable<A> | AsyncIterable<Awaited<A>>>(
   a: A,
-  iterable?: Iterable<A> | AsyncIterable<A>,
-):
-  | IterableIterator<A>
-  | AsyncIterableIterator<A>
-  | ((iterable: B) => ReturnPrependType<A, B>) {
+  iterable?: UniversalIterable<A>,
+): UniversalIterator<A> | ((iterable: B) => ReturnPrependType<A, B>) {
   if (iterable === undefined) {
     return (iterable: B) =>
       prepend(a, iterable as any) as ReturnPrependType<A, B>;

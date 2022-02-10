@@ -1,6 +1,7 @@
 import take from "./Lazy/take";
 import pipe from "./pipe";
 import toArray from "./toArray";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 type HeadReturnType<T> = T extends readonly [a: infer H, ...rest: any[]]
@@ -43,11 +44,11 @@ type HeadReturnType<T> = T extends readonly [a: infer H, ...rest: any[]]
  *
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync}
  */
-function head<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function head<T extends UniversalIterable<unknown>>(
   iterable: T,
 ): HeadReturnType<T>;
 
-function head<A>(iterable: Iterable<A> | AsyncIterable<A>) {
+function head<A>(iterable: UniversalIterable<A>) {
   if (isIterable(iterable)) {
     return pipe(take(1, iterable), toArray, ([a]) => a);
   }

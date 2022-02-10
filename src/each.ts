@@ -1,5 +1,6 @@
 import IterableInfer from "./types/IterableInfer";
 import ReturnValueType from "./types/ReturnValueType";
+import { UniversalIterable } from "./types/Utils";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 function sync<A, B = unknown>(f: (a: A) => B, iterable: Iterable<A>): void {
@@ -41,12 +42,11 @@ function each<A, B = unknown>(
   iterable: AsyncIterable<A>,
 ): Promise<void>;
 
-function each<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
-  B = unknown,
->(f: (a: IterableInfer<A>) => B): (iterable: A) => ReturnValueType<A, void>;
+function each<A extends UniversalIterable<unknown>, B = unknown>(
+  f: (a: IterableInfer<A>) => B,
+): (iterable: A) => ReturnValueType<A, void>;
 
-function each<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function each<A extends UniversalIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ): void | Promise<void> | ((iterable: A) => ReturnValueType<A, void>) {
