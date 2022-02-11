@@ -40,5 +40,5 @@ checks([
   check<typeof res6, AsyncIterableIterator<number>, Test.Pass>(),
   check<typeof res7, number, Test.Pass>(),
   check<typeof res8, IterableIterator<number>, Test.Pass>(),
-  check<typeof res9, AsyncIterableIterator<number>, Test.Fail>(),
+  check<typeof res9, AsyncIterableIterator<number>, Test.Pass>(),
 ]);
