@@ -1,5 +1,5 @@
 import * as Test from "../../src/types/Test";
-import { toAsync, flat, pipe } from "../../src";
+import { flat, pipe, range, toAsync } from "../../src";
 
 const { checks, check } = Test;
 
@@ -22,6 +22,13 @@ const res13 = pipe(toAsync([1, 2, 3]), flat);
 const res14 = pipe(toAsync([1, 2, 3, [4, 5]]), flat);
 const res15 = pipe(toAsync([1, 2, 3, [4, 5, [6]]]), flat);
 
+const res16 = flat(
+  (function* () {
+    yield* range(1, 3);
+    yield toAsync(range(3, 5));
+  })(),
+);
+
 checks([
   check<typeof res1, IterableIterator<never>, Test.Pass>(),
   check<typeof res2, IterableIterator<number>, Test.Pass>(),
@@ -41,4 +48,5 @@ checks([
   check<typeof res13, AsyncIterableIterator<number>, Test.Pass>(),
   check<typeof res14, AsyncIterableIterator<number>, Test.Pass>(),
   check<typeof res15, AsyncIterableIterator<number | number[]>, Test.Pass>(), // prettier-ignore
+  check<typeof res16, IterableIterator<number | AsyncIterableIterator<number>>, Test.Pass>(), // prettier-ignore
 ]);
