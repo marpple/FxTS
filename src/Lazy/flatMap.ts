@@ -2,14 +2,17 @@ import map from "./map";
 import flat from "./flat";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import Awaited from "../types/Awaited";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import IterableInfer from "../types/IterableInfer";
-import DeepFlat from "../types/DeepFlat";
+import { type DeepFlat, type DeepFlatSync } from "../types/DeepFlat";
 
-type FlatMapValue<
-  T,
-  I extends Iterable<unknown> | AsyncIterable<unknown>,
-> = I extends AsyncIterable<any> ? Awaited<T> : T;
+type ReturnFlatMapType<
+  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  B = unknown,
+> = A extends Iterable<unknown>
+  ? IterableIterator<DeepFlatSync<B, 1>>
+  : A extends AsyncIterable<unknown>
+  ? AsyncIterableIterator<DeepFlat<Awaited<B>, 1>>
+  : never;
 
 /**
  * Returns flattened Iterable/AsyncIterable of values by running each element
@@ -55,7 +58,7 @@ type FlatMapValue<
 function flatMap<A, B = unknown>(
   f: (a: A) => B,
   iterable: Iterable<A>,
-): IterableIterator<DeepFlat<B, 1>>;
+): IterableIterator<DeepFlatSync<B, 1>>;
 
 function flatMap<A, B = unknown>(
   f: (a: A) => B,
@@ -65,12 +68,7 @@ function flatMap<A, B = unknown>(
 function flatMap<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
   B = unknown,
->(
-  f: (a: IterableInfer<A>) => B,
-  iterable?: A,
-): (
-  iterable: A,
-) => ReturnIterableIteratorType<A, DeepFlat<FlatMapValue<B, A>, 1>>;
+>(f: (a: IterableInfer<A>) => B): (iterable: A) => ReturnFlatMapType<A, B>;
 
 function flatMap<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
@@ -78,27 +76,27 @@ function flatMap<
 >(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
-):
-  | IterableIterator<DeepFlat<FlatMapValue<B, A>, 1>>
-  | AsyncIterableIterator<DeepFlat<Awaited<B>, 1>>
-  | ((iterable: A) => ReturnIterableIteratorType<A, DeepFlat<B, 1>>) {
+): (iterable: A) => ReturnFlatMapType<A, B>;
+
+function flatMap<
+  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  B = unknown,
+>(
+  f: (a: IterableInfer<A>) => B,
+  iterable?: A,
+): ReturnFlatMapType<A, B> | ((iterable: A) => ReturnFlatMapType<A, B>) {
   if (iterable === undefined) {
     return (iterable: A) => {
-      return flat(map(f, iterable as any)) as ReturnIterableIteratorType<
-        A,
-        DeepFlat<B, 1>
-      >;
+      return flat(map(f, iterable as any)) as any;
     };
   }
 
   if (isIterable<IterableInfer<A>>(iterable)) {
-    return flat(map(f, iterable)) as IterableIterator<
-      DeepFlat<FlatMapValue<B, A>, 1>
-    >;
+    return flat(map(f, iterable as any)) as any;
   }
 
   if (isAsyncIterable<Awaited<IterableInfer<A>>>(iterable)) {
-    return flat(map(f, iterable));
+    return flat(map(f, iterable as any)) as any;
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

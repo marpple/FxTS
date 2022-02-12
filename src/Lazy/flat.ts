@@ -1,12 +1,21 @@
 import concurrent, { isConcurrent } from "./concurrent";
 import last from "../last";
 import IterableInfer from "../types/IterableInfer";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import DeepFlat from "../types/DeepFlat";
+import { type DeepFlat, DeepFlatSync } from "../types/DeepFlat";
 import { empty, isAsyncIterable, isIterable } from "../_internal/utils";
 import { Reject, Resolve } from "../types/Utils";
 import append from "./append";
 import concat from "./concat";
+import Awaited from "../types/Awaited";
+
+type ReturnFlatType<
+  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  B extends number = 1,
+> = A extends Iterable<unknown>
+  ? IterableIterator<DeepFlatSync<IterableInfer<A>, B>>
+  : A extends AsyncIterable<unknown>
+  ? AsyncIterableIterator<DeepFlat<Awaited<IterableInfer<A>>, B>>
+  : never;
 
 const isFlatAble = (a: unknown) => typeof a !== "string" && isIterable(a);
 
@@ -221,7 +230,7 @@ function flat<
 >(
   iterator: A,
   depth?: B
-): ReturnIterableIteratorType<A, DeepFlat<IterableInfer<A>, B>>;
+): ReturnFlatType<A, B>;
 
 function flat<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: Iterable<A> | AsyncIterable<A>,

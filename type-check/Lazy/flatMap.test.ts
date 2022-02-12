@@ -1,5 +1,5 @@
 import * as Test from "../../src/types/Test";
-import { toAsync, flatMap, pipe } from "../../src";
+import { flatMap, pipe, range, toArray, toAsync } from "../../src";
 
 const { checks, check } = Test;
 
@@ -24,6 +24,12 @@ const res7 = pipe(
   flatMap(async (s) => s.split(" ")),
 );
 
+const res8 = pipe(
+  [toAsync(range(0, 5)), toAsync(range(0, 5)), toAsync(range(0, 5))],
+  flatMap((a) => a),
+  toArray,
+);
+
 checks([
   check<typeof res1, IterableIterator<string>, Test.Pass>(),
   check<typeof res2, IterableIterator<Promise<string[]>>, Test.Pass>(),
@@ -33,4 +39,5 @@ checks([
   check<typeof res5, IterableIterator<string>, Test.Pass>(),
   check<typeof res6, IterableIterator<Promise<string[]>>, Test.Pass>(), // prettier-ignore
   check<typeof res7, AsyncIterableIterator<string>, Test.Pass>(), // prettier-ignore
+  check<typeof res8, AsyncIterableIterator<number>[], Test.Pass>(),
 ]);
