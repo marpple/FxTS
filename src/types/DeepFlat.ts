@@ -14,4 +14,4 @@ type DeepFlatSync<A, B extends number = 0> = A extends Iterable<infer U>
     : DeepFlat<U, Sub<B, 1>>
   : A;
 
-export { DeepFlat, DeepFlatSync };
+export { type DeepFlat, type DeepFlatSync };
