@@ -94,7 +94,6 @@ function async<A>(
  * ); // [5, 6]
  * ```
  *
- * {@link https://codesandbox.io/s/fxts-take-372bs | Try It}
  *
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/toArray | toArray}
@@ -121,6 +120,10 @@ function takeRight<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   | IterableIterator<IterableInfer<A>>
   | AsyncIterableIterator<IterableInfer<A>>
   | ((iterable: A) => ReturnIterableIteratorType<A>) {
+  if (l < 0) {
+    throw new TypeError("'length' must be greater than 0");
+  }
+
   if (iterable === undefined) {
     return (iterable: A) => {
       return takeRight(l, iterable as any) as ReturnIterableIteratorType<A>;

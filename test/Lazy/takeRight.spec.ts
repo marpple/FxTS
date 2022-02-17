@@ -10,7 +10,7 @@ import {
   concurrent,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { generatorMock } from "../utils";
+import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("take", function () {
   describe("sync", function () {
@@ -35,9 +35,6 @@ describe("take", function () {
 
       const res5 = toArray(takeRight(5, [1, 2, 3, 4]));
       expect(res5).toEqual([1, 2, 3, 4]);
-
-      const res6 = toArray(takeRight(-1, [1, 2, 3, 4]));
-      expect(res6).toEqual([]);
     });
 
     it("should be able to be used as a curried function in the pipeline", function () {
@@ -86,9 +83,6 @@ describe("take", function () {
 
       const res5 = await toArray(takeRight(5, toAsync([1, 2, 3, 4])));
       expect(res5).toEqual([1, 2, 3, 4]);
-
-      const res6 = await toArray(takeRight(-1, toAsync([1, 2, 3, 4])));
-      expect(res6).toEqual([]);
     });
 
     it("should be able to be used as a curried function in the pipeline", async function () {
@@ -102,7 +96,10 @@ describe("take", function () {
 
       expect(res1).toEqual([14, 16]);
     });
+
     it("should be able to take the element concurrently", async function () {
+      const fn = jest.fn();
+      callFuncAfterTime(fn, 400);
       const res = await pipe(
         toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         map((a) => delay(100, a)),
@@ -111,7 +108,7 @@ describe("take", function () {
         concurrent(3),
         toArray,
       );
-
+      expect(fn).toBeCalled();
       expect(res).toEqual([6, 8, 10]);
     }, 450);
 
