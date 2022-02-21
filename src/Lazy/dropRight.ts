@@ -60,8 +60,8 @@ function async<A>(
  * @example
  * ```ts
  * const iter = dropRight(2, [1, 2, 3, 4]);
- * iter.next() // {done:false, value: 3}
- * iter.next() // {done:false, value: 4}
+ * iter.next() // {done:false, value: 1}
+ * iter.next() // {done:false, value: 2}
  * iter.next() // {done:true, value: undefined}
  *
  * // with pipe
