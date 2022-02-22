@@ -9,8 +9,8 @@ import { isConcurrent } from "./concurrent";
 
 function* stringTakeRight(length: number, str: string) {
   const arr = Array.from(str);
-  const index = str.length - length;
-  for (let i = index; i < str.length; i++) {
+  const index = arr.length - length;
+  for (let i = index; i < arr.length; i++) {
     if (arr[i]) yield arr[i];
   }
 }

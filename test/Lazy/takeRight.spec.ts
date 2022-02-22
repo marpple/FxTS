@@ -12,7 +12,7 @@ import {
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { callFuncAfterTime, generatorMock } from "../utils";
 
-describe("take", function () {
+describe("takeRight", function () {
   describe("sync", function () {
     it("should be able to take the element", function () {
       const res = [];
