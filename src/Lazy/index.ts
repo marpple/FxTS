@@ -30,6 +30,7 @@ import scan from "./scan";
 import slice from "./slice";
 import split from "./split";
 import take from "./take";
+import takeRight from "./takeRight";
 import takeUntil from "./takeUntil";
 import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
@@ -74,6 +75,7 @@ export {
   split,
   take,
   takeUntil,
+  takeRight,
   takeWhile,
   toAsync,
   uniq,
