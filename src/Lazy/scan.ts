@@ -174,7 +174,7 @@ function scan<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
         return empty() as IterableIterator<B>;
       }
 
-      return sync(f, value, {
+      return sync(f, value as B, {
         [Symbol.iterator]() {
           return iterator;
         },
