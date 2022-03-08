@@ -130,7 +130,7 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
       if (done) {
         return undefined;
       }
-      return sync(f, value, {
+      return sync(f, value as B, {
         [Symbol.iterator]() {
           return iterator;
         },
@@ -143,7 +143,7 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
         if (done) {
           return undefined;
         }
-        return async(f, value, {
+        return async(f, value as Promise<B>, {
           [Symbol.asyncIterator]() {
             return iterator;
           },

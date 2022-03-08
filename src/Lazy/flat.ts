@@ -17,11 +17,15 @@ type ReturnFlatType<
   ? AsyncIterableIterator<DeepFlat<Awaited<IterableInfer<A>>, B>>
   : never;
 
-const isFlatAble = (a: unknown) => typeof a !== "string" && isIterable(a);
+const isFlatAble = function (a: unknown): a is Iterable<unknown> {
+  return typeof a !== "string" && isIterable(a);
+};
 
 function sync<A>(iterable: Iterable<A>, depth: number): IterableIterator<A> {
   const iterator = iterable[Symbol.iterator]();
-  const iteratorStack = [iterator];
+  const iteratorStack: [first: Iterator<A>, ...rest: Iterator<any>[]] = [
+    iterator,
+  ];
 
   return {
     [Symbol.iterator]() {
@@ -141,7 +145,9 @@ function asyncSequential<A>(
   depth: number,
 ): AsyncIterableIterator<A> {
   const iterator = iterable[Symbol.asyncIterator]();
-  const iteratorStack = [iterator];
+  const iteratorStack: [first: AsyncIterator<A>, ...rest: Iterator<any>[]] = [
+    iterator,
+  ];
   return {
     [Symbol.asyncIterator]() {
       return this;
