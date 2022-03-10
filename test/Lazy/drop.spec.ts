@@ -20,6 +20,7 @@ describe("drop", function () {
         acc.push(a);
       }
       expect(acc).toEqual([3, 4, 5]);
+      expect(toArray(drop(0, [1, 2, 3, 4, 5]))).toEqual([1, 2, 3, 4, 5]);
     });
 
     it("should be able to be used as a curried function in the pipeline", function () {
@@ -42,6 +43,10 @@ describe("drop", function () {
         acc.push(a);
       }
       expect(acc).toEqual([3, 4, 5]);
+
+      expect(await toArray(drop(0, toAsync([1, 2, 3, 4, 5])))).toEqual([
+        1, 2, 3, 4, 5,
+      ]);
     });
 
     it("should be able to be used as a curried function in the pipeline", async function () {

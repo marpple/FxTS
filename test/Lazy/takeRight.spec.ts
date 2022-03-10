@@ -1,4 +1,5 @@
 import {
+  concurrent,
   delay,
   filter,
   map,
@@ -7,7 +8,6 @@ import {
   takeRight,
   toArray,
   toAsync,
-  concurrent,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { callFuncAfterTime, generatorMock } from "../utils";
@@ -20,6 +20,9 @@ describe("takeRight", function () {
         res.push(item);
       }
       expect(res).toEqual([4]);
+
+      const res0 = toArray(takeRight(0, [1, 2, 3, 4]));
+      expect(res0).toEqual([]);
 
       const res1 = toArray(takeRight(1, [1, 2, 3, 4]));
       expect(res1).toEqual([4]);
@@ -68,6 +71,9 @@ describe("takeRight", function () {
         res.push(item);
       }
       expect(res).toEqual([4]);
+
+      const res0 = await toArray(takeRight(0, toAsync([1, 2, 3, 4])));
+      expect(res0).toEqual([]);
 
       const res1 = await toArray(takeRight(1, toAsync([1, 2, 3, 4])));
       expect(res1).toEqual([4]);

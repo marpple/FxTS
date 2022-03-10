@@ -12,7 +12,7 @@ import { Concurrent } from "../../src/Lazy/concurrent";
 
 import { callFuncAfterTime, generatorMock } from "../utils";
 
-describe("dropRightRight", function () {
+describe("dropRight", function () {
   describe("sync", function () {
     it("should be discarded elements by length", function () {
       const acc = [];
@@ -20,6 +20,8 @@ describe("dropRightRight", function () {
         acc.push(a);
       }
       expect(acc).toEqual([1, 2, 3]);
+
+      expect(toArray(dropRight(0, [1, 2, 3, 4, 5]))).toEqual([1, 2, 3, 4, 5]);
     });
 
     it("should be discarded string by length", function () {
@@ -49,6 +51,10 @@ describe("dropRightRight", function () {
         acc.push(a);
       }
       expect(acc).toEqual([1, 2, 3]);
+
+      expect(await toArray(dropRight(0, [1, 2, 3, 4, 5]))).toEqual([
+        1, 2, 3, 4, 5,
+      ]);
     });
 
     it("should be able to be used as a curried function in the pipeline", async function () {
