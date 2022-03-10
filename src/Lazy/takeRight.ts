@@ -4,8 +4,7 @@ import IterableInfer from "../types/IterableInfer";
 import toArray from "../toArray";
 import isArray from "../isArray";
 import isString from "../isString";
-import concurrent from "./concurrent";
-import { isConcurrent } from "./concurrent";
+import concurrent, { isConcurrent } from "./concurrent";
 
 function* stringTakeRight(length: number, str: string) {
   const arr = Array.from(str);
@@ -121,7 +120,7 @@ function takeRight<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   | AsyncIterableIterator<IterableInfer<A>>
   | ((iterable: A) => ReturnIterableIteratorType<A>) {
   if (l < 0) {
-    throw new TypeError("'length' must be greater than 0");
+    throw new RangeError("'length' must be greater than 0");
   }
 
   if (iterable === undefined) {

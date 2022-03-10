@@ -126,8 +126,8 @@ function dropRight<A extends Iterable<unknown> | AsyncIterable<unknown>>(
     };
   }
 
-  if (length < 1) {
-    throw new TypeError("'length' must be greater than 1");
+  if (length < 0) {
+    throw new RangeError("'length' must be greater than 0");
   }
 
   if (isArray(iterable)) {

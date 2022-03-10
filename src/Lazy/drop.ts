@@ -1,6 +1,7 @@
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
+import consume from "../consume";
 
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
   const iterator = iterable[Symbol.iterator]();
@@ -9,13 +10,8 @@ function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
       return iterator;
     },
   };
-  let i = 0;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  for (const _ of iterableIterator) {
-    if (++i === length) {
-      yield* iterableIterator;
-    }
-  }
+  consume(iterableIterator, length);
+  return yield* iterableIterator;
 }
 
 async function* asyncSequential<A>(length: number, iterable: AsyncIterable<A>) {
@@ -25,13 +21,8 @@ async function* asyncSequential<A>(length: number, iterable: AsyncIterable<A>) {
       return iterator;
     },
   };
-  let i = 0;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  for await (const _ of iterableIterator) {
-    if (++i === length) {
-      yield* iterableIterator;
-    }
-  }
+  await consume(iterableIterator, length);
+  return yield* iterableIterator;
 }
 
 function async<A>(
@@ -121,8 +112,8 @@ function drop<A extends Iterable<unknown> | AsyncIterable<unknown>>(
     };
   }
 
-  if (length < 1) {
-    throw new TypeError("'length' must be greater than 1");
+  if (length < 0) {
+    throw new RangeError("'length' must be greater than 0");
   }
 
   if (isIterable<A>(iterable)) {
