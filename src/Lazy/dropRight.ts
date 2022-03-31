@@ -5,21 +5,9 @@ import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 
-function* stringDropRight(length: number, str: string) {
-  const arr = Array.from(str);
-  for (let i = 0; i < str.length - length; i++) {
-    yield arr[i];
-  }
-}
-
-function* arrayDropRight<T>(length: number, arr: Array<T>) {
-  for (let i = 0; i < arr.length - length; i++) {
-    yield arr[i];
-  }
-}
-
 function* sync<T>(length: number, iterable: Iterable<T>) {
-  const arr = toArray(iterable);
+  const arr =
+    isArray(iterable) || isString(iterable) ? iterable : toArray(iterable);
   for (let i = 0; i < arr.length - length; i++) {
     yield arr[i];
   }
@@ -128,14 +116,6 @@ function dropRight<A extends Iterable<unknown> | AsyncIterable<unknown>>(
 
   if (length < 0) {
     throw new RangeError("'length' must be greater than 0");
-  }
-
-  if (isArray(iterable)) {
-    return arrayDropRight<A>(length, iterable);
-  }
-
-  if (isString(iterable)) {
-    return stringDropRight(length, iterable) as any;
   }
 
   if (isIterable<A>(iterable)) {
