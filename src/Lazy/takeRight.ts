@@ -6,23 +6,9 @@ import isArray from "../isArray";
 import isString from "../isString";
 import concurrent, { isConcurrent } from "./concurrent";
 
-function* stringTakeRight(length: number, str: string) {
-  const arr = Array.from(str);
-  const index = arr.length - length;
-  for (let i = index; i < arr.length; i++) {
-    if (arr[i]) yield arr[i];
-  }
-}
-
-function* arrayTakeRight<A>(length: number, arr: Array<A>) {
-  const index = arr.length - length;
-  for (let i = index; i < arr.length; i++) {
-    if (arr[i]) yield arr[i];
-  }
-}
-
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
-  const arr = toArray(iterable);
+  const arr =
+    isArray(iterable) || isString(iterable) ? iterable : toArray(iterable);
   const index = arr.length - length;
   for (let i = index; i < arr.length; i++) {
     if (arr[i]) yield arr[i];
@@ -127,14 +113,6 @@ function takeRight<A extends Iterable<unknown> | AsyncIterable<unknown>>(
     return (iterable: A) => {
       return takeRight(l, iterable as any) as ReturnIterableIteratorType<A>;
     };
-  }
-
-  if (isArray(iterable)) {
-    return arrayTakeRight<A>(l, iterable) as any;
-  }
-
-  if (isString(iterable)) {
-    return stringTakeRight(l, iterable) as any;
   }
 
   if (isIterable<IterableInfer<A>>(iterable)) {
