@@ -45,6 +45,7 @@ import sortBy from "./sortBy";
 import sum from "./sum";
 import tap from "./tap";
 import toArray from "./toArray";
+import unicodeToArray from "./unicodeToArray";
 
 export {
   add,
@@ -97,6 +98,7 @@ export {
   sum,
   tap,
   toArray,
+  unicodeToArray,
 };
 
 export * from "./Lazy/index";
