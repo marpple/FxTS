@@ -12,6 +12,8 @@ import find from "./find";
 import findIndex from "./findIndex";
 import fromEntries from "./fromEntries";
 import groupBy from "./groupBy";
+import gt from "./gt";
+import gte from "./gte";
 import head from "./head";
 import identity from "./identity";
 import includes from "./includes";
@@ -26,6 +28,8 @@ import isUndefined from "./isUndefined";
 import join from "./join";
 import juxt from "./juxt";
 import last from "./last";
+import lt from "./lt";
+import lte from "./lte";
 import max from "./max";
 import min from "./min";
 import noop from "./noop";
@@ -63,6 +67,8 @@ export {
   findIndex,
   fromEntries,
   groupBy,
+  gt,
+  gte,
   head,
   head as first,
   identity,
@@ -79,6 +85,8 @@ export {
   join,
   juxt,
   last,
+  lt,
+  lte,
   max,
   min,
   noop,
