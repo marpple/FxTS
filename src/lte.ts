@@ -2,11 +2,17 @@ import curry from "./curry";
 import Curry from "./types/Curry";
 
 /**
- * Make sure that it is less than the reference value.
+ * Make sure that it is less or equal than the reference value.
  * It does not provide a generic type, so we are going to provide curry by default.
  *
  * @example
  * ```ts
+ * lte(5, 1) // expected false
+ * lte(1, 1) // expected true
+ * lte(1, 5) // expected true
+ * lte("a", "b") // expected true
+ * lte("b", "a") // expected false
+ *
  * filter(lte(5), [1, 2, 4, 5, 8, 9]) // Iterable<[1, 2, 4, 5]>
  * filter(lte(5), [6, 7, 8]) // Iterable<[]>
  * filter(lte("b"), ["a", "b", "c"]) // Iterable<["a", "b"]>
@@ -15,9 +21,20 @@ import Curry from "./types/Curry";
  */
 function lte(a: string): Curry<(b: string) => boolean>;
 function lte(a: number): Curry<(b: number) => boolean>;
+function lte(a: string, b: string): boolean;
+function lte(a: number, b: number): boolean;
 
-function lte(a: string | number): Curry<(b: string | number) => boolean> {
-  return curry((c: string | number, b: string | number): boolean => b <= c)(a);
+function lte(
+  a: string | number,
+  _b?: string | number,
+): Curry<(b: string | number) => boolean> | boolean {
+  if (_b === undefined) {
+    return curry((c: string | number, b: string | number): boolean => b <= c)(
+      a,
+    );
+  }
+
+  return a <= _b;
 }
 
 export default lte;
