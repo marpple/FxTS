@@ -2,8 +2,7 @@ import curry from "./curry";
 import Curry from "./types/Curry";
 
 /**
- * Make sure that it is greater than the reference value.
- * It does not provide a generic type, so we are going to provide curry by default.
+ * Returns true if the first argument is greater than the second; false otherwise.
  *
  * @example
  * ```ts
