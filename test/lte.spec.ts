@@ -22,24 +22,24 @@ describe("lte(little or equal)", function () {
   });
 
   describe("lte given boolean", function () {
-    it("given two number should return true", function () {
+    it("should return true that the first number is less than second", function () {
       expect(lte(1, 5)).toEqual(true);
     });
-    it("given two number should return true(equal)", function () {
+    it("should return true that the first number is equal to second", function () {
       expect(lte(5, 5)).toEqual(true);
     });
-    it("given two number should return false", function () {
+    it("should return false that the first number is not less than or not equal to second", function () {
       expect(lte(5, 1)).toEqual(false);
     });
 
-    it("given two char should return true", function () {
+    it("should return true that the first char is less to second", function () {
       expect(lte("a", "b")).toEqual(true);
     });
-    it("given two char should return true(equal)", function () {
+    it("should return true that the first char is equal to second", function () {
       expect(lte("b", "b")).toEqual(true);
     });
 
-    it("given two char should return false", function () {
+    it("should return false that the first char is not less than or not equal to second", function () {
       expect(lte("c", "b")).toEqual(false);
     });
   });
