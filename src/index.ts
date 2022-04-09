@@ -22,6 +22,7 @@ import isNil from "./isNil";
 import isNumber from "./isNumber";
 import isObject from "./isObject";
 import isString from "./isString";
+import isUndefined from "./isUndefined";
 import join from "./join";
 import juxt from "./juxt";
 import last from "./last";
@@ -74,6 +75,7 @@ export {
   isNumber,
   isObject,
   isString,
+  isUndefined,
   join,
   juxt,
   last,
