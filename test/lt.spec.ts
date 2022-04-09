@@ -21,17 +21,17 @@ describe("lt(little)", function () {
     });
   });
   describe("lt given boolean", function () {
-    it("given two number should return true", function () {
+    it("should return true that the first number is less than second", function () {
       expect(lt(1, 5)).toEqual(true);
     });
-    it("given two number should return false", function () {
+    it("should return false that the first number is not less than second", function () {
       expect(lt(5, 1)).toEqual(false);
     });
 
-    it("given two char should return true", function () {
+    it("should return true that the first char is less than second", function () {
       expect(lt("a", "b")).toEqual(true);
     });
-    it("given two char should return false", function () {
+    it("should return false that the first char is not less than second", function () {
       expect(lt("c", "b")).toEqual(false);
     });
   });
