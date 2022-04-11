@@ -14,26 +14,27 @@
  * filter(lt("b"), ["b", "c", "d"]) // Itreable<[]>
  * ```
  */
-function lt(a: string | number): (b: string | number) => boolean;
+function lt(a: string | number | Date): (b: string | number | Date) => boolean;
 function lt(a: string, b: string): boolean;
 function lt(a: number, b: number): boolean;
+function lt(a: Date, b: Date): boolean;
 
 function lt(
-  a: string | number,
-  _b?: string | number,
-): ((b: string | number) => boolean) | boolean {
-  if (_b === undefined) {
-    return (b: string | number): boolean => {
-      if (typeof a !== typeof b) {
-        throw new TypeError(
-          "The values you want to compare must be of the same type",
-        );
-      }
-      return b < a;
-    };
+  a: string | number | Date,
+  _b?: string | number | Date,
+): ((b: string | number | Date) => boolean) | boolean {
+  if (_b !== undefined) {
+    return a < _b;
   }
 
-  return a < _b;
+  return (b: string | number | Date): boolean => {
+    if (typeof a !== typeof b) {
+      throw new TypeError(
+        "The values you want to compare must be of the same type",
+      );
+    }
+    return b < a;
+  };
 }
 
 export default lt;
