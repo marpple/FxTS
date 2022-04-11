@@ -15,27 +15,25 @@
  * ```
  */
 
-function gt(a: string | number | Date): (b: string | number | Date) => boolean;
+function gt(a: string): (b: string) => boolean;
+function gt(a: number): (b: number) => boolean;
+function gt(a: Date): (b: Date) => boolean;
 function gt(a: string, b: string): boolean;
 function gt(a: number, b: number): boolean;
 function gt(a: Date, b: Date): boolean;
 
-function gt(
-  a: string | number | Date,
-  _b?: string | number | Date,
-): ((b: string | number | Date) => boolean) | boolean {
-  if (_b !== undefined) {
-    return a > _b;
+function gt(a: any, b?: any): ((b: any) => boolean) | boolean {
+  if (b === undefined) {
+    return (_b: any) => gt(_b, a);
   }
 
-  return (b: string | number | Date): boolean => {
-    if (typeof a !== typeof b) {
-      throw new TypeError(
-        "The values you want to compare must be of the same type",
-      );
-    }
-    return b > a;
-  };
+  if (a.constructor !== b.constructor) {
+    throw new TypeError(
+      "The values you want to compare must be of the same type",
+    );
+  }
+
+  return a > b;
 }
 
 export default gt;

@@ -9,33 +9,31 @@
  * gte("a", "b") // expected false
  * gte("b", "a") // expected true
  *
- * filter(gte(5), [1, 2, 4, 5, 8, 9]) // Iterable<[5, 8, 9]>
- * filter(gte(5), [1, 2, 3, 4]) // Iterable<[]>
- * filter(gte("b"), ["a", "b", "c"]) // Iterable<["b", "c"]>
- * filter(gte("b"), ["a"]) // Itreable<[]>
+ * figter(gte(5), [1, 2, 4, 5, 8, 9]) // Iterable<[5, 8, 9]>
+ * figter(gte(5), [1, 2, 3, 4]) // Iterable<[]>
+ * figter(gte("b"), ["a", "b", "c"]) // Iterable<["b", "c"]>
+ * figter(gte("b"), ["a"]) // Itreable<[]>
  * ```
  */
-function gte(a: string | number | Date): (b: string | number | Date) => boolean;
+function gte(a: string): (b: string) => boolean;
+function gte(a: number): (b: number) => boolean;
+function gte(a: Date): (b: Date) => boolean;
 function gte(a: string, b: string): boolean;
 function gte(a: number, b: number): boolean;
 function gte(a: Date, b: Date): boolean;
 
-function gte(
-  a: string | number | Date,
-  _b?: string | number | Date,
-): ((b: string | number | Date) => boolean) | boolean {
-  if (_b !== undefined) {
-    return a >= _b;
+function gte(a: any, b?: any): ((b: any) => boolean) | boolean {
+  if (b === undefined) {
+    return (_b: any) => gte(_b, a);
   }
 
-  return (b: string | number | Date): boolean => {
-    if (typeof a !== typeof b) {
-      throw new TypeError(
-        "The values you want to compare must be of the same type",
-      );
-    }
-    return b >= a;
-  };
+  if (a.constructor !== b.constructor) {
+    throw new TypeError(
+      "The values you want to compare must be of the same type",
+    );
+  }
+
+  return a >= b;
 }
 
 export default gte;
