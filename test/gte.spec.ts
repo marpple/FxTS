@@ -19,6 +19,25 @@ describe("gte(greater or equal)", function () {
       const result = pipe(["a", "b", "c", "d"], filter(gte("e")), toArray);
       expect(result).toEqual([]);
     });
+    it("given date array then should return date array", function () {
+      const result = pipe(
+        [new Date(2022, 4, 10), new Date(2022, 3, 9), new Date(2022, 4, 11)],
+        filter(gte(new Date(2022, 4, 10))),
+        toArray,
+      );
+
+      expect(result).toEqual([new Date(2022, 4, 10), new Date(2022, 4, 11)]);
+    });
+
+    it("given data array then should return empty array", function () {
+      const result = pipe(
+        [new Date(2021, 4, 10), new Date(2021, 3, 9)],
+        filter(gte(new Date())),
+        toArray,
+      );
+
+      expect(result).toEqual([]);
+    });
   });
 
   describe("should return boolean", function () {
@@ -41,6 +60,15 @@ describe("gte(greater or equal)", function () {
 
     it("should return false that the first char is not greater than or not equal to second", function () {
       expect(gte("b", "c")).toEqual(false);
+    });
+    it("should return true that the first Date is less than second", function () {
+      expect(gte(new Date(), new Date(2021, 4, 11))).toEqual(true);
+    });
+    it("should return true that the first Date is equal to second", function () {
+      expect(gte(new Date(2021, 4, 11), new Date(2021, 4, 11))).toEqual(true);
+    });
+    it("should return false that the first Date is not less than second", function () {
+      expect(gte(new Date(2021, 4, 11), new Date())).toEqual(false);
     });
   });
 });
