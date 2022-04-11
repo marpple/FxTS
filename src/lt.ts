@@ -23,7 +23,7 @@ function lt(a: Date, b: Date): boolean;
 
 function lt(a: any, b?: any): ((b: any) => boolean) | boolean {
   if (b === undefined) {
-    return (_b: any) => lt(_b, a);
+    return (_b: any) => lt(a, _b);
   }
 
   if (a.constructor !== b.constructor) {

@@ -4,19 +4,19 @@ describe("lt(little)", function () {
   describe("lt given curry", function () {
     it("given array then should return little values", function () {
       const result = pipe([4, 5, 6], filter(lt(5)), toArray);
-      expect(result).toEqual([4]);
+      expect(result).toEqual([6]);
     });
     it("given array then should return empty array", function () {
-      const result = pipe([5, 6, 7], filter(lt(5)), toArray);
+      const result = pipe([5, 6, 7], filter(lt(7)), toArray);
       expect(result).toEqual([]);
     });
 
-    it("given string array then should return [a, b, c]", function () {
+    it("given string array then should return [e]", function () {
       const result = pipe(["a", "b", "c", "d", "e"], filter(lt("d")), toArray);
-      expect(result).toEqual(["a", "b", "c"]);
+      expect(result).toEqual(["e"]);
     });
     it("given string array then should return empty array", function () {
-      const result = pipe(["a", "b", "c", "d"], filter(lt("a")), toArray);
+      const result = pipe(["a", "b", "c", "d"], filter(lt("d")), toArray);
       expect(result).toEqual([]);
     });
     it("given date array then should return date array", function () {
@@ -26,13 +26,13 @@ describe("lt(little)", function () {
         toArray,
       );
 
-      expect(result).toEqual([new Date(2022, 3, 9)]);
+      expect(result).toEqual([new Date(2022, 4, 10)]);
     });
 
     it("given data array then should return empty array", function () {
       const result = pipe(
         [new Date(2021, 4, 10), new Date(2021, 3, 9)],
-        filter(lt(new Date(4, 11))),
+        filter(lt(new Date())),
         toArray,
       );
 
