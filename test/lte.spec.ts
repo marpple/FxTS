@@ -4,25 +4,25 @@ describe("lte(little or equal)", function () {
   describe("lte given curry", function () {
     it("given array then should return little values", function () {
       const result = pipe([4, 5, 6], filter(lte(5)), toArray);
-      expect(result).toEqual([4, 5]);
+      expect(result).toEqual([5, 6]);
     });
     it("given array then should return empty array", function () {
-      const result = pipe([6, 7], filter(lte(5)), toArray);
+      const result = pipe([6, 7], filter(lte(8)), toArray);
       expect(result).toEqual([]);
     });
 
-    it("given string array then should return [a, b, c]", function () {
+    it("given string array then should return [d, e]", function () {
       const result = pipe(["a", "b", "c", "d", "e"], filter(lte("d")), toArray);
-      expect(result).toEqual(["a", "b", "c", "d"]);
+      expect(result).toEqual(["d", "e"]);
     });
     it("given string array then should return empty array", function () {
-      const result = pipe(["b", "c", "d"], filter(lte("a")), toArray);
+      const result = pipe(["b", "c", "d"], filter(lte("e")), toArray);
       expect(result).toEqual([]);
     });
     it("given date array then should return date array", function () {
       const result = pipe(
-        [new Date(2022, 4, 10), new Date(2022, 3, 9), new Date(2022, 3, 10)],
-        filter(lte(new Date(2022, 3, 10))),
+        [new Date(2022, 2, 10), new Date(2022, 3, 9), new Date(2022, 3, 10)],
+        filter(lte(new Date(2022, 3, 8))),
         toArray,
       );
 
@@ -32,7 +32,7 @@ describe("lte(little or equal)", function () {
     it("given data array then should return empty array", function () {
       const result = pipe(
         [new Date(2021, 4, 10), new Date(2021, 3, 9)],
-        filter(lte(new Date(4, 11))),
+        filter(lte(new Date())),
         toArray,
       );
 

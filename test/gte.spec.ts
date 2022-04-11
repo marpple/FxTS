@@ -4,19 +4,19 @@ describe("gte(greater or equal)", function () {
   describe("should return curry", function () {
     it("given array then should return greater values", function () {
       const result = pipe([4, 5, 6], filter(gte(5)), toArray);
-      expect(result).toEqual([5, 6]);
+      expect(result).toEqual([4, 5]);
     });
     it("given array then should return empty array", function () {
-      const result = pipe([5, 6, 7], filter(gte(8)), toArray);
+      const result = pipe([5, 6, 7], filter(gte(4)), toArray);
       expect(result).toEqual([]);
     });
 
-    it("given string array then should return [c, d, e]", function () {
+    it("given string array then should return [a, b, c]", function () {
       const result = pipe(["a", "b", "c", "d", "e"], filter(gte("c")), toArray);
-      expect(result).toEqual(["c", "d", "e"]);
+      expect(result).toEqual(["a", "b", "c"]);
     });
     it("given string array then should return empty array", function () {
-      const result = pipe(["a", "b", "c", "d"], filter(gte("e")), toArray);
+      const result = pipe(["b", "c", "d"], filter(gte("a")), toArray);
       expect(result).toEqual([]);
     });
     it("given date array then should return date array", function () {
@@ -26,13 +26,13 @@ describe("gte(greater or equal)", function () {
         toArray,
       );
 
-      expect(result).toEqual([new Date(2022, 4, 10), new Date(2022, 4, 11)]);
+      expect(result).toEqual([new Date(2022, 4, 10), new Date(2022, 3, 9)]);
     });
 
     it("given data array then should return empty array", function () {
       const result = pipe(
         [new Date(2021, 4, 10), new Date(2021, 3, 9)],
-        filter(gte(new Date())),
+        filter(gte(new Date(2020, 4, 10))),
         toArray,
       );
 

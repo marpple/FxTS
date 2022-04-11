@@ -24,7 +24,7 @@ function lte(a: Date, b: Date): boolean;
 
 function lte(a: any, b?: any): ((b: any) => boolean) | boolean {
   if (b === undefined) {
-    return (_b: any) => lte(_b, a);
+    return (_b: any) => lte(a, _b);
   }
 
   if (a.constructor !== b.constructor) {

@@ -24,7 +24,7 @@ function gte(a: Date, b: Date): boolean;
 
 function gte(a: any, b?: any): ((b: any) => boolean) | boolean {
   if (b === undefined) {
-    return (_b: any) => gte(_b, a);
+    return (_b: any) => gte(a, _b);
   }
 
   if (a.constructor !== b.constructor) {
