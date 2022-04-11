@@ -15,27 +15,25 @@
  * filter(lte("b"), ["c", "d"]) // Itreable<[]>
  * ```
  */
-function lte(a: string | number | Date): (b: string | number | Date) => boolean;
+function lte(a: string): (b: string) => boolean;
+function lte(a: number): (b: number) => boolean;
+function lte(a: Date): (b: Date) => boolean;
 function lte(a: string, b: string): boolean;
 function lte(a: number, b: number): boolean;
 function lte(a: Date, b: Date): boolean;
 
-function lte(
-  a: string | number | Date,
-  _b?: string | number | Date,
-): ((b: string | number | Date) => boolean) | boolean {
-  if (_b !== undefined) {
-    return a <= _b;
+function lte(a: any, b?: any): ((b: any) => boolean) | boolean {
+  if (b === undefined) {
+    return (_b: any) => lte(_b, a);
   }
 
-  return (b: string | number | Date): boolean => {
-    if (typeof a !== typeof b) {
-      throw new TypeError(
-        "The values you want to compare must be of the same type",
-      );
-    }
-    return b <= a;
-  };
+  if (a.constructor !== b.constructor) {
+    throw new TypeError(
+      "The values you want to compare must be of the same type",
+    );
+  }
+
+  return a <= b;
 }
 
 export default lte;

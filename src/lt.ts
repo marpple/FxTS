@@ -3,10 +3,10 @@
  *
  * @example
  * ```ts
- * gte(5, 1) // expected false
- * gte(1, 5) // expected true
- * gte("a", "b") // expected true
- * gte("b", "a") // expected false
+ * lte(5, 1) // expected false
+ * lte(1, 5) // expected true
+ * lte("a", "b") // expected true
+ * lte("b", "a") // expected false
  *
  * filter(lt(5), [1, 2, 4, 5, 8, 9]) // Iterable<[1, 2, 4]>
  * filter(lt(5), [5, 6, 7]) // Iterable<[]>
@@ -14,27 +14,25 @@
  * filter(lt("b"), ["b", "c", "d"]) // Itreable<[]>
  * ```
  */
-function lt(a: string | number | Date): (b: string | number | Date) => boolean;
+function lt(a: string): (b: string) => boolean;
+function lt(a: number): (b: number) => boolean;
+function lt(a: Date): (b: Date) => boolean;
 function lt(a: string, b: string): boolean;
 function lt(a: number, b: number): boolean;
 function lt(a: Date, b: Date): boolean;
 
-function lt(
-  a: string | number | Date,
-  _b?: string | number | Date,
-): ((b: string | number | Date) => boolean) | boolean {
-  if (_b !== undefined) {
-    return a < _b;
+function lt(a: any, b?: any): ((b: any) => boolean) | boolean {
+  if (b === undefined) {
+    return (_b: any) => lt(_b, a);
   }
 
-  return (b: string | number | Date): boolean => {
-    if (typeof a !== typeof b) {
-      throw new TypeError(
-        "The values you want to compare must be of the same type",
-      );
-    }
-    return b < a;
-  };
+  if (a.constructor !== b.constructor) {
+    throw new TypeError(
+      "The values you want to compare must be of the same type",
+    );
+  }
+
+  return a < b;
 }
 
 export default lt;
