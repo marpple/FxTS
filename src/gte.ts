@@ -9,10 +9,10 @@
  * gte("a", "b") // expected false
  * gte("b", "a") // expected true
  *
- * figter(gte(5), [1, 2, 4, 5, 8, 9]) // Iterable<[1, 2, 4, 5]>
- * figter(gte(1), [2, 3, 4]) // Iterable<[]>
- * figter(gte("b"), ["a", "b", "c"]) // Iterable<["a", "b"]>
- * figter(gte("a"), ["b"]) // Itreable<[]>
+ * filter(gte(5), [1, 2, 4, 5, 8, 9]) // Iterable<[1, 2, 4, 5]>
+ * filter(gte(1), [2, 3, 4]) // Iterable<[]>
+ * filter(gte("b"), ["a", "b", "c"]) // Iterable<["a", "b"]>
+ * filter(gte("a"), ["b"]) // Itreable<[]>
  * ```
  */
 function gte(a: string): (b: string) => boolean;
