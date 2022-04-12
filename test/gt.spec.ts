@@ -1,7 +1,7 @@
 import { filter, gt, pipe, toArray } from "../src/index";
 
-describe("gt(greater)", function () {
-  describe("should return curry", function () {
+describe("gt(greater then)", function () {
+  describe("currying", function () {
     it("given array then should return array with filtered values greater than 5", function () {
       const result = pipe([4, 5, 6], filter(gt(5)), toArray);
       expect(result).toEqual([4]);
@@ -40,7 +40,7 @@ describe("gt(greater)", function () {
     });
   });
 
-  describe("should return boolean", function () {
+  describe("eager evaluation", function () {
     it("should return true that the first number is greater than second", function () {
       expect(gt(5, 1)).toEqual(true);
     });

@@ -1,7 +1,7 @@
 import { filter, gte, pipe, toArray } from "../src/index";
 
-describe("gte(greater or equal)", function () {
-  describe("should return curry", function () {
+describe("gte(greater then or equal to)", function () {
+  describe("currying", function () {
     it("given array then should return greater values", function () {
       const result = pipe([4, 5, 6], filter(gte(5)), toArray);
       expect(result).toEqual([4, 5]);
@@ -40,7 +40,7 @@ describe("gte(greater or equal)", function () {
     });
   });
 
-  describe("should return boolean", function () {
+  describe("eager evaluation", function () {
     it("should return true that the first number is greater than second", function () {
       expect(gte(5, 1)).toEqual(true);
     });

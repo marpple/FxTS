@@ -1,7 +1,7 @@
 import { filter, lt, pipe, toArray } from "../src/index";
 
-describe("lt(little)", function () {
-  describe("lt given curry", function () {
+describe("lt(less then)", function () {
+  describe("currying", function () {
     it("given array then should return little values", function () {
       const result = pipe([4, 5, 6], filter(lt(5)), toArray);
       expect(result).toEqual([6]);
@@ -39,7 +39,7 @@ describe("lt(little)", function () {
       expect(result).toEqual([]);
     });
   });
-  describe("lt given boolean", function () {
+  describe("eager evaluation", function () {
     it("should return true that the first number is less than second", function () {
       expect(lt(1, 5)).toEqual(true);
     });
