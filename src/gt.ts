@@ -8,10 +8,10 @@
  * gt("a", "b") // expected false
  * gt("b", "a") // expected true
  *
- * filter(gt(5), [1, 2, 4, 5, 8, 9]) // Iterable<[8, 9]>
- * filter(gt(5), [1, 2, 3, 4, 5]) // Iterable<[]>
- * filter(gt("b"), ["a", "b", "c"]) // Iterable<["c"]>
- * filter(gt("b"), ["a", "b"]) // Itreable<[]>
+ * filter(gt(5), [1, 2, 4, 5, 8, 9]) // Iterable<[1, 2, 4]>
+ * filter(gt(1), [1, 2, 3, 4, 5]) // Iterable<[]>
+ * filter(gt("b"), ["a", "b", "c"]) // Iterable<["a"]>
+ * filter(gt("a"), ["a", "b"]) // Itreable<[]>
  * ```
  */
 

@@ -8,10 +8,10 @@
  * lte("a", "b") // expected true
  * lte("b", "a") // expected false
  *
- * filter(lt(5), [1, 2, 4, 5, 8, 9]) // Iterable<[1, 2, 4]>
- * filter(lt(5), [5, 6, 7]) // Iterable<[]>
- * filter(lt("b"), ["a", "b", "c"]) // Iterable<["a"]>
- * filter(lt("b"), ["b", "c", "d"]) // Itreable<[]>
+ * filter(lt(5), [1, 2, 4, 5, 8, 9]) // Iterable<[5, 8, 9]>
+ * filter(lt(7), [5, 6, 7]) // Iterable<[]>
+ * filter(lt("b"), ["a", "b", "c"]) // Iterable<["b", "c"]>
+ * filter(lt("e"), ["b", "c", "d"]) // Itreable<[]>
  * ```
  */
 function lt(a: string): (b: string) => boolean;
