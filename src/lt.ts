@@ -3,14 +3,14 @@
  *
  * @example
  * ```ts
- * lte(5, 1) // expected false
- * lte(1, 5) // expected true
- * lte("a", "b") // expected true
- * lte("b", "a") // expected false
+ * lt(5, 1) // expected false
+ * lt(1, 5) // expected true
+ * lt("a", "b") // expected true
+ * lt("b", "a") // expected false
  *
- * filter(lt(5), [1, 2, 4, 5, 8, 9]) // Iterable<[5, 8, 9]>
+ * filter(lt(5), [1, 2, 4, 5, 8, 9]) // Iterable<[8, 9]>
  * filter(lt(7), [5, 6, 7]) // Iterable<[]>
- * filter(lt("b"), ["a", "b", "c"]) // Iterable<["b", "c"]>
+ * filter(lt("b"), ["a", "b", "c"]) // Iterable<["c"]>
  * filter(lt("e"), ["b", "c", "d"]) // Itreable<[]>
  * ```
  */
