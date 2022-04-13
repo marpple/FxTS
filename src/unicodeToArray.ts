@@ -47,10 +47,10 @@ const reUnicode = RegExp(`${rsFitz}(?=${rsFitz})|${rsSymbol + rsSeq}`, "g");
 /**
  * Converts a Unicode `string` to an array.
  *
- * * @example
- * * ```ts
- * *  unicodeToArray('🙇‍♂️🤩😭'); // ['🙇‍♂️','🤩','😭'];
- * * ```
+ * @example
+ * ```ts
+ *  unicodeToArray('🙇‍♂️🤩😭'); // ['🙇‍♂️','🤩','😭'];
+ * ```
  */
 function unicodeToArray(string: string) {
   return string.match(reUnicode) || [];
