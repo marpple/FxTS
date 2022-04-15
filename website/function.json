@@ -58,6 +58,8 @@
     "findIndex",
     "fromEntries",
     "groupBy",
+    "gt",
+    "gte",
     "head",
     "identity",
     "includes",
@@ -68,9 +70,12 @@
     "isNumber",
     "isObject",
     "isString",
+    "isUndefined",
     "join",
     "juxt",
     "last",
+    "lt",
+    "lte",
     "max",
     "min",
     "noop",
@@ -89,6 +94,7 @@
     "sortBy",
     "sum",
     "tap",
-    "toArray"
+    "toArray",
+    "unicodeToArray"
   ]
 }

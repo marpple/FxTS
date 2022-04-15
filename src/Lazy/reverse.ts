@@ -5,21 +5,9 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import concurrent, { isConcurrent } from "./concurrent";
 
-function* stringReverse(str: string) {
-  const arr = Array.from(str);
-  for (let i = arr.length - 1; i >= 0; i--) {
-    yield arr[i];
-  }
-}
-
-function* arrayReverse<T>(arr: Array<T>) {
-  for (let i = arr.length - 1; i >= 0; i--) {
-    yield arr[i];
-  }
-}
-
 function* sync<T>(iterable: Iterable<T>) {
-  const arr = toArray(iterable);
+  const arr =
+    isArray(iterable) || isString(iterable) ? iterable : toArray(iterable);
   for (let i = arr.length - 1; i >= 0; i--) {
     yield arr[i];
   }
@@ -92,14 +80,6 @@ function reverse<T extends Iterable<unknown> | AsyncIterable<unknown>>(
 function reverse<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: T,
 ) {
-  if (isArray(iterable)) {
-    return arrayReverse(iterable);
-  }
-
-  if (isString(iterable)) {
-    return stringReverse(iterable);
-  }
-
   if (isIterable(iterable)) {
     return sync(iterable);
   }

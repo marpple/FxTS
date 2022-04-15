@@ -24,6 +24,7 @@ import isNil from "./isNil";
 import isNumber from "./isNumber";
 import isObject from "./isObject";
 import isString from "./isString";
+import isUndefined from "./isUndefined";
 import join from "./join";
 import juxt from "./juxt";
 import last from "./last";
@@ -49,6 +50,7 @@ import sortBy from "./sortBy";
 import sum from "./sum";
 import tap from "./tap";
 import toArray from "./toArray";
+import unicodeToArray from "./unicodeToArray";
 
 export {
   add,
@@ -80,6 +82,7 @@ export {
   isNumber,
   isObject,
   isString,
+  isUndefined,
   join,
   juxt,
   last,
@@ -105,6 +108,7 @@ export {
   sum,
   tap,
   toArray,
+  unicodeToArray,
 };
 
 export * from "./Lazy/index";
