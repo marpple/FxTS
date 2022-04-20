@@ -1,7 +1,7 @@
 import concurrent, { isConcurrent } from "./concurrent";
 import last from "../last";
 import IterableInfer from "../types/IterableInfer";
-import { type DeepFlat, DeepFlatSync } from "../types/DeepFlat";
+import type { DeepFlat, DeepFlatSync } from "../types/DeepFlat";
 import { empty, isAsyncIterable, isIterable } from "../_internal/utils";
 import { Reject, Resolve } from "../types/Utils";
 import append from "./append";
