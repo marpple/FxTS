@@ -6,6 +6,7 @@
     "module": "commonjs",
     "lib": ["es2020"],
     "sourceMap": true,
+    "inlineSources": true,
     "outDir": "./dist/cjs/",
     "rootDir": "./src/",
     "baseUrl": "./",
