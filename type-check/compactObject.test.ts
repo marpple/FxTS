@@ -12,15 +12,16 @@ type Input = {
   f?: string | null | undefined;
   g: undefined;
   h: null;
+  i: null | undefined;
 };
 
 type Result = {
   a: number;
-  b: string | undefined;
-  c: boolean | undefined;
-  d: number | undefined;
-  e: string | undefined;
-  f: string | undefined;
+  b?: string;
+  c?: boolean;
+  d?: number;
+  e?: string;
+  f?: string;
 };
 
 const res = compactObject({} as Input);

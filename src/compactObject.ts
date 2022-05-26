@@ -1,18 +1,32 @@
 import isNil from "./isNil";
-
-type NullToUndefined<T> = T extends Exclude<T, null>
-  ? T
-  : Exclude<T, null> | undefined;
+import Merge from "./types/Merge";
 
 type MapNonNullableEntries<T extends object> = {
-  [K in keyof T]: [K, NullToUndefined<T[K]>];
+  [K in keyof T]: [K, Exclude<T[K], null | undefined>];
 };
 
-type MapNonNullableKeys<T extends object> = {
-  [K in keyof T]: NonNullable<T[K]> extends never ? never : K;
+type MapRequiredKeys<T extends object> = {
+  [K in keyof T]: null extends Extract<T[K], null>
+    ? never
+    : undefined extends Extract<T[K], undefined>
+    ? never
+    : K;
 };
 
-type NonNullableKeys<T extends object, U = MapNonNullableKeys<T>> = Exclude<
+type MapOptionalKeys<T extends object> = {
+  [K in keyof T]: Exclude<T[K], null | undefined> extends never
+    ? never
+    : T[K] extends Exclude<T[K], null | undefined>
+    ? never
+    : K;
+};
+
+type RequiredKeys<T extends object, U = MapRequiredKeys<T>> = Exclude<
+  U[keyof U],
+  never
+>;
+
+type OptionalKeys<T extends object, U = MapOptionalKeys<T>> = Exclude<
   U[keyof U],
   never
 >;
@@ -33,12 +47,20 @@ type NonNullableEntries<
  */
 export default function compactObject<T extends object>(
   obj: T,
-): {
-  [K in Extract<keyof T, NonNullableKeys<T>>]: Extract<
-    NonNullableEntries<T>,
-    [K, any]
-  >[1];
-} {
+): Merge<
+  {
+    [K in Extract<keyof T, RequiredKeys<T>>]: Extract<
+      NonNullableEntries<T>,
+      [K, any]
+    >[1];
+  },
+  {
+    [K in Extract<keyof T, OptionalKeys<T>>]?: Extract<
+      NonNullableEntries<T>,
+      [K, any]
+    >[1];
+  }
+> {
   return Object.fromEntries(
     Object.entries(obj).filter(([, value]) => !isNil(value)),
   ) as any;
