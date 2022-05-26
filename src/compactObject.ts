@@ -34,7 +34,7 @@ type ReturnCompactObject<T extends object> = {
  *
  * @example
  * ```ts
- * const compacted = compact({ a: 1, b:"b", c: null, d: undefined });
+ * const compacted = compactObject({ a: 1, b: "b", c: null, d: undefined });
  * // {a: 1, b: "b"}
  * ```
  */
