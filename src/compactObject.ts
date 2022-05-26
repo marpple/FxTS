@@ -22,13 +22,6 @@ type NonNullableEntries<
   U = MapNonNullableEntries<T>,
 > = Exclude<U[keyof U], [any, never]>;
 
-type ReturnCompactObject<T extends object> = {
-  [K in Extract<keyof T, NonNullableKeys<T>>]: Extract<
-    NonNullableEntries<T>,
-    [K, any]
-  >[1];
-};
-
 /**
  * Returns an object with all nullable values removed.
  *
@@ -40,7 +33,12 @@ type ReturnCompactObject<T extends object> = {
  */
 export default function compactObject<T extends object>(
   obj: T,
-): ReturnCompactObject<T> {
+): {
+  [K in Extract<keyof T, NonNullableKeys<T>>]: Extract<
+    NonNullableEntries<T>,
+    [K, any]
+  >[1];
+} {
   return Object.fromEntries(
     Object.entries(obj).filter(([, value]) => !isNil(value)),
   ) as any;
