@@ -1,6 +1,7 @@
 import add from "./add";
 import apply from "./apply";
 import average from "./average";
+import compactObject from "./compactObject";
 import consume from "./consume";
 import countBy from "./countBy";
 import curry from "./curry";
@@ -57,6 +58,7 @@ export {
   apply,
   average,
   average as mean,
+  compactObject,
   consume,
   countBy,
   curry,

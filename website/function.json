@@ -47,6 +47,7 @@
     "add",
     "apply",
     "average",
+    "compactObject",
     "consume",
     "countBy",
     "curry",
