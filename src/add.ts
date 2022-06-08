@@ -1,6 +1,7 @@
 import isNumber from "./isNumber";
 import isString from "./isString";
 import Awaited from "./types/Awaited";
+import { isPromise } from "./_internal/utils";
 
 // prettier-ignore
 type ReturnAddType<T, A extends T, B extends T> = 
@@ -71,7 +72,7 @@ function add<
     };
   }
 
-  if (a instanceof Promise || b instanceof Promise) {
+  if (isPromise(a) || isPromise(b)) {
     return async(Promise.resolve(a), Promise.resolve(b));
   }
 

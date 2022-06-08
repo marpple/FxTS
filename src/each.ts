@@ -1,6 +1,6 @@
 import IterableInfer from "./types/IterableInfer";
 import ReturnValueType from "./types/ReturnValueType";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
+import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 
 function sync<A, B = unknown>(f: (a: A) => B, iterable: Iterable<A>): void {
   for (const a of iterable) {
@@ -14,7 +14,7 @@ async function async<A, B = unknown>(
 ): Promise<void> {
   for await (const item of iterable) {
     const value = f(item);
-    if (value instanceof Promise) {
+    if (isPromise(value)) {
       await value;
     }
   }

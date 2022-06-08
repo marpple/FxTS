@@ -1,4 +1,4 @@
-import { isAsyncIterable, isIterable } from "../_internal/utils";
+import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
 import Awaited from "../types/Awaited";
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
@@ -21,7 +21,7 @@ function sync<A, B>(
       }
 
       const res = f(value);
-      if (res instanceof Promise) {
+      if (isPromise(res)) {
         throw new AsyncFunctionException();
       }
 
