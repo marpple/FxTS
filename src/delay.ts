@@ -1,3 +1,5 @@
+import { isPromise } from "./_internal/utils";
+
 /**
  * Delays the value by given `wait` time
  *
@@ -11,7 +13,7 @@ function delay(wait: number): Promise<void>;
 function delay<T>(wait: number, value: T): Promise<T>;
 function delay<T>(wait: number, value?: T): Promise<T | undefined> {
   return new Promise((resolve, reject) => {
-    if (value instanceof Promise) {
+    if (isPromise(value)) {
       value.catch(reject);
     }
 

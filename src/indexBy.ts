@@ -1,7 +1,7 @@
 import Key from "./types/Key";
 import ReturnValueType from "./types/ReturnValueType";
 import IterableInfer from "./types/IterableInfer";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
+import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import reduce from "./reduce";
 import { AsyncFunctionException } from "./_internal/error";
 
@@ -71,7 +71,7 @@ function indexBy<
     return reduce(
       (group, a) => {
         const key = f(a);
-        if (key instanceof Promise) {
+        if (isPromise(key)) {
           throw new AsyncFunctionException();
         }
         return (group[key] = a), group;

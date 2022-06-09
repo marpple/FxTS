@@ -1,6 +1,6 @@
 import Awaited from "../types/Awaited";
 import ReturnPrependType from "../types/ReturnPrependType";
-import { isAsyncIterable, isIterable } from "../_internal/utils";
+import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
 
 function* sync<A>(a: A, iterable: Iterable<A>): IterableIterator<A> {
   yield a;
@@ -90,7 +90,7 @@ function prepend<A, B extends Iterable<A> | AsyncIterable<Awaited<A>>>(
   }
 
   if (isAsyncIterable(iterable)) {
-    return async(a instanceof Promise ? a : Promise.resolve(a), iterable);
+    return async(isPromise(a) ? a : Promise.resolve(a), iterable);
   }
 
   if (isIterable(iterable)) {

@@ -9,6 +9,7 @@ import toAsync from "./Lazy/toAsync";
 import map from "./Lazy/map";
 import zip from "./Lazy/zip";
 import pipe from "./pipe";
+import { isPromise } from "./_internal/utils";
 
 /**
  *
@@ -78,7 +79,7 @@ function pickBy<T extends object, F extends ConditionalAsyncEntryPredicate<T>>(
 
   const entries = Object.entries(obj);
   const conditions = entries.map((entry) => f(entry as any));
-  const isAsync = conditions.some((c) => c instanceof Promise);
+  const isAsync = conditions.some((c) => isPromise(c));
 
   if (isAsync) {
     return pipe(

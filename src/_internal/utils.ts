@@ -40,3 +40,20 @@ export const asyncEmpty = async function* () {};
 
 export const isNotNullable = <T>(a: T): a is NonNullable<T> =>
   a !== null && a !== undefined;
+
+export const isPromise = <T>(a: Promise<T> | T): a is Promise<T> => {
+  if (a instanceof Promise) {
+    return true;
+  }
+
+  if (
+    a !== null &&
+    typeof a === "object" &&
+    typeof (a as any).then === "function" &&
+    typeof (a as any).catch === "function"
+  ) {
+    return true;
+  }
+
+  return false;
+};

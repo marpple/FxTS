@@ -1,4 +1,6 @@
 import {
+  delay,
+  each,
   filter,
   map,
   pipe,
@@ -73,6 +75,25 @@ describe("pipe", function () {
           (a) => reduce((acc: number, a) => acc + a, a),
         ),
       ).rejects.toThrow("err");
+    });
+
+    it("should be able to use thenable object", async function () {
+      let res = 0;
+
+      await pipe(
+        ["a", "b", "c"],
+        toAsync,
+        each(() => {
+          return {
+            then: (resolve: any) => {
+              resolve(delay(0).then(() => res++));
+            },
+            catch: (reject: any) => reject(),
+          };
+        }),
+      );
+
+      expect(res).toBe(3);
     });
   });
 });

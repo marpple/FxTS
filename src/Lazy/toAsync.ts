@@ -1,3 +1,5 @@
+import { isPromise } from "../_internal/utils";
+
 /**
  * Returns AsyncIterable, `toAsync` used when you want to handle Promise values inside Iterable.
  *
@@ -28,7 +30,7 @@ function toAsync<T>(iter: Iterable<T | Promise<T>>): AsyncIterableIterator<T> {
   return {
     async next() {
       const { value, done } = iterator.next();
-      if (value instanceof Promise) {
+      if (isPromise(value)) {
         return value.then((value) => ({ done, value }));
       } else {
         return { done, value };
