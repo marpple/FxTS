@@ -23,6 +23,7 @@ import isArray from "./isArray";
 import isEmpty from "./isEmpty";
 import isNil from "./isNil";
 import isNumber from "./isNumber";
+import isBoolean from "./isBoolean";
 import isObject from "./isObject";
 import isString from "./isString";
 import isUndefined from "./isUndefined";
@@ -82,6 +83,7 @@ export {
   isEmpty,
   isNil,
   isNumber,
+  isBoolean,
   isObject,
   isString,
   isUndefined,
