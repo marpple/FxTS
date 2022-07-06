@@ -66,6 +66,7 @@
     "includes",
     "indexBy",
     "isArray",
+    "isBoolean",
     "isEmpty",
     "isNil",
     "isNumber",
