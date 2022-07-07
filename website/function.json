@@ -70,7 +70,6 @@
     "isEmpty",
     "isNil",
     "isNumber",
-    "isBoolean",
     "isObject",
     "isString",
     "isUndefined",
