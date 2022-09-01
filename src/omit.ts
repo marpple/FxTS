@@ -2,7 +2,7 @@ import IterableInfer from "./types/IterableInfer";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import toArray from "./toArray";
 
-function inner<T>(obj: T, keys: Set<keyof T>) {
+function inner<T extends object>(obj: T, keys: Set<keyof T>) {
   return Object.fromEntries(
     Object.entries(obj).filter(([k]) => !keys.has(k as keyof T)),
   );
