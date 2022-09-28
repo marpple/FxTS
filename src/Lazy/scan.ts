@@ -19,19 +19,19 @@ function* sync<A, B>(
 }
 
 async function* asyncSequential<A, B>(
-  f: (a: B, b: A) => B,
-  acc: Promise<B>,
+  f: (a: B, b: A) => B | Promise<B>,
+  acc: B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<B> {
   yield acc;
   for await (const a of iterable) {
-    yield (acc = pipe1(acc, (acc) => f(acc as B, a)));
+    yield (acc = pipe1(acc, (acc) => f(acc, a)) as B | Promise<B>);
   }
 }
 
 function async<A, B>(
-  f: (a: B, b: A) => B,
-  acc: Promise<B>,
+  f: (a: B, b: A) => B | Promise<B>,
+  acc: B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<B> {
   let _iterator: AsyncIterator<B>;

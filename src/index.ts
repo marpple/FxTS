@@ -1,6 +1,7 @@
 import add from "./add";
 import apply from "./apply";
 import average from "./average";
+import compactObject from "./compactObject";
 import consume from "./consume";
 import countBy from "./countBy";
 import curry from "./curry";
@@ -19,6 +20,7 @@ import identity from "./identity";
 import includes from "./includes";
 import indexBy from "./indexBy";
 import isArray from "./isArray";
+import isBoolean from "./isBoolean";
 import isEmpty from "./isEmpty";
 import isNil from "./isNil";
 import isNumber from "./isNumber";
@@ -57,6 +59,7 @@ export {
   apply,
   average,
   average as mean,
+  compactObject,
   consume,
   countBy,
   curry,
@@ -77,6 +80,7 @@ export {
   includes as contains,
   indexBy,
   isArray,
+  isBoolean,
   isEmpty,
   isNil,
   isNumber,

@@ -1,4 +1,4 @@
-import { isAsyncIterable, isIterable } from "../_internal/utils";
+import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
 import concurrent, { Concurrent, isConcurrent } from "./concurrent";
 import pipe1 from "../pipe1";
 import IterableInfer from "../types/IterableInfer";
@@ -155,7 +155,7 @@ function* sync<A>(f: (a: A) => unknown, iterable: Iterable<A>) {
   for (const a of iterable) {
     const res = f(a);
 
-    if (res instanceof Promise) {
+    if (isPromise(res)) {
       throw new AsyncFunctionException();
     }
 

@@ -3,7 +3,7 @@ import flat from "./flat";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import Awaited from "../types/Awaited";
 import IterableInfer from "../types/IterableInfer";
-import { type DeepFlat, type DeepFlatSync } from "../types/DeepFlat";
+import type { DeepFlat, DeepFlatSync } from "../types/DeepFlat";
 
 type ReturnFlatMapType<
   A extends Iterable<unknown> | AsyncIterable<unknown>,

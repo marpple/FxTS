@@ -1,4 +1,5 @@
 import Awaited from "./types/Awaited";
+import { isPromise } from "./_internal/utils";
 /**
  * This method invokes interceptor and returns a value.
  * The interceptor is invoked with one argument.
@@ -34,8 +35,8 @@ function tap<T, U>(
     return (v: T) => tap(f, v);
   }
 
-  const res = v instanceof Promise ? v.then(f) : f(v as Awaited<T>);
-  if (res instanceof Promise) {
+  const res = isPromise(v) ? v.then(f as any) : (f(v as Awaited<T>) as any);
+  if (isPromise(res)) {
     return res.then(() => v);
   }
 

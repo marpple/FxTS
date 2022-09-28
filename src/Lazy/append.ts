@@ -1,4 +1,4 @@
-import { isAsyncIterable, isIterable } from "../_internal/utils";
+import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 import Awaited from "../types/Awaited";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
@@ -121,7 +121,7 @@ function append<A, B extends Iterable<A> | AsyncIterable<A>>(
   }
 
   if (isAsyncIterable(iterable)) {
-    return async(a instanceof Promise ? a : Promise.resolve(a), iterable);
+    return async(isPromise(a) ? a : Promise.resolve(a), iterable);
   }
 
   if (isIterable(iterable)) {

@@ -1,6 +1,6 @@
 import IterableInfer from "./types/IterableInfer";
 import ReturnPartitionType from "./types/ReturnPartitionType";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
+import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import groupBy from "./groupBy";
 import { AsyncFunctionException } from "./_internal/error";
 
@@ -69,7 +69,7 @@ function partition<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
   if (isIterable<IterableInfer<A>>(iterable)) {
     const group = groupBy((a) => {
       const key = f(a);
-      if (key instanceof Promise) {
+      if (isPromise(key)) {
         throw new AsyncFunctionException();
       }
       return `${Boolean(key)}`;

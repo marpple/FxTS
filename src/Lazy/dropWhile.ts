@@ -1,7 +1,7 @@
 import IterableInfer from "../types/IterableInfer";
 import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { AsyncFunctionException } from "../_internal/error";
-import { isAsyncIterable, isIterable } from "../_internal/utils";
+import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync<A, B>(f: (a: A) => B, iterable: Iterable<A>) {
@@ -14,7 +14,7 @@ function* sync<A, B>(f: (a: A) => B, iterable: Iterable<A>) {
 
   for (const a of iterableIterator) {
     const res = f(a);
-    if (res instanceof Promise) {
+    if (isPromise(res)) {
       throw new AsyncFunctionException();
     }
 
