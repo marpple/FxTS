@@ -15,6 +15,8 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
  */
 function includes<T extends readonly []>(value: unknown, iterable: T): false;
 
+function includes<T, U extends T>(value: T, iterable: Iterable<U>): value is U;
+
 // prettier-ignore
 function includes<T>(
     value: unknown,
