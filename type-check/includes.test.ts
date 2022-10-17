@@ -19,3 +19,16 @@ checks([
   check<typeof res5, boolean, Test.Pass>(),
   check<typeof res6, Promise<boolean>, Test.Pass>(),
 ]);
+
+const obj = {
+  a: "1",
+  b: "2",
+  c: "3",
+} as const;
+const res7 = "" as string;
+const keys = Object.keys(obj) as ("a" | "b" | "c")[];
+if (includes(res7, keys)) {
+  checks([check<typeof res7, typeof keys[number], Test.Pass>()]);
+} else {
+  checks([check<typeof res7, string, Test.Pass>()]);
+}
