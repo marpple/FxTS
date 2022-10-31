@@ -17,11 +17,14 @@ function sum<A extends Iterable<number> | AsyncIterable<number>>(
   ? number
   : A extends AsyncIterable<number>
   ? Promise<number>
-  : never {
+  : never;
+function sum<A extends Iterable<number> | AsyncIterable<number>>(
+  iterable: A,
+): number | Promise<number> {
   if (Array.isArray(iterable)) {
     return iterable.reduce(add, 0);
   } else if (isIterable(iterable)) {
-    return reduce(add, 0, iterable);
+    return reduce<number, number>((a, b) => add(a, b), 0, iterable);
   } else if (isAsyncIterable(iterable)) {
     return reduce<number, number>(add, Promise.resolve(0), iterable);
   }
