@@ -7,6 +7,7 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
  *
  * @example
  * ```ts
+ * sum([]); // 0
  * sum([1, 2, 3, 4]); // 10
  * await sum(toAsync([1, 2, 3, 4])); // 10
  * ```
@@ -18,6 +19,7 @@ function sum<A extends Iterable<number> | AsyncIterable<number>>(
   : A extends AsyncIterable<number>
   ? Promise<number>
   : never;
+// TODO The signature and implementation type are different.
 function sum<A extends Iterable<number> | AsyncIterable<number>>(
   iterable: A,
 ): number | Promise<number> {
