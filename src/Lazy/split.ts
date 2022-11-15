@@ -83,12 +83,13 @@ function async(
  *
  * // with pipe
  * pipe(
- *  "👍,😀,🙇‍♂️,🤩,🎉",
- *  split(',')
- * ); // ["👍", "😀", "🙇‍♂️", "🤩", "🎉"]
+ *  "1,2,3,4,5",
+ *  split(','),
+ *  toArray,
+ * ); // ["1", "2", "3", "4", "5"]
  * ```
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}
+ * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toArray | toArray}
  */
 function split(
   sep: string,
