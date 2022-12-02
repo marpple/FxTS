@@ -10,14 +10,14 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
  * @example
  * ```ts
  * average([]); // NaN
- * average([1, 2, 3, 4, 5]); // 6
- * await average(toAsync([1, 2, 3, 4, 5])); // 6
+ * average([1, 2, 3, 4, 5]); // 3
+ * await average(toAsync([1, 2, 3, 4, 5])); // 3
  *
  * // with pipe
  * pipe(
  *  [1, 2, 3, 4, 5],
  *  average,
- * ); // 6
+ * ); // 3
  * ```
  *
  * see {@link https://fxts.dev/docs/pipe | pipe}
