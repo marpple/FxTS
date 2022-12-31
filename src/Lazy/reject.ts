@@ -53,6 +53,28 @@ import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/toArray | toArray}
  */
+
+function reject<A, B extends A>(
+  f: (a: A) => a is B,
+  iterable: Iterable<A>,
+): IterableIterator<Exclude<A, B>>;
+
+function reject<A, B extends A>(
+  f: (a: A) => a is B,
+  iterable: AsyncIterable<A>,
+): AsyncIterableIterator<Exclude<A, B>>;
+
+function reject<
+  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  B extends IterableInfer<A>,
+>(
+  f: (a: IterableInfer<A>) => a is B,
+): (
+  iterable: A,
+) => A extends AsyncIterable<any>
+  ? AsyncIterableIterator<Exclude<IterableInfer<A>, B>>
+  : IterableIterator<Exclude<IterableInfer<A>, B>>;
+
 function reject<A, B = unknown>(
   f: (a: A) => B,
   iterable: Iterable<A>,
