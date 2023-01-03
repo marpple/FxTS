@@ -100,7 +100,7 @@ function juxt<FS extends Array<Arrow>>(
   fs: readonly [...FS],
 ): (...args: JuxtArgs<FS>) => JuxtReturnTypes<FS> {
   return (...args: JuxtArgs<FS>) =>
-    fs.map((f) => f(...args)) as JuxtReturnTypes<FS>;
+    fs.map((f) => f(...(args as any))) as JuxtReturnTypes<FS>;
 }
 
 export default juxt;
