@@ -1,29 +1,77 @@
-import type Append from "./types/Append";
 import type Arrow from "./types/Arrow";
-import type Cast from "./types/Cast";
-import type Tail from "./types/Tail";
-import type HasItem from "./types/HasItem";
+import Cast from "./types/Cast";
+import Append from "./types/Append";
+import Tail from "./types/Tail";
+import Head from "./types/Head";
 
-type ParameterTuples<FS extends Arrow[], T = []> = HasItem<FS> extends true
-  ? ParameterTuples<Tail<FS>, Append<Cast<T, any[]>, Parameters<FS[0]>>>
-  : T;
-
-type And<T extends any[], R = T[0]> = HasItem<T> extends true
-  ? And<Tail<T>, R & T[0]>
+/*
+ * HeadEach<[[1,2,3], [4,5,6], [7,8,9]]> => [1, 4, 7]
+ */
+type HeadEach<T extends any[][], R extends any[] = []> = T extends [
+  any[],
+  ...any,
+]
+  ? HeadEach<Cast<Tail<T>, any[][]>, Append<R, Head<T[0]>>>
   : R;
 
+/*
+ * TailEach<[[1,2,3], [4,5,6], [7,8,9]]> => [[2,3], [5,6], [8,9]]
+ */
+type TailEach<T extends any[][], R extends any[] = []> = T extends [
+  any[],
+  ...any,
+]
+  ? TailEach<Cast<Tail<T>, any[][]>, Append<R, Tail<T[0]>>>
+  : R;
+
+/*
+ * Zip<[[1, 2, 3], ['a', 'b'], [true, false, true]]> => [[1, 'a', true], [2, 'b', false], [3, never, true]]
+ */
+type Zip<T extends any[][], R extends any[] = []> = T[number] extends []
+  ? R
+  : Zip<TailEach<T>, Append<R, HeadEach<T>>>;
+
+/*
+ * Sum<[{a: 1}, {b: 2}, {c: 3}]> => {a: 1, b: 2, c: 3}
+ */
+type Sum<T extends any[], R = T[0]> = T extends [any, ...any]
+  ? Sum<Tail<T>, R & T[0]>
+  : R;
+
+/*
+ * SumEach<[[1, 2], ['a', 'b'], [true, false]]> => [1 & 2, 'a' & 'b', true & false]
+ */
+type SumEach<A extends any[][], R extends any[] = []> = A extends [
+  any[],
+  ...any,
+]
+  ? SumEach<Cast<Tail<A>, any[][]>, Append<R, Sum<Head<A>>>>
+  : R;
+
+/*
+ * ParamTuples<[
+ *   (a: number, b: string) => any,
+ *   (a: string, b: number) => any
+ * ]> => [[number, string], [string, number]]
+ */
+type ParamTuples<
+  FS extends Array<Arrow>,
+  Tuples extends any[] = [],
+> = FS extends [Arrow, ...Array<Arrow>]
+  ? ParamTuples<Cast<Tail<FS>, Array<Arrow>>, Append<Tuples, Parameters<FS[0]>>>
+  : Tuples;
+
 type JuxtArgs<
-  FS extends Arrow[],
-  R = Cast<And<ParameterTuples<FS>>, any[]>,
-> = R extends never ? undefined : R;
+  FS extends Array<Arrow>,
+  ARGS extends any[] = ParamTuples<FS>,
+> = Cast<ARGS[0] extends Sum<ARGS> ? ARGS[0] : SumEach<Zip<ARGS>>, any[]>;
 
-type ReturnTuples<FS extends Arrow[], T = []> = HasItem<FS> extends true
-  ? ReturnTuples<Tail<FS>, Append<Cast<T, any[]>, ReturnType<FS[0]>>>
-  : T;
-
-type JuxtReturnTypes<ARGS, FS extends Arrow[]> = ARGS extends undefined
-  ? void
-  : ReturnTuples<FS>;
+type JuxtReturnTypes<
+  FS extends Array<Arrow>,
+  R extends any[] = [],
+> = FS extends [Arrow, ...Array<Arrow>]
+  ? JuxtReturnTypes<Cast<Tail<FS>, Array<Arrow>>, Append<R, ReturnType<FS[0]>>>
+  : R;
 
 /**
  * `juxt` applies a list of functions to a list of values.
@@ -48,11 +96,11 @@ type JuxtReturnTypes<ARGS, FS extends Arrow[]> = ARGS extends undefined
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/apply | apply}
  */
 
-function juxt<FS extends Arrow[]>(
-  fs: [...FS] | readonly [...FS],
-): (...args: JuxtArgs<FS>) => JuxtReturnTypes<JuxtArgs<FS>, FS> {
+function juxt<FS extends Array<Arrow>>(
+  fs: readonly [...FS],
+): (...args: JuxtArgs<FS>) => JuxtReturnTypes<FS> {
   return (...args: JuxtArgs<FS>) =>
-    fs.map((f: Arrow) => f(...(args as any))) as any;
+    fs.map((f) => f(...args)) as JuxtReturnTypes<FS>;
 }
 
 export default juxt;
