@@ -24,7 +24,7 @@ async function main() {
       const importRegex = /import [\w,{}\s\n_*]+ from "[\w,{}\s\n./_]+";/gi;
       const exportRegex = /export [\w,{}\s\n_*]+ from "[\w,{}\s\n./_]+";/gi;
       const statements = (file.match(importRegex) || []).concat(
-        file.match(exportRegex) || [],
+        file.match(exportRegex) || ([] as any),
       );
 
       let acc = file;
