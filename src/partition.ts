@@ -42,6 +42,27 @@ import { AsyncFunctionException } from "./_internal/error";
  *
  *  see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync}
  */
+
+function partition<A, L extends A, R extends A = Exclude<A, L>>(
+  f: (a: A) => a is L,
+  iterable: Iterable<A>,
+): [L[], R[]];
+
+function partition<A, L extends A, R extends A = Exclude<A, L>>(
+  f: (a: A) => a is L,
+  iterable: AsyncIterable<A>,
+): Promise<[L[], R[]]>;
+
+function partition<
+  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  L extends IterableInfer<A>,
+  R = Exclude<IterableInfer<A>, L>,
+>(
+  f: (a: IterableInfer<A>) => a is L,
+): (
+  iterable: A,
+) => A extends AsyncIterable<any> ? Promise<[L[], R[]]> : [L[], R[]];
+
 function partition<A, B>(f: (a: A) => B, iterable: Iterable<A>): [A[], A[]];
 
 function partition<A, B>(
