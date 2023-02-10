@@ -87,5 +87,11 @@ async function generateExports() {
 }
 
 (async function main() {
-  await generateExports();
+  await Promise.all([
+    // Add package.json file to esm/esm5 directory
+    writeFile(`${ESM_ROOT_DIR}/package.json`, '{ "type": "module" }'),
+    writeFile(`${ESM5_ROOT_DIR}/package.json`, '{ "type": "module" }'),
+    // Generate and add 'exports' field to root package.json
+    generateExports(),
+  ]);
 })();
