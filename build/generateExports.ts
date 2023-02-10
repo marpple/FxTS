@@ -4,16 +4,19 @@ import { drop, map, not, pipe, reduce } from "../src/index";
 
 const SOURCE_DIR = "./src";
 const OUTPUT_DIR = "./dist";
+const TYPES_ROOT_DIR = `${OUTPUT_DIR}/types`;
 const CJS_ROOT_DIR = `${OUTPUT_DIR}/cjs`;
 const ESM_ROOT_DIR = `${OUTPUT_DIR}/esm`;
 const ESM5_ROOT_DIR = `${OUTPUT_DIR}/esm5`;
 
 const conditionalRootIndex = {
+  types: `${TYPES_ROOT_DIR}/index.d.ts`,
   import: `${ESM_ROOT_DIR}/index.js`,
   require: `${CJS_ROOT_DIR}/index.js`,
 };
 
 const conditionalRootIndexLazy = {
+  types: `${TYPES_ROOT_DIR}/Lazy/index.d.ts`,
   import: `${ESM_ROOT_DIR}/Lazy/index.js`,
   require: `${CJS_ROOT_DIR}/Lazy/index.js`,
 };
@@ -52,6 +55,7 @@ async function generateExports() {
     fileNames,
     map((name) => {
       const conditionalSubPaths = {
+        types: `${TYPES_ROOT_DIR}/${name}.d.ts`,
         import: `${ESM_ROOT_DIR}/${name}.js`,
         require: `${CJS_ROOT_DIR}/${name}.js`,
       };
@@ -83,10 +87,5 @@ async function generateExports() {
 }
 
 (async function main() {
-  await Promise.all([
-    // Add package.json file to cjs directory
-    writeFile(`${CJS_ROOT_DIR}/package.json`, '{ "type": "commonjs" }'),
-    // Generate and add 'exports' field to root package.json
-    generateExports(),
-  ]);
+  await generateExports();
 })();
