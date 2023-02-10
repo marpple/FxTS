@@ -21,12 +21,12 @@ const res2 = pipe(obj, values);
 checks([
   check<
     typeof res1,
-    Generator<typeof obj[keyof typeof obj], void>,
+    Generator<(typeof obj)[keyof typeof obj], void>,
     Test.Pass
   >(),
   check<
     typeof res2,
-    Generator<typeof obj[keyof typeof obj], void>,
+    Generator<(typeof obj)[keyof typeof obj], void>,
     Test.Pass
   >(),
 ]);

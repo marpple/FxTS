@@ -28,7 +28,7 @@ const obj = {
 const res7 = "" as string;
 const keys = Object.keys(obj) as ("a" | "b" | "c")[];
 if (includes(res7, keys)) {
-  checks([check<typeof res7, typeof keys[number], Test.Pass>()]);
+  checks([check<typeof res7, (typeof keys)[number], Test.Pass>()]);
 } else {
   checks([check<typeof res7, string, Test.Pass>()]);
 }
