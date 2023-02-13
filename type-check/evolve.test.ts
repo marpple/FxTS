@@ -36,7 +36,7 @@ const obj2 = {
 
 const transform3 = {
   a: (v: number) => v + 1,
-  b: (obj: typeof obj2["b"]) => evolve({ c: Boolean, d: () => null }, obj),
+  b: (obj: (typeof obj2)["b"]) => evolve({ c: Boolean, d: () => null }, obj),
   e: String,
 };
 

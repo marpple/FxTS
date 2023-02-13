@@ -2,7 +2,7 @@
   "include": ["src", "test", "type-check"],
   "compilerOptions": {
     "target": "es5",
-    "module": "es2015",
+    "module": "commonjs",
     "lib": ["es2020"],
     "importHelpers": true,
     "downlevelIteration": true,

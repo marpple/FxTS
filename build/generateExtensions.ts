@@ -21,7 +21,7 @@ async function main() {
     ])
     .map(async (promise) => {
       const [path, file] = await promise;
-      const importRegex = /import [\w,{}\s\n_*]+ from "[\w,{}\s\n./_]+";/gi;
+      const importRegex = /import [\w,{}\s\n_*]+ from "\.[\w,{}\s\n./_]+";/gi;
       const exportRegex = /export [\w,{}\s\n_*]+ from "[\w,{}\s\n./_]+";/gi;
       const statements = (file.match(importRegex) || []).concat(
         file.match(exportRegex) || ([] as any),
