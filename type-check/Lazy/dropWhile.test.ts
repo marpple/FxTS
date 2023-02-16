@@ -1,5 +1,5 @@
+import { dropWhile, pipe, toAsync } from "../../src";
 import * as Test from "../../src/types/Test";
-import { toAsync, dropWhile, pipe } from "../../src";
 
 const { checks, check } = Test;
 

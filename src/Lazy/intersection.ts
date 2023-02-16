@@ -1,6 +1,6 @@
+import { isAsyncIterable, isIterable } from "../_internal/utils";
 import identity from "../identity";
 import type IterableInfer from "../types/IterableInfer";
-import { isAsyncIterable, isIterable } from "../_internal/utils";
 import intersectionBy from "./intersectionBy";
 
 /**

@@ -1,7 +1,7 @@
-import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import uniqueBy from "./uniqBy";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import identity from "../identity";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import uniqueBy from "./uniqBy";
 
 /**
  * Returns Iterable/AsyncIterable with duplicate values removed inside the given Iterable/AsyncIterable.

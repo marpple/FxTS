@@ -1,9 +1,9 @@
-import type IterableInfer from "./types/IterableInfer";
-import type ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import isArray from "./isArray";
 import pipe1 from "./pipe1";
 import toArray from "./toArray";
+import type IterableInfer from "./types/IterableInfer";
+import type ReturnValueType from "./types/ReturnValueType";
 
 /**
  * Returns an array, sorted according to the comparator `f`, which should accept two values

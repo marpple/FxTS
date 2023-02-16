@@ -1,6 +1,6 @@
+import { isAsyncIterable, isIterable } from "../_internal/utils";
 import type IterableInfer from "../types/IterableInfer";
 import type ReturnConcatType from "../types/ReturnConcatType";
-import { isAsyncIterable, isIterable } from "../_internal/utils";
 
 function* sync<A>(a: Iterable<A>, b: Iterable<A>): IterableIterator<A> {
   yield* a;

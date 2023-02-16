@@ -1,6 +1,6 @@
-import type Length from "./Length";
 import type Cast from "./Cast";
 import type Drop from "./Drop";
+import type Length from "./Length";
 
 type CleanGaps<O extends any[]> = {
   [K in keyof O]: NonNullable<O[K]>;

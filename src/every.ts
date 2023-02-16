@@ -1,12 +1,12 @@
-import reduce from "./reduce";
 import map from "./Lazy/map";
 import takeUntil from "./Lazy/takeUntil";
+import { isAsyncIterable, isIterable } from "./_internal/utils";
 import not from "./not";
 import pipe from "./pipe";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
+import reduce from "./reduce";
+import type Arrow from "./types/Arrow";
 import type IterableInfer from "./types/IterableInfer";
 import type ReturnValueType from "./types/ReturnValueType";
-import type Arrow from "./types/Arrow";
 
 /**
  * Returns true if all of the values in Iterable/AsyncIterable pass the `f` truth test.

@@ -1,7 +1,7 @@
+import { isPromise } from "./_internal/utils";
 import isNumber from "./isNumber";
 import isString from "./isString";
 import type Awaited from "./types/Awaited";
-import { isPromise } from "./_internal/utils";
 
 // prettier-ignore
 type ReturnAddType<T, A extends T, B extends T> = 

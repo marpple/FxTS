@@ -63,6 +63,7 @@
     "@babel/runtime-corejs3": "^7.20.13",
     "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
+    "@ianvs/prettier-plugin-sort-imports": "^3.7.1",
     "@types/glob": "^8.0.1",
     "@types/jest": "^29.4.0",
     "@types/node": "^16.18.12",

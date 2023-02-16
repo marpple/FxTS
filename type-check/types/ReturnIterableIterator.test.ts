@@ -1,5 +1,5 @@
-import * as Test from "../../src/types/Test";
 import type ReturnIterableIteratorType from "../../src/types/ReturnIterableIteratorType";
+import * as Test from "../../src/types/Test";
 
 const { checks, check } = Test;
 

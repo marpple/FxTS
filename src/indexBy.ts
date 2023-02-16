@@ -1,9 +1,9 @@
-import type Key from "./types/Key";
-import type ReturnValueType from "./types/ReturnValueType";
-import type IterableInfer from "./types/IterableInfer";
+import { AsyncFunctionException } from "./_internal/error";
 import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import reduce from "./reduce";
-import { AsyncFunctionException } from "./_internal/error";
+import type IterableInfer from "./types/IterableInfer";
+import type Key from "./types/Key";
+import type ReturnValueType from "./types/ReturnValueType";
 
 /**
  * Given `f` that generates a key,

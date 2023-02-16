@@ -1,8 +1,8 @@
-import zip from "./zip";
 import pipe from "../pipe";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import filter from "./filter";
 import map from "./map";
-import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import zip from "./zip";
 
 /**
  * Returns Iterable/AsyncIterable that filters elements from 'iterable' returning only those that have a corresponding element in 'selectors' that evaluates to 'true'.

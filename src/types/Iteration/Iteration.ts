@@ -1,4 +1,5 @@
 import type IterationMap from "./IterationMap";
+
 /**
  * from ts-toolbelt repository
  * https://github.com/millsp/ts-toolbelt

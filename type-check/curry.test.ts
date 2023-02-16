@@ -1,7 +1,7 @@
-import * as Test from "../src/types/Test";
-import type Curry from "../src/types/Curry";
 import { curry, pipe, toAsync } from "../src";
 import { filter, map } from "../src/Lazy";
+import type Curry from "../src/types/Curry";
+import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
 

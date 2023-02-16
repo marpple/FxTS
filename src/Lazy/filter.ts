@@ -1,12 +1,11 @@
+import { AsyncFunctionException } from "../_internal/error";
 import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
-import type { Concurrent } from "./concurrent";
-import concurrent, { isConcurrent } from "./concurrent";
 import pipe1 from "../pipe1";
 import type IterableInfer from "../types/IterableInfer";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import type TruthyTypesOf from "../types/TrutyTypesOf";
 import type { Reject, Resolve } from "../types/Utils";
-import { AsyncFunctionException } from "../_internal/error";
+import concurrent, { isConcurrent, type Concurrent } from "./concurrent";
 
 async function* asyncSequential<A>(
   f: (a: A) => unknown,

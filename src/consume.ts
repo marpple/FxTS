@@ -1,6 +1,6 @@
-import type ReturnValueType from "./types/ReturnValueType";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
 import range from "./Lazy/range";
+import { isAsyncIterable, isIterable } from "./_internal/utils";
+import type ReturnValueType from "./types/ReturnValueType";
 
 function sync<T>(iterable: Iterable<T>, n: number) {
   const iterator = iterable[Symbol.iterator]();

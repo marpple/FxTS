@@ -1,8 +1,8 @@
+import type Append from "./types/Append";
 import type Arrow from "./types/Arrow";
 import type Cast from "./types/Cast";
-import type Append from "./types/Append";
-import type Tail from "./types/Tail";
 import type Head from "./types/Head";
+import type Tail from "./types/Tail";
 
 /*
  * HeadEach<[[1,2,3], [4,5,6], [7,8,9]]> => [1, 4, 7]

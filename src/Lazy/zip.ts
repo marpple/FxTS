@@ -1,13 +1,13 @@
-import map from "./map";
+import { isAsyncIterable, isIterable, toIterator } from "../_internal/utils";
+import every from "../every";
 import pipe from "../pipe";
 import toArray from "../toArray";
-import toAsync from "./toAsync";
-import { isAsyncIterable, isIterable, toIterator } from "../_internal/utils";
 import type ReturnZipType from "../types/ReturnZipType";
+import type { UniversalIterable } from "../types/Utils";
+import map from "./map";
 import range from "./range";
 import takeWhile from "./takeWhile";
-import every from "../every";
-import type { UniversalIterable } from "../types/Utils";
+import toAsync from "./toAsync";
 
 function sync(
   iterable: Iterable<Iterable<unknown>>,

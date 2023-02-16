@@ -1,5 +1,5 @@
+import { pipe, sum, toAsync } from "../src";
 import * as Test from "../src/types/Test";
-import { sum, pipe, toAsync } from "../src";
 
 const { checks, check } = Test;
 

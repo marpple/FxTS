@@ -1,8 +1,8 @@
+import { isAsyncIterable, isIterable } from "./_internal/utils";
 import reduce from "./reduce";
 import type IterableInfer from "./types/IterableInfer";
 import type Key from "./types/Key";
 import type ReturnValueType from "./types/ReturnValueType";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**
  * Returns an object from string keyed-value pairs.

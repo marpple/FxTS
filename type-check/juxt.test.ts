@@ -1,5 +1,5 @@
+import { apply, juxt, pipe } from "../src";
 import * as Test from "../src/types/Test";
-import { apply, pipe, juxt } from "../src";
 
 const { checks, check } = Test;
 

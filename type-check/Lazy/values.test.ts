@@ -1,5 +1,5 @@
+import { pipe, values } from "../../src";
 import * as Test from "../../src/types/Test";
-import { values, pipe } from "../../src";
 
 const { checks, check } = Test;
 

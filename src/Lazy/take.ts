@@ -1,6 +1,6 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
   const iterator = iterable[Symbol.iterator]();

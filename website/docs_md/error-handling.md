@@ -14,7 +14,7 @@ so it is good to use with [sentry](https://sentry.io/) or various 3rd party erro
 ### Synchronous error handling
 
 ```typescript
-import { pipe, toAsync, take, map, toArray } from "@fxts/core";
+import { map, pipe, take, toArray, toAsync } from "@fxts/core";
 
 const syncError = (a) => {
   throw new Error(`err ${a}`);
@@ -35,7 +35,7 @@ try {
 ### Asynchronous error handling
 
 ```typescript
-import { pipe, toAsync, map, filter, toArray } from "@fxts/core";
+import { filter, map, pipe, toArray, toAsync } from "@fxts/core";
 
 const fetchAsyncError = (a) => Promise.reject(`err ${a}`);
 
@@ -76,7 +76,7 @@ This is the same case where asynchronous requests are executed with [Promise.all
 `Promise.all` is all executed even if one fails.
 
 ```typescript
-import { pipe, toAsync, map, filter, concurrent, toArray } from "@fxts/core";
+import { concurrent, filter, map, pipe, toArray, toAsync } from "@fxts/core";
 
 const fetchAsyncError = (a) => {
   if (a === 3) {

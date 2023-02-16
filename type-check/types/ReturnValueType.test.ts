@@ -1,5 +1,5 @@
-import * as Test from "../../src/types/Test";
 import type ReturnValueType from "../../src/types/ReturnValueType";
+import * as Test from "../../src/types/Test";
 
 const { checks, check } = Test;
 

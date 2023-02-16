@@ -1,5 +1,5 @@
-import * as Test from "../src/types/Test";
 import compactObject from "../src/compactObject";
+import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
 

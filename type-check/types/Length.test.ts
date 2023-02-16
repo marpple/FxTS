@@ -1,5 +1,5 @@
-import * as Test from "../../src/types/Test";
 import type Length from "../../src/types/Length";
+import * as Test from "../../src/types/Test";
 
 const { checks, check } = Test;
 

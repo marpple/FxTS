@@ -1,19 +1,21 @@
-import * as path from "path";
 import * as fs from "fs";
+import * as path from "path";
 import * as util from "util";
-import { ApiItem } from "@microsoft/api-extractor-model";
+
 import {
-  MarkdownDocumenterFeature,
   IMarkdownDocumenterFeatureOnBeforeWritePageArgs,
+  MarkdownDocumenterFeature,
 } from "@microsoft/api-documenter";
-import SignatureMap from "./SignatureMap";
+import { ApiItem } from "@microsoft/api-extractor-model";
+
 import {
-  SignatureType,
-  Signature,
   FuncParameters,
   FuncReturn,
+  Signature,
   SignatureOut,
+  SignatureType,
 } from "./Signature";
+import SignatureMap from "./SignatureMap";
 
 const unLinkP = util.promisify(fs.unlink);
 const readFileP = util.promisify(fs.readFile);

@@ -1,5 +1,5 @@
-import * as Test from "../../src/types/Test";
 import type Drop from "../../src/types/Drop";
+import * as Test from "../../src/types/Test";
 
 const { checks, check } = Test;
 

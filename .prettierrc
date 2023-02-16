@@ -3,5 +3,12 @@
   "tabWidth": 2,
   "semi": true,
   "singleQuote": false,
-  "printWidth": 80
+  "printWidth": 80,
+  "importOrder": ["<THIRD_PARTY_MODULES>", "", "^[./]"],
+  "importOrderBuiltinModulesToTop": true,
+  "importOrderParserPlugins": ["typescript", "jsx"],
+  "importOrderMergeDuplicateImports": true,
+  "importOrderCombineTypeAndValueImports": true,
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

@@ -1,7 +1,7 @@
+import { isAsyncIterable, isIterable } from "./_internal/utils";
 import isArray from "./isArray";
 import isString from "./isString";
 import reduce from "./reduce";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 type LastReturnType<T> = T extends readonly [...rest: any[], a: infer L]
   ? L

@@ -1,4 +1,4 @@
-import { delay, map, pipe, toArray, toAsync, intersection } from "../../src";
+import { delay, intersection, map, pipe, toArray, toAsync } from "../../src";
 import concurrent, { Concurrent } from "../../src/Lazy/concurrent";
 import { callFuncAfterTime, generatorMock } from "../utils";
 

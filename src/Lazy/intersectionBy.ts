@@ -1,11 +1,11 @@
-import map from "./map";
-import filter from "./filter";
-import toAsync from "./toAsync";
+import { isAsyncIterable, isIterable } from "../_internal/utils";
+import pipe from "../pipe";
+import pipe1 from "../pipe1";
 import toArray from "../toArray";
 import concurrent, { isConcurrent } from "./concurrent";
-import { isAsyncIterable, isIterable } from "../_internal/utils";
-import pipe1 from "../pipe1";
-import pipe from "../pipe";
+import filter from "./filter";
+import map from "./map";
+import toAsync from "./toAsync";
 import uniq from "./uniq";
 
 function* sync<T>(

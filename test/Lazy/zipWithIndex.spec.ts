@@ -1,5 +1,5 @@
-import { concurrent, delay, toAsync, zipWithIndex } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
+import { concurrent, delay, toAsync, zipWithIndex } from "../../src/index";
 import { generatorMock } from "../utils";
 
 describe("zipWithIndex", function () {
