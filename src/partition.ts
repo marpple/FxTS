@@ -1,6 +1,7 @@
 import { AsyncFunctionException } from "./_internal/error";
 import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import groupBy from "./groupBy";
+import type Cast from "./types/Cast";
 import type IterableInfer from "./types/IterableInfer";
 import type ReturnPartitionType from "./types/ReturnPartitionType";
 
@@ -43,20 +44,75 @@ import type ReturnPartitionType from "./types/ReturnPartitionType";
  *  see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync}
  */
 
-function partition<A, L extends A, R extends A = Exclude<A, L>>(
-  f: (a: A) => a is L,
-  iterable: Iterable<A>,
-): [L[], R[]];
+type Not<T extends boolean> = T extends true ? false : true;
 
-function partition<A, L extends A, R extends A = Exclude<A, L>>(
-  f: (a: A) => a is L,
-  iterable: AsyncIterable<A>,
-): Promise<[L[], R[]]>;
+type Equals<A, B> = A extends B ? (B extends A ? true : false) : false;
+
+type ExcludeEach<A extends object, B extends A> = {
+  [key in keyof A]: B[key] extends boolean
+    ? Equals<B[key], boolean> extends false
+      ? Not<Cast<B[key], boolean>>
+      : Exclude<A[key], B[key]>
+    : Exclude<A[key], B[key]>;
+};
+
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
+  k: infer I,
+) => void
+  ? I
+  : never;
+
+type LastOf<T> = UnionToIntersection<
+  T extends any ? () => T : never
+> extends () => infer R
+  ? R
+  : never;
+
+type Push<T extends any[], V> = [...T, V];
+
+type TuplifyUnion<
+  T,
+  L = LastOf<T>,
+  N = [T] extends [never] ? true : false,
+> = true extends N ? [] : Push<TuplifyUnion<Exclude<T, L>>, L>;
+
+type CompactKeys<T extends object> = Exclude<
+  {
+    [key in keyof T]: T[key] extends never ? never : key;
+  }[keyof T],
+  never
+>;
+
+type ExcludeObject<
+  A extends object,
+  B extends A,
+  C = ExcludeEach<A, B>,
+  D = {
+    [key in keyof A]: Cast<C, A>[key] extends never ? A[key] : Cast<C, A>[key];
+  },
+> = Equals<Exclude<A, B> | B, A> extends true
+  ? Exclude<A, B>
+  : TuplifyUnion<CompactKeys<Cast<C, object>>>["length"] extends 1
+  ? D
+  : A;
+
+function partition<
+  A,
+  L extends A,
+  R extends A = A extends object ? ExcludeObject<A, L> : Exclude<A, L>,
+>(f: (a: A) => a is L, iterable: Iterable<A>): [L[], R[]];
+
+function partition<
+  A,
+  L extends A,
+  R extends A = A extends object ? ExcludeObject<A, L> : Exclude<A, L>,
+>(f: (a: A) => a is L, iterable: AsyncIterable<A>): Promise<[L[], R[]]>;
 
 function partition<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
-  L extends IterableInfer<A>,
-  R = Exclude<IterableInfer<A>, L>,
+  B extends IterableInfer<A>,
+  L extends B,
+  R extends B = B extends object ? ExcludeObject<B, L> : Exclude<B, L>,
 >(
   f: (a: IterableInfer<A>) => a is L,
 ): (
