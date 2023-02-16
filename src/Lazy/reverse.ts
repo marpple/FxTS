@@ -2,7 +2,7 @@ import toArray from "../toArray";
 import isArray from "../isArray";
 import isString from "../isString";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync<T>(iterable: Iterable<T>) {

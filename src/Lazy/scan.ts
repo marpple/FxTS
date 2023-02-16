@@ -1,8 +1,8 @@
 import pipe1 from "../pipe1";
-import Arrow from "../types/Arrow";
-import Awaited from "../types/Awaited";
-import IterableInfer from "../types/IterableInfer";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import type Arrow from "../types/Arrow";
+import type Awaited from "../types/Awaited";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { empty, isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 import head from "../head";

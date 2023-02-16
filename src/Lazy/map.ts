@@ -1,7 +1,7 @@
 import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
-import Awaited from "../types/Awaited";
-import IterableInfer from "../types/IterableInfer";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import type Awaited from "../types/Awaited";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { AsyncFunctionException } from "../_internal/error";
 
 function sync<A, B>(

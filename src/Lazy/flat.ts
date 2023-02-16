@@ -1,12 +1,12 @@
 import concurrent, { isConcurrent } from "./concurrent";
 import last from "../last";
-import IterableInfer from "../types/IterableInfer";
+import type IterableInfer from "../types/IterableInfer";
 import type { DeepFlat, DeepFlatSync } from "../types/DeepFlat";
 import { empty, isAsyncIterable, isIterable } from "../_internal/utils";
-import { Reject, Resolve } from "../types/Utils";
+import type { Reject, Resolve } from "../types/Utils";
 import append from "./append";
 import concat from "./concat";
-import Awaited from "../types/Awaited";
+import type Awaited from "../types/Awaited";
 
 type ReturnFlatType<
   A extends Iterable<unknown> | AsyncIterable<unknown>,

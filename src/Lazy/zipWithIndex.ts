@@ -1,7 +1,7 @@
 import map from "./map";
 import concurrent, { isConcurrent } from "./concurrent";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import ReturnZipWithIndexType from "../types/ReturnZipWithIndexType";
+import type ReturnZipWithIndexType from "../types/ReturnZipWithIndexType";
 
 function _zipWithIndex<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: T,

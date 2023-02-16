@@ -1,5 +1,5 @@
-import Iteration from "./Iteration";
-import IterationMap from "./IterationMap";
+import type Iteration from "./Iteration";
+import type IterationMap from "./IterationMap";
 
 /**
  * from ts-toolbelt repository

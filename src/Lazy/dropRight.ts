@@ -1,7 +1,7 @@
 import isArray from "../isArray";
 import isString from "../isString";
 import toArray from "../toArray";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 

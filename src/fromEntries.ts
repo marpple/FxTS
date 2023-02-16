@@ -1,7 +1,7 @@
 import reduce from "./reduce";
-import IterableInfer from "./types/IterableInfer";
-import Key from "./types/Key";
-import ReturnValueType from "./types/ReturnValueType";
+import type IterableInfer from "./types/IterableInfer";
+import type Key from "./types/Key";
+import type ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**

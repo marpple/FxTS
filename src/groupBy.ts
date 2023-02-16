@@ -1,10 +1,10 @@
-import Key from "./types/Key";
-import ReturnValueType from "./types/ReturnValueType";
-import IterableInfer from "./types/IterableInfer";
+import type Key from "./types/Key";
+import type ReturnValueType from "./types/ReturnValueType";
+import type IterableInfer from "./types/IterableInfer";
 import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import { AsyncFunctionException } from "./_internal/error";
 import reduce from "./reduce";
-import iterableInfer from "./types/IterableInfer";
+import type iterableInfer from "./types/IterableInfer";
 
 /**
  * Splits Iterable/AsyncIterable into sets, grouped by the result of running each value through `f`.

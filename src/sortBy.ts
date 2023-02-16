@@ -1,8 +1,8 @@
 import isArray from "./isArray";
 import pipe1 from "./pipe1";
 import toArray from "./toArray";
-import IterableInfer from "./types/IterableInfer";
-import ReturnValueType from "./types/ReturnValueType";
+import type IterableInfer from "./types/IterableInfer";
+import type ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**

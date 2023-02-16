@@ -1,5 +1,5 @@
-import IterableInfer from "./types/IterableInfer";
-import ReturnPartitionType from "./types/ReturnPartitionType";
+import type IterableInfer from "./types/IterableInfer";
+import type ReturnPartitionType from "./types/ReturnPartitionType";
 import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import groupBy from "./groupBy";
 import { AsyncFunctionException } from "./_internal/error";

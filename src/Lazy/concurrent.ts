@@ -1,5 +1,5 @@
 import { isAsyncIterable } from "../_internal/utils";
-import { Reject, Resolve } from "../types/Utils";
+import type { Reject, Resolve } from "../types/Utils";
 
 export class Concurrent {
   length: number;

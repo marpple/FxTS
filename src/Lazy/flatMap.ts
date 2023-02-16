@@ -1,8 +1,8 @@
 import map from "./map";
 import flat from "./flat";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import Awaited from "../types/Awaited";
-import IterableInfer from "../types/IterableInfer";
+import type Awaited from "../types/Awaited";
+import type IterableInfer from "../types/IterableInfer";
 import type { DeepFlat, DeepFlatSync } from "../types/DeepFlat";
 
 type ReturnFlatMapType<

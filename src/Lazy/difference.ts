@@ -1,5 +1,5 @@
 import identity from "../identity";
-import IterableInfer from "../types/IterableInfer";
+import type IterableInfer from "../types/IterableInfer";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import differenceBy from "./differenceBy";
 

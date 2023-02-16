@@ -1,4 +1,4 @@
-import Awaited from "./types/Awaited";
+import type Awaited from "./types/Awaited";
 import { isPromise } from "./_internal/utils";
 /**
  * This method invokes interceptor and returns a value.

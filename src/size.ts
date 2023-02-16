@@ -1,5 +1,5 @@
 import each from "./each";
-import ReturnValueType from "./types/ReturnValueType";
+import type ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 function sync<A extends Iterable<unknown>>(iterable: A) {

@@ -1,4 +1,4 @@
-import ReturnValueType from "./types/ReturnValueType";
+import type ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import range from "./Lazy/range";
 

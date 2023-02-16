@@ -1,5 +1,5 @@
 import isNil from "./isNil";
-import Merge from "./types/Merge";
+import type Merge from "./types/Merge";
 
 type MapNonNullableEntries<T extends object> = {
   [K in keyof T]: [K, Exclude<T[K], null | undefined>];

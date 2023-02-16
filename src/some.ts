@@ -4,9 +4,9 @@ import takeUntil from "./Lazy/takeUntil";
 import pipe from "./pipe";
 import identity from "./identity";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
-import IterableInfer from "./types/IterableInfer";
-import ReturnValueType from "./types/ReturnValueType";
-import Arrow from "./types/Arrow";
+import type IterableInfer from "./types/IterableInfer";
+import type ReturnValueType from "./types/ReturnValueType";
+import type Arrow from "./types/Arrow";
 
 /**
  * Returns true if any of the values in Iterable/AsyncIterable pass `f` truth test

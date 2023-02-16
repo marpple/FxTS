@@ -1,6 +1,6 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import type IterableInfer from "../types/IterableInfer";
 import toArray from "../toArray";
 import isArray from "../isArray";
 import isString from "../isString";

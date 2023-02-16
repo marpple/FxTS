@@ -1,10 +1,11 @@
 import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
-import concurrent, { Concurrent, isConcurrent } from "./concurrent";
+import type { Concurrent } from "./concurrent";
+import concurrent, { isConcurrent } from "./concurrent";
 import pipe1 from "../pipe1";
-import IterableInfer from "../types/IterableInfer";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import TruthyTypesOf from "../types/TrutyTypesOf";
-import { Reject, Resolve } from "../types/Utils";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import type TruthyTypesOf from "../types/TrutyTypesOf";
+import type { Reject, Resolve } from "../types/Utils";
 import { AsyncFunctionException } from "../_internal/error";
 
 async function* asyncSequential<A>(

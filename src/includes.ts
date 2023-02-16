@@ -1,5 +1,5 @@
 import some from "./some";
-import ReturnValueType from "./types/ReturnValueType";
+import type ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**

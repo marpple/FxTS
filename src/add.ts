@@ -1,6 +1,6 @@
 import isNumber from "./isNumber";
 import isString from "./isString";
-import Awaited from "./types/Awaited";
+import type Awaited from "./types/Awaited";
 import { isPromise } from "./_internal/utils";
 
 // prettier-ignore

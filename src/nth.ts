@@ -1,5 +1,5 @@
-import IterableInfer from "./types/IterableInfer";
-import ReturnValueType from "./types/ReturnValueType";
+import type IterableInfer from "./types/IterableInfer";
+import type ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 function sync<T>(index: number, iterable: Iterable<T>): T | undefined {

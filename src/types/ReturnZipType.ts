@@ -1,9 +1,9 @@
-import Append from "./Append";
-import Drop from "./Drop";
-import IterableInfer from "./IterableInfer";
-import Tail from "./Tail";
-import { UniversalIterable } from "./Utils";
-import Cast from "./Cast";
+import type Append from "./Append";
+import type Drop from "./Drop";
+import type IterableInfer from "./IterableInfer";
+import type Tail from "./Tail";
+import type { UniversalIterable } from "./Utils";
+import type Cast from "./Cast";
 
 type _ReturnZipValueType<
   T extends unknown[],

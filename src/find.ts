@@ -1,8 +1,8 @@
 import filter from "./Lazy/filter";
 import head from "./head";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
-import ReturnValueType from "./types/ReturnValueType";
-import IterableInfer from "./types/IterableInfer";
+import type ReturnValueType from "./types/ReturnValueType";
+import type IterableInfer from "./types/IterableInfer";
 
 /**
  * Looks through each value in Iterable/AsyncIterable, returning the first one that passes a truth test `f`,

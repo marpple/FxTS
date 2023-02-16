@@ -1,5 +1,5 @@
-import IterableInfer from "./IterableInfer";
-import Awaited from "./Awaited";
+import type IterableInfer from "./IterableInfer";
+import type Awaited from "./Awaited";
 
 type ReturnIterableIteratorType<
   T extends Iterable<unknown> | AsyncIterable<unknown>,

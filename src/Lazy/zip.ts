@@ -3,11 +3,11 @@ import pipe from "../pipe";
 import toArray from "../toArray";
 import toAsync from "./toAsync";
 import { isAsyncIterable, isIterable, toIterator } from "../_internal/utils";
-import ReturnZipType from "../types/ReturnZipType";
+import type ReturnZipType from "../types/ReturnZipType";
 import range from "./range";
 import takeWhile from "./takeWhile";
 import every from "../every";
-import { UniversalIterable } from "../types/Utils";
+import type { UniversalIterable } from "../types/Utils";
 
 function sync(
   iterable: Iterable<Iterable<unknown>>,

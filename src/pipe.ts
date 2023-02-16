@@ -1,7 +1,7 @@
 import pipe1 from "./pipe1";
 import reduce from "./reduce";
-import Awaited from "./types/Awaited";
-import ReturnPipeType from "./types/ReturnPipeType";
+import type Awaited from "./types/Awaited";
+import type ReturnPipeType from "./types/ReturnPipeType";
 
 /**
  * Performs left to right function composition.

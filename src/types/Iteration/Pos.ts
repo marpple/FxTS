@@ -1,4 +1,4 @@
-import Iteration from "./Iteration";
+import type Iteration from "./Iteration";
 
 /**
  * from ts-toolbelt repository

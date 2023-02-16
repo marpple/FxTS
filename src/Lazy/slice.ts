@@ -1,5 +1,5 @@
 import isNumber from "../isNumber";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import concurrent, { isConcurrent } from "./concurrent";
 

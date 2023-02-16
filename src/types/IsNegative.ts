@@ -1,5 +1,5 @@
-import IterationOf from "./Iteration/IterationOf";
-import Iteration from "./Iteration/Iteration";
+import type IterationOf from "./Iteration/IterationOf";
+import type Iteration from "./Iteration/Iteration";
 
 /**
  * from ts-toolbelt repository

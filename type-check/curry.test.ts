@@ -1,5 +1,5 @@
 import * as Test from "../src/types/Test";
-import Curry from "../src/types/Curry";
+import type Curry from "../src/types/Curry";
 import { curry, pipe, toAsync } from "../src";
 import { filter, map } from "../src/Lazy";
 
