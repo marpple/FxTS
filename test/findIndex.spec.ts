@@ -1,6 +1,6 @@
-import Arrow from "../src/types/Arrow";
-import { filter, findIndex, map, pipe, toAsync } from "../src/index";
 import { AsyncFunctionException } from "../src/_internal/error";
+import { filter, findIndex, map, pipe, toAsync } from "../src/index";
+import type Arrow from "../src/types/Arrow";
 
 describe("findIndex", function () {
   describe("sync", function () {

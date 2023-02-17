@@ -28,7 +28,7 @@ Please review the [API documentation](https://fxts.dev/docs/index)
 ## Usage
 
 ```ts
-import { pipe, range, map, filter, take, each } from "@fxts/core";
+import { each, filter, map, pipe, range, take } from "@fxts/core";
 
 pipe(
   range(10),
@@ -42,7 +42,7 @@ pipe(
 ## Usage(concurrent)
 
 ```ts
-import { pipe, toAsync, map, flat, concurrent, countBy } from "@fxts/core";
+import { concurrent, countBy, flat, map, pipe, toAsync } from "@fxts/core";
 
 // maybe 1 seconds api
 const fetchWiki = (page: string) =>

@@ -1,4 +1,4 @@
-import { apply, range, pipe, toArray } from "../src/index";
+import { apply, pipe, range, toArray } from "../src/index";
 
 describe("apply", function () {
   it("should apply given list to the function", function () {

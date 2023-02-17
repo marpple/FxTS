@@ -1,6 +1,6 @@
-import IterableInfer from "./types/IterableInfer";
-import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
+import type IterableInfer from "./types/IterableInfer";
+import type ReturnValueType from "./types/ReturnValueType";
 
 function sync<A, B = unknown>(f: (a: A) => B, iterable: Iterable<A>): void {
   for (const a of iterable) {

@@ -1,9 +1,9 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import IterableInfer from "../types/IterableInfer";
-import toArray from "../toArray";
 import isArray from "../isArray";
 import isString from "../isString";
+import toArray from "../toArray";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {

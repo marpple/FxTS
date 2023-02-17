@@ -1,7 +1,7 @@
 import take from "./Lazy/take";
+import { isAsyncIterable, isIterable } from "./_internal/utils";
 import pipe from "./pipe";
 import toArray from "./toArray";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 type HeadReturnType<T> = T extends readonly [a: infer H, ...rest: any[]]
   ? H

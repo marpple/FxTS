@@ -1,5 +1,5 @@
-import map from "./map";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import map from "./map";
 
 /**
  * Returns Iterable/AsyncIterable by plucking the same named property off all objects in Iterable/AsyncIterable supplied.

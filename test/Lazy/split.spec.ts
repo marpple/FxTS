@@ -1,12 +1,12 @@
 import {
+  concurrent,
+  delay,
+  filter,
+  map,
   pipe,
   split,
-  toAsync,
-  map,
   toArray,
-  filter,
-  delay,
-  concurrent,
+  toAsync,
 } from "../../src";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { callFuncAfterTime, generatorMock } from "../utils";

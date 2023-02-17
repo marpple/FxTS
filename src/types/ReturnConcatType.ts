@@ -1,4 +1,4 @@
-import IterableInfer from "./IterableInfer";
+import type IterableInfer from "./IterableInfer";
 
 type ReturnConcatType<
   A extends Iterable<unknown> | AsyncIterable<unknown>,

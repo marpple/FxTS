@@ -1,5 +1,5 @@
-import reduce from "./reduce";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import reduce from "./reduce";
 
 type ReturnJoinType<T extends Iterable<unknown> | AsyncIterable<unknown>> =
   T extends Iterable<unknown>

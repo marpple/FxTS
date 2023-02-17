@@ -41,7 +41,7 @@ reduce(
 We are providing `pipe` to solve the above problem.
 
 ```typescript
-import { pipe, filter, map, reduce } from "@fxts/core";
+import { filter, map, pipe, reduce } from "@fxts/core";
 
 pipe(
   arr,

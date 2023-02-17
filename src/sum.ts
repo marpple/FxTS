@@ -1,6 +1,6 @@
+import { isAsyncIterable, isIterable } from "./_internal/utils";
 import add from "./add";
 import reduce from "./reduce";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
 
 /**
  * Adds all the elements of a Iterable/AsyncIterable.

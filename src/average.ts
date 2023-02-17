@@ -1,8 +1,8 @@
 import peek from "./Lazy/peek";
+import { isAsyncIterable, isIterable } from "./_internal/utils";
 import pipe from "./pipe";
 import sum from "./sum";
-import ReturnValueType from "./types/ReturnValueType";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
+import type ReturnValueType from "./types/ReturnValueType";
 
 /**
  * Returns the average of the given (Iterable/AsyncIterable) (mean)

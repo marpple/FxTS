@@ -1,4 +1,4 @@
-import IterableInfer from "./IterableInfer";
+import type IterableInfer from "./IterableInfer";
 
 type ReturnArrayType<T extends Iterable<unknown> | AsyncIterable<unknown>> =
   T extends Iterable<unknown>

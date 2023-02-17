@@ -1,9 +1,9 @@
-import filter from "./filter";
-import pipe1 from "../pipe1";
-import not from "../not";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import IterableInfer from "../types/IterableInfer";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import not from "../not";
+import pipe1 from "../pipe1";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import filter from "./filter";
 
 /**
  * The opposite of {@link https://fxts.dev/docs/filter | filter}

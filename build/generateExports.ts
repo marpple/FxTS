@@ -1,6 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
-import { searchFiles } from "./util";
+
 import { drop, map, not, pipe, reduce } from "../src/index";
+import { searchFiles } from "./util";
 
 const SOURCE_DIR = "./src";
 const OUTPUT_DIR = "./dist";

@@ -1,4 +1,4 @@
-import { toArray, toAsync, intersectionBy } from "../../src";
+import { intersectionBy, toArray, toAsync } from "../../src";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 

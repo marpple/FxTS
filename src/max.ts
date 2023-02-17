@@ -1,5 +1,5 @@
-import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import type ReturnValueType from "./types/ReturnValueType";
 
 function sync(iterable: Iterable<number>) {
   let n = NaN;

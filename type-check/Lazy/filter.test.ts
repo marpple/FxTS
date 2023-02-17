@@ -1,5 +1,5 @@
+import { filter, isString, pipe, toAsync } from "../../src";
 import * as Test from "../../src/types/Test";
-import { toAsync, filter, pipe, isString } from "../../src";
 
 const { checks, check } = Test;
 

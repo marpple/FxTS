@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "fs/promises";
+
 import { searchFiles } from "./util";
 
 const OUTPUT_DIR = "./dist";

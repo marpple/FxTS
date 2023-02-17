@@ -1,4 +1,5 @@
 import { IApiDocumenterPluginManifest } from "@microsoft/api-documenter";
+
 import MarkdownFeature from "./MarkdownFeature";
 
 export const apiDocumenterPluginManifest: IApiDocumenterPluginManifest = {

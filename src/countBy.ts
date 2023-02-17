@@ -1,9 +1,9 @@
-import Key from "./types/Key";
-import ReturnValueType from "./types/ReturnValueType";
-import IterableInfer from "./types/IterableInfer";
-import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import { AsyncFunctionException } from "./_internal/error";
+import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import reduce from "./reduce";
+import type IterableInfer from "./types/IterableInfer";
+import type Key from "./types/Key";
+import type ReturnValueType from "./types/ReturnValueType";
 
 function incSel<B extends Key>(parent: { [K in B]: number }, k: B) {
   parent[k] ? parent[k]++ : (parent[k] = 1);

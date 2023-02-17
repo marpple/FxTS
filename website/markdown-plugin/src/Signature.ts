@@ -1,4 +1,5 @@
 import { LAST_EXCEPT } from "./SignatureMap";
+
 export const Signature = {
   text: "<b>Signature:</b>",
   skip: 2,

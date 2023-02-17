@@ -1,6 +1,6 @@
-import Awaited from "./Awaited";
-import IterableInfer from "./IterableInfer";
-import ReturnValueType from "./ReturnValueType";
+import type Awaited from "./Awaited";
+import type IterableInfer from "./IterableInfer";
+import type ReturnValueType from "./ReturnValueType";
 
 type ReturnPartitionType<T extends Iterable<unknown> | AsyncIterable<unknown>> =
   ReturnValueType<

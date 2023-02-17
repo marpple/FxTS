@@ -1,5 +1,5 @@
+import type Equals from "../../src/types/Equals";
 import * as Test from "../../src/types/Test";
-import Equals from "../../src/types/Equals";
 
 const { checks, check } = Test;
 

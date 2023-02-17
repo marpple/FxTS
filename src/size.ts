@@ -1,6 +1,6 @@
-import each from "./each";
-import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import each from "./each";
+import type ReturnValueType from "./types/ReturnValueType";
 
 function sync<A extends Iterable<unknown>>(iterable: A) {
   let a = 0;

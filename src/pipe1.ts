@@ -1,5 +1,5 @@
-import Awaited from "./types/Awaited";
 import { isPromise } from "./_internal/utils";
+import type Awaited from "./types/Awaited";
 
 type Pipe1 = <P, F extends (a: P extends Promise<any> ? Awaited<P> : P) => any>(
   a: P,

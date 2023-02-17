@@ -1,5 +1,5 @@
+import type Tail from "../../src/types/Tail";
 import * as Test from "../../src/types/Test";
-import Tail from "../../src/types/Tail";
 
 const { checks, check } = Test;
 

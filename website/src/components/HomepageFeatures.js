@@ -1,8 +1,9 @@
-import React from "react";
-import clsx from "clsx";
-import CodeBlock from "@theme/CodeBlock";
-import styles from "./HomepageFeatures.module.css";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import CodeBlock from "@theme/CodeBlock";
+import clsx from "clsx";
+import React from "react";
+
+import styles from "./HomepageFeatures.module.css";
 
 const LazyFeature = () => {
   return (

@@ -1,14 +1,14 @@
-import take from "./take";
-import toArray from "../toArray";
 import {
   asyncEmpty,
   empty,
   isAsyncIterable,
   isIterable,
 } from "../_internal/utils";
-import IterableInfer from "../types/IterableInfer";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import toArray from "../toArray";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import concurrent, { isConcurrent } from "./concurrent";
+import take from "./take";
 
 function* sync<T>(size: number, iterable: Iterable<T>): IterableIterator<T[]> {
   const iterator = iterable[Symbol.iterator]();

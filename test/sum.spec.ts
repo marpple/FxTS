@@ -1,4 +1,4 @@
-import { sum, pipe, toAsync } from "../src";
+import { pipe, sum, toAsync } from "../src";
 
 describe("sum", function () {
   describe("sync", function () {

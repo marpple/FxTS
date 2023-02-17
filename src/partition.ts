@@ -1,8 +1,8 @@
-import IterableInfer from "./types/IterableInfer";
-import ReturnPartitionType from "./types/ReturnPartitionType";
+import { AsyncFunctionException } from "./_internal/error";
 import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import groupBy from "./groupBy";
-import { AsyncFunctionException } from "./_internal/error";
+import type IterableInfer from "./types/IterableInfer";
+import type ReturnPartitionType from "./types/ReturnPartitionType";
 
 /**
  * Split Iterable/AsyncIterable into two arrays:

@@ -1,5 +1,5 @@
-import pipe from "./pipe";
 import identity from "./identity";
+import pipe from "./pipe";
 
 type Transformation<O extends Record<string, any>> = {
   [K in keyof O]?: (value: O[K]) => any;

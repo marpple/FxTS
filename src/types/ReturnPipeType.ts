@@ -1,6 +1,6 @@
-import Awaited from "./Awaited";
-import Drop from "./Drop";
-import Prepend from "./Prepend";
+import type Awaited from "./Awaited";
+import type Drop from "./Drop";
+import type Prepend from "./Prepend";
 
 type ReturnPipeType<T extends any[]> = T extends [
   a: infer A,

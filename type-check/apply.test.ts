@@ -1,5 +1,5 @@
-import * as Test from "../src/types/Test";
 import { apply, pipe, range, toArray } from "../src";
+import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
 

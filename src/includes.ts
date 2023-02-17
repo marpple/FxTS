@@ -1,6 +1,6 @@
-import some from "./some";
-import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import some from "./some";
+import type ReturnValueType from "./types/ReturnValueType";
 
 /**
  * Checks if the specified value is equal. (contains)

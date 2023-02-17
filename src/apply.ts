@@ -1,4 +1,4 @@
-import Arrow from "./types/Arrow";
+import type Arrow from "./types/Arrow";
 
 /**
  * Applies function `f` to the argument list `args`.

@@ -1,9 +1,9 @@
+import { isAsyncIterable, isIterable } from "../_internal/utils";
 import pipe from "../pipe";
 import pipe1 from "../pipe1";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import filter from "./filter";
-import { isAsyncIterable, isIterable } from "../_internal/utils";
-import IterableInfer from "../types/IterableInfer";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 
 /**
  * Unlike {@link https://fxts.dev/docs/uniq | uniq} returns Iterable/AsyncIterable

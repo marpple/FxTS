@@ -1,5 +1,5 @@
+import { filter, gt, pipe, toArray, toAsync } from "../src";
 import * as Test from "../src/types/Test";
-import { gt, pipe, filter, toArray, toAsync } from "../src";
 
 const { checks, check } = Test;
 
