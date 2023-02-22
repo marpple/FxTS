@@ -1,6 +1,7 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import not from "../not";
 import pipe1 from "../pipe1";
+import { type ExcludeObject } from "../types/ExcludeObject";
 import type IterableInfer from "../types/IterableInfer";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import filter from "./filter";
@@ -57,23 +58,27 @@ import filter from "./filter";
 function reject<A, B extends A>(
   f: (a: A) => a is B,
   iterable: Iterable<A>,
-): IterableIterator<Exclude<A, B>>;
+): IterableIterator<A extends object ? ExcludeObject<A, B> : Exclude<A, B>>;
 
 function reject<A, B extends A>(
   f: (a: A) => a is B,
   iterable: AsyncIterable<A>,
-): AsyncIterableIterator<Exclude<A, B>>;
+): AsyncIterableIterator<
+  A extends object ? ExcludeObject<A, B> : Exclude<A, B>
+>;
 
 function reject<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends IterableInfer<A>,
+  C extends B,
+  R = B extends object ? ExcludeObject<B, C> : Exclude<B, C>,
 >(
-  f: (a: IterableInfer<A>) => a is B,
+  f: (a: IterableInfer<A>) => a is C,
 ): (
   iterable: A,
 ) => A extends AsyncIterable<any>
-  ? AsyncIterableIterator<Exclude<IterableInfer<A>, B>>
-  : IterableIterator<Exclude<IterableInfer<A>, B>>;
+  ? AsyncIterableIterator<R>
+  : IterableIterator<R>;
 
 function reject<A, B = unknown>(
   f: (a: A) => B,

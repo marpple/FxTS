@@ -1,6 +1,7 @@
 import { AsyncFunctionException } from "./_internal/error";
 import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import groupBy from "./groupBy";
+import { type ExcludeObject } from "./types/ExcludeObject";
 import type IterableInfer from "./types/IterableInfer";
 import type ReturnPartitionType from "./types/ReturnPartitionType";
 
@@ -43,20 +44,23 @@ import type ReturnPartitionType from "./types/ReturnPartitionType";
  *  see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync}
  */
 
-function partition<A, L extends A, R extends A = Exclude<A, L>>(
-  f: (a: A) => a is L,
-  iterable: Iterable<A>,
-): [L[], R[]];
+function partition<
+  A,
+  L extends A,
+  R extends A = A extends object ? ExcludeObject<A, L> : Exclude<A, L>,
+>(f: (a: A) => a is L, iterable: Iterable<A>): [L[], R[]];
 
-function partition<A, L extends A, R extends A = Exclude<A, L>>(
-  f: (a: A) => a is L,
-  iterable: AsyncIterable<A>,
-): Promise<[L[], R[]]>;
+function partition<
+  A,
+  L extends A,
+  R extends A = A extends object ? ExcludeObject<A, L> : Exclude<A, L>,
+>(f: (a: A) => a is L, iterable: AsyncIterable<A>): Promise<[L[], R[]]>;
 
 function partition<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
-  L extends IterableInfer<A>,
-  R = Exclude<IterableInfer<A>, L>,
+  B extends IterableInfer<A>,
+  L extends B,
+  R extends B = B extends object ? ExcludeObject<B, L> : Exclude<B, L>,
 >(
   f: (a: IterableInfer<A>) => a is L,
 ): (
