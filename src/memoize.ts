@@ -1,0 +1,40 @@
+/**
+ * Creates a new function that, stores the results of its calculations in a [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object).
+ * When the function is called with same input again, it retrieves the cached result instead of recalculating it.
+ * If resolver is provided, it determines the cache key for storing the result based on the arguments provided to the memoized function.
+ * By default, the first argument provided to the memoized function is used as the map cache key
+ *
+ * @example
+ * ```ts
+ * const add10 = (a: number): number => a + 10;
+ *
+ * const memoized = memoize(add10);
+ * console.log(memoized(5)); // 15
+ * console.log(memoized(10)) // 20
+ * console.log(memoized(5)); // 15 (cached)
+ *
+ * memoized.cache.clear(); // clear cache
+ * console.log(memoized(5)); // 15 (no cache)
+ * ```
+ */
+function memoize<
+  F extends (...args: any[]) => any,
+  R extends (...args: any[]) => any,
+>(f: F, resolver?: R) {
+  const memoized = (...args: Parameters<typeof f>): ReturnType<F> => {
+    const key = resolver ? resolver(...args) : args[0];
+    const cache = memoized.cache;
+    if (cache.has(key)) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      return cache.get(key)!;
+    }
+    const result = f(...args);
+    cache.set(key, result);
+    return result;
+  };
+
+  memoized.cache = new Map<any, ReturnType<F>>();
+  return memoized;
+}
+
+export default memoize;

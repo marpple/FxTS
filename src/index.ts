@@ -33,6 +33,7 @@ import last from "./last";
 import lt from "./lt";
 import lte from "./lte";
 import max from "./max";
+import memoize from "./memoize";
 import min from "./min";
 import noop from "./noop";
 import not from "./not";
@@ -93,6 +94,7 @@ export {
   lt,
   lte,
   max,
+  memoize,
   min,
   noop,
   not,
