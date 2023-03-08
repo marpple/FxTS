@@ -19,10 +19,25 @@
  */
 function memoize<
   F extends (...args: any[]) => any,
+  K extends Parameters<F>[0],
+  Return extends F & {
+    cache: K extends object ? WeakMap<K, ReturnType<F>> : Map<K, ReturnType<F>>;
+  },
+>(f: F): Return;
+function memoize<
+  F extends (...args: any[]) => any,
+  Resolver extends (...args: Parameters<F>) => any,
+  K extends ReturnType<Resolver>,
+  Return extends F & {
+    cache: K extends object ? WeakMap<K, ReturnType<F>> : Map<K, ReturnType<F>>;
+  },
+>(f: F, resolver: Resolver): Return;
+function memoize<
+  F extends (...args: any[]) => any,
   R extends (...args: any[]) => any,
 >(f: F, resolver?: R) {
   const memoized = (...args: Parameters<typeof f>): ReturnType<F> => {
-    const key = resolver ? resolver(...args) : args[0];
+    const key = typeof resolver === "function" ? resolver(...args) : args[0];
     const cache = memoized.cache;
     if (cache.has(key)) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
