@@ -41,4 +41,11 @@ describe("memoize", function () {
     expect(res2).toEqual("hello world");
     expect(callCount).toEqual(1);
   });
+
+  it("should be use only `WeakMap` or `Map` to `cache`", () => {
+    const temp = (a: number) => a;
+    const memoized = memoize(temp);
+    memoized.cache = {} as any;
+    expect(() => memoized(3)).toThrowError();
+  });
 });

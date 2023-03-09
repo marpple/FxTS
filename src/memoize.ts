@@ -39,6 +39,11 @@ function memoize<
   const memoized = (...args: Parameters<typeof f>): ReturnType<F> => {
     const key = typeof resolver === "function" ? resolver(...args) : args[0];
     const cache = memoized.cache;
+
+    if (!(cache instanceof WeakMap || cache instanceof Map)) {
+      throw new TypeError("`cache` should only use `WeakMap`, `Map`");
+    }
+
     if (cache.has(key)) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return cache.get(key)!;
