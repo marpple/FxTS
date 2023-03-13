@@ -1,5 +1,5 @@
 /**
- * Creates a new function that, stores the results of its calculations in a [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object).
+ * Creates a new function that, stores the results of its calculations in a {@link http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object | Map}.
  * When the function is called with same input again, it retrieves the cached result instead of recalculating it.
  * If resolver is provided, it determines the cache key for storing the result based on the arguments provided to the memoized function.
  * By default, the first argument provided to the memoized function is used as the map cache key
