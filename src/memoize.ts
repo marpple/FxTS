@@ -38,8 +38,12 @@ function memoize<
 >(f: F, resolver?: R) {
   const memoized = (...args: Parameters<typeof f>): ReturnType<F> => {
     const key = typeof resolver === "function" ? resolver(...args) : args[0];
-    const cache = memoized.cache;
-
+    const _self = memoized as any;
+    if (_self.cache === undefined) {
+      _self.cache =
+        key != null && typeof key === "object" ? new WeakMap() : new Map();
+    }
+    const { cache } = _self;
     if (!(cache instanceof WeakMap || cache instanceof Map)) {
       throw new TypeError("`cache` should only use `WeakMap`, `Map`");
     }
@@ -52,8 +56,6 @@ function memoize<
     cache.set(key, result);
     return result;
   };
-
-  memoized.cache = new Map<any, ReturnType<F>>();
   return memoized;
 }
 
