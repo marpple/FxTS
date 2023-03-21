@@ -31,12 +31,20 @@ import type ReturnValueType from "./types/ReturnValueType";
 function indexBy<A, B extends Key>(
   f: (a: A) => B,
   iterable: Iterable<A>,
-): { [K in B]: A };
+): {
+  [K in B]: {
+    [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+  };
+};
 
 function indexBy<A, B extends Key>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
-): Promise<{ [K in B]: A }>;
+): Promise<{
+  [K in B]: {
+    [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+  };
+}>;
 
 function indexBy<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
