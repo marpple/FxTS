@@ -102,7 +102,6 @@ function partition<
       }
       return `${Boolean(key)}`;
     }, iterable);
-    const some = [group["true"] || [], group["false"] || []];
     //    ^?
     return [group["true"] || [], group["false"] || []] as [
       IterableInfer<A>[],
