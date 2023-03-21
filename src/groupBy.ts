@@ -6,6 +6,14 @@ import type iterableInfer from "./types/IterableInfer";
 import type Key from "./types/Key";
 import type ReturnValueType from "./types/ReturnValueType";
 
+type GroupBy<A, B extends Key> = {
+  [K in B]: (A extends object
+    ? {
+        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+      }
+    : A)[];
+};
+
 /**
  * Splits Iterable/AsyncIterable into sets, grouped by the result of running each value through `f`.
  *
@@ -35,35 +43,22 @@ import type ReturnValueType from "./types/ReturnValueType";
  *
  * {@link https://codesandbox.io/s/fxts-groupby-v8q3b | Try It}
  */
-
 function groupBy<A, B extends Key>(
   f: (a: A) => B,
   iterable: Iterable<A>,
-): {
-  [K in B]: (A extends object
-    ? {
-        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
-      }
-    : A)[];
-};
+): GroupBy<A, B>;
 
 function groupBy<A, B extends Key>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
-): Promise<{
-  [K in B]: (A extends object
-    ? {
-        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
-      }
-    : A)[];
-}>;
+): Promise<GroupBy<A, B>>;
 
 function groupBy<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Key,
 >(
   f: (a: IterableInfer<A>) => B | Promise<B>,
-): (iterable: A) => ReturnValueType<A, { [K in B]: IterableInfer<A>[] }>;
+): (iterable: A) => ReturnValueType<A, GroupBy<IterableInfer<A>, B>>;
 
 function groupBy<
   A extends Iterable<unknown> | AsyncIterable<unknown>,

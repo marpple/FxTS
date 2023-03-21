@@ -30,7 +30,7 @@ const res4 = pipe(
   groupBy((a) => Promise.resolve(a.name)),
 );
 
-const res5 = groupBy((a) => a.type, [
+const list = [
   { type: "a", value: 1 },
   { type: "b", value: 2 },
   { type: "c", value: 3 },
@@ -41,29 +41,42 @@ const res5 = groupBy((a) => a.type, [
   { type: "b", value: 8 },
   { type: "c", value: 9 },
   { type: "a", value: 10 },
-] as { type: "a" | "b" | "c"; value: number }[]);
+] as { type: "a" | "b" | "c"; value: number }[];
+const res5 = groupBy((a) => a.type, list);
+
+const res6 = pipe(
+  list,
+  groupBy((a) => a.type),
+); // Res
+const res7 = groupBy((a) => a.type, toAsync(list)); // Promise<Res>
+const res8 = pipe(
+  list,
+  toAsync,
+  groupBy((a) => a.type),
+); // Promise<Res>
+
+type Res5To8 = {
+  a: {
+    type: "a";
+    value: number;
+  }[];
+  b: {
+    type: "b";
+    value: number;
+  }[];
+  c: {
+    type: "c";
+    value: number;
+  }[];
+};
 
 checks([
   check<typeof res1, { [p: string]: Data[] }, Test.Pass>(),
   check<typeof res2, { [p: string]: Data[] }, Test.Pass>(),
   check<typeof res3, { [p: string]: Data[] }, Test.Pass>(),
   check<typeof res4, Promise<{ [p: string]: Data[] }>, Test.Pass>(),
-  check<
-    typeof res5,
-    {
-      a: {
-        type: "a";
-        value: number;
-      }[];
-      b: {
-        type: "b";
-        value: number;
-      }[];
-      c: {
-        type: "c";
-        value: number;
-      }[];
-    },
-    Test.Pass
-  >(),
+  check<typeof res5, Res5To8, Test.Pass>(),
+  check<typeof res6, Res5To8, Test.Pass>(),
+  check<typeof res7, Promise<Res5To8>, Test.Pass>(),
+  check<typeof res8, Promise<Res5To8>, Test.Pass>(),
 ]);
