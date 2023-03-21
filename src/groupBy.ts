@@ -36,15 +36,23 @@ import type ReturnValueType from "./types/ReturnValueType";
  * {@link https://codesandbox.io/s/fxts-groupby-v8q3b | Try It}
  */
 
-function groupBy<A, B extends Key>(
+function groupBy<A extends object, B extends Key>(
   f: (a: A) => B,
   iterable: Iterable<A>,
-): { [K in B]: A[] };
+): {
+  [K in B]: {
+    [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+  }[];
+};
 
 function groupBy<A, B extends Key>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
-): Promise<{ [K in B]: A[] }>;
+): Promise<{
+  [K in B]: {
+    [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+  }[];
+}>;
 
 function groupBy<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
@@ -60,8 +68,16 @@ function groupBy<
   f: (a: IterableInfer<A>) => B | Promise<B>,
   iterable?: A,
 ):
-  | { [K in B]: IterableInfer<A>[] }
-  | Promise<{ [K in B]: IterableInfer<A>[] }>
+  | {
+      [K in B]: {
+        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+      }[];
+    }
+  | Promise<{
+      [K in B]: {
+        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+      }[];
+    }>
   | ((iterable: A) => ReturnValueType<A, { [K in B]: IterableInfer<A>[] }>) {
   if (iterable === undefined) {
     return (
@@ -86,7 +102,11 @@ function groupBy<
       },
       obj,
       iterable,
-    );
+    ) as {
+      [K in B]: {
+        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+      }[];
+    };
   }
 
   if (isAsyncIterable<iterableInfer<A>>(iterable)) {
@@ -97,7 +117,11 @@ function groupBy<
       },
       obj,
       iterable,
-    );
+    ) as {
+      [K in B]: {
+        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+      }[];
+    };
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
