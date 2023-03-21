@@ -36,22 +36,26 @@ import type ReturnValueType from "./types/ReturnValueType";
  * {@link https://codesandbox.io/s/fxts-groupby-v8q3b | Try It}
  */
 
-function groupBy<A extends object, B extends Key>(
+function groupBy<A, B extends Key>(
   f: (a: A) => B,
   iterable: Iterable<A>,
 ): {
-  [K in B]: {
-    [K2 in keyof A]: A[K2] extends B ? K : A[K2];
-  }[];
+  [K in B]: (A extends object
+    ? {
+        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+      }
+    : A)[];
 };
 
 function groupBy<A, B extends Key>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): Promise<{
-  [K in B]: {
-    [K2 in keyof A]: A[K2] extends B ? K : A[K2];
-  }[];
+  [K in B]: (A extends object
+    ? {
+        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+      }
+    : A)[];
 }>;
 
 function groupBy<
@@ -69,14 +73,18 @@ function groupBy<
   iterable?: A,
 ):
   | {
-      [K in B]: {
-        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
-      }[];
+      [K in B]: (A extends object
+        ? {
+            [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+          }
+        : A)[];
     }
   | Promise<{
-      [K in B]: {
-        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
-      }[];
+      [K in B]: (A extends object
+        ? {
+            [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+          }
+        : A)[];
     }>
   | ((iterable: A) => ReturnValueType<A, { [K in B]: IterableInfer<A>[] }>) {
   if (iterable === undefined) {
@@ -103,9 +111,11 @@ function groupBy<
       obj,
       iterable,
     ) as {
-      [K in B]: {
-        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
-      }[];
+      [K in B]: (A extends object
+        ? {
+            [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+          }
+        : A)[];
     };
   }
 
@@ -118,9 +128,11 @@ function groupBy<
       obj,
       iterable,
     ) as {
-      [K in B]: {
-        [K2 in keyof A]: A[K2] extends B ? K : A[K2];
-      }[];
+      [K in B]: (A extends object
+        ? {
+            [K2 in keyof A]: A[K2] extends B ? K : A[K2];
+          }
+        : A)[];
     };
   }
 
