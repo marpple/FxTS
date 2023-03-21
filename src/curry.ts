@@ -1,4 +1,4 @@
-import Curry from "./types/Curry";
+import type Curry from "./types/Curry";
 
 /**
  * Returns a curried function of `f`

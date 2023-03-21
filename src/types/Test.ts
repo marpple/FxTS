@@ -2,7 +2,7 @@
  * from ts-toolbelt repository
  * https://github.com/millsp/ts-toolbelt/blob/master/sources/Test.ts
  */
-import Equals from "./Equals";
+import type Equals from "./Equals";
 
 /**
  * Test should pass

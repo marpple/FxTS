@@ -1,5 +1,5 @@
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync(sep: string, iterable: Iterable<string>) {
@@ -83,12 +83,13 @@ function async(
  *
  * // with pipe
  * pipe(
- *  "👍,😀,🙇‍♂️,🤩,🎉",
- *  split(',')
- * ); // ["👍", "😀", "🙇‍♂️", "🤩", "🎉"]
+ *  "1,2,3,4,5",
+ *  split(','),
+ *  toArray,
+ * ); // ["1", "2", "3", "4", "5"]
  * ```
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}
+ * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toArray | toArray}
  */
 function split(
   sep: string,

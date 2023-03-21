@@ -1,5 +1,5 @@
+import type Prepend from "../../src/types/Prepend";
 import * as Test from "../../src/types/Test";
-import Prepend from "../../src/types/Prepend";
 
 const { checks, check } = Test;
 

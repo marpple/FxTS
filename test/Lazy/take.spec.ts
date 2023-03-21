@@ -1,3 +1,4 @@
+import { Concurrent } from "../../src/Lazy/concurrent";
 import {
   delay,
   filter,
@@ -8,7 +9,6 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
-import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
 describe("take", function () {

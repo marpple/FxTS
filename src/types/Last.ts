@@ -1,6 +1,6 @@
-import ArrayInfer from "./ArrayInfer";
-import Equals from "./Equals";
-import Length from "./Length";
+import type ArrayInfer from "./ArrayInfer";
+import type Equals from "./Equals";
+import type Length from "./Length";
 
 type Last<T extends unknown[]> = Equals<Length<T>, number> extends 1
   ? ArrayInfer<T>

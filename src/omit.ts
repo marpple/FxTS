@@ -1,6 +1,6 @@
-import IterableInfer from "./types/IterableInfer";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import toArray from "./toArray";
+import type IterableInfer from "./types/IterableInfer";
 
 function inner<T extends object>(obj: T, keys: Set<keyof T>) {
   return Object.fromEntries(

@@ -1,7 +1,7 @@
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import concurrent, { isConcurrent } from "./concurrent";
 import consume from "../consume";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
   const iterator = iterable[Symbol.iterator]();

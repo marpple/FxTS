@@ -70,15 +70,6 @@ const config = {
             ],
           },
           {
-            title: "Community",
-            items: [
-              {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/fxts",
-              },
-            ],
-          },
-          {
             title: "More",
             items: [
               {

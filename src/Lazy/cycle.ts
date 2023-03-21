@@ -1,6 +1,6 @@
-import IterableInfer from "../types/IterableInfer";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import concurrent, { isConcurrent } from "./concurrent";
 
 function* sync<T>(iterable: Iterable<T>): IterableIterator<T> {

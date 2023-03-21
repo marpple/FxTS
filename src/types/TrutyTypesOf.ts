@@ -1,4 +1,4 @@
-import Falsy from "./Falsy";
+import type Falsy from "./Falsy";
 
 type TruthyTypesOf<T> = T extends Falsy ? never : T;
 

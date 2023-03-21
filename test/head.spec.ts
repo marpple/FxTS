@@ -1,5 +1,5 @@
-import { filter, head, map, pipe, toAsync } from "../src/index";
 import { range } from "../src/Lazy";
+import { filter, head, map, pipe, toAsync } from "../src/index";
 
 describe("head", function () {
   describe("sync", function () {

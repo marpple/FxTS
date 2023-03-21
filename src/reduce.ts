@@ -1,8 +1,8 @@
-import pipe1 from "./pipe1";
-import Arrow from "./types/Arrow";
-import IterableInfer from "./types/IterableInfer";
-import ReturnValueType from "./types/ReturnValueType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import pipe1 from "./pipe1";
+import type Arrow from "./types/Arrow";
+import type IterableInfer from "./types/IterableInfer";
+import type ReturnValueType from "./types/ReturnValueType";
 
 function sync<A, B>(f: (a: B, b: A) => B, acc: B, iterable: Iterable<A>): B {
   for (const a of iterable) {

@@ -1,15 +1,15 @@
-import {
+import filter from "./Lazy/filter";
+import map from "./Lazy/map";
+import toAsync from "./Lazy/toAsync";
+import zip from "./Lazy/zip";
+import { isPromise } from "./_internal/utils";
+import pipe from "./pipe";
+import toArray from "./toArray";
+import type {
   AsyncEntryPredicate,
   ConditionalAsyncEntryPredicate,
   EntryPredicate,
 } from "./types/EntryPredicate";
-import toArray from "./toArray";
-import filter from "./Lazy/filter";
-import toAsync from "./Lazy/toAsync";
-import map from "./Lazy/map";
-import zip from "./Lazy/zip";
-import pipe from "./pipe";
-import { isPromise } from "./_internal/utils";
 
 /**
  *

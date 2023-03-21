@@ -79,6 +79,7 @@
     "lt",
     "lte",
     "max",
+    "memoize",
     "min",
     "noop",
     "not",

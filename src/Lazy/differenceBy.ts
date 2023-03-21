@@ -1,12 +1,12 @@
+import { isAsyncIterable, isIterable } from "../_internal/utils";
+import pipe from "../pipe";
+import pipe1 from "../pipe1";
+import toArray from "../toArray";
+import concurrent, { isConcurrent } from "./concurrent";
 import map from "./map";
 import reject from "./reject";
-import pipe1 from "../pipe1";
 import toAsync from "./toAsync";
-import toArray from "../toArray";
 import uniq from "./uniq";
-import pipe from "../pipe";
-import concurrent, { isConcurrent } from "./concurrent";
-import { isAsyncIterable, isIterable } from "../_internal/utils";
 
 function* sync<T>(
   f: (a: T) => unknown,

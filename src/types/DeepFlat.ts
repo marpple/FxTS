@@ -1,4 +1,4 @@
-import Sub from "./Sub";
+import type Sub from "./Sub";
 
 type DeepFlat<A, B extends number = 0> = A extends
   | Iterable<infer U>

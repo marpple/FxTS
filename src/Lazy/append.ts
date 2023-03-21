@@ -1,7 +1,7 @@
 import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
+import type Awaited from "../types/Awaited";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import concurrent, { isConcurrent } from "./concurrent";
-import Awaited from "../types/Awaited";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 
 function* sync<A>(a: A, iterable: Iterable<A>) {
   yield* iterable;

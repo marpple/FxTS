@@ -1,4 +1,4 @@
-import Awaited from "./Awaited";
+import type Awaited from "./Awaited";
 
 // prettier-ignore
 type ReturnPrependType<A, B extends Iterable<A> | AsyncIterable<Awaited<A>>> =

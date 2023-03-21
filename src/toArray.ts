@@ -1,5 +1,5 @@
-import ReturnArrayType from "./types/ReturnArrayType";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import type ReturnArrayType from "./types/ReturnArrayType";
 
 async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
   const res: A[] = [];

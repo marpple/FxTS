@@ -1,8 +1,8 @@
 import peek from "./Lazy/peek";
+import { isAsyncIterable, isIterable } from "./_internal/utils";
 import pipe from "./pipe";
 import sum from "./sum";
-import ReturnValueType from "./types/ReturnValueType";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
+import type ReturnValueType from "./types/ReturnValueType";
 
 /**
  * Returns the average of the given (Iterable/AsyncIterable) (mean)
@@ -10,14 +10,14 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
  * @example
  * ```ts
  * average([]); // NaN
- * average([1, 2, 3, 4, 5]); // 6
- * await average(toAsync([1, 2, 3, 4, 5])); // 6
+ * average([1, 2, 3, 4, 5]); // 3
+ * await average(toAsync([1, 2, 3, 4, 5])); // 3
  *
  * // with pipe
  * pipe(
  *  [1, 2, 3, 4, 5],
  *  average,
- * ); // 6
+ * ); // 3
  * ```
  *
  * see {@link https://fxts.dev/docs/pipe | pipe}

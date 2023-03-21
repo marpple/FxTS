@@ -1,9 +1,9 @@
-import tap from "../tap";
-import map from "./map";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import Awaited from "../types/Awaited";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import IterableInfer from "../types/IterableInfer";
+import tap from "../tap";
+import type Awaited from "../types/Awaited";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import map from "./map";
 
 /**
  * Iterate over an input list,

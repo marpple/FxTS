@@ -1,11 +1,11 @@
-import find from "./find";
 import zipWithIndex from "./Lazy/zipWithIndex";
+import { isAsyncIterable, isIterable } from "./_internal/utils";
+import find from "./find";
 import pipe from "./pipe";
 import pipe1 from "./pipe1";
-import Arrow from "./types/Arrow";
-import IterableInfer from "./types/IterableInfer";
-import ReturnValueType from "./types/ReturnValueType";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
+import type Arrow from "./types/Arrow";
+import type IterableInfer from "./types/IterableInfer";
+import type ReturnValueType from "./types/ReturnValueType";
 
 /**
  * Returns the index of the first element of Iterable/AsyncIterable which matches f, or -1 if no element matches.

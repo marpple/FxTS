@@ -1,5 +1,5 @@
+import type IterableInfer from "../../src/types/IterableInfer";
 import * as Test from "../../src/types/Test";
-import IterableInfer from "../../src/types/IterableInfer";
 
 const { checks, check } = Test;
 

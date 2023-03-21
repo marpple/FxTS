@@ -1,9 +1,10 @@
-import filter from "./filter";
-import pipe1 from "../pipe1";
-import not from "../not";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
-import IterableInfer from "../types/IterableInfer";
-import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import not from "../not";
+import pipe1 from "../pipe1";
+import { type ExcludeObject } from "../types/ExcludeObject";
+import type IterableInfer from "../types/IterableInfer";
+import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import filter from "./filter";
 
 /**
  * The opposite of {@link https://fxts.dev/docs/filter | filter}
@@ -53,6 +54,32 @@ import ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/toArray | toArray}
  */
+
+function reject<A, B extends A>(
+  f: (a: A) => a is B,
+  iterable: Iterable<A>,
+): IterableIterator<A extends object ? ExcludeObject<A, B> : Exclude<A, B>>;
+
+function reject<A, B extends A>(
+  f: (a: A) => a is B,
+  iterable: AsyncIterable<A>,
+): AsyncIterableIterator<
+  A extends object ? ExcludeObject<A, B> : Exclude<A, B>
+>;
+
+function reject<
+  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  B extends IterableInfer<A>,
+  C extends B,
+  R = B extends object ? ExcludeObject<B, C> : Exclude<B, C>,
+>(
+  f: (a: IterableInfer<A>) => a is C,
+): (
+  iterable: A,
+) => A extends AsyncIterable<any>
+  ? AsyncIterableIterator<R>
+  : IterableIterator<R>;
+
 function reject<A, B = unknown>(
   f: (a: A) => B,
   iterable: Iterable<A>,

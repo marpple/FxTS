@@ -1,10 +1,10 @@
-import Cast from "./Cast";
-import { _IsNegative } from "./IsNegative";
-import Iteration from "./Iteration/Iteration";
-import IterationOf from "./Iteration/IterationOf";
-import Next from "./Iteration/Next";
-import Pos from "./Iteration/Pos";
-import Prev from "./Iteration/Prev";
+import type Cast from "./Cast";
+import type { _IsNegative } from "./IsNegative";
+import type Iteration from "./Iteration/Iteration";
+import type IterationOf from "./Iteration/IterationOf";
+import type Next from "./Iteration/Next";
+import type Pos from "./Iteration/Pos";
+import type Prev from "./Iteration/Prev";
 
 /**
  * from ts-toolbelt repository
