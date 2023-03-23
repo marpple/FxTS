@@ -93,7 +93,6 @@ function partition<
       return partition(f, iterable as any) as ReturnPartitionType<A>;
     };
   }
-  iterable;
   if (isIterable<IterableInfer<A>>(iterable)) {
     const group = groupBy((a) => {
       const key = f(a);
