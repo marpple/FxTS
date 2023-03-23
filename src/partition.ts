@@ -90,7 +90,7 @@ function partition<
   | ((iterable: A) => ReturnPartitionType<A>) {
   if (iterable === undefined) {
     return (iterable: A): ReturnPartitionType<A> => {
-      return partition(f, iterable as any) as ReturnPartitionType<A>;
+      return partition(f, iterable as any) as unknown as ReturnPartitionType<A>;
     };
   }
   if (isIterable<IterableInfer<A>>(iterable)) {
@@ -101,7 +101,7 @@ function partition<
       }
       return `${Boolean(key)}`;
     }, iterable);
-    return [group["true"] || [], group["false"] || []] as [
+    return [group["true"] || [], group["false"] || []] as unknown as [
       IterableInfer<A>[],
       IterableInfer<A>[],
     ];
