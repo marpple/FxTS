@@ -4,6 +4,7 @@ import reduce from "./reduce";
 import type IterableInfer from "./types/IterableInfer";
 import type iterableInfer from "./types/IterableInfer";
 import type Key from "./types/Key";
+import type { Prettify } from "./types/Prettify";
 import type ReturnValueType from "./types/ReturnValueType";
 import type { GroupBy } from "./types/groupBy";
 
@@ -39,19 +40,19 @@ import type { GroupBy } from "./types/groupBy";
 function groupBy<A, B extends Key>(
   f: (a: A) => B,
   iterable: Iterable<A>,
-): GroupBy<A, B>;
+): Prettify<GroupBy<A, B>>;
 
 function groupBy<A, B extends Key>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
-): Promise<GroupBy<A, B>>;
+): Promise<Prettify<GroupBy<A, B>>>;
 
 function groupBy<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Key,
 >(
   f: (a: IterableInfer<A>) => B | Promise<B>,
-): (iterable: A) => ReturnValueType<A, GroupBy<IterableInfer<A>, B>>;
+): (iterable: A) => ReturnValueType<A, Prettify<GroupBy<IterableInfer<A>, B>>>;
 
 function groupBy<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
@@ -60,9 +61,9 @@ function groupBy<
   f: (a: IterableInfer<A>) => B | Promise<B>,
   iterable?: A,
 ):
-  | GroupBy<A, B>
-  | Promise<GroupBy<A, B>>
-  | ((iterable: A) => ReturnValueType<A, GroupBy<A, B>>) {
+  | Prettify<GroupBy<A, B>>
+  | Promise<Prettify<GroupBy<A, B>>>
+  | ((iterable: A) => ReturnValueType<A, Prettify<GroupBy<A, B>>>) {
   if (iterable === undefined) {
     return (iterable: A): ReturnValueType<A, GroupBy<A, B>> => {
       return groupBy(f, iterable as any) as unknown as ReturnValueType<
