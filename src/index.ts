@@ -45,6 +45,7 @@ import pick from "./pick";
 import pickBy from "./pickBy";
 import pipe from "./pipe";
 import pipe1 from "./pipe1";
+import prop from "./prop";
 import reduce from "./reduce";
 import size from "./size";
 import some from "./some";
@@ -106,6 +107,7 @@ export {
   pickBy,
   pipe,
   pipe1,
+  prop,
   reduce,
   size,
   some,
