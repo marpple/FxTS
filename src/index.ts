@@ -1,4 +1,5 @@
 import add from "./add";
+import always from "./always";
 import apply from "./apply";
 import average from "./average";
 import compactObject from "./compactObject";
@@ -45,6 +46,8 @@ import pick from "./pick";
 import pickBy from "./pickBy";
 import pipe from "./pipe";
 import pipe1 from "./pipe1";
+import prop from "./prop";
+import props from "./props";
 import reduce from "./reduce";
 import size from "./size";
 import some from "./some";
@@ -57,6 +60,7 @@ import unicodeToArray from "./unicodeToArray";
 
 export {
   add,
+  always,
   apply,
   average,
   average as mean,
@@ -106,6 +110,8 @@ export {
   pickBy,
   pipe,
   pipe1,
+  prop,
+  props,
   reduce,
   size,
   some,
