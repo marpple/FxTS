@@ -92,6 +92,10 @@ function concurrent<A>(
   if (length <= 0) {
     throw new RangeError("'length' must be over 0");
   }
+    
+  if (!length) {
+      throw new TypeError("'length' must be type of number");
+  }
 
   if (!isAsyncIterable(iterable)) {
     throw new TypeError("'iterable' must be type of AsyncIterable");
