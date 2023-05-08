@@ -1,4 +1,4 @@
-import { always, pipe, range, toArray } from "../src";
+import { always, pipe, range } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
