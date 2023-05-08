@@ -1,10 +1,12 @@
 import type Key from "./types/Key";
 
-type PropsTuple<K extends readonly Key[], T> = T extends null
-  ? undefined[]
-  : {
-      -readonly [I in keyof K]: K[I] extends keyof T ? T[K[I]] : undefined;
-    };
+type PropsTuple<K extends readonly Key[], T> = {
+  -readonly [I in keyof K]: T extends null
+    ? undefined
+    : K[I] extends keyof T
+    ? T[K[I]]
+    : undefined;
+};
 
 type PropsReturnType<
   K extends readonly Key[],
