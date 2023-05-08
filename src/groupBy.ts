@@ -4,7 +4,9 @@ import reduce from "./reduce";
 import type IterableInfer from "./types/IterableInfer";
 import type iterableInfer from "./types/IterableInfer";
 import type Key from "./types/Key";
+import type { Prettify } from "./types/Prettify";
 import type ReturnValueType from "./types/ReturnValueType";
+import type { GroupBy } from "./types/groupBy";
 
 /**
  * Splits Iterable/AsyncIterable into sets, grouped by the result of running each value through `f`.
@@ -35,23 +37,22 @@ import type ReturnValueType from "./types/ReturnValueType";
  *
  * {@link https://codesandbox.io/s/fxts-groupby-v8q3b | Try It}
  */
-
 function groupBy<A, B extends Key>(
   f: (a: A) => B,
   iterable: Iterable<A>,
-): { [K in B]: A[] };
+): Prettify<GroupBy<A, B>>;
 
 function groupBy<A, B extends Key>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
-): Promise<{ [K in B]: A[] }>;
+): Promise<Prettify<GroupBy<A, B>>>;
 
 function groupBy<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Key,
 >(
   f: (a: IterableInfer<A>) => B | Promise<B>,
-): (iterable: A) => ReturnValueType<A, { [K in B]: IterableInfer<A>[] }>;
+): (iterable: A) => ReturnValueType<A, Prettify<GroupBy<IterableInfer<A>, B>>>;
 
 function groupBy<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
@@ -60,16 +61,14 @@ function groupBy<
   f: (a: IterableInfer<A>) => B | Promise<B>,
   iterable?: A,
 ):
-  | { [K in B]: IterableInfer<A>[] }
-  | Promise<{ [K in B]: IterableInfer<A>[] }>
-  | ((iterable: A) => ReturnValueType<A, { [K in B]: IterableInfer<A>[] }>) {
+  | Prettify<GroupBy<A, B>>
+  | Promise<Prettify<GroupBy<A, B>>>
+  | ((iterable: A) => ReturnValueType<A, Prettify<GroupBy<A, B>>>) {
   if (iterable === undefined) {
-    return (
-      iterable: A,
-    ): ReturnValueType<A, { [K in B]: IterableInfer<A>[] }> => {
-      return groupBy(f, iterable as any) as ReturnValueType<
+    return (iterable: A): ReturnValueType<A, GroupBy<A, B>> => {
+      return groupBy(f, iterable as any) as unknown as ReturnValueType<
         A,
-        { [K in B]: IterableInfer<A>[] }
+        GroupBy<A, B>
       >;
     };
   }
@@ -86,11 +85,11 @@ function groupBy<
       },
       obj,
       iterable,
-    );
+    ) as unknown as GroupBy<A, B>;
   }
 
   if (isAsyncIterable<iterableInfer<A>>(iterable)) {
-    return reduce(
+    const reulst = reduce(
       async (group, a) => {
         const key = await f(a);
         return (group[key] || (group[key] = [])).push(a), group;
@@ -98,6 +97,7 @@ function groupBy<
       obj,
       iterable,
     );
+    return reulst as unknown as Promise<GroupBy<A, B>>;
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

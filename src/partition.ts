@@ -78,7 +78,10 @@ function partition<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
   f: (a: IterableInfer<A>) => B,
 ): (iterable: A) => ReturnPartitionType<A>;
 
-function partition<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function partition<
+  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  B extends boolean,
+>(
   f: (a: IterableInfer<A>) => B,
   iterable?: A,
 ):
@@ -87,10 +90,9 @@ function partition<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
   | ((iterable: A) => ReturnPartitionType<A>) {
   if (iterable === undefined) {
     return (iterable: A): ReturnPartitionType<A> => {
-      return partition(f, iterable as any) as ReturnPartitionType<A>;
+      return partition(f, iterable as any) as unknown as ReturnPartitionType<A>;
     };
   }
-
   if (isIterable<IterableInfer<A>>(iterable)) {
     const group = groupBy((a) => {
       const key = f(a);
@@ -99,12 +101,18 @@ function partition<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
       }
       return `${Boolean(key)}`;
     }, iterable);
-    return [group["true"] || [], group["false"] || []];
+    return [group["true"] || [], group["false"] || []] as unknown as [
+      IterableInfer<A>[],
+      IterableInfer<A>[],
+    ];
   }
 
   if (isAsyncIterable<IterableInfer<A>>(iterable)) {
     const group = groupBy(async (a) => `${Boolean(await f(a))}`, iterable);
-    return group.then((group) => [group["true"] || [], group["false"] || []]);
+    return group.then((group) => [
+      group["true"] || [],
+      group["false"] || [],
+    ]) as Promise<[IterableInfer<A>[], IterableInfer<A>[]]>;
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
