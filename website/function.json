@@ -45,6 +45,7 @@
   ],
   "Strict": [
     "add",
+    "always",
     "apply",
     "average",
     "compactObject",
@@ -90,6 +91,8 @@
     "pick",
     "pickBy",
     "pipe",
+    "prop",
+    "props",
     "reduce",
     "size",
     "some",
