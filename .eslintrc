@@ -8,6 +8,8 @@
     "prettier"
   ],
   "rules": {
+    "no-misleading-character-class": 1,
+
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/consistent-type-imports": 2
   },
