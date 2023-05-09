@@ -1,7 +1,8 @@
 import { readFile, writeFile } from "fs/promises";
 
+import { glob } from "glob";
+
 import { drop, map, not, pipe, reduce } from "../src/index";
-import { searchFiles } from "./util";
 
 const SOURCE_DIR = "./src";
 const OUTPUT_DIR = "./dist";
@@ -40,9 +41,9 @@ const defaultSubPathExports = {
 
 async function generateExports() {
   const fileNames = await Promise.all([
-    searchFiles(`${SOURCE_DIR}/*.ts`),
-    searchFiles(`${SOURCE_DIR}/_internal/*.ts`),
-    searchFiles(`${SOURCE_DIR}/Lazy/*.ts`),
+    glob(`${SOURCE_DIR}/*.ts`),
+    glob(`${SOURCE_DIR}/_internal/*.ts`),
+    glob(`${SOURCE_DIR}/Lazy/*.ts`),
   ]).then((lists) =>
     lists
       .flat()

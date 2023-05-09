@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "fs/promises";
 
-import { searchFiles } from "./util";
+import { glob } from "glob";
 
 const OUTPUT_DIR = "./dist";
 const ESM_ROOT_DIR = `${OUTPUT_DIR}/esm`;
@@ -9,8 +9,8 @@ const ESM5_ROOT_DIR = `${OUTPUT_DIR}/esm5`;
 async function main() {
   const files = (
     await Promise.all([
-      searchFiles(`${ESM_ROOT_DIR}/**/*.js`),
-      searchFiles(`${ESM5_ROOT_DIR}/**/*.js`),
+      glob(`${ESM_ROOT_DIR}/**/*.js`),
+      glob(`${ESM5_ROOT_DIR}/**/*.js`),
     ])
   ).flat();
 
