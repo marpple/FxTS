@@ -85,12 +85,8 @@ function concurrent<A>(
     };
   }
 
-  if (length === Infinity) {
-    throw new RangeError("'length' cannot be infinite");
-  }
-
-  if (length <= 0) {
-    throw new RangeError("'length' must be over 0");
+  if (!Number.isFinite(length) || length <= 0) {
+    throw new RangeError("'length' must be positive integer");
   }
 
   if (!isAsyncIterable(iterable)) {
