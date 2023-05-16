@@ -14,7 +14,7 @@ type LastOf<T> = UnionToIntersection<
 
 type Push<T extends any[], V> = [...T, V];
 
-type TuplifyUnion<
+export type TuplifyUnion<
   T,
   L = LastOf<T>,
   N = [T] extends [never] ? true : false,

@@ -45,7 +45,8 @@ type Res5To8 = {
   }[];
 };
 
-type Res9To12 = { a: "a"[]; b: "b"[]; c: "c"[] };
+type NarrowedAlphabetListResult = { a: "a"[]; b: "b"[]; c: "c"[] };
+type NormalAlphabetListResult = { [p: string]: ("a" | "b" | "c")[] };
 
 const list1 = [
   { type: "a", value: 1 },
@@ -85,7 +86,46 @@ const res12 = pipe(
   list2,
   toAsync,
   groupBy((a) => a),
-); // Promise<Res>
+);
+
+const res13 = groupBy((a) => a + String(Math.random()), list2);
+
+const res14 = pipe(
+  list2,
+  groupBy((a) => a + String(Math.random())),
+);
+
+const res15 = groupBy((a) => a + String(Math.random()), toAsync(list2));
+const res16 = pipe(
+  list2,
+  toAsync,
+  groupBy((a) => a + String(Math.random())),
+);
+
+type Data2 = {
+  id: number;
+  value: "a" | "b" | "c";
+  name: "a" | "b" | "c";
+};
+
+const source2: Data2[] = [
+  { id: 1, value: "a", name: "c" },
+  { id: 2, value: "b", name: "c" },
+  { id: 3, value: "c", name: "b" },
+  { id: 4, value: "c", name: "a" },
+];
+
+const res17 = groupBy((a) => a.value, source2);
+const res18 = pipe(
+  source2,
+  groupBy((a) => a.value),
+);
+const res19 = groupBy((a) => a.value, toAsync(source2));
+const res20 = pipe(
+  source2,
+  toAsync,
+  groupBy((a) => a.value),
+);
 
 checks([
   check<typeof res1, { [p: string]: Data[] }, Test.Pass>(),
@@ -96,8 +136,24 @@ checks([
   check<typeof res6, Res5To8, Test.Pass>(),
   check<typeof res7, Promise<Res5To8>, Test.Pass>(),
   check<typeof res8, Promise<Res5To8>, Test.Pass>(),
-  check<typeof res9, Res9To12, Test.Pass>(),
-  check<typeof res10, Res9To12, Test.Pass>(),
-  check<typeof res11, Promise<Res9To12>, Test.Pass>(),
-  check<typeof res12, Promise<Res9To12>, Test.Pass>(),
+  check<typeof res9, NarrowedAlphabetListResult, Test.Pass>(),
+  check<typeof res10, NarrowedAlphabetListResult, Test.Pass>(),
+  check<typeof res11, Promise<NarrowedAlphabetListResult>, Test.Pass>(),
+  check<typeof res12, Promise<NarrowedAlphabetListResult>, Test.Pass>(),
+  check<typeof res13, NormalAlphabetListResult, Test.Pass>(),
+  check<typeof res14, NormalAlphabetListResult, Test.Pass>(),
+  check<typeof res15, Promise<NormalAlphabetListResult>, Test.Pass>(),
+  check<typeof res16, Promise<NormalAlphabetListResult>, Test.Pass>(),
+  check<typeof res17, { a: Data2[]; b: Data2[]; c: Data2[] }, Test.Pass>(),
+  check<typeof res18, { a: Data2[]; b: Data2[]; c: Data2[] }, Test.Pass>(),
+  check<
+    typeof res19,
+    Promise<{ a: Data2[]; b: Data2[]; c: Data2[] }>,
+    Test.Pass
+  >(),
+  check<
+    typeof res20,
+    Promise<{ a: Data2[]; b: Data2[]; c: Data2[] }>,
+    Test.Pass
+  >(),
 ]);
