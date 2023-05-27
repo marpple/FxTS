@@ -22,6 +22,7 @@ import includes from "./includes";
 import indexBy from "./indexBy";
 import isArray from "./isArray";
 import isBoolean from "./isBoolean";
+import isDefined from "./isDefined";
 import isEmpty from "./isEmpty";
 import isNil from "./isNil";
 import isNumber from "./isNumber";
@@ -92,6 +93,7 @@ export {
   isObject,
   isString,
   isUndefined,
+  isDefined,
   join,
   juxt,
   last,
