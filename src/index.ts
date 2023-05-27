@@ -56,6 +56,7 @@ import sort from "./sort";
 import sortBy from "./sortBy";
 import sum from "./sum";
 import tap from "./tap";
+import throwIf from "./throwIf";
 import toArray from "./toArray";
 import unicodeToArray from "./unicodeToArray";
 
@@ -122,6 +123,7 @@ export {
   sum,
   tap,
   toArray,
+  throwIf,
   unicodeToArray,
 };
 
