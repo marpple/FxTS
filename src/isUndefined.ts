@@ -7,7 +7,7 @@
  * isUndefined(2); // false
  * ```
  */
-function isUndefined(a: any): a is undefined {
+function isUndefined<T>(a: T | undefined): a is undefined {
   return typeof a === "undefined";
 }
 
