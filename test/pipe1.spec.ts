@@ -1,4 +1,4 @@
-import { pipe1 } from "../src/index";
+import { pipe1 } from "../src";
 
 const add10 = (a: number) => a + 10;
 const add10Async = async (a: number) => a + 10;

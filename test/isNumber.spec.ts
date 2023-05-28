@@ -1,4 +1,4 @@
-import { isNumber } from "../src/index";
+import { isNumber } from "../src";
 
 describe("isNumber", function () {
   it.each([undefined, null, true, "1", Symbol("a"), () => null])(

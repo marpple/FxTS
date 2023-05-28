@@ -1,4 +1,4 @@
-import { delay, map, pipe, range, tap, toArray, toAsync } from "../src/index";
+import { delay, map, pipe, range, tap, toArray, toAsync } from "../src";
 import { callFuncAfterTime } from "./utils";
 
 describe("tap", function () {

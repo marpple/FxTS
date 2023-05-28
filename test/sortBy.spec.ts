@@ -1,4 +1,4 @@
-import { filter, identity, pipe, sortBy, toAsync } from "../src/index";
+import { filter, identity, pipe, sortBy, toAsync } from "../src";
 
 describe("sortBy", function () {
   describe("sync", function () {

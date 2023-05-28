@@ -1,4 +1,4 @@
-import { omitBy, pipe } from "../src/index";
+import { omitBy, pipe } from "../src";
 
 describe("omitBy", function () {
   describe("sync", function () {

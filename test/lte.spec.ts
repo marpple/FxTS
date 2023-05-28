@@ -1,4 +1,4 @@
-import { filter, lte, pipe, toArray } from "../src/index";
+import { filter, lte, pipe, toArray } from "../src";
 
 describe("lte(less then or equal to)", function () {
   describe("currying", function () {

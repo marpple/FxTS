@@ -1,4 +1,4 @@
-import isEmpty from "../src/isEmpty";
+import { isEmpty } from "../src";
 
 describe("isEmpty", function () {
   const testParameters = [

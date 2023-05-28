@@ -1,4 +1,4 @@
-import { each, map, pipe, range, toAsync } from "../src/index";
+import { each, map, pipe, range, toAsync } from "../src";
 
 describe("each", function () {
   describe("sync", function () {

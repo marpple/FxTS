@@ -1,4 +1,4 @@
-import { omit, pipe, toAsync } from "../src/index";
+import { omit, pipe, toAsync } from "../src";
 
 describe("omit", function () {
   describe("sync", function () {

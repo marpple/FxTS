@@ -1,4 +1,4 @@
-import { evolve, pipe } from "../src/index";
+import { evolve, pipe } from "../src";
 
 describe("evolve", function () {
   const add1 = (a: number) => a + 1;

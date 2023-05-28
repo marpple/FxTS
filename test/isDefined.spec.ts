@@ -1,4 +1,4 @@
-import isDefined from "../src/isDefined";
+import { isDefined } from "../src";
 
 describe("isDefined", function () {
   it.each([2, true, null, {}, [], Symbol("a"), "a"])(

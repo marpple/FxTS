@@ -1,4 +1,4 @@
-import { pipe, props, toArray } from "../src/index";
+import { pipe, props, toArray } from "../src";
 
 describe("props", () => {
   const obj = { a: "v1", b: "v2", c: "v3", d: "v4", e: "v5", f: "v6" };

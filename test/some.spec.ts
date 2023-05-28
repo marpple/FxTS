@@ -1,5 +1,5 @@
+import { filter, map, pipe, some, toAsync } from "../src";
 import { AsyncFunctionException } from "../src/_internal/error";
-import { filter, map, pipe, some, toAsync } from "../src/index";
 
 describe("some", function () {
   describe("sync", function () {

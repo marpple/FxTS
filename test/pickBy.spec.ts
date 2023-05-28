@@ -1,4 +1,4 @@
-import { pickBy, pipe } from "../src/index";
+import { pickBy, pipe } from "../src";
 
 describe("pickBy", function () {
   describe("sync", function () {

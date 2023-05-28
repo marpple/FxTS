@@ -1,5 +1,4 @@
-import { identity, isString } from "../src";
-import throwIf from "../src/throwIf";
+import { identity, isString, throwIf } from "../src";
 
 describe("throwIf", function () {
   it("if return of predicate is true", function () {

@@ -1,4 +1,4 @@
-import { filter, gt, pipe, toArray } from "../src/index";
+import { filter, gt, pipe, toArray } from "../src";
 
 describe("gt(greater then)", function () {
   describe("currying", function () {

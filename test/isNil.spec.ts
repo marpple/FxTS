@@ -1,4 +1,4 @@
-import { isNil } from "../src/index";
+import { isNil } from "../src";
 
 describe("isNil", function () {
   it("should check if given value is `null` or `undefined`", function () {

@@ -1,4 +1,4 @@
-import { isArray } from "../src/index";
+import { isArray } from "../src";
 
 describe("isArray", function () {
   it.each([undefined, null, true, 1, "a", Symbol("a"), () => null])(
