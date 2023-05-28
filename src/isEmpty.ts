@@ -1,3 +1,6 @@
+import isArray from "./isArray";
+import isNil from "./isNil";
+
 /**
  * Returns true if the given value is empty value, false otherwise.
  *
@@ -24,39 +27,21 @@
  * isEmpty(Symbol("")); // false
  * ```
  */
-function isEmpty(value: unknown): boolean {
-  if (typeof value === "number" || typeof value === "boolean") {
-    return false;
-  }
+export const isEmpty = (value: unknown): boolean => {
+  if (isNil(value)) return true; // if value is null or undefined.
 
-  if (typeof value === "undefined" || value === null) {
-    return true;
-  }
+  if (
+    typeof value === "object" &&
+    (value as object)["constructor"] === Object &&
+    Object.getOwnPropertyNames(value).length === 0
+  )
+    return true; // if value is a literal object and have no property.
 
-  if (value instanceof Date) {
-    return false;
-  }
+  if (isArray(value) && value.length === 0) return true; // if value have no item.
 
-  if (typeof value === "function") {
-    return false;
-  }
-
-  if (value instanceof Object && !Object.keys(value).length) {
-    return true;
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length === 0) {
-      return true;
-    }
-    return false;
-  }
-
-  if (value === "") {
-    return true;
-  }
+  if (value === "") return true;
 
   return false;
-}
+};
 
 export default isEmpty;

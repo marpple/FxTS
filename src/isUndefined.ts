@@ -1,5 +1,5 @@
 /**
- * Returns true if `a` is a undefined.
+ * Checks if the given value is `undefined`.
  *
  * @example
  * ```ts
@@ -7,8 +7,7 @@
  * isUndefined(2); // false
  * ```
  */
-function isUndefined<T>(a: T | undefined): a is undefined {
-  return typeof a === "undefined";
-}
+export const isUndefined = <T>(a: T | undefined): a is undefined =>
+  a === undefined;
 
 export default isUndefined;

@@ -1,3 +1,6 @@
+import isNull from "./isNull";
+import isUndefined from "./isUndefined";
+
 type Nullable<T> = T extends null | undefined ? T : never;
 
 /**
@@ -11,12 +14,6 @@ type Nullable<T> = T extends null | undefined ? T : never;
  * isNil(null); // true
  * ```
  */
-function isNil<T>(a: T): a is Nullable<T> {
-  if (a === undefined || a === null) {
-    return true;
-  }
-
-  return false;
-}
+export const isNil = <T>(a: T): a is Nullable<T> => isUndefined(a) || isNull(a);
 
 export default isNil;

@@ -10,8 +10,6 @@ import isUndefined from "./isUndefined";
  * isDefined(2); // true
  * ```
  */
-function isDefined<T>(a: T | undefined): a is T {
-  return !isUndefined(a);
-}
+export const isDefined = <T>(a: T | undefined): a is T => !isUndefined(a);
 
 export default isDefined;
