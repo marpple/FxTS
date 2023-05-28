@@ -25,6 +25,7 @@ import isBoolean from "./isBoolean";
 import isDefined from "./isDefined";
 import isEmpty from "./isEmpty";
 import isNil from "./isNil";
+import { isNull } from "./isNull";
 import isNumber from "./isNumber";
 import isObject from "./isObject";
 import isString from "./isString";
@@ -95,6 +96,7 @@ export {
   isString,
   isUndefined,
   isDefined,
+  isNull,
   join,
   juxt,
   last,
