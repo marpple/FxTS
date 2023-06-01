@@ -22,10 +22,9 @@ import includes from "./includes";
 import indexBy from "./indexBy";
 import isArray from "./isArray";
 import isBoolean from "./isBoolean";
-import isDefined from "./isDefined";
 import isEmpty from "./isEmpty";
 import isNil from "./isNil";
-import { isNull } from "./isNull";
+import isNull from "./isNull";
 import isNumber from "./isNumber";
 import isObject from "./isObject";
 import isString from "./isString";
@@ -57,7 +56,6 @@ import sort from "./sort";
 import sortBy from "./sortBy";
 import sum from "./sum";
 import tap from "./tap";
-import throwIf from "./throwIf";
 import toArray from "./toArray";
 import unicodeToArray from "./unicodeToArray";
 
@@ -95,7 +93,6 @@ export {
   isObject,
   isString,
   isUndefined,
-  isDefined,
   isNull,
   join,
   juxt,
@@ -125,7 +122,6 @@ export {
   sum,
   tap,
   toArray,
-  throwIf,
   unicodeToArray,
 };
 

@@ -9,6 +9,6 @@
  * isNull(null); // true
  * ```
  */
-export const isNull = <T>(input: T | null): input is null => input === null;
+const isNull = <T>(input: T | null): input is null => input === null;
 
 export default isNull;

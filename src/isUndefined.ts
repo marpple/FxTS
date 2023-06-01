@@ -7,7 +7,6 @@
  * isUndefined(2); // false
  * ```
  */
-export const isUndefined = <T>(a: T | undefined): a is undefined =>
-  a === undefined;
+const isUndefined = <T>(a: T | undefined): a is undefined => a === undefined;
 
 export default isUndefined;

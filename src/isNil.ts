@@ -14,6 +14,6 @@ type Nullable<T> = T extends null | undefined ? T : never;
  * isNil(null); // true
  * ```
  */
-export const isNil = <T>(a: T): a is Nullable<T> => isUndefined(a) || isNull(a);
+const isNil = <T>(a: T): a is Nullable<T> => isUndefined(a) || isNull(a);
 
 export default isNil;
