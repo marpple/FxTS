@@ -37,6 +37,7 @@ import lte from "./lte";
 import max from "./max";
 import memoize from "./memoize";
 import min from "./min";
+import negate from "./negate";
 import noop from "./noop";
 import not from "./not";
 import nth from "./nth";
@@ -56,6 +57,7 @@ import sort from "./sort";
 import sortBy from "./sortBy";
 import sum from "./sum";
 import tap from "./tap";
+import throwIf from "./throwIf";
 import toArray from "./toArray";
 import unicodeToArray from "./unicodeToArray";
 
@@ -102,6 +104,7 @@ export {
   max,
   memoize,
   min,
+  negate,
   noop,
   not,
   nth,
@@ -121,6 +124,7 @@ export {
   sortBy,
   sum,
   tap,
+  throwIf,
   toArray,
   unicodeToArray,
 };
