@@ -52,7 +52,7 @@ const res7 = pipe(
   throwIf((a): a is 2 => a === 2),
 );
 
-// 1 | 2 | 3
+// 1 | 3
 const res8 = pipe(
   randomInt(1, 3) as 1 | 2 | 3,
 
