@@ -1,4 +1,4 @@
-import { isBoolean } from "../src/index";
+import { isBoolean } from "../src";
 
 describe("isBoolean", function () {
   it.each([undefined, null, 1, "1", Symbol("a"), () => null])(

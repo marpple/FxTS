@@ -1,4 +1,4 @@
-import { noop } from "../src/index";
+import { noop } from "../src";
 
 describe("noop", function () {
   it("should return `undefined`", function () {

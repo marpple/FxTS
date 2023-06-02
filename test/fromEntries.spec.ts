@@ -1,4 +1,4 @@
-import { fromEntries, toAsync } from "../src/index";
+import { fromEntries, toAsync } from "../src";
 
 //an object from string keyed-value pairs.
 describe("fromEntries", function () {

@@ -1,4 +1,4 @@
-import isUndefined from "../src/isUndefined";
+import { isUndefined } from "../src";
 
 describe("isUndefined", function () {
   it.each([2, true, null, {}, [], Symbol("a"), "a"])(

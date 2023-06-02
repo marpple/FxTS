@@ -1,4 +1,4 @@
-import { pipe, prop } from "../src/index";
+import { pipe, prop } from "../src";
 
 describe("prop", () => {
   it("should return the value for the given object property", () => {

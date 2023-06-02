@@ -1,5 +1,5 @@
+import { map, partition, pipe, toAsync } from "../src";
 import { AsyncFunctionException } from "../src/_internal/error";
-import { map, partition, pipe, toAsync } from "../src/index";
 
 describe("partition", function () {
   describe("sync", function () {

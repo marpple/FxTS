@@ -1,4 +1,4 @@
-import { consume, peek, pipe, toAsync } from "../src/index";
+import { consume, peek, pipe, toAsync } from "../src";
 
 describe("consume", function () {
   describe("sync", function () {

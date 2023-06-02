@@ -1,5 +1,5 @@
+import { filter, groupBy, pipe, toAsync } from "../src";
 import { AsyncFunctionException } from "../src/_internal/error";
-import { filter, groupBy, pipe, toAsync } from "../src/index";
 
 type Obj = {
   category: "clothes" | "pants" | "shoes";

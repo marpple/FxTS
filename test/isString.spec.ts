@@ -1,4 +1,4 @@
-import { isString } from "../src/index";
+import { isString } from "../src";
 
 describe("isString", function () {
   it.each([undefined, null, true, 1, Symbol("a"), () => null])(

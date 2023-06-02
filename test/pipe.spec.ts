@@ -8,7 +8,7 @@ import {
   reduce,
   toArray,
   toAsync,
-} from "../src/index";
+} from "../src";
 
 describe("pipe", function () {
   describe("sync", function () {

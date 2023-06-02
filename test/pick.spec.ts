@@ -1,4 +1,4 @@
-import { pick, pipe, toAsync } from "../src/index";
+import { pick, pipe, toAsync } from "../src";
 
 describe("pick", function () {
   describe("sync", function () {

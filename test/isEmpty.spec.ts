@@ -1,4 +1,4 @@
-import isEmpty from "../src/isEmpty";
+import { isEmpty } from "../src";
 
 describe("isEmpty", function () {
   const testParameters = [
@@ -22,8 +22,6 @@ describe("isEmpty", function () {
 
   it.each(testParameters)(
     "should Return `true` if the given value is empty value(%s)",
-    function (input, expected) {
-      expect(isEmpty(input)).toEqual(expected);
-    },
+    (input, expected) => expect(isEmpty(input)).toEqual(expected),
   );
 });

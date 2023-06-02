@@ -24,6 +24,7 @@ import isArray from "./isArray";
 import isBoolean from "./isBoolean";
 import isEmpty from "./isEmpty";
 import isNil from "./isNil";
+import isNull from "./isNull";
 import isNumber from "./isNumber";
 import isObject from "./isObject";
 import isString from "./isString";
@@ -92,6 +93,7 @@ export {
   isObject,
   isString,
   isUndefined,
+  isNull,
   join,
   juxt,
   last,

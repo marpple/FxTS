@@ -1,5 +1,5 @@
+import { filter, join, map, pipe, toAsync } from "../src";
 import { asyncEmpty, empty } from "../src/_internal/utils";
-import { filter, join, map, pipe, toAsync } from "../src/index";
 
 describe("join", function () {
   describe("sync", function () {

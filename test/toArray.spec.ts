@@ -1,4 +1,4 @@
-import { range, toArray, toAsync } from "../src/index";
+import { range, toArray, toAsync } from "../src";
 
 const identityP = <T>(a: T) => Promise.resolve(a);
 

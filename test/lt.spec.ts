@@ -1,4 +1,4 @@
-import { filter, lt, pipe, toArray } from "../src/index";
+import { filter, lt, pipe, toArray } from "../src";
 
 describe("lt(less then)", function () {
   describe("currying", function () {

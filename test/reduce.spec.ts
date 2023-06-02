@@ -1,4 +1,4 @@
-import { filter, map, pipe, range, reduce, toAsync } from "../src/index";
+import { filter, map, pipe, range, reduce, toAsync } from "../src";
 
 const addNumber = (a: number, b: number) => a + b;
 const addNumberAsync = async (a: number, b: number) => a + b;

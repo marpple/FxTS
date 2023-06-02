@@ -1,4 +1,4 @@
-import { filter, map, nth, pipe, toAsync } from "../src/index";
+import { filter, map, nth, pipe, toAsync } from "../src";
 
 describe("nth", function () {
   describe("sync", function () {

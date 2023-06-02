@@ -1,4 +1,4 @@
-import { filter, pipe, sort, toAsync } from "../src/index";
+import { filter, pipe, sort, toAsync } from "../src";
 
 describe("sort", function () {
   const sortFn = (a: number | string, b: number | string) => {

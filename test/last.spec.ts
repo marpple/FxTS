@@ -1,4 +1,4 @@
-import { filter, last, map, pipe, range, toAsync } from "../src/index";
+import { filter, last, map, pipe, range, toAsync } from "../src";
 
 describe("last", function () {
   describe("sync", function () {

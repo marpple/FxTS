@@ -1,5 +1,5 @@
+import { countBy, filter, pipe, toAsync } from "../src";
 import { AsyncFunctionException } from "../src/_internal/error";
-import { countBy, filter, pipe, toAsync } from "../src/index";
 
 type Obj = {
   category: "clothes" | "pants" | "shoes";
