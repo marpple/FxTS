@@ -4,7 +4,7 @@ import type Include from "./types/Include";
 /**
  * throw return of `err` if predicate function return true
  *
- * default throw function is {@link identity}
+ * default throw function is {@link https://fxts.dev/docs/identity | identity }
  *
  * if you want to use typeguard, please define generic type like example
  *
