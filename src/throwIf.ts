@@ -1,5 +1,4 @@
 import identity from "./identity";
-import type Include from "./types/Include";
 
 /**
  * throw return of `err` if predicate function return true
@@ -20,14 +19,16 @@ import type Include from "./types/Include";
  *  )
  * ```
  */
+
+function throwIf<T, N extends T>(
+  predicate: (input: T) => input is N,
+  err?: (input: N) => unknown,
+): (input: T) => Exclude<T, N>;
+
 function throwIf<T>(
   predicate: (input: T) => boolean,
   err?: (input: T) => unknown,
 ): (input: T) => T;
-function throwIf<T, N>(
-  predicate: (input: T) => input is Include<T, N>,
-  err?: (input: N) => unknown,
-): (input: T) => Exclude<T, N>;
 
 function throwIf<T>(
   predicate: (input: T) => unknown,

@@ -3,7 +3,7 @@ import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
 
-const isDefined = negate<User["name"], undefined>(isUndefined);
+const isDefined = negate(isUndefined);
 
 type User = {
   name?: string;
