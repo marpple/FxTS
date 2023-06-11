@@ -5,14 +5,12 @@ import identity from "./identity";
  *
  * default throw function is {@link https://fxts.dev/docs/identity | identity }
  *
- * if you want to use typeguard, please define generic type like example
- *
  * @example
  * ```ts
  *  pipe(
  *    fn(), // return type is string | undefined
  *
- *    throwIf<string | undefined, undefined>(isUndefined, (err) => Error("return of fn() is undefined")),
+ *    throwIf(isUndefined, (err) => Error("return of fn() is undefined")),
  *    // err is undefined, and it is return of fn
  *
  *    (input) => input, // input is string
@@ -31,7 +29,7 @@ function throwIf<T>(
 ): (input: T) => T;
 
 function throwIf<T>(
-  predicate: (input: T) => unknown,
+  predicate: (input: T) => boolean,
   err: (input: unknown) => unknown = identity,
 ) {
   return (input: T) => {
