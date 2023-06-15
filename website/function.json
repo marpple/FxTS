@@ -82,6 +82,7 @@
     "max",
     "memoize",
     "min",
+    "negate",
     "noop",
     "not",
     "nth",
@@ -100,6 +101,7 @@
     "sortBy",
     "sum",
     "tap",
+    "throwIf",
     "toArray",
     "unicodeToArray"
   ]
