@@ -1,3 +1,5 @@
+import type Include from "./types/Include";
+
 /**
  * Returns true if `a` is an Array.
  *
@@ -7,8 +9,7 @@
  * isArray(2); // false
  * ```
  */
-function isArray(a: any): a is any[] {
-  return Array.isArray(a);
-}
+const isArray = <T>(a: T): a is Include<T, unknown[] | Readonly<unknown[]>> =>
+  Array.isArray(a);
 
 export default isArray;

@@ -48,7 +48,7 @@ function sortBy<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   };
 
   if (isArray(iterable)) {
-    return iterable.sort(_sortBy);
+    return (iterable as any).sort(_sortBy);
   }
 
   if (isIterable(iterable)) {

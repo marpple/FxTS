@@ -49,7 +49,7 @@ function sort<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   }
 
   if (isArray(iterable)) {
-    return iterable.sort(f as any);
+    return (iterable as any[]).sort(f as any);
   }
 
   if (isIterable(iterable)) {
