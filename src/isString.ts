@@ -1,3 +1,5 @@
+import type Include from "./types/Include";
+
 /**
  * Returns true if `s` is a String.
  *
@@ -7,8 +9,6 @@
  * isString(2); // false
  * ```
  */
-function isString(s: unknown): s is string {
-  return typeof s === "string";
-}
+const isString = <T>(s: T): s is Include<T, string> => typeof s === "string";
 
 export default isString;

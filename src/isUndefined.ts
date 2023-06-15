@@ -1,3 +1,5 @@
+import type Include from "./types/Include";
+
 /**
  * Checks if the given value is `undefined`.
  *
@@ -7,6 +9,6 @@
  * isUndefined(2); // false
  * ```
  */
-const isUndefined = <T>(a: T | undefined): a is undefined => a === undefined;
+const isUndefined = <T>(a: T): a is Include<T, undefined> => a === undefined;
 
 export default isUndefined;
