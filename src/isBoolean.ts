@@ -1,3 +1,5 @@
+import type Include from "./types/Include";
+
 /**
  * Returns true if `n` is a Boolean.
  *
@@ -8,8 +10,6 @@
  * isBoolean("FxTS"); // false
  * ```
  */
-function isBoolean(n: unknown): n is boolean {
-  return typeof n === "boolean";
-}
+const isBoolean = <T>(n: T): n is Include<T, boolean> => typeof n === "boolean";
 
 export default isBoolean;

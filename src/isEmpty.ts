@@ -19,7 +19,7 @@ import isNil from "./isNil";
  * isEmpty(new Date()) // false
  * ```
  */
-export const isEmpty = (value: unknown): boolean => {
+const isEmpty = <T>(value: T): boolean => {
   if (isNil(value)) return true; // if value is null or undefined.
 
   if (

@@ -47,7 +47,7 @@ function last<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: T,
 ): LastReturnType<T>;
 
-function last<A>(iterable: Iterable<A> | AsyncIterable<A>) {
+function last<A>(iterable: Iterable<A> | AsyncIterable<A> | A[]) {
   if (isArray(iterable) || isString(iterable)) {
     return iterable[iterable.length - 1];
   }

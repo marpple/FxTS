@@ -1,3 +1,5 @@
+import type Include from "./types/Include";
+
 /**
  * Checks if the given value is `null`.
  *
@@ -9,6 +11,6 @@
  * isNull(null); // true
  * ```
  */
-const isNull = <T>(input: T | null): input is null => input === null;
+const isNull = <T>(input: T): input is Include<T, null> => input === null;
 
 export default isNull;

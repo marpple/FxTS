@@ -1,4 +1,4 @@
-type IdentityObject<T> = T extends object ? T : never;
+import type Include from "./types/Include";
 
 /**
  * Checks if value is the type of object.
@@ -12,9 +12,9 @@ type IdentityObject<T> = T extends object ? T : never;
  * isObject(123); // false
  * ```
  */
-function isObject<T = unknown>(a: T): a is IdentityObject<T> {
+const isObject = <T>(a: T): a is Include<T, object> => {
   const type = typeof a;
   return a != null && (type === "object" || type === "function");
-}
+};
 
 export default isObject;
