@@ -3,10 +3,10 @@
  *
  * @example
  * ```ts
- * const isDefined = negate(isUndefined);
- *  // <T>(input:T|undefined) => boolean
- * const isDefined = negate<string | undefined, undefined>(isUndefined);
+ * const isDefined = negate(isUndefined)<string | undefined>
  *  // (input: string | undefined) => input is string
+ * const isDefined = negate((input) => input === undefined)
+ *  // (input: unknown) => boolean
  * ```
  */
 function negate<T, N extends T>(
