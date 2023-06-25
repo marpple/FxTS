@@ -3,10 +3,9 @@
  *
  * @example
  * ```ts
- * const isDefined = negate(isUndefined)<string | undefined>
- *  // (input: string | undefined) => input is string
- * const isDefined = negate((input) => input === undefined)
- *  // (input: unknown) => boolean
+ * const isDefined: (input: string | undefined) => input is string = negate(isUndefined)<string | undefined>
+ *
+ * const isDefined: (input: unknown) => boolean = negate((input) => input === undefined)
  * ```
  */
 function negate<T, N extends T>(
