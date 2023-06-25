@@ -52,6 +52,7 @@ import prop from "./prop";
 import props from "./props";
 import reduce from "./reduce";
 import size from "./size";
+import skip from "./skip";
 import some from "./some";
 import sort from "./sort";
 import sortBy from "./sortBy";
@@ -119,6 +120,7 @@ export {
   props,
   reduce,
   size,
+  skip,
   some,
   sort,
   sortBy,
