@@ -3,6 +3,8 @@
  *
  * If skipped, return the input data as is, If executed, return the result of the process function
  *
+ * If the return type of the process function is void, it will be inferred as returning undefined.
+ *
  * @example
  * ```ts
  * const isString = (input: string | undefined): input is string =>
@@ -17,18 +19,18 @@
  * @param predicate determines whether to skip or include the process function
  * @return original input or result of process function
  */
-function skip<T, N extends T>(
+function skip<T, N extends T, U>(
   predicate: (input: T) => input is N,
-): <U>(process: (input: Exclude<T, N>) => U) => (input: T) => N | U;
+  process: (input: Exclude<T, N>) => U,
+): (input: T) => N | (U extends void ? undefined : U);
 
-function skip<T>(
+function skip<T, U>(
   predicate: (input: T) => boolean,
-): <N>(process: (input: T) => N) => (input: T) => T | N;
+  process: (input: T) => U,
+): (input: T) => T | (U extends void ? undefined : U);
 
-function skip<T>(predicate: (input: T) => boolean) {
-  return <N>(process: (input: T) => N) =>
-    (input: T) =>
-      predicate(input) ? input : process(input);
+function skip(predicate: any, process: any) {
+  return (input: any) => (predicate(input) ? input : process(input));
 }
 
 export default skip;
