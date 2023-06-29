@@ -1,5 +1,5 @@
-import { Concurrent } from "../../src/Lazy/concurrent";
 import { compact, filter, map, pipe, toArray, toAsync } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
 describe("compact", function () {

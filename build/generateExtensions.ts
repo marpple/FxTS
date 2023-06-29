@@ -1,5 +1,4 @@
 import { readFile, writeFile } from "fs/promises";
-
 import { glob } from "glob";
 
 const OUTPUT_DIR = "./dist";

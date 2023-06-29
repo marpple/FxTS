@@ -1,5 +1,5 @@
-import take from "./Lazy/take";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import take from "./Lazy/take";
 import pipe from "./pipe";
 import toArray from "./toArray";
 

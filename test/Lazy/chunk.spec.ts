@@ -1,4 +1,3 @@
-import { Concurrent } from "../../src/Lazy/concurrent";
 import {
   chunk,
   concurrent,
@@ -10,6 +9,7 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { callFuncAfterTime, generatorMock } from "../utils";
 
 const expected = [

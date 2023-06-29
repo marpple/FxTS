@@ -1,6 +1,6 @@
-import filter from "./Lazy/filter";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import head from "./head";
+import filter from "./Lazy/filter";
 import type IterableInfer from "./types/IterableInfer";
 import type ReturnValueType from "./types/ReturnValueType";
 

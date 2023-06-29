@@ -1,5 +1,5 @@
-import { Concurrent } from "../../src/Lazy/concurrent";
 import { pipe, range, reject, toArray, toAsync } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
 const mod = (a: number) => a % 2 === 0;
