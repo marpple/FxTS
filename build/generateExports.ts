@@ -1,5 +1,4 @@
 import { readFile, writeFile } from "fs/promises";
-
 import { glob } from "glob";
 
 import { drop, map, not, pipe, reduce } from "../src/index";

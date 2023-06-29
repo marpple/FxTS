@@ -1,4 +1,3 @@
-import { Concurrent } from "../../src/Lazy/concurrent";
 import {
   concat,
   concurrent,
@@ -8,6 +7,7 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("concat", function () {

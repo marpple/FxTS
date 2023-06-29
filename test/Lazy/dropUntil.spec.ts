@@ -8,8 +8,8 @@ import {
   toArray,
   toAsync,
 } from "../../src";
-import { Concurrent } from "../../src/Lazy/concurrent";
 import { AsyncFunctionException } from "../../src/_internal/error";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("dropUntil", function () {

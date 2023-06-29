@@ -1,4 +1,3 @@
-import { Concurrent } from "../../src/Lazy/concurrent";
 import {
   concurrent,
   delay,
@@ -8,6 +7,7 @@ import {
   toAsync,
   zip,
 } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { callFuncAfterTime, generatorMock } from "../utils";
 
 describe("zip", function () {

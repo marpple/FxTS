@@ -1,5 +1,5 @@
-import { Concurrent } from "../../src/Lazy/concurrent";
 import { map, peek, pipe, toArray, toAsync } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
 describe("peek", function () {

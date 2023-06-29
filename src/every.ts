@@ -1,6 +1,6 @@
+import { isAsyncIterable, isIterable } from "./_internal/utils";
 import map from "./Lazy/map";
 import takeUntil from "./Lazy/takeUntil";
-import { isAsyncIterable, isIterable } from "./_internal/utils";
 import not from "./not";
 import pipe from "./pipe";
 import reduce from "./reduce";

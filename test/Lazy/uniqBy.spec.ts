@@ -1,5 +1,5 @@
-import { Concurrent } from "../../src/Lazy/concurrent";
 import { filter, map, pipe, toArray, toAsync, uniqBy } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
 describe("uniqBy", function () {
