@@ -1,6 +1,6 @@
 import { randomInt } from "crypto";
 
-import { isString, pipe, skip } from "../src";
+import { isString, pipe, skip, throwError } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
@@ -10,10 +10,6 @@ interface User {
   gender: "female" | "male";
   age: number;
 }
-
-const toThrow = () => {
-  throw Error();
-};
 
 const createUser = (): User => ({ name: null, age: 23, gender: "female" });
 
@@ -40,7 +36,10 @@ const res3 = pipe(
 const res4 = pipe(
   randomInt(1, 4),
 
-  skip((val: number) => val > 2, toThrow),
+  skip(
+    (val: number) => val > 2,
+    throwError(() => Error("")),
+  ),
 );
 
 const res5 = pipe(
@@ -58,7 +57,7 @@ const res6 = pipe(
   createUser(),
   skip(
     (user): user is User & { gender: "female" } => user.gender === "female",
-    toThrow,
+    throwError(() => Error("")),
   ),
 );
 
