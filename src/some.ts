@@ -1,7 +1,7 @@
-import map from "./Lazy/map";
-import takeUntil from "./Lazy/takeUntil";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import identity from "./identity";
+import map from "./Lazy/map";
+import takeUntil from "./Lazy/takeUntil";
 import pipe from "./pipe";
 import reduce from "./reduce";
 import type Arrow from "./types/Arrow";

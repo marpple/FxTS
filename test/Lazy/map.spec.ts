@@ -1,6 +1,6 @@
-import { Concurrent } from "../../src/Lazy/concurrent";
 import { AsyncFunctionException } from "../../src/_internal/error";
 import { map, pipe, range, toArray, toAsync } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
 describe("map", function () {

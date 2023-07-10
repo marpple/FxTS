@@ -1,4 +1,3 @@
-import { Concurrent } from "../../src/Lazy/concurrent";
 import { AsyncFunctionException } from "../../src/_internal/error";
 import {
   concurrent,
@@ -12,6 +11,7 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
+import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
 describe("takeUntil", function () {

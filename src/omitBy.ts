@@ -1,8 +1,8 @@
+import { isPromise } from "./_internal/utils";
 import map from "./Lazy/map";
 import reject from "./Lazy/reject";
 import toAsync from "./Lazy/toAsync";
 import zip from "./Lazy/zip";
-import { isPromise } from "./_internal/utils";
 import pipe from "./pipe";
 import toArray from "./toArray";
 import type {

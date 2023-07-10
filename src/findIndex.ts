@@ -1,6 +1,6 @@
-import zipWithIndex from "./Lazy/zipWithIndex";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import find from "./find";
+import zipWithIndex from "./Lazy/zipWithIndex";
 import pipe from "./pipe";
 import pipe1 from "./pipe1";
 import type Arrow from "./types/Arrow";
