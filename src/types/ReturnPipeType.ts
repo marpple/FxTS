@@ -1,16 +1,15 @@
 import type Awaited from "./Awaited";
 import type { TuplifyUnion } from "./ExcludeObject";
+import type Head from "./Head";
 import type Last from "./Last";
 import type Tail from "./Tail";
 
-type IsAny<T> = 0 extends 1 & T ? true : false;
-
-type HasPromise<T extends any[]> = T extends []
+type HasPromise<T extends any[]> = Head<T> extends never
   ? false
-  : IsAny<T[0]> extends true
-  ? HasPromise<Tail<T>>
-  : T extends [Promise<any>, ...any]
+  : Head<T> extends Promise<unknown>
   ? true
+  : T["length"] extends 0
+  ? false
   : HasPromise<Tail<T>>;
 
 type PossiblyHasPromise<T extends any[]> = T extends []
