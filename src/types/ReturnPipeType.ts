@@ -19,14 +19,6 @@ type PossiblyHasPromise<T extends any[]> = Head<T> extends never
   ? false
   : PossiblyHasPromise<Tail<T>>;
 
-type ReturnPipeType<T extends any[]> = HasPromise<T> extends true
-  ? Promise<Awaited<R<T>>>
-  : PossiblyHasPromise<T> extends true
-  ? Promise<Awaited<R<T>>> | Awaited<R<T>>
-  : R<T>;
-
-export default ReturnPipeType;
-
 type R<T extends any[]> = T["length"] extends 0
   ? undefined
   : T["length"] extends 1
@@ -34,3 +26,11 @@ type R<T extends any[]> = T["length"] extends 0
   : Awaited<T[1]> extends never
   ? never
   : R<Tail<T>>;
+
+type ReturnPipeType<T extends any[]> = HasPromise<T> extends true
+  ? Promise<Awaited<R<T>>>
+  : PossiblyHasPromise<T> extends true
+  ? Promise<Awaited<R<T>>> | Awaited<R<T>>
+  : R<T>;
+
+export default ReturnPipeType;
