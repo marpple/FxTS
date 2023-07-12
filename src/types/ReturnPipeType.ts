@@ -19,18 +19,21 @@ type PossiblyHasPromise<T extends any[]> = Head<T> extends never
   ? false
   : PossiblyHasPromise<Tail<T>>;
 
-type R<T extends any[]> = T["length"] extends 0
+type PipeLast<T extends any[]> = T["length"] extends 0
   ? undefined
   : T["length"] extends 1
   ? T[0]
   : Awaited<T[1]> extends never
   ? never
-  : R<Tail<T>>;
+  : PipeLast<Tail<T>>;
 
-type ReturnPipeType<T extends any[]> = HasPromise<T> extends true
-  ? Promise<Awaited<R<T>>>
+type ReturnPipeType<
+  T extends any[],
+  R = Awaited<PipeLast<T>>,
+> = HasPromise<T> extends true
+  ? Promise<R>
   : PossiblyHasPromise<T> extends true
-  ? Promise<Awaited<R<T>>> | Awaited<R<T>>
-  : R<T>;
+  ? Promise<R> | R
+  : R;
 
 export default ReturnPipeType;
