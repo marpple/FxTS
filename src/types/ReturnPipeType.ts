@@ -22,7 +22,7 @@ type PossiblyHasPromise<T extends any[]> = Head<T> extends never
 type PipeLast<T extends any[]> = T["length"] extends 0
   ? undefined
   : T["length"] extends 1
-  ? T[0]
+  ? Head<T>
   : Awaited<T[1]> extends never
   ? never
   : PipeLast<Tail<T>>;
