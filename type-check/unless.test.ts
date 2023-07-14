@@ -1,6 +1,5 @@
 import { randomInt } from "crypto";
 
-import "../src";
 import { isString, pipe, throwError, unless } from "../src";
 import * as Test from "../src/types/Test";
 
