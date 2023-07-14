@@ -1,4 +1,4 @@
-import { isNumber, isString, pipe, skip, throwError } from "../src";
+import { isNumber, isString, pipe, unless, throwError } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
@@ -13,7 +13,7 @@ const res2 = pipe(
 const res3 = pipe(
   0,
 
-  skip(
+  unless(
     isNumber,
     throwError(() => Error("")),
   ),
@@ -22,7 +22,7 @@ const res3 = pipe(
 const res4 = pipe(
   0,
 
-  skip(
+  unless(
     isString,
     throwError(() => Error("")),
   ),

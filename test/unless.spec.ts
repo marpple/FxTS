@@ -1,12 +1,12 @@
-import { isNumber, pipe, skip } from "../src";
+import { isNumber, pipe, unless } from "../src";
 
-describe("skip", () => {
+describe("unless", () => {
   it("do process function if predicate return false", () => {
     let count = 0;
     const result = pipe(
       "0",
 
-      skip(isNumber, (input) => {
+      unless(isNumber, (input) => {
         count += 1;
         return Number(input);
       }),
@@ -20,7 +20,7 @@ describe("skip", () => {
     const result = pipe(
       0,
 
-      skip(isNumber, (input) => {
+      unless(isNumber, (input) => {
         count += 1;
         return Number(input);
       }),

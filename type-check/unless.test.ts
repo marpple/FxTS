@@ -1,6 +1,6 @@
 import { randomInt } from "crypto";
 
-import { isString, pipe, skip, throwError } from "../src";
+import { isString, pipe, unless, throwError } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
@@ -19,13 +19,13 @@ const res2 = pipe(
 
   (user) => user.name,
 
-  skip(isString, () => 0),
+  unless(isString, () => 0),
 );
 
 const res3 = pipe(
   randomInt(1, 4),
 
-  skip(
+  unless(
     (val: number) => val > 2,
     () => {
       return;
@@ -36,7 +36,7 @@ const res3 = pipe(
 const res4 = pipe(
   randomInt(1, 4),
 
-  skip(
+  unless(
     (val: number) => val > 2,
     throwError(() => Error("")),
   ),
@@ -45,7 +45,7 @@ const res4 = pipe(
 const res5 = pipe(
   randomInt(1, 4) as 1 | 2 | 3,
 
-  skip(
+  unless(
     (num: 1 | 2 | 3): num is 3 => num > 2,
     (num) => {
       return `${num}` as const;
@@ -55,7 +55,7 @@ const res5 = pipe(
 
 const res6 = pipe(
   createUser(),
-  skip(
+  unless(
     (user): user is User & { gender: "female" } => user.gender === "female",
     throwError(() => Error("")),
   ),

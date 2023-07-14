@@ -1,4 +1,4 @@
-import { isNumber, pipe, skip, throwError } from "../src";
+import { isNumber, pipe, unless, throwError } from "../src";
 
 describe("throwError", () => {
   it("throw in pipe", () => {
@@ -6,7 +6,7 @@ describe("throwError", () => {
       pipe(
         "0",
 
-        skip(
+        unless(
           isNumber,
           throwError((input) => Error(`input is ${input}`)),
         ),

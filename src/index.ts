@@ -52,7 +52,6 @@ import prop from "./prop";
 import props from "./props";
 import reduce from "./reduce";
 import size from "./size";
-import skip from "./skip";
 import some from "./some";
 import sort from "./sort";
 import sortBy from "./sortBy";
@@ -62,6 +61,7 @@ import throwError from "./throwError";
 import throwIf from "./throwIf";
 import toArray from "./toArray";
 import unicodeToArray from "./unicodeToArray";
+import unless from "./unless";
 
 export {
   add,
@@ -121,7 +121,7 @@ export {
   props,
   reduce,
   size,
-  skip,
+  unless,
   some,
   sort,
   sortBy,
