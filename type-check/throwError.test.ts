@@ -1,4 +1,4 @@
-import { isNumber, isString, pipe, unless, throwError } from "../src";
+import { isNumber, isString, pipe, throwError, unless } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;

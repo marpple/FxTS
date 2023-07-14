@@ -1,6 +1,7 @@
 import { randomInt } from "crypto";
 
-import { isString, pipe, unless, throwError } from "../src";
+import "../src";
+import { isString, pipe, throwError, unless } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
