@@ -57,9 +57,11 @@ import sort from "./sort";
 import sortBy from "./sortBy";
 import sum from "./sum";
 import tap from "./tap";
+import throwError from "./throwError";
 import throwIf from "./throwIf";
 import toArray from "./toArray";
 import unicodeToArray from "./unicodeToArray";
+import unless from "./unless";
 
 export {
   add,
@@ -119,11 +121,13 @@ export {
   props,
   reduce,
   size,
+  unless,
   some,
   sort,
   sortBy,
   sum,
   tap,
+  throwError,
   throwIf,
   toArray,
   unicodeToArray,

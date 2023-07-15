@@ -1,27 +1,35 @@
 import type Awaited from "./Awaited";
 import type { TuplifyUnion } from "./ExcludeObject";
-import type Last from "./Last";
+import type Head from "./Head";
 import type Tail from "./Tail";
 
-type IsAny<T> = 0 extends 1 & T ? true : false;
-
-type HasPromise<T extends any[]> = T extends []
+type HasPromise<T extends any[]> = Head<T> extends never
   ? false
-  : IsAny<T[0]> extends true
-  ? HasPromise<Tail<T>>
-  : T extends [Promise<any>, ...any]
+  : Head<T> extends Promise<unknown>
   ? true
+  : T["length"] extends 0
+  ? false
   : HasPromise<Tail<T>>;
 
-type PossiblyHasPromise<T extends any[]> = T extends []
+type PossiblyHasPromise<T extends any[]> = Head<T> extends never
   ? false
-  : HasPromise<TuplifyUnion<T[0]>> extends true
+  : HasPromise<TuplifyUnion<Head<T>>> extends true
   ? true
+  : T["length"] extends 0
+  ? false
   : PossiblyHasPromise<Tail<T>>;
+
+type PipeLast<T extends any[]> = T["length"] extends 0
+  ? undefined
+  : T["length"] extends 1
+  ? Head<T>
+  : Awaited<T[1]> extends never
+  ? never
+  : PipeLast<Tail<T>>;
 
 type ReturnPipeType<
   T extends any[],
-  R = Awaited<Last<T>>,
+  R = Awaited<PipeLast<T>>,
 > = HasPromise<T> extends true
   ? Promise<R>
   : PossiblyHasPromise<T> extends true
