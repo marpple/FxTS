@@ -1,23 +1,22 @@
 /**
- * Skip the process function if predicate return true.
  *
- * If skipped, return the input data as is, If executed, return the result of the process function
+ * If the result of `predicate` is true, `process` will not be executed.
  *
- * If the return type of the process function is void, it will be inferred as returning undefined.
+ * `unless` return the result of `process` if it is executed,
+ *
+ *  and if the `process` is not executed, it returns the function argument as is.
+ *
  *
  * @example
  * ```ts
- * const isString = (input: string | undefined): input is string =>
- *   typeof input === "string";
- *
- * const skipIfString: (input: string | undefined) => string = skip(isString)((input) => {
- *   // input type is undefined
- *   throw Error("input is undefined");
+ * // it will return only string
+ * const unlessIsString: (input: string | undefined) => string = unless(isString, (input) => {
+ *    throw Error("input is undefiend.")
  * });
  * ```
  *
- * @param predicate determines whether to skip or include the process function
- * @return original input or result of process function
+ * @param predicate determines whether to execute `process`
+ * @return original input or result of `process`
  */
 function unless<T, N extends T, U>(
   predicate: (input: T) => input is N,
