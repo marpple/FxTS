@@ -1,11 +1,8 @@
 /**
  *
  * If the result of `predicate` is true, `process` will not be executed.
- *
  * `unless` return the result of `process` if it is executed,
- *
  *  and if the `process` is not executed, it returns the function argument as is.
- *
  *
  * @example
  * ```ts
