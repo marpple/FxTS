@@ -20,6 +20,7 @@ import intersectionBy from "./intersectionBy";
 import keys from "./keys";
 import map from "./map";
 import peek from "./peek";
+import pipeLazy from "./pipeLazy";
 import pluck from "./pluck";
 import prepend from "./prepend";
 import range from "./range";
@@ -64,6 +65,7 @@ export {
   keys,
   map,
   peek,
+  pipeLazy,
   pluck,
   prepend,
   range,
