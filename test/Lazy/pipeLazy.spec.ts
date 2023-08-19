@@ -76,6 +76,7 @@ describe("pipeLazy", function () {
       let res = 0;
 
       await pipeLazy(
+        (arr: string[]) => arr,
         toAsync,
         each(() => {
           return {

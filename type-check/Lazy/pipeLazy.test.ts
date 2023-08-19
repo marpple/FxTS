@@ -23,22 +23,22 @@ const res9 = pipeLazy(
 const res10 = pipeLazy(
   (a: "a") => a.toUpperCase(),
   async () => 1,
-)(Promise.resolve("a"));
+)(Promise.resolve("a" as const));
 
 const res11 = pipeLazy(
   (a: "a") => Promise.resolve(a.toUpperCase()),
   () => 1,
-)(Promise.resolve("a"));
+)(Promise.resolve("a" as const));
 
 const res12 = pipeLazy(
   (a: "a") => a.toUpperCase(),
   () => Promise.resolve(1),
-)(Promise.resolve("a"));
+)(Promise.resolve("a" as const));
 
 const res13 = pipeLazy(
   (a: "a") => (Math.random() > 0.5 ? a.toUpperCase() : Promise.resolve("hi")),
   () => 1,
-)(Promise.resolve("a"));
+)(Promise.resolve("a" as const));
 
 const res14 = pipeLazy(throwError(() => Error()))(0);
 
@@ -62,6 +62,8 @@ const res17 = pipeLazy(
   () => 2,
 )(0);
 
+const res18 = pipeLazy((a: number) => String(a))(Promise.resolve(2));
+
 checks([
   check<typeof res1, string, Test.Pass>(),
   check<typeof res2, number, Test.Pass>(),
@@ -75,9 +77,10 @@ checks([
   check<typeof res10, Promise<number>, Test.Pass>(),
   check<typeof res11, Promise<number>, Test.Pass>(),
   check<typeof res12, Promise<number>, Test.Pass>(),
-  check<typeof res13, number | Promise<number>, Test.Pass>(),
+  check<typeof res13, Promise<number>, Test.Pass>(),
   check<typeof res14, never, Test.Pass>(),
   check<typeof res15, Promise<never>, Test.Pass>(),
   check<typeof res16, never, Test.Pass>(),
   check<typeof res17, Promise<never>, Test.Pass>(),
+  check<typeof res18, Promise<string>, Test.Pass>(),
 ]);
