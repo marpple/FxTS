@@ -38,9 +38,7 @@ import type ReturnPipeType from "../types/ReturnPipeType";
  * )([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4), Promise.resolve(5)]); // [12, 14]
  * ```
  *
- * {@link https://codesandbox.io/s/fxts-toarray-fy84i | Try It}
- *
- * see {@link https://fxts.dev/docs/pipeLazy | pipeLazy}, {@link https://fxts.dev/docs/toAsync | toAsync},
+ * see {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/map | map}, {@link https://fxts.dev/docs/filter | filter}
  */
 // eslint-disable-next-line
