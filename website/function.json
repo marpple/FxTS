@@ -22,6 +22,7 @@
     "keys",
     "map",
     "peek",
+    "pipeLazy",
     "pluck",
     "prepend",
     "range",
