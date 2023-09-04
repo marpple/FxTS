@@ -51,7 +51,7 @@ const sum = pipe(
 ); // typeof 'sum' inferred as the number
 ```
 
-**Note: It is recommended to enable [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) tsc option. If not, type inference does not work as we expected. For example, in the example above, `sum` is not inferred as a number type if the option is turned off.**
+**Note: It is recommended to enable [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes), [strictNullChecks](https://www.typescriptlang.org/tsconfig#strictNullChecks) tsc option. If not, type inference does not work as we expected. For example, in the example above, `sum` is not inferred as a number type if the option is turned off.**
 
 ### JavaScript
 
