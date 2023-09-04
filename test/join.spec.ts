@@ -10,6 +10,7 @@ describe("join", function () {
     });
 
     it("should be joined with separator", function () {
+      expect(join("_", [1])).toEqual("1");
       expect(join(", ", "hello")).toEqual("h, e, l, l, o");
     });
 
