@@ -1,4 +1,5 @@
 import { isAsyncIterable, isIterable } from "./_internal/utils";
+import isString from "./isString";
 import reduce from "./reduce";
 
 type ReturnJoinType<T extends Iterable<unknown> | AsyncIterable<unknown>> =
@@ -9,13 +10,22 @@ type ReturnJoinType<T extends Iterable<unknown> | AsyncIterable<unknown>> =
     : never;
 
 function sync<A>(sep: string, iterable: Iterable<A>) {
-  return reduce((a: string, b) => `${a}${sep}${b}`, iterable) ?? "";
+  const res = reduce((a: string, b) => `${a}${sep}${b}`, iterable);
+  if (res == null) {
+    return "";
+  }
+
+  return isString(res) ? res : String(res);
 }
 
 function async<A>(sep: string, iterable: AsyncIterable<A>) {
-  return reduce((a: string, b) => `${a}${sep}${b}`, iterable).then(
-    (a) => a ?? "",
-  );
+  return reduce((a: string, b) => `${a}${sep}${b}`, iterable).then((res) => {
+    if (res == null) {
+      return "";
+    }
+
+    return isString(res) ? res : String(res);
+  });
 }
 
 /**
