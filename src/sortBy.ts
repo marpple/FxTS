@@ -1,7 +1,6 @@
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import isArray from "./isArray";
-import pipe1 from "./pipe1";
-import toArray from "./toArray";
+import sort from "./sort";
 import type IterableInfer from "./types/IterableInfer";
 import type ReturnValueType from "./types/ReturnValueType";
 
@@ -52,15 +51,11 @@ function sortBy<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   }
 
   if (isIterable(iterable)) {
-    return pipe1(toArray(iterable as Iterable<IterableInfer<T>>), (arr) =>
-      arr.sort(_sortBy),
-    );
+    return sort(_sortBy, iterable as Iterable<IterableInfer<T>>);
   }
 
   if (isAsyncIterable(iterable)) {
-    return pipe1(toArray(iterable as AsyncIterable<IterableInfer<T>>), (arr) =>
-      arr.sort(_sortBy),
-    );
+    return sort(_sortBy, iterable as AsyncIterable<IterableInfer<T>>);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
