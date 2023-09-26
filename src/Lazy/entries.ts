@@ -1,6 +1,7 @@
-type Entries<T extends Record<string, any>, K extends keyof T> = K extends any
-  ? [K, T[K]]
-  : never;
+type Entries<
+  T extends Record<string, any>,
+  K extends keyof T,
+> = K extends string ? [K, T[K]] : never;
 
 /**
  *

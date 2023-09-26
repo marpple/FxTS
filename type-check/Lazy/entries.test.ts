@@ -15,6 +15,13 @@ const obj = {
 const res1 = entries(obj);
 const res2 = pipe(obj, entries);
 
+type Obj = {
+  [key: string]: number;
+};
+
+const fn = (obj: Obj) => entries(obj);
+const res3 = fn({ hello: 3 });
+
 checks([
   check<
     typeof res1,
@@ -42,4 +49,6 @@ checks([
     >,
     Test.Pass
   >(),
+
+  check<typeof res3, Generator<[string, number], void, unknown>, Test.Pass>(),
 ]);
