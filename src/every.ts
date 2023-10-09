@@ -58,7 +58,12 @@ function every<
     return pipe(
       map(f, iterable),
       takeUntil(not),
-      reduce((a, b) => a && b),
+      (acc) =>
+        reduce(
+          (a: boolean, b: boolean) => a && b,
+          true,
+          acc as Iterable<boolean>,
+        ),
       (a) => a ?? true,
       Boolean,
     );
@@ -68,7 +73,12 @@ function every<
     return pipe(
       map(f, iterable),
       takeUntil(not),
-      reduce((a, b) => a && b),
+      (acc) =>
+        reduce(
+          (a: boolean, b: boolean) => a && b,
+          true,
+          acc as AsyncIterable<boolean>,
+        ),
       (a) => a ?? true,
       Boolean,
     );

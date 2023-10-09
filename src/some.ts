@@ -78,7 +78,12 @@ function some<
     return pipe(
       map(f, iterable),
       takeUntil(identity),
-      reduce((a, b) => a || b),
+      (acc) =>
+        reduce(
+          (a: boolean, b: boolean) => a || b,
+          false,
+          acc as Iterable<boolean>,
+        ),
       Boolean,
     );
   }
@@ -87,7 +92,12 @@ function some<
     return pipe(
       map(f, iterable),
       takeUntil(identity),
-      reduce((a, b) => a || b),
+      (acc) =>
+        reduce(
+          (a: boolean, b: boolean) => a || b,
+          false,
+          acc as AsyncIterable<boolean>,
+        ),
       Boolean,
     );
   }

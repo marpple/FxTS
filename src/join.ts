@@ -10,7 +10,11 @@ type ReturnJoinType<T extends Iterable<unknown> | AsyncIterable<unknown>> =
     : never;
 
 function sync<A>(sep: string, iterable: Iterable<A>) {
-  const res = reduce((a: string, b) => `${a}${sep}${b}`, iterable);
+  const res = reduce(
+    (a: string, b) => (a == "" ? `${b}` : `${a}${sep}${b}`),
+    "",
+    iterable,
+  );
   if (res == null) {
     return "";
   }
@@ -19,7 +23,11 @@ function sync<A>(sep: string, iterable: Iterable<A>) {
 }
 
 function async<A>(sep: string, iterable: AsyncIterable<A>) {
-  return reduce((a: string, b) => `${a}${sep}${b}`, iterable).then((res) => {
+  return reduce(
+    (a: string, b) => (a == "" ? `${b}` : `${a}${sep}${b}`),
+    "",
+    iterable,
+  ).then((res) => {
     if (res == null) {
       return "";
     }

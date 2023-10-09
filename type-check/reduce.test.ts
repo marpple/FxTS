@@ -3,7 +3,7 @@ import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
 
-const res1 = reduce((a, b) => a + b, []);
+const res1 = reduce((a) => a, []);
 const res2 = reduce((a, b) => a + b, "seed", []);
 const res3 = reduce((a, b) => a + b, 0, [1, 2, 3]);
 const res4 = reduce((a, b) => a + b, [1, 2, 3]);
@@ -52,7 +52,7 @@ const res16 = pipe(
 );
 
 checks([
-  check<typeof res1, undefined, Test.Pass>(),
+  check<typeof res1, never, Test.Pass>(),
   check<typeof res2, "seed", Test.Pass>(),
   check<typeof res3, number, Test.Pass>(),
   check<typeof res4, number, Test.Pass>(),
