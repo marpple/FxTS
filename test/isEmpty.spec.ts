@@ -15,6 +15,10 @@ describe("isEmpty", function () {
     [[1], false],
     ["", true],
     ["a", false],
+    [new Map(), true],
+    [new Map([["key", "value"]]), false],
+    [new Set(), true],
+    [new Set(["value"]), false],
     [Symbol(""), false],
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     [function () {}, false],
