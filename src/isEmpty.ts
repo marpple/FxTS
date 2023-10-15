@@ -11,6 +11,8 @@ import isNil from "./isNil";
  * isEmpty(null) // true
  * isEmpty(undefined) // true
  * isEmpty("") // true
+ * isEmpty(new Map()) // true
+ * isEmpty(new Set()) // true
  *
  * isEmpty(0) // false
  * isEmpty(false) // false
@@ -32,6 +34,8 @@ const isEmpty = <T>(value: T): boolean => {
   if (isArray(value) && value.length === 0) return true; // if value have no item.
 
   if (value === "") return true;
+
+  if (value instanceof Map || value instanceof Set) return value.size === 0; // if value is a Map or Set and have no item.
 
   return false;
 };
