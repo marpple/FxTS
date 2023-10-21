@@ -9,8 +9,8 @@ describe("reduce", function () {
       expect(reduce((a, b) => a + b, "seed", [])).toEqual("seed");
     });
 
-    it("should return 'undefined' when the given `iterable` is an empty array and initial value is absent", function () {
-      expect(reduce((a, b) => a + b, [])).toBeUndefined();
+    it("should be occured error when the given `iterable` is an empty array and initial value is absent", function () {
+      expect(() => reduce((a) => a, [])).toThrow();
     });
 
     it("should work given it is initial value", function () {

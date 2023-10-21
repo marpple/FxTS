@@ -72,8 +72,6 @@ async function async<A, B>(
  * {@link https://fxts.dev/docs/map | map}, {@link https://fxts.dev/docs/filter | filter}
  */
 
-function reduce<A extends readonly []>(f: Arrow, iterable: A): undefined;
-
 function reduce<A extends readonly [], B>(f: Arrow, seed: B, iterable: A): B;
 
 function reduce<A>(f: (a: A, b: A) => A, iterable: Iterable<A>): A;
@@ -113,11 +111,7 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
   f: (a: B, b: IterableInfer<A>) => B,
   seed?: B | Iterable<IterableInfer<A>> | AsyncIterable<IterableInfer<A>>,
   iterable?: Iterable<IterableInfer<A>> | AsyncIterable<IterableInfer<A>>,
-):
-  | B
-  | undefined
-  | Promise<B | undefined>
-  | ((iterable: A) => ReturnValueType<A, B>) {
+): B | Promise<B> | ((iterable: A) => ReturnValueType<A, B>) {
   if (iterable === undefined) {
     if (seed === undefined) {
       return (iterable: A) =>
@@ -128,7 +122,7 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
       const iterator = seed[Symbol.iterator]();
       const { done, value } = iterator.next();
       if (done) {
-        return undefined;
+        throw new TypeError("'reduce' of empty iterable with no initial value");
       }
       return sync(f, value as B, {
         [Symbol.iterator]() {
@@ -141,8 +135,11 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
       const iterator = seed[Symbol.asyncIterator]();
       return iterator.next().then(({ done, value }) => {
         if (done) {
-          return undefined;
+          throw new TypeError(
+            "'reduce' of empty iterable with no initial value",
+          );
         }
+
         return async(f, value as Promise<B>, {
           [Symbol.asyncIterator]() {
             return iterator;
