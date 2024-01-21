@@ -4,21 +4,25 @@ import type Arrow from "./types/Arrow";
 import type IterableInfer from "./types/IterableInfer";
 import type ReturnValueType from "./types/ReturnValueType";
 
-function sync<A, B>(f: (a: B, b: A) => B, acc: B, iterable: Iterable<A>): B {
+function sync<T, Acc>(
+  f: (a: Acc, b: T) => Acc,
+  acc: Acc,
+  iterable: Iterable<T>,
+): Acc {
   for (const a of iterable) {
     acc = f(acc, a);
   }
   return acc;
 }
 
-async function async<A, B>(
-  f: (a: B, b: A) => B,
-  acc: Promise<B>,
-  iterable: AsyncIterable<A>,
+async function async<T, Acc>(
+  f: (a: Acc, b: T) => Acc,
+  acc: Promise<Acc>,
+  iterable: AsyncIterable<T>,
 ) {
   for await (const a of iterable) {
     // becauseof using es5, use `await`
-    acc = await pipe1(acc, (acc) => f(acc as B, a));
+    acc = await pipe1(acc, (acc) => f(acc as Acc, a));
   }
   return acc;
 }
@@ -27,19 +31,49 @@ async function async<A, B>(
  * Also known as foldl, this method boils down a list of values into a single value.
  *
  * @example
+ * You can reduce values into homogeneous type.
+ *
  * ```ts
  * const sum = (a:number, b:number) => a + b;
- * reduce(sum, [1, 2, 3, 4]); // 10
- * reduce(sum, 0, [1, 2, 3, 4]); // 10
  *
- * // with pipe
+ * // with implicit seed with first element
+ * reduce(sum, [1, 2, 3, 4]); // 10
+ *
+ * // with explicit seed
+ * reduce(sum, 0, [1, 2, 3, 4]); // 10
+ * ```
+ *
+ * You can reduce values into heterogeneous type.
+ *
+ * ```ts
+ * // reduce { id: number; score: number; } to number
+ * reduce((acc, value) => acc + value.score, 0, [
+ *  { id: 0, score: 1 },
+ *  { id: 5, score: 2 },
+ *  { id: 9, score: 3 },
+ *  { id: 3, score: 4 }
+ * ])
+ * ```
+ *
+ * Omitting iterable will returns function, useful when using with pipe.
+ *
+ * ```ts
  * pipe(
  *  [1, 2, 3, 4],
  *  map(a => a + 10),
  *  filter(a => a % 2 === 0),
  *  reduce(sum),
  * ); // 26
+ * ```
  *
+ * Currently, type with explicit seed form can't be inferred properly due to the limitation of typescript.
+ * But you can still use mostly with @ts-ignore flag. For more information please visit issue.
+ *
+ * {@link https://github.com/marpple/FxTS/issues/239 | #related issue}
+ *
+ * Asynchronous things don't matter.
+ *
+ * ```ts
  * await pipe(
  *  Promise.resolve([1, 2, 3, 4]),
  *  map((a) => a + 10),
@@ -70,52 +104,66 @@ async function async<A, B>(
  *
  * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/map | map}, {@link https://fxts.dev/docs/filter | filter}
+ *
+ * @typeParam T - Type of values in `iterable` which would be consummed.
+ * @typeParam Acc - Type of `acc` which is the type of accumulative value
  */
 
-function reduce<A extends readonly [], B>(f: Arrow, seed: B, iterable: A): B;
+function reduce<T extends readonly [], Acc>(
+  f: Arrow,
+  seed: Acc,
+  iterable: T,
+): Acc;
 
-function reduce<A>(f: (a: A, b: A) => A, iterable: Iterable<A>): A;
+function reduce<T>(f: (acc: T, value: T) => T, iterable: Iterable<T>): T;
 
-function reduce<A, B>(f: (a: B, b: A) => B, iterable: Iterable<A>): B;
+function reduce<T, Acc>(
+  f: (acc: Acc, value: T) => Acc,
+  iterable: Iterable<T>,
+): Acc;
 
-function reduce<A, B>(f: (a: B, b: A) => B, seed: B, iterable: Iterable<A>): B;
+function reduce<T, Acc>(
+  f: (acc: Acc, value: T) => Acc,
+  seed: Acc,
+  iterable: Iterable<T>,
+): Acc;
 
-function reduce<A>(
-  f: (a: A, b: A) => A,
-  iterable: AsyncIterable<A>,
-): Promise<A>;
+function reduce<T>(
+  f: (acc: T, value: T) => T,
+  iterable: AsyncIterable<T>,
+): Promise<T>;
 
-function reduce<A, B>(
-  f: (a: B, b: A) => B | Promise<B>,
-  seed: B | Promise<B>,
-  iterable: AsyncIterable<A>,
-): Promise<B>;
+function reduce<T, Acc>(
+  f: (acc: Acc, value: T) => Acc | Promise<Acc>,
+  seed: Acc | Promise<Acc>,
+  iterable: AsyncIterable<T>,
+): Promise<Acc>;
 
-function reduce<A, B>(
-  f: (a: B, b: A) => B | Promise<B>,
-  iterable: AsyncIterable<A>,
-): Promise<B>;
+function reduce<T, Acc>(
+  f: (acc: Acc, value: T) => Acc | Promise<Acc>,
+  iterable: AsyncIterable<T>,
+): Promise<Acc>;
 
-function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>>(
+function reduce<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   f: (
-    a: IterableInfer<A>,
-    b: IterableInfer<A>,
-  ) => IterableInfer<A> | Promise<IterableInfer<A>>,
-): (iterable: A) => ReturnValueType<A, IterableInfer<A>>;
+    acc: IterableInfer<T>,
+    value: IterableInfer<T>,
+  ) => IterableInfer<T> | Promise<IterableInfer<T>>,
+): (iterable: T) => ReturnValueType<T, IterableInfer<T>>;
 
-function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
-  f: (a: B, b: IterableInfer<A>) => B | Promise<B>,
-): (iterable: A) => ReturnValueType<A, B>;
+function reduce<T extends Iterable<unknown> | AsyncIterable<unknown>, Acc>(
+  f: (acc: Acc, value: IterableInfer<T>) => Acc | Promise<Acc>,
+): (iterable: T) => ReturnValueType<T, Acc>;
 
-function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
-  f: (a: B, b: IterableInfer<A>) => B,
-  seed?: B | Iterable<IterableInfer<A>> | AsyncIterable<IterableInfer<A>>,
-  iterable?: Iterable<IterableInfer<A>> | AsyncIterable<IterableInfer<A>>,
-): B | Promise<B> | ((iterable: A) => ReturnValueType<A, B>) {
+function reduce<T extends Iterable<unknown> | AsyncIterable<unknown>, Acc>(
+  f: (acc: Acc, value: IterableInfer<T>) => Acc,
+  seed?: Acc | Iterable<IterableInfer<T>> | AsyncIterable<IterableInfer<T>>,
+  iterable?: Iterable<IterableInfer<T>> | AsyncIterable<IterableInfer<T>>,
+): Acc | Promise<Acc> | ((iterable: T) => ReturnValueType<T, Acc>) {
   if (iterable === undefined) {
     if (seed === undefined) {
-      return (iterable: A) =>
-        reduce(f, iterable as any) as ReturnValueType<A, B>;
+      return (iterable: T) =>
+        reduce(f, iterable as any) as ReturnValueType<T, Acc>;
     }
 
     if (isIterable(seed)) {
@@ -124,7 +172,7 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
       if (done) {
         throw new TypeError("'reduce' of empty iterable with no initial value");
       }
-      return sync(f, value as B, {
+      return sync(f, value as Acc, {
         [Symbol.iterator]() {
           return iterator;
         },
@@ -140,7 +188,7 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
           );
         }
 
-        return async(f, value as Promise<B>, {
+        return async(f, value as Promise<Acc>, {
           [Symbol.asyncIterator]() {
             return iterator;
           },
@@ -152,11 +200,11 @@ function reduce<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
   }
 
   if (isIterable(iterable)) {
-    return sync(f, seed as B, iterable);
+    return sync(f, seed as Acc, iterable);
   }
 
   if (isAsyncIterable(iterable)) {
-    return async(f, Promise.resolve(seed as B), iterable);
+    return async(f, Promise.resolve(seed as Acc), iterable);
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
