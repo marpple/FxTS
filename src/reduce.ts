@@ -71,7 +71,6 @@ async function async<T, Acc>(
  *
  * {@link https://github.com/marpple/FxTS/issues/239 | #related issue}
  *
- * Asynchronous things don't matter.
  *
  * ```ts
  * await pipe(
