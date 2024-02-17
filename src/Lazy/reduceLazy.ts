@@ -12,6 +12,50 @@ type InferCarrier<T> = T extends AsyncIterable<infer R>
 // DO NOT change the order of signatures prematurely.
 // See `reduceLazy.test.ts` for the reason
 
+/**
+ * High order functional version of `reduce`, which behaves identical to it.
+ *
+ * @param f Reducer function `(acc, value) => acc`. It can be both synchronous and asynchronous.
+ * @param seed Initial value. Note that if the type of `acc` and `value` differ, `seed` must be given.
+ *
+ * @example
+ * Type must be provided for stand alone call.
+ *
+ * ```ts
+ * const reduce = reduceLazy((a: number, b: number) => a + b, 5)
+ *
+ * reduce([1, 2, 3]) // number
+ * reduce(toAsync([1, 2, 3])) // Promise<number>
+ * ```
+ *
+ * Fit perfectly with `pipe`
+ *
+ * ```ts
+ * pipe(
+ *   [1, 2, 3, 4],
+ *   reduceLazy((a, b) => a + b, 5)
+ * ); // 15
+ * ```
+ *
+ * You can use asynchronous callback
+ *
+ * ```ts
+ * await pipe(
+ *   [1, 2, 3, 4],
+ *   reduceLazy(async (a, b) => a + b, 5)
+ * ); // 15
+ * ```
+ *
+ * `AsyncIterable` doesn't matter.
+ *
+ * ```ts
+ * await pipe(
+ *   [1, 2, 3, 4],
+ *   toAsync,
+ *   reduceLazy((a, b) => a + b, 5)
+ * ); // 15
+ * ```
+ */
 function reduceLazy<T extends Iterable<unknown> | AsyncIterable<unknown>, Acc>(
   f: SyncReducer<Acc, IterableInfer<T>> | AsyncReducer<Acc, IterableInfer<T>>,
   seed: Acc,

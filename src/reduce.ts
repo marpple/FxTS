@@ -67,11 +67,8 @@ async function async<T, Acc>(
  * ); // 26
  * ```
  *
- * Currently, type with explicit seed form can't be inferred properly due to the limitation of typescript.
- * But you can still use mostly with @ts-ignore flag. For more information please visit issue.
- *
- * {@link https://github.com/marpple/FxTS/issues/239 | #related issue}
- *
+ * For backward compatibility, `reduce` can support partial lazy form.
+ * You may want to use `reduceLazy` to use `seed`.
  *
  * ```ts
  * await pipe(
@@ -190,7 +187,9 @@ function reduce<T extends Iterable<unknown> | AsyncIterable<unknown>, Acc>(
       });
     }
 
-    throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
+    throw new TypeError(
+      "'iterable' must be type of Iterable or AsyncIterable. Are you looking for 'reduceLazy'?",
+    );
   }
 
   if (isIterable(iterable)) {
