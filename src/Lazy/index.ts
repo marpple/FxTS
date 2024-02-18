@@ -24,6 +24,7 @@ import pipeLazy from "./pipeLazy";
 import pluck from "./pluck";
 import prepend from "./prepend";
 import range from "./range";
+import reduceLazy from "./reduceLazy";
 import reject from "./reject";
 import repeat from "./repeat";
 import reverse from "./reverse";
@@ -70,6 +71,7 @@ export {
   prepend,
   range,
   reject,
+  reduceLazy,
   repeat,
   reverse,
   scan,

@@ -2,10 +2,11 @@ import { isAsyncIterable, isIterable } from "./_internal/utils";
 import pipe1 from "./pipe1";
 import type Arrow from "./types/Arrow";
 import type IterableInfer from "./types/IterableInfer";
+import type { AsyncReducer, SyncReducer } from "./types/Reducer";
 import type ReturnValueType from "./types/ReturnValueType";
 
 function sync<T, Acc>(
-  f: (a: Acc, b: T) => Acc,
+  f: SyncReducer<Acc, T>,
   acc: Acc,
   iterable: Iterable<T>,
 ): Acc {
@@ -16,7 +17,7 @@ function sync<T, Acc>(
 }
 
 async function async<T, Acc>(
-  f: (a: Acc, b: T) => Acc,
+  f: SyncReducer<Acc, T>,
   acc: Promise<Acc>,
   iterable: AsyncIterable<T>,
 ) {
@@ -66,11 +67,8 @@ async function async<T, Acc>(
  * ); // 26
  * ```
  *
- * Currently, type with explicit seed form can't be inferred properly due to the limitation of typescript.
- * But you can still use mostly with @ts-ignore flag. For more information please visit issue.
- *
- * {@link https://github.com/marpple/FxTS/issues/239 | #related issue}
- *
+ * For backward compatibility, `reduce` can support partial lazy form.
+ * You may want to use `reduceLazy` to use `seed`.
  *
  * ```ts
  * await pipe(
@@ -114,48 +112,42 @@ function reduce<T extends readonly [], Acc>(
   iterable: T,
 ): Acc;
 
-function reduce<T>(f: (acc: T, value: T) => T, iterable: Iterable<T>): T;
+function reduce<T>(f: SyncReducer<T, T>, iterable: Iterable<T>): T;
+
+function reduce<T, Acc>(f: SyncReducer<Acc, T>, iterable: Iterable<T>): Acc;
 
 function reduce<T, Acc>(
-  f: (acc: Acc, value: T) => Acc,
-  iterable: Iterable<T>,
-): Acc;
-
-function reduce<T, Acc>(
-  f: (acc: Acc, value: T) => Acc,
+  f: SyncReducer<Acc, T>,
   seed: Acc,
   iterable: Iterable<T>,
 ): Acc;
 
 function reduce<T>(
-  f: (acc: T, value: T) => T,
+  f: SyncReducer<T, T>,
   iterable: AsyncIterable<T>,
 ): Promise<T>;
 
 function reduce<T, Acc>(
-  f: (acc: Acc, value: T) => Acc | Promise<Acc>,
+  f: AsyncReducer<Acc, T>,
   seed: Acc | Promise<Acc>,
   iterable: AsyncIterable<T>,
 ): Promise<Acc>;
 
 function reduce<T, Acc>(
-  f: (acc: Acc, value: T) => Acc | Promise<Acc>,
+  f: AsyncReducer<Acc, T>,
   iterable: AsyncIterable<T>,
 ): Promise<Acc>;
 
 function reduce<T extends Iterable<unknown> | AsyncIterable<unknown>>(
-  f: (
-    acc: IterableInfer<T>,
-    value: IterableInfer<T>,
-  ) => IterableInfer<T> | Promise<IterableInfer<T>>,
-): (iterable: T) => ReturnValueType<T, IterableInfer<T>>;
+  f: AsyncReducer<IterableInfer<T>, IterableInfer<T>>,
+): (iterable: T) => ReturnValueType<T>;
 
 function reduce<T extends Iterable<unknown> | AsyncIterable<unknown>, Acc>(
-  f: (acc: Acc, value: IterableInfer<T>) => Acc | Promise<Acc>,
+  f: AsyncReducer<Acc, IterableInfer<T>>,
 ): (iterable: T) => ReturnValueType<T, Acc>;
 
 function reduce<T extends Iterable<unknown> | AsyncIterable<unknown>, Acc>(
-  f: (acc: Acc, value: IterableInfer<T>) => Acc,
+  f: SyncReducer<Acc, IterableInfer<T>>,
   seed?: Acc | Iterable<IterableInfer<T>> | AsyncIterable<IterableInfer<T>>,
   iterable?: Iterable<IterableInfer<T>> | AsyncIterable<IterableInfer<T>>,
 ): Acc | Promise<Acc> | ((iterable: T) => ReturnValueType<T, Acc>) {
@@ -195,7 +187,9 @@ function reduce<T extends Iterable<unknown> | AsyncIterable<unknown>, Acc>(
       });
     }
 
-    throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");
+    throw new TypeError(
+      "'iterable' must be type of Iterable or AsyncIterable. Are you looking for 'reduceLazy'?",
+    );
   }
 
   if (isIterable(iterable)) {
