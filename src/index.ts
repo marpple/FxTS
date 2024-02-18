@@ -51,6 +51,7 @@ import pipe1 from "./pipe1";
 import prop from "./prop";
 import props from "./props";
 import reduce from "./reduce";
+import reduceLazy from "./reduceLazy";
 import size from "./size";
 import some from "./some";
 import sort from "./sort";
@@ -120,6 +121,7 @@ export {
   prop,
   props,
   reduce,
+  reduceLazy,
   size,
   unless,
   some,

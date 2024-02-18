@@ -1,7 +1,7 @@
-import reduce from "../reduce";
-import type IterableInfer from "../types/IterableInfer";
-import type { AsyncReducer, SyncReducer } from "../types/Reducer";
-import type ReturnValueType from "../types/ReturnValueType";
+import reduce from "./reduce";
+import type IterableInfer from "./types/IterableInfer";
+import type { AsyncReducer, SyncReducer } from "./types/Reducer";
+import type ReturnValueType from "./types/ReturnValueType";
 
 type InferCarrier<T> = T extends AsyncIterable<infer R>
   ? AsyncIterable<R>
