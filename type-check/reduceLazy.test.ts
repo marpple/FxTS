@@ -1,6 +1,6 @@
-import { pipe, toAsync } from "../../src";
-import reduceLazy from "../../src/Lazy/reduceLazy";
-import * as Test from "../../src/types/Test";
+import { pipe, toAsync } from "../src";
+import reduceLazy from "../src/reduceLazy";
+import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
 
