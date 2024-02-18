@@ -26,6 +26,7 @@
     "pluck",
     "prepend",
     "range",
+    "reduceLazy",
     "reject",
     "repeat",
     "reverse",
