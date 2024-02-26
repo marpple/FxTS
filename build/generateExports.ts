@@ -83,6 +83,8 @@ async function generateExports() {
           ...subPathExports,
         },
       }),
+      null,
+      2
     ),
   );
 }
