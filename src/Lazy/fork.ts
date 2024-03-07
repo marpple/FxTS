@@ -55,6 +55,48 @@ function sync<T>(iterable: Iterable<T>) {
   };
 }
 
+/**
+ * Returns an iterable of forks of original source. Each fork contains the same values as source, and can be consumed independently.
+ *
+ * @example
+ * ```ts
+ * const arr = [1, 2, 3];
+ * const iter1 = fork(arr);
+ * const iter2 = fork(arr);
+ *
+ * iter1.next() // {done:false, value: 1}
+ * iter1.next() // {done:false, value: 2}
+ * iter2.next() // {done:false, value: 1}
+ * iter2.next() // {done:false, value: 2}
+ *
+ * const str = 'abc'
+ * const strIter1 = fork(str);
+ * const strIter2 = fork(str);
+ *
+ * strIter1.next() // {done:false, value: 'a'}
+ * strIter1.next() // {done:false, value: 'b'}
+ * strIter2.next() // {done:false, value: 'a'}
+ * strIter2.next() // {done:false, value: 'b'}
+ *
+ * // with pipe
+ * const arrAdd10 = pipe(
+ *   [1, 2, 3],
+ *   map((a) => a + 10),
+ * );
+ *
+ * const arrAdd10Iter1 = fork(arrAdd10);
+ * const arrAdd10Iter2 = fork(arrAdd10);
+ * arrAdd10Iter1.next() // { value: 11, done: false }
+ * arrAdd10Iter2.next() // { value: 11, done: false }
+ *
+ * const arrAdd10Iter3 = fork(arrAdd10Iter1);
+ * arrAdd10Iter1.next() // { value: 12, done: false }
+ * arrAdd10Iter1.next() // { value: 13, done: false }
+ * arrAdd10Iter2.next() // { value: 12, done: false }
+ * arrAdd10Iter3.next() // { value: 12, done: false }
+ * ```
+ */
+// prettier-ignore
 function fork<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: A,
 ): ReturnForkType<A> {
