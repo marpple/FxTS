@@ -1,4 +1,6 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
+import { LinkedList } from "../dataStructure/linkedList/linkedList";
+import type { LinkedListNode } from "../dataStructure/linkedList/linkedListNode";
 import isNil from "../isNil";
 import type IterableInfer from "../types/IterableInfer";
 
@@ -7,51 +9,22 @@ type ReturnForkType<A extends Iterable<unknown> | AsyncIterable<unknown>> =
     ? AsyncIterableIterator<IterableInfer<A>>
     : IterableIterator<IterableInfer<A>>;
 
-type Node<T> = { value: T; done?: boolean };
+type Value = any;
 
-class ForkItem<T> {
-  node: Node<T>;
-  nextNode: ForkItem<T> | null;
-
-  constructor(node: Node<T>) {
-    this.node = node;
-    this.nextNode = null;
-  }
-}
-
-class ForkQueue<T> {
-  head: ForkItem<T>;
-
-  current: ForkItem<T>;
-
-  constructor() {
-    this.head = new ForkItem(null as any);
-    this.current = this.head;
-  }
-
-  toString() {
-    const arr = [];
-    let cur: ForkItem<T> | null = this.head.nextNode;
-    while (cur) {
-      arr.push(cur.node.value);
-      cur = cur.nextNode;
-    }
-
-    return arr.join(", ");
-  }
-}
-
-const forkMap = new WeakMap<any, ForkQueue<any>>();
+const forkMap = new WeakMap<
+  Iterator<Value>,
+  LinkedList<IteratorResult<Value>>
+>();
 
 function sync<T>(iterable: Iterable<T>) {
   const iterator = iterable[Symbol.iterator]();
-  let queue = forkMap.get(iterator) as ForkQueue<any>;
+  let queue = forkMap.get(iterator) as LinkedList<IteratorResult<T>>;
   if (!queue) {
-    queue = new ForkQueue();
+    queue = new LinkedList();
     forkMap.set(iterator, queue);
   }
 
-  let cur = queue.current;
+  let current: LinkedListNode<IteratorResult<T>> | null = queue.getTail();
   let done = false;
 
   return {
@@ -67,20 +40,17 @@ function sync<T>(iterable: Iterable<T>) {
         };
       }
 
-      const item = cur.nextNode;
+      const item = current?.getNext();
       if (isNil(item)) {
         const node = iterator.next();
-        cur.nextNode = new ForkItem(node);
-        cur = cur.nextNode;
-
-        queue.current = cur;
+        current = queue.insertLast(node);
         done = node.done ?? true;
 
-        return cur.node;
+        return node;
       }
 
-      cur = item;
-      return cur.node;
+      current = item;
+      return current.getValue();
     },
   };
 }
