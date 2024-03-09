@@ -84,7 +84,7 @@ async function generateExports() {
         },
       }),
       null,
-      2
+      2,
     ),
   );
 }
