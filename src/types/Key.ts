@@ -1,3 +1,3 @@
-type Key = string | symbol | number;
+type Key = string | symbol | number | bigint;
 
 export default Key;
