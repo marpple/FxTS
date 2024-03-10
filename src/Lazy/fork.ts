@@ -11,47 +11,160 @@ type ReturnForkType<A extends Iterable<unknown> | AsyncIterable<unknown>> =
 
 type Value = any;
 
-const forkMap = new WeakMap<
-  Iterator<Value>,
-  LinkedList<IteratorResult<Value>>
->();
+type ForkItem = {
+  queue: LinkedList<IteratorResult<Value>>;
+  originNext: () => IteratorResult<Value, any>;
+};
+
+const forkMap = new WeakMap<Iterator<Value>, ForkItem>();
 
 function sync<T>(iterable: Iterable<T>) {
   const iterator = iterable[Symbol.iterator]();
-  let queue = forkMap.get(iterator) as LinkedList<IteratorResult<T>>;
-  if (!queue) {
-    queue = new LinkedList();
-    forkMap.set(iterator, queue);
-  }
 
-  let current: LinkedListNode<IteratorResult<T>> | null = queue.getTail();
-  let done = false;
+  const getNext = (forkItem: ForkItem) => {
+    let current: LinkedListNode<IteratorResult<T>> | null =
+      forkItem.queue.getLastNode();
 
-  return {
-    [Symbol.iterator]() {
-      return iterator;
-    },
+    const done = () => {
+      iterator.next = forkItem.originNext;
 
-    next() {
-      if (done) {
-        return {
-          done,
-          value: undefined,
-        };
+      return {
+        done: true,
+        value: undefined,
+      } as const;
+    };
+
+    let isDone = false;
+    const next = () => {
+      if (isDone) {
+        return done();
       }
 
       const item = current?.getNext();
-      if (isNil(item)) {
-        const node = iterator.next();
-        current = queue.insertLast(node);
-        done = node.done ?? true;
+
+      if (isNil(item) || item === forkItem.queue.getTail()) {
+        const node = forkItem.originNext();
+
+        current = forkItem.queue.insertLast(node);
+        isDone = node.done ?? true;
+        if (isDone) {
+          return done();
+        }
 
         return node;
       }
 
       current = item;
       return current.getValue();
+    };
+
+    return next;
+  };
+
+  let forkItem = forkMap.get(iterator) as ForkItem;
+
+  if (!forkItem) {
+    const originNext = iterator.next.bind(iterator);
+    forkItem = {
+      queue: new LinkedList(),
+      originNext: originNext,
+    };
+
+    iterator.next = getNext(forkItem);
+    forkMap.set(iterator, forkItem);
+  }
+
+  const next = getNext(forkItem);
+
+  return {
+    [Symbol.iterator]() {
+      return this;
     },
+
+    next: next,
+  };
+}
+
+type ForkAsyncItem = {
+  queue: LinkedList<IteratorResult<Value>>;
+  next: (...args: any) => Promise<IteratorResult<Value, any>>;
+};
+
+const forkAsyncMap = new WeakMap<AsyncIterator<Value>, ForkAsyncItem>();
+
+function async<T>(iterable: AsyncIterable<T>) {
+  const iterator = iterable[Symbol.asyncIterator]();
+
+  const getNext = (forkItem: ForkAsyncItem) => {
+    let current: Promise<LinkedListNode<IteratorResult<T>> | null> =
+      Promise.resolve(forkItem.queue.getLastNode());
+
+    const done = () => {
+      iterator.next = forkItem.next;
+
+      return {
+        done: true,
+        value: undefined,
+      } as const;
+    };
+
+    let isDone = false;
+    const next = async (_concurrent: any) => {
+      if (isDone) {
+        return done();
+      }
+
+      const itemCurrent = await current;
+      const item = itemCurrent?.getNext();
+
+      return new Promise((resolve, reject) => {
+        if (isNil(item) || item === forkItem.queue.getTail()) {
+          return forkItem
+            .next(_concurrent)
+            .then((node) => {
+              current = current.then(() => {
+                return forkItem.queue.insertLast(node);
+              });
+
+              isDone = node.done ?? true;
+              if (isDone) {
+                return resolve(done());
+              }
+
+              return resolve(node);
+            })
+            .catch(reject);
+        }
+
+        current = current.then(() => {
+          return item;
+        });
+
+        resolve(item.getValue());
+      });
+    };
+
+    return next;
+  };
+
+  let forkItem = forkAsyncMap.get(iterator) as ForkAsyncItem;
+  if (!forkItem) {
+    const originNext = iterator.next.bind(iterator);
+    forkItem = {
+      queue: new LinkedList(),
+      next: originNext,
+    };
+
+    iterator.next = getNext(forkItem) as any;
+    forkAsyncMap.set(iterator, forkItem);
+  }
+
+  const next = getNext(forkItem);
+  return {
+    [Symbol.asyncIterator]() {
+      return this;
+    },
+    next: next,
   };
 }
 
@@ -101,11 +214,11 @@ function fork<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: A,
 ): ReturnForkType<A> {
   if (isIterable(iterable)) {
-    return sync(iterable) as ReturnForkType<A>;
+    return sync(iterable) as any;
   }
 
   if (isAsyncIterable(iterable)) {
-    throw new TypeError("'fork' asyncIterable isn't supported not yet");
+    return async(iterable) as any;
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable");

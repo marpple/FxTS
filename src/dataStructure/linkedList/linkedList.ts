@@ -6,16 +6,29 @@ export class LinkedList<T> {
 
   constructor() {
     this.head = new LinkedListNode(null as unknown as T);
-    this.tail = this.head;
+    this.tail = new LinkedListNode(null as unknown as T);
+
+    this.head.setNextNode(this.tail);
+    this.tail.setPrevNode(this.head);
   }
 
   insertFirst(value: T): LinkedListNode<T> {
     const node = new LinkedListNode(value);
     if (this.isEmpty()) {
-      this.tail = node;
+      this.tail.setPrevNode(node);
       this.head.setNextNode(node);
+
+      node.setNextNode(this.tail);
+      node.setPrevNode(this.head);
     } else {
-      node.setNextNode(this.head.getNext());
+      const firstNode = this.head.getNext();
+      if (!firstNode) {
+        throw new TypeError("firstNode must be a LinkedListNode");
+      }
+
+      node.setPrevNode(this.head);
+      node.setNextNode(firstNode);
+      firstNode.setPrevNode(node);
       this.head.setNextNode(node);
     }
 
@@ -28,8 +41,17 @@ export class LinkedList<T> {
     }
 
     const node = new LinkedListNode(value);
-    this.tail?.setNextNode(node);
-    this.tail = node;
+    const lastNode = this.tail.getPrev();
+
+    if (!lastNode) {
+      throw new TypeError("lastNode must be a LinkedListNode");
+    }
+
+    node.setPrevNode(lastNode);
+    node.setNextNode(this.tail);
+    lastNode.setNextNode(node);
+    this.tail.setPrevNode(node);
+
     return node;
   }
 
@@ -45,13 +67,17 @@ export class LinkedList<T> {
     return this.tail;
   }
 
+  getLastNode() {
+    return this.tail.getPrev();
+  }
+
   toArray() {
     const arr = [];
     let cur = this.head;
-    while (cur.hasNext()) {
+    while (cur.getNext() !== this.tail) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       cur = cur.getNext()!;
-      arr.push(cur);
+      arr.push(cur.getValue());
     }
 
     return arr;
