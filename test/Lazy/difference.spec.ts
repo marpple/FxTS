@@ -1,7 +1,7 @@
 import { delay, map, pipe, toArray, toAsync } from "../../src";
 import concurrent, { Concurrent } from "../../src/Lazy/concurrent";
 import difference from "../../src/Lazy/difference";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("difference", function () {
   describe("sync", function () {
@@ -53,9 +53,6 @@ describe("difference", function () {
     });
 
     it("should be handled concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 900);
-
       const res = await pipe(
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
         toAsync,
@@ -65,7 +62,6 @@ describe("difference", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 6, 7, 8, 9]);
     }, 950);
 

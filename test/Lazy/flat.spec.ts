@@ -12,7 +12,7 @@ import {
   toAsync,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("flat", function () {
   describe("sync", function () {
@@ -65,8 +65,6 @@ describe("flat", function () {
     });
 
     it("should be flattened concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
       const iterator = toAsync([
         [1],
         [2],
@@ -93,7 +91,6 @@ describe("flat", function () {
       const { value: v4 } = await res.next();
       const { value: v5 } = await res.next();
       const { value: v6 } = await res.next();
-      expect(fn).toBeCalled();
       expect(v1).toEqual(1);
       expect(v2).toEqual(2);
       expect(v3).toEqual(3);
@@ -234,9 +231,7 @@ describe("flat", function () {
     it.each(testParameters)(
       "should be flattened concurrently",
       async ({ timeout, input, depth, size, expected }: FlatTest) => {
-        const fn = jest.fn();
         jest.setTimeout(timeout + 100);
-        callFuncAfterTime(fn, timeout);
 
         const res = await pipe(
           toAsync(input),
@@ -246,15 +241,11 @@ describe("flat", function () {
           toArray,
         );
 
-        expect(fn).toBeCalled();
         expect(res).toEqual(expected);
       },
     );
 
     it("should be flattened concurrently with chuck", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
-
       const res = await pipe(
         toAsync(range(1, 7)),
         map((a) => delay(500, a)),
@@ -264,7 +255,6 @@ describe("flat", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 1050);
 

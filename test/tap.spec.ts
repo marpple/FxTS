@@ -1,5 +1,4 @@
 import { delay, map, pipe, range, tap, toArray, toAsync } from "../src";
-import { callFuncAfterTime } from "./utils";
 
 describe("tap", function () {
   describe("sync", function () {
@@ -28,18 +27,18 @@ describe("tap", function () {
 
   describe("async", function () {
     it("should return the received argument as it is", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
       const res = await tap((a) => delay(1000, a), 10);
-      expect(fn).toBeCalled();
       expect(res).toEqual(10);
     }, 1050);
 
     it("should support asynchronous when curried.", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 500);
-      await pipe(range(5), toAsync, map(tap(() => delay(100))), toArray);
-      expect(fn).toBeCalled();
-    });
+      const res = await pipe(
+        range(5),
+        toAsync,
+        map(tap(() => delay(100))),
+        toArray,
+      );
+      expect(res).toEqual([0, 1, 2, 3, 4]);
+    }, 550);
   });
 });

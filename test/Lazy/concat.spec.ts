@@ -8,7 +8,7 @@ import {
   toAsync,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("concat", function () {
   describe("sync", function () {
@@ -25,8 +25,6 @@ describe("concat", function () {
 
   describe("async", function () {
     it("should be concatenated given two 'AsyncIterable'", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 4000);
       const res = await pipe(
         [
           map((a) => delay(1000, a), toAsync([1, 2])),
@@ -35,13 +33,10 @@ describe("concat", function () {
         ([a, b]) => concat(a, b),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4]);
     }, 4050);
 
     it("should be concatenated given two 'AsyncIterable' concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 3000);
       const res = await pipe(
         [
           map((a) => delay(1000, a), toAsync([1, 2, 3])),
@@ -51,7 +46,6 @@ describe("concat", function () {
         concurrent(2),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 3050);
 

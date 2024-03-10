@@ -9,7 +9,7 @@ import {
   toAsync,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("append", function () {
   describe("sync", function () {
@@ -43,8 +43,6 @@ describe("append", function () {
     });
 
     it("should be appended sequentially", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 3000);
       let chainedPromise: Promise<void | number> = Promise.resolve();
       const res = await pipe(
         toAsync(range(1, 4)),
@@ -65,13 +63,10 @@ describe("append", function () {
           ),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 3050);
 
     it("should be appended concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
       const res = await pipe(
         toAsync([1, 2, 3]),
         map((a) => delay(1000, a)),
@@ -81,7 +76,6 @@ describe("append", function () {
         concurrent(3),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 1050);
 

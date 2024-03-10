@@ -1,9 +1,3 @@
-import type Arrow from "../src/types/Arrow";
-
-export const callFuncAfterTime = (callback: Arrow, time = 1000) => {
-  setTimeout(callback, time);
-};
-
 export const generatorMock = (cnt = 10): AsyncIterableIterator<number> => {
   let concurrent: any;
 

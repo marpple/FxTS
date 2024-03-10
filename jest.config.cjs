@@ -5,5 +5,4 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
   testMatch: [path.join(__dirname, "test/**/*.spec.ts")],
-  maxWorkers: 1,
 };

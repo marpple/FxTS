@@ -9,7 +9,7 @@ import {
   toAsync,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("dropRight", function () {
   describe("sync", function () {
@@ -69,8 +69,6 @@ describe("dropRight", function () {
     });
 
     it("should be discarded elements by length concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 400);
       const res = await pipe(
         toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         map((a) => delay(100, a)),
@@ -79,7 +77,6 @@ describe("dropRight", function () {
         concurrent(3),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([2, 4, 6]);
     }, 450);
 

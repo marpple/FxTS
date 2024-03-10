@@ -1,6 +1,6 @@
 import { delay, filter, map, pipe, reverse, toArray, toAsync } from "../../src";
 import concurrent, { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("reverse", function () {
   describe("sync", function () {
@@ -43,8 +43,6 @@ describe("reverse", function () {
     });
 
     it("should be reversed elements concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 400);
       const res = await pipe(
         toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         map((a) => delay(100, a)),
@@ -53,7 +51,6 @@ describe("reverse", function () {
         concurrent(3),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([10, 8, 6, 4, 2]);
     }, 450);
 

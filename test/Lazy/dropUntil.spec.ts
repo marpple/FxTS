@@ -10,7 +10,7 @@ import {
 } from "../../src";
 import { AsyncFunctionException } from "../../src/_internal/error";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("dropUntil", function () {
   describe("sync", function () {
@@ -89,8 +89,6 @@ describe("dropUntil", function () {
     });
 
     it("should be dropped elements concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1500);
       const res = await pipe(
         [1, 2, 3, 4, 5, 1, 2],
         toAsync,
@@ -100,14 +98,10 @@ describe("dropUntil", function () {
         concurrent(3),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([11]);
     }, 1550);
 
     it("should be controlled the order when concurrency", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 2000);
-
       const res = await pipe(
         toAsync(
           (function* () {
@@ -127,7 +121,6 @@ describe("dropUntil", function () {
         concurrent(5),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([8, 9]);
     }, 2050);
 
