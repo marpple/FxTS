@@ -1,4 +1,4 @@
-import { filter, join, map, pipe, toAsync } from "../src";
+import { filter, fx, join, map, pipe, toAsync } from "../src";
 import { asyncEmpty, empty } from "../src/_internal/utils";
 
 describe("join", function () {
@@ -28,6 +28,14 @@ describe("join", function () {
       expect(res).toEqual("12-14-16");
     });
 
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx([1, 2, 3, 4, 5, 6, 7])
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .join("-");
+      expect(res).toEqual("12-14-16");
+    });
+
     it("should return an empty string when it is an empty array", function () {
       expect(join("~", [])).toEqual("");
     });
@@ -51,6 +59,14 @@ describe("join", function () {
         join("-"),
       );
 
+      expect(res).toEqual("12-14-16");
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res = await fx(toAsync([1, 2, 3, 4, 5, 6, 7]))
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .join("-");
       expect(res).toEqual("12-14-16");
     });
 

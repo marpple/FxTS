@@ -4,6 +4,7 @@ import {
   delay,
   filter,
   flat,
+  fx,
   map,
   pipe,
   range,
@@ -37,6 +38,15 @@ describe("flat", function () {
 
       expect(res).toEqual([11, 12, 13, 14, 15]);
     });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx([1, 2, 3, [4, 5]])
+        .flat()
+        .map((a) => a + 10)
+        .toArray();
+
+      expect(res).toEqual([11, 12, 13, 14, 15]);
+    });
   });
 
   describe("async", function () {
@@ -60,6 +70,15 @@ describe("flat", function () {
         map((a) => a + 10),
         toArray,
       );
+
+      expect(res).toEqual([11, 12, 13, 14, 15]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res = await fx(toAsync([1, 2, 3, [4, 5]]))
+        .flat()
+        .map((a) => a + 10)
+        .toArray();
 
       expect(res).toEqual([11, 12, 13, 14, 15]);
     });

@@ -1,4 +1,4 @@
-import { pipe, slice, toArray, toAsync } from "../../src";
+import { fx, pipe, slice, toArray, toAsync } from "../../src";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
@@ -41,6 +41,14 @@ describe("slice", function () {
       const res2 = pipe([1, 2, 3, 4, 5], slice(1, 3), toArray);
       expect(res2).toEqual([2, 3]);
     });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res1 = fx([1, 2, 3, 4, 5]).slice(2).toArray();
+      expect(res1).toEqual([3, 4, 5]);
+
+      const res2 = fx([1, 2, 3, 4, 5]).slice(1, 3).toArray();
+      expect(res2).toEqual([2, 3]);
+    });
   });
 
   describe("async", function () {
@@ -81,6 +89,14 @@ describe("slice", function () {
       expect(res1).toEqual([3, 4, 5]);
 
       const res2 = await pipe([1, 2, 3, 4, 5], toAsync, slice(1, 3), toArray);
+      expect(res2).toEqual([2, 3]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res1 = await fx([1, 2, 3, 4, 5]).toAsync().slice(2).toArray();
+      expect(res1).toEqual([3, 4, 5]);
+
+      const res2 = await fx([1, 2, 3, 4, 5]).toAsync().slice(1, 3).toArray();
       expect(res2).toEqual([2, 3]);
     });
 

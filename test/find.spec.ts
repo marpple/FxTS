@@ -1,4 +1,4 @@
-import { filter, find, map, pipe, toAsync } from "../src";
+import { filter, find, fx, map, pipe, toAsync } from "../src";
 import { AsyncFunctionException } from "../src/_internal/error";
 import type Arrow from "../src/types/Arrow";
 
@@ -22,6 +22,14 @@ describe("find", function () {
         filter((a) => a % 2 === 0),
         find((a) => a === 14),
       );
+      expect(res1).toEqual(14);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res1 = fx([1, 2, 3, 4])
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .find((a) => a === 14);
       expect(res1).toEqual(14);
     });
 
@@ -54,6 +62,14 @@ describe("find", function () {
       filter((a) => a % 2 === 0),
       find((a) => a === 14),
     );
+    expect(res1).toEqual(14);
+  });
+
+  it("should be able to be used as a chaining method in the `fx`", async function () {
+    const res1 = await fx(toAsync([1, 2, 3, 4]))
+      .map((a) => a + 10)
+      .filter((a) => a % 2 === 0)
+      .find((a) => a === 14);
     expect(res1).toEqual(14);
   });
 });

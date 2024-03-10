@@ -1,6 +1,7 @@
 import {
   delay,
   filter,
+  fx,
   map,
   pipe,
   range,
@@ -47,6 +48,16 @@ describe("take", function () {
         take(2),
         toArray,
       );
+
+      expect(res1).toEqual([12, 14]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res1 = fx([1, 2, 3, 4])
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .take(2)
+        .toArray();
 
       expect(res1).toEqual([12, 14]);
     });
@@ -98,6 +109,16 @@ describe("take", function () {
         take(2),
         toArray,
       );
+
+      expect(res1).toEqual([12, 14]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res1 = await fx(toAsync([1, 2, 3, 4]))
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .take(2)
+        .toArray();
 
       expect(res1).toEqual([12, 14]);
     });

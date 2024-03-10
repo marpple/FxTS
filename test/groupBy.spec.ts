@@ -1,4 +1,4 @@
-import { filter, groupBy, pipe, toAsync } from "../src";
+import { filter, fx, groupBy, pipe, toAsync } from "../src";
 import { AsyncFunctionException } from "../src/_internal/error";
 
 type Obj = {
@@ -52,6 +52,14 @@ describe("groupBy", function () {
       expect(res).toEqual(then2);
     });
 
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx(given)
+        .filter((a) => a.category !== "clothes")
+        .groupBy((a) => a.category);
+
+      expect(res).toEqual(then2);
+    });
+
     it("should throw an error when the callback is asynchronous", function () {
       const res = () =>
         pipe(
@@ -75,6 +83,14 @@ describe("groupBy", function () {
         filter((a) => a.category !== "clothes"),
         groupBy((a) => a.category),
       );
+
+      expect(res).toEqual(then2);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res = await fx(toAsync(given))
+        .filter((a) => a.category !== "clothes")
+        .groupBy((a) => a.category);
 
       expect(res).toEqual(then2);
     });

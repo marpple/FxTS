@@ -2,6 +2,7 @@ import {
   concurrent,
   delay,
   filter,
+  fx,
   map,
   peek,
   pipe,
@@ -49,6 +50,14 @@ describe("concurrent", function () {
       iter.next(),
     ]).then((arr) => arr.map((a) => a.value));
 
+    expect(arr).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  }, 550);
+
+  it("should be able to be used as a chaining method in the `fx`", async function () {
+    const arr = await fx(toAsync(range(1, 11)))
+      .map((a) => delay(100, a))
+      .concurrent(2)
+      .toArray();
     expect(arr).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   }, 550);
 

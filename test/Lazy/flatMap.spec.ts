@@ -1,4 +1,4 @@
-import { flatMap, map, pipe, toArray, toAsync } from "../../src/index";
+import { flatMap, fx, map, pipe, toArray, toAsync } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
@@ -25,6 +25,15 @@ describe("flatMap", function () {
 
       expect(res).toEqual(["IT", "IS", "A", "GOOD", "DAY"]);
     });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx(["It is", "a good", "day"])
+        .flatMap((s) => s.split(" "))
+        .map((a) => a.toUpperCase())
+        .toArray();
+
+      expect(res).toEqual(["IT", "IS", "A", "GOOD", "DAY"]);
+    });
   });
 
   describe("async", function () {
@@ -44,6 +53,15 @@ describe("flatMap", function () {
         map((a) => a.toUpperCase()),
         toArray,
       );
+
+      expect(res).toEqual(["IT", "IS", "A", "GOOD", "DAY"]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res = await fx(toAsync(["It is", "a good", "day"]))
+        .flatMap((s) => s.split(" "))
+        .map((a) => a.toUpperCase())
+        .toArray();
 
       expect(res).toEqual(["IT", "IS", "A", "GOOD", "DAY"]);
     });

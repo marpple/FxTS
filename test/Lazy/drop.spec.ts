@@ -3,6 +3,7 @@ import {
   delay,
   drop,
   filter,
+  fx,
   map,
   pipe,
   toArray,
@@ -33,6 +34,16 @@ describe("drop", function () {
 
       expect(res).toEqual([16, 18]);
     });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx([1, 2, 3, 4, 5, 6, 7, 8])
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .drop(2)
+        .toArray();
+
+      expect(res).toEqual([16, 18]);
+    });
   });
 
   describe("async", function () {
@@ -56,6 +67,16 @@ describe("drop", function () {
         drop(2),
         toArray,
       );
+
+      expect(res).toEqual([16, 18]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res = await fx(toAsync([1, 2, 3, 4, 5, 6, 7, 8]))
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .drop(2)
+        .toArray();
 
       expect(res).toEqual([16, 18]);
     });

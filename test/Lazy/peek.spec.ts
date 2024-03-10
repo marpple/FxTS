@@ -1,4 +1,4 @@
-import { map, peek, pipe, toArray, toAsync } from "../../src/index";
+import { fx, map, peek, pipe, toArray, toAsync } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
@@ -23,6 +23,18 @@ describe("peek", function () {
         map((a) => a + 10),
         (a) => toArray(a),
       );
+      expect(sum).toEqual(50);
+      expect(res).toEqual([21, 22, 23, 24]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      let sum = 0;
+      const res = fx([1, 2, 3, 4])
+        .map((a) => a + 10)
+        .peek((a) => (sum = sum + a))
+        .map((a) => a + 10)
+        .toArray();
+
       expect(sum).toEqual(50);
       expect(res).toEqual([21, 22, 23, 24]);
     });
@@ -66,6 +78,18 @@ describe("peek", function () {
         map((a) => a + 10),
         (a) => toArray(a),
       );
+      expect(sum).toEqual(50);
+      expect(res).toEqual([21, 22, 23, 24]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      let sum = 0;
+      const res = await fx(toAsync([1, 2, 3, 4]))
+        .map((a) => a + 10)
+        .peek((a) => (sum = sum + a))
+        .map((a) => a + 10)
+        .toArray();
+
       expect(sum).toEqual(50);
       expect(res).toEqual([21, 22, 23, 24]);
     });

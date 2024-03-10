@@ -1,4 +1,4 @@
-import { every, filter, map, pipe, toAsync } from "../src";
+import { every, filter, fx, map, pipe, toAsync } from "../src";
 import { AsyncFunctionException } from "../src/_internal/error";
 
 describe("every", function () {
@@ -36,6 +36,23 @@ describe("every", function () {
         map((a) => a + 10),
         every((a) => a < 10),
       );
+      expect(res3).toEqual(false);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res1 = fx([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .filter((a) => a % 2 === 0)
+        .every((a) => a % 2 === 0);
+      expect(res1).toEqual(true);
+
+      const res2 = fx([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .map((a) => a + 10)
+        .every((a) => a > 10);
+      expect(res2).toEqual(true);
+
+      const res3 = fx([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .map((a) => a + 10)
+        .every((a) => a < 10);
       expect(res3).toEqual(false);
     });
 
@@ -84,6 +101,23 @@ describe("every", function () {
       map((a) => a + 10),
       every((a) => a < 10),
     );
+    expect(res3).toEqual(false);
+  });
+
+  it("should be able to be used as a chaining method in the `fx`", async function () {
+    const res1 = await fx(toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+      .filter((a) => a % 2 === 0)
+      .every((a) => a % 2 === 0);
+    expect(res1).toEqual(true);
+
+    const res2 = await fx(toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+      .map((a) => a + 10)
+      .every((a) => a > 10);
+    expect(res2).toEqual(true);
+
+    const res3 = await fx(toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+      .map((a) => a + 10)
+      .every((a) => a < 10);
     expect(res3).toEqual(false);
   });
 });

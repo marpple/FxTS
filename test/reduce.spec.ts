@@ -1,4 +1,4 @@
-import { filter, map, pipe, range, reduce, toAsync } from "../src";
+import { filter, fx, map, pipe, range, reduce, toAsync } from "../src";
 
 const addNumber = (a: number, b: number) => a + b;
 const addNumberAsync = async (a: number, b: number) => a + b;
@@ -28,6 +28,14 @@ describe("reduce", function () {
         filter((a) => a % 2),
         reduce(addNumber),
       );
+      expect(res).toEqual(1 + 3 + 5);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx(["1", "2", "3", "4", "5"])
+        .map((a) => Number(a))
+        .filter((a) => a % 2)
+        .reduce(addNumber);
       expect(res).toEqual(1 + 3 + 5);
     });
   });
@@ -109,8 +117,17 @@ describe("reduce", function () {
         filter((a) => a % 2),
         reduce(addNumberAsync),
       );
-      expect(res1).toEqual(1 + 3 + 5);
-      expect(res2).toEqual(1 + 3 + 5);
+      expect(res1).toEqual(9);
+      expect(res2).toEqual(9);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res1 = await fx(toAsync(["1", "2", "3", "4", "5"]))
+        .map((a) => Number(a))
+        .filter((a) => a % 2)
+        .reduce(addNumber);
+
+      expect(res1).toEqual(9);
     });
   });
 });
