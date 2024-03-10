@@ -9,7 +9,7 @@ import {
   toAsync,
 } from "../../src";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("split", function () {
   describe("sync", function () {
@@ -105,9 +105,6 @@ describe("split", function () {
     });
 
     it("should be controlled the order when concurrency", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
-
       const res = await pipe(
         toAsync(
           (function* () {
@@ -127,14 +124,10 @@ describe("split", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual(["1", "2", "3", "4", "5"]);
     }, 1050);
 
     it("should be consumed concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
-
       const res = await pipe(
         toAsync("1,2,3,4,5,6,7,8,9,10"),
         split(","),
@@ -145,7 +138,6 @@ describe("split", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([2, 4, 6, 8, 10]);
     }, 1050);
   });

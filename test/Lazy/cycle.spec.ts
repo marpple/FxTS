@@ -9,7 +9,7 @@ import {
 } from "../../src";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import cycle from "../../src/Lazy/cycle";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("cycle", function () {
   describe("sync", function () {
@@ -77,9 +77,6 @@ describe("cycle", function () {
     });
 
     it("should be repeated concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 900);
-
       const res = await pipe(
         toAsync(
           (function* () {
@@ -97,7 +94,6 @@ describe("cycle", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 950);
 

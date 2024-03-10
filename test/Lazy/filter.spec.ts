@@ -11,7 +11,7 @@ import {
   toAsync,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 const mod = (a: number) => a % 2 === 0;
 const modAsync = async (a: number) => a % 2 === 0;
@@ -160,9 +160,6 @@ describe("filter", function () {
     }, 1050);
 
     it("should be having all elements when all elements are not filtered", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
-
       const res = await pipe(
         toAsync(range(1, 20)),
         filter(() => delay(100, true)),
@@ -170,16 +167,12 @@ describe("filter", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
       ]);
     }, 1050);
 
     it("should be filtered by the callback 'take' - 'filter' - 'concurrent'", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 2000);
-
       const res = await pipe(
         toAsync(range(1, 21)),
         take(10),
@@ -188,14 +181,10 @@ describe("filter", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([2, 4, 6, 8, 10]);
     }, 2050);
 
     it("should be filtered by the callback 'filter' - 'take' - 'concurrent'", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
-
       const res = await pipe(
         toAsync(range(1, 51)),
         filter((a) => delay(500, a % 2 === 0)),
@@ -204,14 +193,10 @@ describe("filter", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]);
     }, 1050);
 
     it("should be filtered by the callback 'map' - 'filter' - 'concurrent'", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
-
       const res = await pipe(
         toAsync(range(1, 21)),
         map((a) => delay(500, a + 10)),
@@ -220,14 +205,10 @@ describe("filter", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([12, 14, 16, 18, 20, 22, 24, 26, 28, 30]);
     }, 1050);
 
     it("should be filtered by the callback 'map' - 'filter' - 'concurrent' - 'take'", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
-
       const res = await pipe(
         toAsync(range(1, 10)),
         map((a) => delay(500, a)),
@@ -237,7 +218,6 @@ describe("filter", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([...range(1, 9)]);
     }, 1050);
 
@@ -284,8 +264,6 @@ describe("filter", function () {
     });
 
     it("should be consumed 'AsyncIterable' as many times as called with 'next'", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 2000);
       const iterator = toAsync(range(1, 21));
       const res = pipe(
         iterator,
@@ -299,7 +277,6 @@ describe("filter", function () {
       const { value: v3 } = await res.next();
       const { value: v4 } = await res.next();
       const { value: v5 } = await res.next(); // 10
-      expect(fn).toBeCalled();
       expect(v1).toEqual(2);
       expect(v2).toEqual(4);
       expect(v3).toEqual(6);

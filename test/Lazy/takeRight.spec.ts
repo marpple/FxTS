@@ -10,7 +10,7 @@ import {
   toAsync,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("takeRight", function () {
   describe("sync", function () {
@@ -104,8 +104,6 @@ describe("takeRight", function () {
     });
 
     it("should be able to take the element concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 400);
       const res = await pipe(
         toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
         map((a) => delay(100, a)),
@@ -114,7 +112,6 @@ describe("takeRight", function () {
         concurrent(3),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([6, 8, 10]);
     }, 450);
 

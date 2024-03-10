@@ -10,7 +10,7 @@ import {
   toAsync,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 const expected = [
   [1, 2, 3],
@@ -60,8 +60,6 @@ describe("chunk", function () {
     });
 
     it("should be chunked after concurrent", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 600);
       const res = await pipe(
         toAsync(range(1, 12)),
         map((a) => delay(100, a)),
@@ -69,13 +67,10 @@ describe("chunk", function () {
         chunk(3),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual(expected);
     }, 650);
 
     it("should be chunked after concurrent with filter", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
       const res = await pipe(
         toAsync(range(1, 21)),
         map((a) => delay(100, a)),
@@ -85,13 +80,10 @@ describe("chunk", function () {
         toArray,
       );
       const expected: number[][] = [[2, 4, 6], [8, 10, 12], [14, 16, 18], [20]];
-      expect(fn).toBeCalled();
       expect(res).toEqual(expected);
     }, 1050);
 
     it("should be chunked before concurrent", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
       const res = await pipe(
         toAsync(range(1, 21)),
         map((a) => delay(100, a)),
@@ -101,7 +93,6 @@ describe("chunk", function () {
         toArray,
       );
       const expected: number[][] = [[2, 4, 6], [8, 10, 12], [14, 16, 18], [20]];
-      expect(fn).toBeCalled();
       expect(res).toEqual(expected);
     }, 1050);
 

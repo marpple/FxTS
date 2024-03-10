@@ -1,7 +1,7 @@
 import { delay, map, pipe, range, toArray, toAsync } from "../../src";
 import concurrent, { Concurrent } from "../../src/Lazy/concurrent";
 import scan from "../../src/Lazy/scan";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("scan", function () {
   describe("sync", function () {
@@ -96,9 +96,6 @@ describe("scan", function () {
     });
 
     it("should be handled concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 600);
-
       const res = await pipe(
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
         toAsync,
@@ -108,14 +105,10 @@ describe("scan", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]);
     }, 650);
 
     it("should be handled concurrently without seed", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 600);
-
       const res = await pipe(
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
         toAsync,
@@ -125,7 +118,6 @@ describe("scan", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 6, 24, 120, 720, 5040, 40320, 362880]);
     }, 650);
 

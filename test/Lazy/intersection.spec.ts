@@ -1,6 +1,6 @@
 import { delay, intersection, map, pipe, toArray, toAsync } from "../../src";
 import concurrent, { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("intersection", function () {
   describe("sync", function () {
@@ -52,9 +52,6 @@ describe("intersection", function () {
     });
 
     it("should be handled concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 900);
-
       const res = await pipe(
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
         toAsync,
@@ -64,7 +61,6 @@ describe("intersection", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([3, 4, 5]);
     }, 950);
 

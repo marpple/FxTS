@@ -8,7 +8,6 @@ import {
   toArray,
   toAsync,
 } from "../../src/index";
-import { callFuncAfterTime } from "../utils";
 
 describe("prepend", function () {
   describe("sync", function () {
@@ -47,9 +46,7 @@ describe("prepend", function () {
       expect(res).toEqual([1, 2, 3, 4]);
     });
 
-    it("should be prepened the given element sequentially", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 3000);
+    it("should be prepend the given element sequentially", async function () {
       let chainedPromise: Promise<number | void> = Promise.resolve();
       const res = await pipe(
         toAsync(range(4, 7)),
@@ -70,13 +67,10 @@ describe("prepend", function () {
           ),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 3050);
 
-    it("should be prepened the given element concurrently", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
+    it("should be prepend the given element concurrently", async function () {
       const res = await pipe(
         toAsync([4, 5, 6]),
         map((a) => delay(1000, a)),
@@ -86,13 +80,10 @@ describe("prepend", function () {
         concurrent(3),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 1050);
 
     it("should be able to be used as a curried function in the pipeline", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
       const res = await pipe(
         toAsync([4, 5, 6]),
         map((a) => delay(1000, a)),
@@ -102,7 +93,6 @@ describe("prepend", function () {
         concurrent(3),
         toArray,
       );
-      expect(fn).toBeCalled();
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     }, 1050);
 

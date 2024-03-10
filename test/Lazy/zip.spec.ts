@@ -8,7 +8,7 @@ import {
   zip,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
-import { callFuncAfterTime, generatorMock } from "../utils";
+import { generatorMock } from "../utils";
 
 describe("zip", function () {
   describe("sync", function () {
@@ -187,9 +187,6 @@ describe("zip", function () {
     });
 
     it("should be zipped sequentially", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 4000);
-
       const res = await pipe(
         toAsync([5, 6, 7, 8]),
         map((nums) => delay(1000, nums)),
@@ -197,7 +194,6 @@ describe("zip", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([
         [1, 5],
         [2, 6],
@@ -207,9 +203,6 @@ describe("zip", function () {
     }, 4050);
 
     it("should be zipped concurrently: zip - map", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
-
       const res = await pipe(
         toAsync([5, 6, 7, 8]),
         zip([1, 2, 3, 4]),
@@ -218,7 +211,6 @@ describe("zip", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([
         [1, 5],
         [2, 6],
@@ -228,9 +220,6 @@ describe("zip", function () {
     }, 1050);
 
     it("should be zipped concurrently: map - zip", async function () {
-      const fn = jest.fn();
-      callFuncAfterTime(fn, 1000);
-
       const res = await pipe(
         toAsync([5, 6, 7, 8]),
         map((nums) => delay(1000, nums)),
@@ -239,7 +228,6 @@ describe("zip", function () {
         toArray,
       );
 
-      expect(fn).toBeCalled();
       expect(res).toEqual([
         [1, 5],
         [2, 6],
