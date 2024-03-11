@@ -1,4 +1,13 @@
-import { fork, map, pipe, toAsync } from "../../src/index";
+import {
+  concurrent,
+  delay,
+  fork,
+  map,
+  pipe,
+  range,
+  toArray,
+  toAsync,
+} from "../../src/index";
 
 describe("fork", function () {
   describe("sync", function () {
@@ -212,5 +221,74 @@ describe("fork", function () {
       expect(await iter3.next()).toEqual({ value: 12, done: false });
       expect(await iter4.next()).toEqual({ value: 12, done: false });
     });
+
+    it("forked iterable should be consumed concurrently", async function () {
+      const iter = pipe(
+        toAsync(range(10)),
+        map((a) => delay(500, a)),
+      );
+
+      const forkedIter = fork(iter);
+      const arr1 = await pipe(iter, concurrent(5), toArray);
+      expect(arr1).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+      const arr2 = await pipe(forkedIter, concurrent(5), toArray);
+      expect(arr2).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    }, 1050);
+
+    it("forked iterable should be consumed concurrently (forked iterable first)", async function () {
+      const iter = pipe(
+        toAsync(range(10)),
+        map((a) => delay(500, a)),
+      );
+
+      const forkedIter = fork(iter);
+      const arr1 = await pipe(forkedIter, concurrent(5), toArray);
+      expect(arr1).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+      const arr2 = await pipe(iter, concurrent(5), toArray);
+      expect(arr2).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    }, 1050);
+
+    it("forked iterable and origin iterable must each be consumable.", async function () {
+      const origin = pipe(
+        toAsync(range(6)),
+        map((a) => delay(500, a)),
+      );
+
+      const iter = pipe(origin, concurrent(3));
+      const forkedIter = pipe(fork(origin), concurrent(3));
+
+      const p1 = await iter.next();
+      const pf1 = await forkedIter.next();
+      const p2 = await iter.next();
+      const pf2 = await forkedIter.next();
+      const p3 = await iter.next();
+      const pf3 = await forkedIter.next();
+      const p4 = await iter.next();
+      const pf4 = await forkedIter.next();
+      const p5 = await iter.next();
+      const pf5 = await forkedIter.next();
+      const p6 = await iter.next();
+      const pf6 = await forkedIter.next();
+      const p7 = await iter.next();
+      const pf7 = await forkedIter.next();
+
+      expect(p1).toEqual({ value: 0, done: false });
+      expect(p2).toEqual({ value: 1, done: false });
+      expect(p3).toEqual({ value: 2, done: false });
+      expect(p4).toEqual({ value: 3, done: false });
+      expect(p5).toEqual({ value: 4, done: false });
+      expect(p6).toEqual({ value: 5, done: false });
+      expect(p7).toEqual({ value: undefined, done: true });
+
+      expect(pf1).toEqual({ value: 0, done: false });
+      expect(pf2).toEqual({ value: 1, done: false });
+      expect(pf3).toEqual({ value: 2, done: false });
+      expect(pf4).toEqual({ value: 3, done: false });
+      expect(pf5).toEqual({ value: 4, done: false });
+      expect(pf6).toEqual({ value: 5, done: false });
+      expect(pf7).toEqual({ value: undefined, done: true });
+    }, 1050);
   });
 });

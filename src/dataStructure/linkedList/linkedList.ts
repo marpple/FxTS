@@ -56,7 +56,7 @@ export class LinkedList<T> {
   }
 
   isEmpty() {
-    return !this.head.hasNext();
+    return this.head.getNext() === this.tail;
   }
 
   getHead() {
@@ -69,6 +69,14 @@ export class LinkedList<T> {
 
   getLastNode() {
     return this.tail.getPrev();
+  }
+
+  hasNext(node?: LinkedListNode<T> | null): node is LinkedListNode<T> {
+    if (node == null) {
+      return false;
+    }
+
+    return node.getNext() !== this.tail;
   }
 
   toArray() {

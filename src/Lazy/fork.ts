@@ -3,6 +3,8 @@ import { LinkedList } from "../dataStructure/linkedList/linkedList";
 import type { LinkedListNode } from "../dataStructure/linkedList/linkedListNode";
 import isNil from "../isNil";
 import type IterableInfer from "../types/IterableInfer";
+import type { Reject, Resolve } from "../types/Utils";
+import type { Concurrent } from "./concurrent";
 
 type ReturnForkType<A extends Iterable<unknown> | AsyncIterable<unknown>> =
   A extends AsyncIterable<any>
@@ -13,7 +15,7 @@ type Value = any;
 
 type ForkItem = {
   queue: LinkedList<IteratorResult<Value>>;
-  originNext: () => IteratorResult<Value, any>;
+  next: () => IteratorResult<Value, any>;
 };
 
 const forkMap = new WeakMap<Iterator<Value>, ForkItem>();
@@ -26,7 +28,7 @@ function sync<T>(iterable: Iterable<T>) {
       forkItem.queue.getLastNode();
 
     const done = () => {
-      iterator.next = forkItem.originNext;
+      iterator.next = forkItem.next;
 
       return {
         done: true,
@@ -43,7 +45,7 @@ function sync<T>(iterable: Iterable<T>) {
       const item = current?.getNext();
 
       if (isNil(item) || item === forkItem.queue.getTail()) {
-        const node = forkItem.originNext();
+        const node = forkItem.next();
 
         current = forkItem.queue.insertLast(node);
         isDone = node.done ?? true;
@@ -67,7 +69,7 @@ function sync<T>(iterable: Iterable<T>) {
     const originNext = iterator.next.bind(iterator);
     forkItem = {
       queue: new LinkedList(),
-      originNext: originNext,
+      next: originNext,
     };
 
     iterator.next = getNext(forkItem);
@@ -88,6 +90,7 @@ function sync<T>(iterable: Iterable<T>) {
 type ForkAsyncItem = {
   queue: LinkedList<IteratorResult<Value>>;
   next: (...args: any) => Promise<IteratorResult<Value, any>>;
+  done: boolean;
 };
 
 const forkAsyncMap = new WeakMap<AsyncIterator<Value>, ForkAsyncItem>();
@@ -96,51 +99,77 @@ function async<T>(iterable: AsyncIterable<T>) {
   const iterator = iterable[Symbol.asyncIterator]();
 
   const getNext = (forkItem: ForkAsyncItem) => {
-    let current: Promise<LinkedListNode<IteratorResult<T>> | null> =
-      Promise.resolve(forkItem.queue.getLastNode());
+    const settlementQueue: [Resolve<T>, Reject][] = [];
+    let currentNode: LinkedListNode<IteratorResult<T>> | null =
+      forkItem.queue.getLastNode() ?? null;
+    let nextCallCount = 0;
+    let resolvedCount = 0;
+    let prevItem = Promise.resolve();
 
-    const done = () => {
-      iterator.next = forkItem.next;
+    const fillBuffer = (concurrent: Concurrent) => {
+      const nextItem = forkItem.next(concurrent);
 
-      return {
-        done: true,
-        value: undefined,
-      } as const;
+      prevItem = prevItem
+        .then(() => nextItem)
+        .then(({ done, value }) => {
+          if (done) {
+            while (settlementQueue.length > 0) {
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              const [resolve] = settlementQueue.shift()!;
+              resolve({ done: true, value: undefined });
+            }
+
+            return void (forkItem.done = true);
+          }
+
+          forkItem.queue.insertLast({ done: false, value });
+          recur(concurrent);
+        })
+        .catch((reason) => {
+          forkItem.done = true;
+          while (settlementQueue.length > 0) {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const [, reject] = settlementQueue.shift()!;
+            reject(reason);
+          }
+        });
     };
 
-    let isDone = false;
-    const next = async (_concurrent: any) => {
-      if (isDone) {
-        return done();
+    function consumeBuffer() {
+      while (
+        forkItem.queue.hasNext(currentNode) &&
+        nextCallCount > resolvedCount
+      ) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const result = currentNode.getNext()!.getValue()!;
+        currentNode = currentNode.getNext();
+
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const [resolve] = settlementQueue.shift()!;
+        resolve(result);
+        resolvedCount++;
+      }
+    }
+
+    function recur(concurrent: Concurrent) {
+      if (nextCallCount === resolvedCount) {
+        return;
+      } else if (forkItem.queue.hasNext(currentNode)) {
+        consumeBuffer();
+      } else {
+        fillBuffer(concurrent);
+      }
+    }
+
+    const next = async (concurrent: Concurrent) => {
+      if (forkItem.done && !forkItem.queue.hasNext(currentNode)) {
+        return { done: true, value: undefined };
       }
 
-      const itemCurrent = await current;
-      const item = itemCurrent?.getNext();
-
+      nextCallCount++;
       return new Promise((resolve, reject) => {
-        if (isNil(item) || item === forkItem.queue.getTail()) {
-          return forkItem
-            .next(_concurrent)
-            .then((node) => {
-              current = current.then(() => {
-                return forkItem.queue.insertLast(node);
-              });
-
-              isDone = node.done ?? true;
-              if (isDone) {
-                return resolve(done());
-              }
-
-              return resolve(node);
-            })
-            .catch(reject);
-        }
-
-        current = current.then(() => {
-          return item;
-        });
-
-        resolve(item.getValue());
+        settlementQueue.push([resolve, reject]);
+        recur(concurrent);
       });
     };
 
@@ -153,6 +182,7 @@ function async<T>(iterable: AsyncIterable<T>) {
     forkItem = {
       queue: new LinkedList(),
       next: originNext,
+      done: false,
     };
 
     iterator.next = getNext(forkItem) as any;
