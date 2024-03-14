@@ -1,4 +1,4 @@
-import { filter, map, pipe, some, toAsync } from "../src";
+import { filter, fx, map, pipe, some, toAsync } from "../src";
 import { AsyncFunctionException } from "../src/_internal/error";
 
 describe("some", function () {
@@ -47,6 +47,28 @@ describe("some", function () {
         map((a) => a + 10),
         some((a) => a < 15),
       );
+      expect(res4).toEqual(true);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res1 = fx([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .filter((a) => a % 2 === 0)
+        .some((a) => a % 2 === 0);
+      expect(res1).toEqual(true);
+
+      const res2 = fx([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .map((a) => a + 10)
+        .some((a) => a > 10);
+      expect(res2).toEqual(true);
+
+      const res3 = fx([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .map((a) => a + 10)
+        .some((a) => a < 10);
+      expect(res3).toEqual(false);
+
+      const res4 = fx([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .map((a) => a + 10)
+        .some((a) => a < 15);
       expect(res4).toEqual(true);
     });
 
@@ -134,6 +156,28 @@ describe("some", function () {
         map((a) => a + 10),
         some((a) => Promise.resolve(a < 15)),
       );
+      expect(res4).toEqual(true);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res1 = await fx(toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+        .filter((a) => a % 2 === 0)
+        .some((a) => a % 2 === 0);
+      expect(res1).toEqual(true);
+
+      const res2 = await fx(toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+        .map((a) => a + 10)
+        .some((a) => a > 10);
+      expect(res2).toEqual(true);
+
+      const res3 = await fx(toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+        .map((a) => a + 10)
+        .some((a) => Promise.resolve(a < 10));
+      expect(res3).toEqual(false);
+
+      const res4 = await fx(toAsync([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+        .map((a) => a + 10)
+        .some((a) => Promise.resolve(a < 15));
       expect(res4).toEqual(true);
     });
   });

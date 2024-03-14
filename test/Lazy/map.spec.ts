@@ -1,5 +1,5 @@
 import { AsyncFunctionException } from "../../src/_internal/error";
-import { map, pipe, range, toArray, toAsync } from "../../src/index";
+import { fx, map, pipe, range, toArray, toAsync } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
@@ -29,6 +29,16 @@ describe("map", function () {
         map((a) => a),
         toArray,
       );
+
+      expect(res).toEqual(["1", "2", "3", "4"]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx([1, 2, 3, 4])
+        .map((a) => a)
+        .map((a) => String(a))
+        .map((a) => a)
+        .toArray();
 
       expect(res).toEqual(["1", "2", "3", "4"]);
     });
@@ -79,6 +89,15 @@ describe("map", function () {
         map((a) => a),
         toArray,
       );
+
+      expect(res).toEqual(["1", "2", "3", "4"]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res = await fx(toAsync([1, 2, 3, 4]))
+        .map((a) => Promise.resolve(a))
+        .map((a) => String(a))
+        .toArray();
 
       expect(res).toEqual(["1", "2", "3", "4"]);
     });

@@ -17,6 +17,7 @@
     "filter",
     "flat",
     "flatMap",
+    "fx",
     "intersection",
     "intersectionBy",
     "keys",

@@ -3,6 +3,7 @@ import {
   concurrent,
   delay,
   filter,
+  fx,
   map,
   pipe,
   range,
@@ -42,6 +43,16 @@ describe("takeWhile", function () {
         takeWhile((a) => a < 20),
         toArray,
       );
+
+      expect(res).toEqual([12, 14, 16, 18]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx(range(1, 20))
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .takeWhile((a) => a < 20)
+        .toArray();
 
       expect(res).toEqual([12, 14, 16, 18]);
     });
@@ -91,6 +102,17 @@ describe("takeWhile", function () {
         takeWhile((a) => a < 20),
         toArray,
       );
+
+      expect(res).toEqual([12, 14, 16, 18]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res = await fx(range(1, 20))
+        .toAsync()
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .takeWhile((a) => a < 20)
+        .toArray();
 
       expect(res).toEqual([12, 14, 16, 18]);
     });

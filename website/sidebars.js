@@ -71,6 +71,11 @@ const sidebars = {
           id: "error-handling",
           label: "Error handling",
         },
+        {
+          type: "doc",
+          id: "method-chaining",
+          label: "Method Chaining",
+        },
       ],
     },
     {

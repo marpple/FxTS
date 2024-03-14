@@ -3,6 +3,7 @@ import {
   concurrent,
   delay,
   filter,
+  fx,
   map,
   peek,
   pipe,
@@ -43,6 +44,16 @@ describe("takeUntil", function () {
         takeUntil((a) => a > 12),
         toArray,
       );
+
+      expect(res).toEqual([12, 14]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx([1, 2, 3, 4])
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .takeUntil((a) => a > 12)
+        .toArray();
 
       expect(res).toEqual([12, 14]);
     });
@@ -92,6 +103,16 @@ describe("takeUntil", function () {
         takeUntil((a) => a > 12),
         toArray,
       );
+
+      expect(res).toEqual([12, 14]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res = await fx(toAsync([1, 2, 3, 4]))
+        .map((a) => a + 10)
+        .filter((a) => a % 2 === 0)
+        .takeUntil((a) => a > 12)
+        .toArray();
 
       expect(res).toEqual([12, 14]);
     });

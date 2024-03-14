@@ -1,4 +1,4 @@
-import { each, map, pipe, range, toAsync } from "../src";
+import { each, fx, map, pipe, range, toAsync } from "../src";
 
 describe("each", function () {
   describe("sync", function () {
@@ -22,6 +22,16 @@ describe("each", function () {
           acc += a;
         }),
       );
+      expect(acc).toEqual(50);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      let acc = 0;
+      fx([1, 2, 3, 4])
+        .map((a) => a + 10)
+        .each((a) => {
+          acc += a;
+        });
       expect(acc).toEqual(50);
     });
   });
@@ -100,6 +110,16 @@ describe("each", function () {
         }),
       );
       expect(res2).toEqual(50);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      let acc = 0;
+      await fx(toAsync([1, 2, 3, 4]))
+        .map((a) => a + 10)
+        .each((a) => {
+          acc += a;
+        });
+      expect(acc).toEqual(50);
     });
   });
 });

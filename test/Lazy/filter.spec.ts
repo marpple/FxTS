@@ -3,6 +3,7 @@ import {
   concurrent,
   delay,
   filter,
+  fx,
   map,
   pipe,
   range,
@@ -51,6 +52,14 @@ describe("filter", function () {
         filter((a) => a % 2 === 0),
         toArray,
       );
+
+      expect(res).toEqual([2, 4]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res = fx([1, 2, 3, 4])
+        .filter((a) => a % 2 === 0)
+        .toArray();
 
       expect(res).toEqual([2, 4]);
     });
@@ -259,6 +268,14 @@ describe("filter", function () {
         filter((a) => a % 2 === 0),
         toArray,
       );
+
+      expect(res).toEqual([2, 4]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res = await fx(toAsync([1, 2, 3, 4]))
+        .filter((a) => a % 2 === 0)
+        .toArray();
 
       expect(res).toEqual([2, 4]);
     });

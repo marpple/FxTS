@@ -25,7 +25,7 @@ Please review the [API documentation](https://fxts.dev/docs/index)
 ## Usage
 
 ```ts
-import { each, filter, map, pipe, range, take } from "@fxts/core";
+import { each, filter, fx, map, pipe, range, take } from "@fxts/core";
 
 pipe(
   range(10),
@@ -34,18 +34,25 @@ pipe(
   take(2),
   each((a) => console.log(a)),
 );
+
+// chaining
+fx(range(10))
+  .map((a) => a + 10)
+  .filter((a) => a % 2 === 0)
+  .take(2)
+  .each((a) => console.log(a));
 ```
 
 ## Usage(concurrent)
 
 ```ts
-import { concurrent, countBy, flat, map, pipe, toAsync } from "@fxts/core";
+import { concurrent, countBy, flat, fx, map, pipe, toAsync } from "@fxts/core";
 
 // maybe 1 seconds api
 const fetchWiki = (page: string) =>
   fetch(`https://en.wikipedia.org/w/api.php?action=parse&page=${page}`);
 
-const countWords = async (concurrency = 1) =>
+const countWords = async (concurrency: number) =>
   pipe(
     ["html", "css", "javascript", "typescript"],
     toAsync,

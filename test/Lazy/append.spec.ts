@@ -2,6 +2,7 @@ import {
   append,
   concurrent,
   delay,
+  fx,
   map,
   pipe,
   range,
@@ -25,6 +26,11 @@ describe("append", function () {
       const res = pipe(range(1, 4), append(4), append(5), append(6), toArray);
       expect(res).toEqual([1, 2, 3, 4, 5, 6]);
     });
+
+    it("should be able to be used chaining method with chain in the `fx`", function () {
+      const res = fx(range(1, 4)).chain(append(4)).chain(append(5)).toArray();
+      expect(res).toEqual([1, 2, 3, 4, 5]);
+    });
   });
 
   describe("async", function () {
@@ -40,6 +46,15 @@ describe("append", function () {
         toArray,
       );
       expect(res).toEqual([1, 2, 3, 4]);
+    });
+
+    it("should be able to be used chaining method with chain in the `fx`", async function () {
+      const res = await fx(range(1, 4))
+        .toAsync()
+        .chain(append(4))
+        .chain(append(5))
+        .toArray();
+      expect(res).toEqual([1, 2, 3, 4, 5]);
     });
 
     it("should be appended sequentially", async function () {
