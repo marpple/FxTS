@@ -32,25 +32,29 @@ function sync<A>(iterable: Iterable<A>, depth: number): IterableIterator<A> {
       return this;
     },
     next() {
-      const iterator = last(iteratorStack);
-      if (!iterator) {
-        return { done: true, value: undefined };
-      }
+      while (iteratorStack.length > 0) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const currentIterator = last(iteratorStack)!;
+        const { value, done } = currentIterator.next();
+        if (done) {
+          iteratorStack.pop();
+          continue;
+        }
 
-      const { value, done } = iterator.next();
-      if (done) {
-        iteratorStack.pop();
-        return this.next();
-      }
+        if (isFlatAble(value) && iteratorStack.length < depth + 1) {
+          iteratorStack.push(value[Symbol.iterator]());
+          continue;
+        }
 
-      if (isFlatAble(value) && iteratorStack.length < depth + 1) {
-        iteratorStack.push(value[Symbol.iterator]());
-        return this.next();
+        return {
+          done: false,
+          value,
+        };
       }
 
       return {
-        done: false,
-        value,
+        done: true,
+        value: undefined,
       };
     },
   };
