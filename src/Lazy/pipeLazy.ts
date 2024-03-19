@@ -41,8 +41,6 @@ import type ReturnPipeType from "../types/ReturnPipeType";
  * see {@link https://fxts.dev/docs/toAsync | toAsync},
  * {@link https://fxts.dev/docs/map | map}, {@link https://fxts.dev/docs/filter | filter}
  */
-// eslint-disable-next-line
-// @ts-ignore
 // prettier-ignore
 function pipeLazy<T1, R>(
   f1: (a: Awaited<T1>) => R

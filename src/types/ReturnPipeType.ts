@@ -1,5 +1,5 @@
 import type Awaited from "./Awaited";
-import type { TuplifyUnion } from "./ExcludeObject";
+import type Equals from "./Equals";
 import type Head from "./Head";
 import type Tail from "./Tail";
 
@@ -13,7 +13,7 @@ type HasPromise<T extends any[]> = Head<T> extends never
 
 type PossiblyHasPromise<T extends any[]> = Head<T> extends never
   ? false
-  : HasPromise<TuplifyUnion<Head<T>>> extends true
+  : Equals<Head<T>, Head<T> | Promise<Awaited<Head<T>>>> extends 1
   ? true
   : T["length"] extends 0
   ? false
@@ -27,7 +27,7 @@ type PipeLast<T extends any[]> = T["length"] extends 0
   ? never
   : PipeLast<Tail<T>>;
 
-type ReturnPipeType<
+type _ReturnPipeType<
   T extends any[],
   R = Awaited<PipeLast<T>>,
 > = HasPromise<T> extends true
@@ -35,5 +35,12 @@ type ReturnPipeType<
   : PossiblyHasPromise<T> extends true
   ? Promise<R> | R
   : R;
+
+type ReturnPipeType<
+  T extends any[],
+  R = Awaited<PipeLast<T>>,
+> = _ReturnPipeType<T, R> extends Promise<never>
+  ? never
+  : _ReturnPipeType<T, R>;
 
 export default ReturnPipeType;
