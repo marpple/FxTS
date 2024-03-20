@@ -4,11 +4,11 @@
 
 - api-extractor
   ```
-  npm install -g @microsoft/api-extractor@7
+  npm install -g @microsoft/api-extractor@7.20.0
   ```
 - api-documenter
   ```
-  npm install -g @microsoft/api-documenter@7
+  npm install -g @microsoft/api-documenter@7.20.0
   ```
 
 ## Install / Update plugin markdown-plugin
