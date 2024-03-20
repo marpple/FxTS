@@ -1,4 +1,4 @@
-import { pipe, throwError } from "../src";
+import { entries, filter, map, pipe, throwError, toArray } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
@@ -144,6 +144,36 @@ const res19 = pipe(
   async (_: { code: Code }): Promise<Code> => Code.None,
 );
 
+interface Data {
+  a?: {
+    value: string;
+    order: string;
+  };
+  b?: {
+    value: string;
+    order: string;
+  };
+}
+
+const data: Data = {
+  a: {
+    value: "a",
+    order: "1",
+  },
+  b: {
+    value: "b",
+    order: "2",
+  },
+};
+
+const res20 = pipe(
+  data,
+  entries,
+  filter(([, value]) => value != null),
+  map(([key]) => key),
+  toArray,
+);
+
 checks([
   check<typeof res1, string, Test.Pass>(),
   check<typeof res2, number, Test.Pass>(),
@@ -164,4 +194,5 @@ checks([
   check<typeof res17, Promise<never>, Test.Pass>(),
   check<typeof res18, Code, Test.Pass>(),
   check<typeof res19, Promise<Code>, Test.Pass>(),
+  check<typeof res20, ("a" | "b")[], Test.Pass>(),
 ]);

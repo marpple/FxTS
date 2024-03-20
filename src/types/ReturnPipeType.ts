@@ -13,7 +13,7 @@ type HasPromise<T extends any[]> = Head<T> extends never
 
 type PossiblyHasPromise<T extends any[]> = Head<T> extends never
   ? false
-  : Equals<Head<T>, Head<T> | Promise<Awaited<Head<T>>>> extends 1
+  : Equals<Head<T> | Promise<Awaited<Head<T>>>, Head<T>> extends 1
   ? true
   : T["length"] extends 0
   ? false
