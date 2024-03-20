@@ -79,7 +79,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Marpple, Inc.`,
+        copyright: `<div>Copyright © ${new Date().getFullYear()} <a href="https://www.marpplecorp.com/">Marpple, Inc.</a></div>`,
       },
       prism: {
         theme: lightCodeTheme,
