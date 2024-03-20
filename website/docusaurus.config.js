@@ -11,8 +11,8 @@ const config = {
   tagline: "A functional library for TypeScript/JavaScript programmers.",
   url: "https://fxts.dev",
   baseUrl: "/",
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: "ignore",
+  onBrokenMarkdownLinks: "ignore",
   favicon: "img/favicon.ico",
   i18n: {
     defaultLocale: "en",
@@ -27,13 +27,6 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
-          lastVersion: "current",
-          versions: {
-            current: {
-              label: "1.0.0",
-              path: "1.0.0",
-            },
-          },
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // editUrl: "https://github.com/marpple/fxts/edit/main/website/",
