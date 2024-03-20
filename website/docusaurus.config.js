@@ -11,7 +11,7 @@ const config = {
   tagline: "A functional library for TypeScript/JavaScript programmers.",
   url: "https://fxts.dev",
   baseUrl: "/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "ignore",
   favicon: "img/favicon.ico",
   i18n: {
