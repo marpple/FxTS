@@ -1,8 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const { themes } = require("prism-react-renderer");
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -13,6 +14,10 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en"],
+  },
   organizationName: "marpple", // Usually your GitHub org/user name.
   projectName: "FxTS", // Usually your repo name.
   themes: ["@docusaurus/theme-live-codeblock"],
@@ -20,8 +25,15 @@ const config = {
     [
       "@docusaurus/preset-classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
+          lastVersion: "current",
+          versions: {
+            current: {
+              label: "1.0.0",
+              path: "1.0.0",
+            },
+          },
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // editUrl: "https://github.com/marpple/fxts/edit/main/website/",
@@ -35,7 +47,11 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-      }),
+        gtag: {
+          trackingID: "G-BTGRJYWTNK",
+          anonymizeIP: true,
+        },
+      },
     ],
   ],
   themeConfig:
@@ -85,10 +101,6 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-      gtag: {
-        trackingID: "G-BTGRJYWTNK",
-        anonymizeIP: true,
-      },
       algolia: {
         // The application ID provided by Algolia
         appId: "0G39LGZ9QE",
@@ -97,20 +109,6 @@ const config = {
         apiKey: "6234b2f489b3f43928034ab6c128f06c",
 
         indexName: "fxts",
-
-        // Optional: see doc section below
-        // contextualSearch: true,
-
-        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-        // externalUrlRegex: "external\\.com|domain\\.com",
-
-        // Optional: Algolia search parameters
-        // searchParameters: {},
-
-        // Optional: path for search page that enabled by default (`false` to disable it)
-        // searchPagePath: "search",
-
-        //... other Algolia params
       },
     }),
   clientModules: [require.resolve("./analytics.js")],

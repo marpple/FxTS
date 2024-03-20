@@ -24,7 +24,7 @@ export const FuncParameters = {
 };
 
 export const FuncReturn = {
-  text: "<b>Returns:</b>",
+  text: "**Returns:**",
   skip: 2,
 };
 
