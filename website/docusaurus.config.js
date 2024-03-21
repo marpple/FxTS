@@ -58,7 +58,7 @@ const config = {
         },
         items: [
           { to: "/docs/getting-started", label: "Docs", position: "left" },
-          { to: "/docs/index", label: "API", position: "left" },
+          { to: "/docs", label: "API", position: "left" },
           {
             href: "https://github.com/marpple/fxts",
             label: "GitHub",
@@ -74,7 +74,7 @@ const config = {
             items: [
               {
                 label: "API",
-                to: "/docs/index",
+                to: "/docs",
               },
             ],
           },
