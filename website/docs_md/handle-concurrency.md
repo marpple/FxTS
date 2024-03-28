@@ -41,8 +41,6 @@ A more practical code is below.
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
-### Note
-
 If the position of `concurrent` in the code above is as follows, would the result be different?
 No, It would be same! Note that `concurrent` always applies to `Iterable` before the length is changed.
 

@@ -19,9 +19,7 @@ fx("abc")
   .toArray(); // ["a", "b"]
 ```
 
-### Note
-
-Since `fx` defaults to lazy evaluation, it is not actually evaluated until strict evaluation methods such as `toArray`, `groupBy`, `indexBy`, and `some` are executed.
+**Note: Since `fx` defaults to lazy evaluation, it is not actually evaluated until strict evaluation methods such as `toArray`, `groupBy`, `indexBy`, and `some` are executed.**
 
 For details on lazy evaluation, please refer to https://fxts.dev/docs/lazy-evaluation.
 
