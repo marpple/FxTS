@@ -545,7 +545,7 @@ export class FxIterable<A> {
  *   .map((a) => a + 10)
  *   .toArray(); // [11, 12, 13, 14]
  *
- * const asyncArr2 = await fx(toAsync([1, 2, 3, 4]));
+ * const asyncArr2 = await fx(toAsync([1, 2, 3, 4]))
  *   .map((a) => a + 10)
  *   .toArray(); // [11, 12, 13, 14]
  * ```
