@@ -11,6 +11,7 @@ import join from "../join";
 import reduce from "../reduce";
 import some from "../some";
 import type Cast from "../types/Cast";
+import type { DeepFlat } from "../types/DeepFlat";
 import type IterableInfer from "../types/IterableInfer";
 import type Key from "../types/Key";
 import type { SyncReducer } from "../types/Reducer";
@@ -71,8 +72,10 @@ class FxAsyncIterable<A> {
    *
    * see {@link https://fxts.dev/docs/flat | flat}
    */
-  flat(depth?: number) {
-    return new FxAsyncIterable(flat(this.asyncIterable, depth));
+  flat<T extends number = 1>(depth?: T) {
+    return new FxAsyncIterable(
+      flat(this.asyncIterable, depth),
+    ) as FxAsyncIterable<DeepFlat<A, T>>;
   }
 
   /**
@@ -326,8 +329,10 @@ export class FxIterable<A> {
    *
    * see {@link https://fxts.dev/docs/flat | flat}
    */
-  flat(depth?: number) {
-    return new FxIterable(flat(this.iterable, depth));
+  flat<T extends number = 1>(depth?: T) {
+    const res = flat(this.iterable, depth);
+
+    return new FxIterable(res) as FxIterable<DeepFlat<A, T>>;
   }
 
   /**
