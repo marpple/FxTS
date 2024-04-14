@@ -203,7 +203,7 @@ function async<A>(
 
 /**
  * Returns flattened Iterable/AsyncIterable.
- * If first argument is number, more perform flatten `flat(2, [[[1,2]]]) // [1,2]`
+ * If first argument is number, more perform flatten `flat([[[1,2]]], 2) // [1,2]`
  *
  * @example
  * ```ts

@@ -60,7 +60,14 @@ class FxAsyncIterable<A> {
 
   /**
    * Returns flattened AsyncIterable.
-   * If first argument is number, more perform flatten `flat(2, [[[1,2]]]) // [1,2]`
+   * If first argument is number, more perform flatten
+   *
+   * @example
+   * ```
+   * await fx([[1],[[2]]])
+   *   .toAsync()
+   *   .flat(2).toArray(); // [1,2]
+   * ```
    *
    * see {@link https://fxts.dev/docs/flat | flat}
    */
@@ -312,7 +319,10 @@ export class FxIterable<A> {
 
   /**
    * Returns flattened Iterable.
-   * If first argument is number, more perform flatten `flat(2, [[[1,2]]]) // [1,2]`
+   * If first argument is number, more perform flatten
+   *
+   * @example
+   * `fx([[1],[[2]]]).flat(2).toArray(); // [1,2]`
    *
    * see {@link https://fxts.dev/docs/flat | flat}
    */
