@@ -42,6 +42,7 @@ const rsSymbol = `(?:${[
 ].join("|")})`;
 
 /** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
+// eslint-disable-next-line no-misleading-character-class
 const reUnicode = RegExp(`${rsFitz}(?=${rsFitz})|${rsSymbol + rsSeq}`, "g");
 
 /**

@@ -138,9 +138,11 @@ const Code = {
 } as const;
 
 type Code = (typeof Code)[keyof typeof Code];
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const res18 = pipe({ code: Code.None }, (_: { code: Code }): Code => Code.None);
 const res19 = pipe(
   { code: Code.None },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (_: { code: Code }): Promise<Code> => Code.None,
 );
 
