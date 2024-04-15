@@ -20,7 +20,7 @@ npm install @fxts/core
 
 ## Documentation
 
-Please review the [API documentation](https://fxts.dev/docs/index)
+Please review the [API documentation](https://fxts.dev/docs/)
 
 ## Usage
 
