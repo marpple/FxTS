@@ -13,7 +13,7 @@
  * ```
  *
  * @param predicate determines whether to execute `process`
- * @return original input or result of `process`
+ * @returns original input or result of `process`
  */
 function unless<T, N extends T, U>(
   predicate: (input: T) => input is N,
