@@ -77,7 +77,7 @@ pipe(
 Combinations of `Lazy` functions don't evaluate actual values like [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator).
 It can be evaluated with a [for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) or
 [await for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of),
-`Strict` functions. `Strict` functions can be found [here](https://fxts.dev/docs/index#strict)
+`Strict` functions. `Strict` functions can be found [here](https://fxts.dev/docs#strict)
 
 ```typescript
 const squareNums = pipe(
@@ -93,7 +93,7 @@ const result = pipe(
 );
 ```
 
-Lazy functions can be found [here](https://fxts.dev/docs/index#lazy)
+Lazy functions can be found [here](https://fxts.dev/docs#lazy)
 
 ### Useful Example
 
