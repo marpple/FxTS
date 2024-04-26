@@ -70,10 +70,10 @@ function async<A, B>(
  *
  * @example
  * ```ts
- * const iter = dropUntil((a) => a < 3, [1, 2, 3, 4, 5, 1, 2]);
- * iter.next(); // {done:false, value: 3}
- * iter.next(); // {done:false, value: 4}
+ * const iter = dropUntil((a) => a > 3, [1, 2, 3, 4, 5, 1, 2]);
  * iter.next(); // {done:false, value: 5}
+ * iter.next(); // {done:false, value: 1}
+ * iter.next(); // {done:false, value: 2}
  *
  * // with pipe
  * pipe(
