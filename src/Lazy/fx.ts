@@ -36,8 +36,8 @@ class FxAsyncIterable<A> {
     this.asyncIterable = asyncIterable;
   }
 
-  private [Symbol.asyncIterator]() {
-    return this.asyncIterable;
+  [Symbol.asyncIterator]() {
+    return this.asyncIterable[Symbol.asyncIterator]();
   }
 
   /**
@@ -297,8 +297,8 @@ export class FxIterable<A> {
     this.iterable = iterable;
   }
 
-  private [Symbol.iterator]() {
-    return this.iterable;
+  [Symbol.iterator]() {
+    return this.iterable[Symbol.iterator]();
   }
 
   /**
