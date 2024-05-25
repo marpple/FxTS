@@ -14,9 +14,9 @@ fx([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
   .reduce(sum); // 4
 
 fx("abc")
-  .map((a) => a.toUpperCase()) // ["a", "b"]
+  .map((a) => a.toUpperCase()) // ["A", "B"]
   .take(2)
-  .toArray(); // ["a", "b"]
+  .toArray(); // ["A", "B"]
 ```
 
 **Note: Since `fx` defaults to lazy evaluation, it is not actually evaluated until strict evaluation methods such as `toArray`, `groupBy`, `indexBy`, and `some` are executed.**
