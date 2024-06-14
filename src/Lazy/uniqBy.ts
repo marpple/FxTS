@@ -8,6 +8,7 @@ import filter from "./filter";
 /**
  * Unlike {@link https://fxts.dev/docs/uniq | uniq} returns Iterable/AsyncIterable
  * with duplicate values removed by applying with `f` inside the given Iterable/AsyncIterable.
+ * The order of result values is determined by the order they occur in the array.
  *
  * @example
  * ```ts
