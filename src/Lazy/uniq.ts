@@ -5,7 +5,7 @@ import uniqueBy from "./uniqBy";
 
 /**
  * Returns Iterable/AsyncIterable with duplicate values removed inside the given Iterable/AsyncIterable.
- * Only primitive values can be compared.
+ * Only primitive values can be compared. The order of result values is determined by the order they occur in the array.
  *
  * @example
  * ```ts
