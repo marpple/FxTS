@@ -76,6 +76,7 @@ export {
   curry,
   delay,
   each,
+  each as forEach,
   every,
   evolve,
   find,

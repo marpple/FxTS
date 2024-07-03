@@ -21,7 +21,7 @@ async function async<A, B = unknown>(
 }
 
 /**
- * Iterates over Iterable/AsyncIterable, applying each in turn to `f`.
+ * Iterates over Iterable/AsyncIterable, applying each in turn to `f`. (forEach)
  *
  * @example
  * ```ts
