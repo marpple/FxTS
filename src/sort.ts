@@ -11,7 +11,7 @@ import type ReturnValueType from "./types/ReturnValueType";
  * @example
  * ```ts
  * sort((a, b) => a > b, [3, 4, 1, 2, 5, 2]); // [1, 2, 2, 3, 4, 5]
- * sort((a, b) => a > b, 'bcdaef); // ["a", "b", "c", "d", "e", "f"]
+ * sort((a, b) => a.localeCompare(b), "bcdaef"); // ["a", "b", "c", "d", "e", "f"]
  * ```
  */
 // prettier-ignore
