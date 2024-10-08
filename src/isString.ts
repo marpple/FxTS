@@ -1,5 +1,3 @@
-import type Include from "./types/Include";
-
 /**
  * Returns true if `s` is a String.
  *
@@ -9,6 +7,7 @@ import type Include from "./types/Include";
  * isString(2); // false
  * ```
  */
-const isString = <T>(s: T): s is Include<T, string> => typeof s === "string";
+const isString = <T>(input: T): input is T & string =>
+  typeof input === "string";
 
 export default isString;

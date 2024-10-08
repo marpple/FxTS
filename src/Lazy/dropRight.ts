@@ -9,7 +9,7 @@ function* sync<T>(length: number, iterable: Iterable<T>) {
   const arr =
     isArray(iterable) || isString(iterable) ? iterable : toArray(iterable);
   for (let i = 0; i < arr.length - length; i++) {
-    yield arr[i];
+    yield arr[i] as T;
   }
 }
 

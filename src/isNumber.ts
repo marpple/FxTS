@@ -1,5 +1,3 @@
-import type Include from "./types/Include";
-
 /**
  * Returns true if `n` is a Number.
  *
@@ -9,6 +7,7 @@ import type Include from "./types/Include";
  * isNumber("a"); // false
  * ```
  */
-const isNumber = <T>(n: T): n is Include<T, number> => typeof n === "number";
+const isNumber = <T>(input: T): input is T & number =>
+  typeof input === "number";
 
 export default isNumber;
