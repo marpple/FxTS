@@ -1,4 +1,4 @@
-import type Include from "./types/Include";
+import isNull from "./isNull";
 
 /**
  * Checks if value is the type of object.
@@ -12,9 +12,9 @@ import type Include from "./types/Include";
  * isObject(123); // false
  * ```
  */
-const isObject = <T>(a: T): a is Include<T, object> => {
-  const type = typeof a;
-  return a != null && (type === "object" || type === "function");
+const isObject = (input: unknown): input is object => {
+  const type = typeof input;
+  return !isNull(input) && (type === "object" || type === "function");
 };
 
 export default isObject;

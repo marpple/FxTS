@@ -1,6 +1,5 @@
 import isNull from "./isNull";
 import isUndefined from "./isUndefined";
-import type Include from "./types/Include";
 
 /**
  * Checks if the given value is `null` or `undefined`.
@@ -13,7 +12,6 @@ import type Include from "./types/Include";
  * isNil(null); // true
  * ```
  */
-const isNil = <T>(a: T): a is Include<T, null | undefined> =>
-  isUndefined(a) || isNull(a);
-
+const isNil = (input: unknown): input is null | undefined =>
+  isUndefined(input) || isNull(input);
 export default isNil;

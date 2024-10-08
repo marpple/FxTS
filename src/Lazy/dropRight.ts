@@ -8,9 +8,7 @@ import concurrent, { isConcurrent } from "./concurrent";
 function* sync<T>(length: number, iterable: Iterable<T>) {
   const arr =
     isArray(iterable) || isString(iterable) ? iterable : toArray(iterable);
-  for (let i = 0; i < arr.length - length; i++) {
-    yield arr[i];
-  }
+  for (let i = 0; i < arr.length - length; i++) yield arr[i] as T;
 }
 
 async function* asyncSequential<T>(length: number, iterable: AsyncIterable<T>) {
