@@ -1,3 +1,4 @@
+import { throwIfPromiseError } from "../_internal/error";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import pipe from "../pipe";
 import pipe1 from "../pipe1";
@@ -13,7 +14,7 @@ function* sync<T>(
   iterable1: Iterable<T>,
   iterable2: Iterable<T>,
 ) {
-  const set = new Set(map(f, iterable1));
+  const set = new Set(map((a) => throwIfPromiseError(f(a)), iterable1));
 
   yield* pipe(
     iterable2,

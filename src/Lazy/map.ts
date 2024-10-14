@@ -20,14 +20,9 @@ function sync<A, B>(
         };
       }
 
-      const res = f(value);
-      if (isPromise(res)) {
-        throw new AsyncFunctionException();
-      }
-
       return {
         done: false,
-        value: res,
+        value: f(value),
       };
     },
     [Symbol.iterator]() {

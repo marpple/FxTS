@@ -30,6 +30,12 @@ const res10 = pipe(
   map(async (a) => a),
 );
 
+const res11 = map(async (a) => a, [1, 2, 3, 4]);
+const res12 = pipe(
+  [1, 2, 3, 4],
+  map(async (a) => a),
+);
+
 checks([
   check<typeof res1, IterableIterator<number>, Test.Pass>(),
   check<typeof res2, IterableIterator<string>, Test.Pass>(),
@@ -42,4 +48,7 @@ checks([
   check<typeof res8, IterableIterator<Promise<number>>, Test.Pass>(),
   check<typeof res9, AsyncIterableIterator<number>, Test.Pass>(),
   check<typeof res10, AsyncIterableIterator<number>, Test.Pass>(),
+
+  check<typeof res11, IterableIterator<Promise<number>>, Test.Pass>(),
+  check<typeof res12, IterableIterator<Promise<number>>, Test.Pass>(),
 ]);
