@@ -269,10 +269,21 @@ class FxAsyncIterable<A> {
 
   /**
    * Iterates over AsyncIterable, applying each in turn to `f`.
+   * It works the same way as `forEach`.
    *
    * see {@link https://fxts.dev/docs/each | each}
    */
   async each(f: (a: A) => unknown): Promise<void> {
+    return each(f, this.asyncIterable);
+  }
+
+  /**
+   * Iterates over AsyncIterable, applying each in turn to `f`.
+   * It works the same way as `each`.
+   *
+   * see {@link https://fxts.dev/docs/each | each}
+   */
+  async forEach(f: (a: A) => unknown): Promise<void> {
     return each(f, this.asyncIterable);
   }
 
@@ -516,10 +527,21 @@ export class FxIterable<A> {
 
   /**
    * Iterates over Iterable, applying each in turn to `f`.
+   * It works the same way as `forEach`.
    *
    * see {@link https://fxts.dev/docs/each | each}
    */
   each(f: (a: A) => unknown): void {
+    return each(f, this.iterable);
+  }
+
+  /**
+   * Iterates over Iterable, applying each in turn to `f`.
+   * It works the same way as `each`.
+   *
+   * see {@link https://fxts.dev/docs/each | each}
+   */
+  forEach(f: (a: A) => unknown): void {
     return each(f, this.iterable);
   }
 
