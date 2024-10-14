@@ -1,4 +1,4 @@
-import { fx, size, toArray, toAsync, uniq } from "../../src";
+import { delay, fx, size, toArray, toAsync, uniq } from "../../src";
 
 describe("fx", function () {
   describe("sync", function () {
@@ -58,5 +58,33 @@ describe("fx", function () {
 
       expect(arrSize).toEqual(3);
     });
+
+    it("handle Promise object", async function () {
+      const res = await fx(Promise.resolve([1, 2, 3, 4])).toArray();
+      expect(res).toEqual([1, 2, 3, 4]);
+    });
+
+    it("handle Promise.all object", async function () {
+      const res1 = fx(
+        Promise.all([
+          Promise.resolve(1),
+          Promise.resolve(2),
+          Promise.resolve(3),
+          Promise.resolve(4),
+        ]),
+      );
+      expect(await res1.toArray()).toEqual([1, 2, 3, 4]);
+
+      const res2 = await fx(
+        Promise.all([
+          delay(1000, 1),
+          Promise.resolve(2),
+          delay(1000, 3),
+          Promise.resolve(4),
+        ]),
+      ).toArray();
+
+      expect(res2).toEqual([1, 2, 3, 4]);
+    }, 1050);
   });
 });

@@ -24,6 +24,9 @@ const res7 = fx(toAsync([1, 2, 3]))
 const res8 = [...fx([1, 2, 3])];
 const res9 = [...fx("abc")];
 
+const res10 = fx(Promise.resolve([1]));
+const res11 = fx(Promise.all([Promise.resolve(1)]));
+
 checks([
   check<typeof res1, Cast<Iterable<number>, typeof res1>, Test.Pass>(),
   check<typeof res2, number[], Test.Pass>(),
@@ -34,4 +37,6 @@ checks([
   check<typeof res7, Promise<number[]>, Test.Pass>(),
   check<typeof res8, number[], Test.Pass>(),
   check<typeof res9, string[], Test.Pass>(),
+  check<typeof res10, Cast<AsyncIterable<number>, typeof res10>, Test.Pass>(),
+  check<typeof res11, Cast<AsyncIterable<number>, typeof res11>, Test.Pass>(),
 ]);

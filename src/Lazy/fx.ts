@@ -1,4 +1,4 @@
-import { isAsyncIterable, isIterable } from "../_internal/utils";
+import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
 import consume from "../consume";
 import each from "../each";
 import every from "../every";
@@ -593,6 +593,8 @@ export class FxIterable<A> {
   }
 }
 
+type NonPromise<T> = T extends Promise<unknown> ? never : T;
+
 /**
  * `fx` allows functions provided by existing `fxts` to be used in a method chaining.
  *  Not all functions are provided as methods and can be connected through `chain` if necessary.
@@ -621,18 +623,64 @@ export class FxIterable<A> {
  *   .toArray(); // [11, 12, 13, 14]
  * ```
  */
-function fx<T extends Iterable<unknown> | AsyncIterable<unknown>>(
+function fx<
+  T extends
+    | Promise<Iterable<unknown>>
+    | Iterable<unknown>
+    | AsyncIterable<unknown>,
+>(
   a: T,
 ): T extends Iterable<unknown>
   ? FxIterable<IterableInfer<T>>
-  : FxAsyncIterable<IterableInfer<T>> {
+  : T extends Promise<Iterable<infer U>>
+  ? FxAsyncIterable<U>
+  : FxAsyncIterable<IterableInfer<NonPromise<T>>> {
   if (isAsyncIterable(a)) {
     return new FxAsyncIterable(a) as any;
   } else if (isIterable(a)) {
     return new FxIterable(a) as any;
-  }
+  } else if (isPromise(a)) {
+    let started = false;
+    let itered = false;
+    let iter: any;
 
-  throw new TypeError(`'fx' must be type of Iterable or AsyncIterable`);
+    const next = async (): Promise<{
+      done: boolean;
+      value: any;
+    }> => {
+      if (!started) {
+        iter = await a;
+        started = true;
+      }
+
+      if (itered) {
+        return iter.next();
+      }
+
+      if (isIterable(iter)) {
+        iter = iter[Symbol.iterator]();
+        itered = true;
+        return next();
+      } else {
+        return { done: true, value: iter };
+      }
+    };
+
+    const asyncIter = {
+      [Symbol.asyncIterator]() {
+        return this;
+      },
+      async next() {
+        return next();
+      },
+    };
+
+    return new FxAsyncIterable(asyncIter) as any;
+  } else {
+    throw new TypeError(
+      `'fx' must be type of Iterable or AsyncIterable or Promise`,
+    );
+  }
 }
 
 export default fx;
