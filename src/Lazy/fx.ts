@@ -41,6 +41,22 @@ class FxAsyncIterable<A> {
   }
 
   /**
+   * It takes a user-defined function that transforms the current object and returns the result of that transformation.
+   *
+   * @example
+   * ```ts
+   * const arrSize = await fx([5, 2, 3, 1, 4, 5, 3])
+   *   .toAsync()
+   *   .filter((n) => n % 2 === 1)
+   *   .map((n) => n * 10)
+   *   .to((iterable) => size(uniq(iterable)));
+   * ```
+   */
+  to<R>(converter: (asyncIterable: this) => R): R {
+    return converter(this);
+  }
+
+  /**
    * Returns AsyncIterable of values by running each applying `f`.
    *
    * see {@link https://fxts.dev/docs/map | map}
@@ -299,6 +315,24 @@ export class FxIterable<A> {
 
   [Symbol.iterator]() {
     return this.iterable[Symbol.iterator]();
+  }
+
+  /**
+   * It takes a user-defined function that transforms the current object and returns the result of that transformation.
+   *
+   *
+   * @example
+   * ```ts
+   * const size = fx([5, 2, 3, 1, 4, 5, 3])
+   *  .filter(n => n % 2 === 1)
+   *  .map(n => n * 10)
+   *  .to(iterable => new Set(iterable)) // convert set
+   *  .add(10)
+   *  .size;
+   * ```
+   */
+  to<R>(converter: (iterable: this) => R): R {
+    return converter(this);
   }
 
   /**
