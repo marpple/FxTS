@@ -1,3 +1,4 @@
+import { throwIfPromiseError } from "./_internal/error";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import identity from "./identity";
 import map from "./Lazy/map";
@@ -76,7 +77,7 @@ function some<
 
   if (isIterable<IterableInfer<A>>(iterable)) {
     return pipe(
-      map(f, iterable),
+      map((a) => throwIfPromiseError(f(a)), iterable),
       takeUntil(identity),
       (acc) =>
         reduce(
