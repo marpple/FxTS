@@ -3,6 +3,7 @@ import {
   concurrent,
   delay,
   filter,
+  fx,
   map,
   pipe,
   range,
@@ -46,6 +47,25 @@ describe("chunk", function () {
       const res = pipe(range(1, 12), chunk(3), toArray);
       expect(res).toEqual(expected);
     });
+
+    it.each([
+      [
+        [1, 2, 3, 4],
+        [
+          [1, 2],
+          [3, 4],
+        ],
+      ],
+      [
+        [1, 2, 3, 4, 5],
+        [[1, 2], [3, 4], [5]],
+      ],
+    ])(
+      "should be able to be used as a chaining method in the `fx`",
+      function (data: number[], result: number[][]) {
+        expect(fx(data).chunk(2).toArray()).toEqual(result);
+      },
+    );
   });
 
   describe("async", function () {
@@ -131,6 +151,25 @@ describe("chunk", function () {
       const res = await pipe(range(1, 12), toAsync, chunk(3), toArray);
       expect(res).toEqual(expected);
     });
+
+    it.each([
+      [
+        [1, 2, 3, 4],
+        [
+          [1, 2],
+          [3, 4],
+        ],
+      ],
+      [
+        [1, 2, 3, 4, 5],
+        [[1, 2], [3, 4], [5]],
+      ],
+    ])(
+      "should be able to be used as a chaining method in the `fx`",
+      async function (data: number[], result: number[][]) {
+        expect(await fx(data).toAsync().chunk(2).toArray()).toEqual(result);
+      },
+    );
 
     it("should be passed concurrent object when job works concurrently", async function () {
       const mock = generatorMock();
