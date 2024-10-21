@@ -15,6 +15,7 @@ import type { DeepFlat } from "../types/DeepFlat";
 import type IterableInfer from "../types/IterableInfer";
 import type Key from "../types/Key";
 import type { SyncReducer } from "../types/Reducer";
+import chunk from "./chunk";
 import concurrent from "./concurrent";
 import drop from "./drop";
 import filter from "./filter";
@@ -187,6 +188,16 @@ class FxAsyncIterable<A> {
     f: (asyncIterable: AsyncIterable<A>) => AsyncIterable<Awaited<B>>,
   ): FxAsyncIterable<B> {
     return new FxAsyncIterable(f(this.asyncIterable));
+  }
+
+  /**
+   * Returns AsyncIterable of elements split into groups the length of size.
+   * If AsyncIterableIterator can't be split evenly, the final chunk will be the remaining elements.
+   *
+   * see {@link https://fxts.dev/docs/chunk | chunk}
+   */
+  chunk(size: number) {
+    return new FxAsyncIterable(chunk(size, this.asyncIterable));
   }
 
   /**
@@ -471,6 +482,16 @@ export class FxIterable<A> {
    */
   chain<B>(f: (iterable: Iterable<A>) => Iterable<B>): FxIterable<B> {
     return new FxIterable(f(this.iterable));
+  }
+
+  /**
+   * Returns Iterable of elements split into groups the length of size.
+   * If iterableIterator can't be split evenly, the final chunk will be the remaining elements.
+   *
+   * see {@link https://fxts.dev/docs/chunk | chunk}
+   */
+  chunk(size: number) {
+    return new FxIterable(chunk(size, this.iterable));
   }
 
   /**
