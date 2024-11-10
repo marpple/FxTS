@@ -57,8 +57,20 @@ const config = {
           src: "img/fxts.png",
         },
         items: [
-          { to: "/docs/getting-started", label: "Docs", position: "left",type:'doc', docId:'getting-started' },
-          { to: "/docs", label: "API", position: "left", type:'doc', docId: 'index' },
+          {
+            to: "/docs/getting-started",
+            label: "Docs",
+            position: "left",
+            type: "doc",
+            docId: "getting-started",
+          },
+          {
+            to: "/docs",
+            label: "API",
+            position: "left",
+            type: "doc",
+            docId: "index",
+          },
           {
             href: "https://github.com/marpple/fxts",
             label: "GitHub",
