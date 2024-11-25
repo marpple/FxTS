@@ -1,5 +1,4 @@
-import { AsyncFunctionException } from "../_internal/error";
-import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
+import { isAsyncIterable, isIterable } from "../_internal/utils";
 import type Awaited from "../types/Awaited";
 import type IterableInfer from "../types/IterableInfer";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
@@ -54,6 +53,8 @@ function async<A, B>(
 
 /**
  * Returns Iterable/AsyncIterable of values by running each applying `f`.
+ *
+ * If the `map` causes side effects, it is recommended to use `mapEffect` instead.
  *
  * @example
  * ```ts
