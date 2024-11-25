@@ -3,7 +3,9 @@ import some from "./some";
 import type ReturnValueType from "./types/ReturnValueType";
 
 /**
- * Checks if the specified value is equal. (contains)
+ * Checks if the specified value is equal.
+ *
+ * There is another alias function called `contains`.
  *
  * @example
  * ```ts
