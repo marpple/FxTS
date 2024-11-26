@@ -66,6 +66,7 @@ export {
   intersectionBy,
   keys,
   map,
+  map as mapEffect,
   peek,
   pipeLazy,
   pluck,

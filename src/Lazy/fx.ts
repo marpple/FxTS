@@ -67,6 +67,15 @@ class FxAsyncIterable<A> {
   }
 
   /**
+   * A function that is identical to `map`, but is intended to create side effects as part of its convention.
+   *
+   * see {@link https://fxts.dev/docs/map | map}
+   */
+  mapEffect<B>(f: (a: A) => B) {
+    return new FxAsyncIterable(map(f, this.asyncIterable));
+  }
+
+  /**
    * Returns flattened AsyncIterable of values by running each element
    * flattening the mapped results.
    *
@@ -363,6 +372,15 @@ export class FxIterable<A> {
    * see {@link https://fxts.dev/docs/map | map}
    */
   map<B>(f: (a: A) => B): FxIterable<B> {
+    return new FxIterable(map(f, this.iterable));
+  }
+
+  /**
+   * A function that is identical to `map`, but is intended to create side effects as part of its convention.
+   *
+   * see {@link https://fxts.dev/docs/map | map}
+   */
+  mapEffect<B>(f: (a: A) => B): FxIterable<B> {
     return new FxIterable(map(f, this.iterable));
   }
 
