@@ -10,6 +10,14 @@ import styles from "./index.module.css";
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
 
+  React.useEffect(() => {
+    console.log(
+      "%cHello FxTS!\n%cExperience the FxTS functions through `window._` in this console.",
+      "color: #8f52fa; font-weight: bold; font-size: 36px;",
+      "color: gray; font-size: 16px;",
+    );
+  }, []);
+
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
       <div className="container">
