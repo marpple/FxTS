@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
 import { glob } from "glob";
 
-import { drop, map, not, pipe, reduce } from "../src/index";
+import { drop, filter, identity, map, not, pipe, reduce } from "../src/index";
 
 const SOURCE_DIR = "./src";
 const OUTPUT_DIR = "./dist";
@@ -54,6 +54,7 @@ async function generateExports() {
 
   const subPathExports = pipe(
     fileNames,
+    filter(identity),
     map((name) => {
       const conditionalSubPaths = {
         types: `${TYPES_ROOT_DIR}/${name}.d.ts`,

@@ -1,3 +1,4 @@
+import { throwIfPromiseError } from "../_internal/error";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import map from "./map";
 import zip from "./zip";
@@ -44,7 +45,10 @@ function zipWith<A, B, C>(
   iterable2: Iterable<B> | AsyncIterable<B>,
 ): IterableIterator<C> | AsyncIterableIterator<C> {
   if (isIterable(iterable1) && isIterable(iterable2)) {
-    return map(([a, b]) => f(a, b), zip(iterable1, iterable2));
+    return map(
+      ([a, b]) => throwIfPromiseError(f(a, b)),
+      zip(iterable1, iterable2),
+    );
   }
   if (isIterable(iterable1) && isAsyncIterable(iterable2)) {
     return map(([a, b]) => f(a, b), zip(iterable1, iterable2));

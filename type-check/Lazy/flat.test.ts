@@ -1,4 +1,4 @@
-import { flat, pipe, range, toAsync } from "../../src";
+import { flat, fx, pipe, range, toArray, toAsync } from "../../src";
 import * as Test from "../../src/types/Test";
 
 const { checks, check } = Test;
@@ -29,6 +29,33 @@ const res16 = flat(
   })(),
 );
 
+const res17 = fx([1, 2]).flat().toArray();
+// prettier-ignore
+const res18 = fx([1, [2]]).flat().toArray();
+// prettier-ignore
+const res19 = fx([1, [2, [3]]]).flat().toArray();
+// prettier-ignore
+const res20 = fx([1, [2, [3]]]).flat(2).toArray();
+
+const res21 = fx(["a", "b"]).flat().toArray();
+// prettier-ignore
+const res22 = fx(['a', ['b']]).flat().toArray();
+// prettier-ignore
+const res23 = fx(['a', ['b', ['c']]]).flat().toArray();
+// prettier-ignore
+const res24 = fx(['a', ['b', ['c']]]).flat(2).toArray();
+
+// prettier-ignore
+const res25 = fx(['a', 'b']).toAsync().flat().toArray();
+// prettier-ignore
+const res26 = fx(['a', ['b']]).toAsync().flat().toArray();
+
+// prettier-ignore
+const res27 = fx(['a', ['b', ['c']]]).toAsync().flat().toArray();
+const res28 = pipe(["a", ["b", ["c"]]], toAsync, flat, toArray);
+// prettier-ignore
+const res29 = fx(['a', ['b', ['c']]]).toAsync().flat(2).toArray();
+
 checks([
   check<typeof res1, IterableIterator<never>, Test.Pass>(),
   check<typeof res2, IterableIterator<number>, Test.Pass>(),
@@ -49,4 +76,20 @@ checks([
   check<typeof res14, AsyncIterableIterator<number>, Test.Pass>(),
   check<typeof res15, AsyncIterableIterator<number | number[]>, Test.Pass>(), // prettier-ignore
   check<typeof res16, IterableIterator<number | AsyncIterableIterator<number>>, Test.Pass>(), // prettier-ignore
+
+  check<typeof res17, number[], Test.Pass>(),
+  check<typeof res18, number[], Test.Pass>(),
+  check<typeof res19, (number | number[])[], Test.Pass>(),
+  check<typeof res20, number[], Test.Pass>(),
+
+  check<typeof res21, string[], Test.Pass>(),
+  check<typeof res22, string[], Test.Pass>(),
+  check<typeof res23, (string | string[])[], Test.Pass>(),
+  check<typeof res24, string[], Test.Pass>(),
+
+  check<typeof res25, Promise<string[]>, Test.Pass>(),
+  check<typeof res26, Promise<string[]>, Test.Pass>(),
+  check<typeof res27, Promise<(string | string[])[]>, Test.Pass>(),
+  check<typeof res28, Promise<(string | string[])[]>, Test.Pass>(),
+  check<typeof res29, Promise<string[]>, Test.Pass>(),
 ]);

@@ -1,5 +1,3 @@
-import type Include from "./types/Include";
-
 /**
  * Returns true if `a` is an Array.
  *
@@ -9,7 +7,7 @@ import type Include from "./types/Include";
  * isArray(2); // false
  * ```
  */
-const isArray = <T>(a: T): a is Include<T, unknown[] | Readonly<unknown[]>> =>
-  Array.isArray(a);
+const isArray = <T>(input: T): input is T & (unknown[] | Readonly<unknown[]>) =>
+  Array.isArray(input);
 
 export default isArray;

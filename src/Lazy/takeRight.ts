@@ -11,7 +11,7 @@ function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
     isArray(iterable) || isString(iterable) ? iterable : toArray(iterable);
   const index = arr.length - length;
   for (let i = index; i < arr.length; i++) {
-    if (arr[i]) yield arr[i];
+    if (arr[i]) yield arr[i] as A;
   }
 }
 

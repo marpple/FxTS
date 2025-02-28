@@ -1,4 +1,3 @@
-import { AsyncFunctionException } from "../../src/_internal/error";
 import { fx, map, pipe, range, toArray, toAsync } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
@@ -14,11 +13,6 @@ describe("map", function () {
         acc.push(a);
       }
       expect(acc).toEqual([11, 12, 13, 14, 15]);
-    });
-
-    it("should throw an error when the callback is asynchronous", function () {
-      const res = () => [...map(add10Async, [1, 2, 3, 4, 5])];
-      expect(res).toThrowError(new AsyncFunctionException());
     });
 
     it("should be able to be used as a curried function in the pipeline", function () {
@@ -91,6 +85,18 @@ describe("map", function () {
       );
 
       expect(res).toEqual(["1", "2", "3", "4"]);
+    });
+    it("should be able to be used as a promise function", async function () {
+      const res1 = map(async (a) => a, [1, 2, 3, 4]);
+
+      expect(await Promise.all(res1)).toEqual([1, 2, 3, 4]);
+
+      const res2 = pipe(
+        [1, 2, 3, 4],
+        map(async (a) => a),
+      );
+
+      expect(await Promise.all(res2)).toEqual([1, 2, 3, 4]);
     });
 
     it("should be able to be used as a chaining method in the `fx`", async function () {

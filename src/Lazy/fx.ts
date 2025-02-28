@@ -11,9 +11,11 @@ import join from "../join";
 import reduce from "../reduce";
 import some from "../some";
 import type Cast from "../types/Cast";
+import type { DeepFlat } from "../types/DeepFlat";
 import type IterableInfer from "../types/IterableInfer";
 import type Key from "../types/Key";
 import type { SyncReducer } from "../types/Reducer";
+import chunk from "./chunk";
 import concurrent from "./concurrent";
 import drop from "./drop";
 import filter from "./filter";
@@ -35,8 +37,24 @@ class FxAsyncIterable<A> {
     this.asyncIterable = asyncIterable;
   }
 
-  private [Symbol.asyncIterator]() {
-    return this.asyncIterable;
+  [Symbol.asyncIterator]() {
+    return this.asyncIterable[Symbol.asyncIterator]();
+  }
+
+  /**
+   * It takes a user-defined function that transforms the current object and returns the result of that transformation.
+   *
+   * @example
+   * ```ts
+   * const arrSize = await fx([5, 2, 3, 1, 4, 5, 3])
+   *   .toAsync()
+   *   .filter((n) => n % 2 === 1)
+   *   .map((n) => n * 10)
+   *   .to((iterable) => size(uniq(iterable)));
+   * ```
+   */
+  to<R>(converter: (asyncIterable: this) => R): R {
+    return converter(this);
   }
 
   /**
@@ -45,6 +63,15 @@ class FxAsyncIterable<A> {
    * see {@link https://fxts.dev/docs/map | map}
    */
   map<B>(f: (a: A) => B) {
+    return new FxAsyncIterable(map(f, this.asyncIterable));
+  }
+
+  /**
+   * A function that is identical to `map`, but is intended to create side effects as part of its convention.
+   *
+   * see {@link https://fxts.dev/docs/map | map}
+   */
+  mapEffect<B>(f: (a: A) => B) {
     return new FxAsyncIterable(map(f, this.asyncIterable));
   }
 
@@ -60,12 +87,21 @@ class FxAsyncIterable<A> {
 
   /**
    * Returns flattened AsyncIterable.
-   * If first argument is number, more perform flatten `flat(2, [[[1,2]]]) // [1,2]`
+   * If first argument is number, more perform flatten
+   *
+   * @example
+   * ```
+   * await fx([[1],[[2]]])
+   *   .toAsync()
+   *   .flat(2).toArray(); // [1,2]
+   * ```
    *
    * see {@link https://fxts.dev/docs/flat | flat}
    */
-  flat(depth?: number) {
-    return new FxAsyncIterable(flat(this.asyncIterable, depth));
+  flat<T extends number = 1>(depth?: T) {
+    return new FxAsyncIterable(
+      flat(this.asyncIterable, depth),
+    ) as FxAsyncIterable<DeepFlat<A, T>>;
   }
 
   /**
@@ -164,6 +200,16 @@ class FxAsyncIterable<A> {
   }
 
   /**
+   * Returns AsyncIterable of elements split into groups the length of size.
+   * If AsyncIterableIterator can't be split evenly, the final chunk will be the remaining elements.
+   *
+   * see {@link https://fxts.dev/docs/chunk | chunk}
+   */
+  chunk(size: number) {
+    return new FxAsyncIterable(chunk(size, this.asyncIterable));
+  }
+
+  /**
    * Concurrent is used to balance the load of multiple asynchronous requests.
    * The first argument receives a number that controls the number of loads, and the second argument is an AsyncIterable.
    *
@@ -259,10 +305,21 @@ class FxAsyncIterable<A> {
 
   /**
    * Iterates over AsyncIterable, applying each in turn to `f`.
+   * It works the same way as `forEach`.
    *
    * see {@link https://fxts.dev/docs/each | each}
    */
   async each(f: (a: A) => unknown): Promise<void> {
+    return each(f, this.asyncIterable);
+  }
+
+  /**
+   * Iterates over AsyncIterable, applying each in turn to `f`.
+   * It works the same way as `each`.
+   *
+   * see {@link https://fxts.dev/docs/each | each}
+   */
+  async forEach(f: (a: A) => unknown): Promise<void> {
     return each(f, this.asyncIterable);
   }
 
@@ -287,8 +344,26 @@ export class FxIterable<A> {
     this.iterable = iterable;
   }
 
-  private [Symbol.iterator]() {
-    return this.iterable;
+  [Symbol.iterator]() {
+    return this.iterable[Symbol.iterator]();
+  }
+
+  /**
+   * It takes a user-defined function that transforms the current object and returns the result of that transformation.
+   *
+   *
+   * @example
+   * ```ts
+   * const size = fx([5, 2, 3, 1, 4, 5, 3])
+   *  .filter(n => n % 2 === 1)
+   *  .map(n => n * 10)
+   *  .to(iterable => new Set(iterable)) // convert set
+   *  .add(10)
+   *  .size;
+   * ```
+   */
+  to<R>(converter: (iterable: this) => R): R {
+    return converter(this);
   }
 
   /**
@@ -297,6 +372,15 @@ export class FxIterable<A> {
    * see {@link https://fxts.dev/docs/map | map}
    */
   map<B>(f: (a: A) => B): FxIterable<B> {
+    return new FxIterable(map(f, this.iterable));
+  }
+
+  /**
+   * A function that is identical to `map`, but is intended to create side effects as part of its convention.
+   *
+   * see {@link https://fxts.dev/docs/map | map}
+   */
+  mapEffect<B>(f: (a: A) => B): FxIterable<B> {
     return new FxIterable(map(f, this.iterable));
   }
 
@@ -312,12 +396,17 @@ export class FxIterable<A> {
 
   /**
    * Returns flattened Iterable.
-   * If first argument is number, more perform flatten `flat(2, [[[1,2]]]) // [1,2]`
+   * If first argument is number, more perform flatten
+   *
+   * @example
+   * `fx([[1],[[2]]]).flat(2).toArray(); // [1,2]`
    *
    * see {@link https://fxts.dev/docs/flat | flat}
    */
-  flat(depth?: number) {
-    return new FxIterable(flat(this.iterable, depth));
+  flat<T extends number = 1>(depth?: T) {
+    const res = flat(this.iterable, depth);
+
+    return new FxIterable(res) as FxIterable<DeepFlat<A, T>>;
   }
 
   /**
@@ -414,6 +503,16 @@ export class FxIterable<A> {
   }
 
   /**
+   * Returns Iterable of elements split into groups the length of size.
+   * If iterableIterator can't be split evenly, the final chunk will be the remaining elements.
+   *
+   * see {@link https://fxts.dev/docs/chunk | chunk}
+   */
+  chunk(size: number) {
+    return new FxIterable(chunk(size, this.iterable));
+  }
+
+  /**
    * Returns AsyncIterable, `toAsync` used when you want to handle Promise values inside Iterable.
    *
    * see {@link https://fxts.dev/docs/toAsync | toAsync}
@@ -501,10 +600,21 @@ export class FxIterable<A> {
 
   /**
    * Iterates over Iterable, applying each in turn to `f`.
+   * It works the same way as `forEach`.
    *
    * see {@link https://fxts.dev/docs/each | each}
    */
   each(f: (a: A) => unknown): void {
+    return each(f, this.iterable);
+  }
+
+  /**
+   * Iterates over Iterable, applying each in turn to `f`.
+   * It works the same way as `each`.
+   *
+   * see {@link https://fxts.dev/docs/each | each}
+   */
+  forEach(f: (a: A) => unknown): void {
     return each(f, this.iterable);
   }
 

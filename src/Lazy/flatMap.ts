@@ -1,3 +1,4 @@
+import { throwIfPromiseError } from "../_internal/error";
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import type Awaited from "../types/Awaited";
 import type { DeepFlat, DeepFlatSync } from "../types/DeepFlat";
@@ -87,12 +88,12 @@ function flatMap<
 ): ReturnFlatMapType<A, B> | ((iterable: A) => ReturnFlatMapType<A, B>) {
   if (iterable === undefined) {
     return (iterable: A) => {
-      return flat(map(f, iterable as any)) as any;
+      return flatMap(f, iterable) as any;
     };
   }
 
   if (isIterable<IterableInfer<A>>(iterable)) {
-    return flat(map(f, iterable as any)) as any;
+    return flat(map((a) => throwIfPromiseError(f(a)), iterable)) as any;
   }
 
   if (isAsyncIterable<Awaited<IterableInfer<A>>>(iterable)) {

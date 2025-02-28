@@ -11,7 +11,7 @@ const res2 = pipe(
 );
 
 const res3 = pipe(
-  0,
+  0 as const,
 
   unless(
     isNumber,
@@ -31,6 +31,6 @@ const res4 = pipe(
 checks([
   check<typeof res1, never, Test.Pass>(),
   check<typeof res2, never, Test.Pass>(),
-  check<typeof res3, number, Test.Pass>(),
-  check<typeof res4, number, Test.Pass>(),
+  check<typeof res3, 0, Test.Pass>(),
+  check<typeof res4, never, Test.Pass>(),
 ]);

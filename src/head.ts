@@ -16,6 +16,8 @@ type HeadReturnType<T> = T extends readonly [a: infer H, ...rest: any[]]
 /**
  * Returns the first element of Iterable/AsyncIterable.
  *
+ * There is another alias function called `first`.
+ *
  * @example
  * ```ts
  * head([1, 2, 3, 4, 5]); // 1
