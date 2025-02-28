@@ -68,7 +68,7 @@ function concurrentPool<A>(
       idleWorkers++;
 
       itemMap.set(id, item);
-      await chainItem(item);
+      chainItem(item);
     } catch (error) {
       idleWorkers++;
       finished = true;
@@ -79,11 +79,11 @@ function concurrentPool<A>(
       } as Item<A>;
 
       itemMap.set(id, item);
-      await chainItem(item);
+      chainItem(item);
     }
   }
 
-  async function chainItem(item: Item<A>) {
+  function chainItem(item: Item<A>) {
     prev = prev.then(() => item).then(pullItem);
     return item;
   }
