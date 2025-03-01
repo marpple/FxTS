@@ -22,6 +22,7 @@ import includes from "./includes";
 import indexBy from "./indexBy";
 import isArray from "./isArray";
 import isBoolean from "./isBoolean";
+import isDate from "./isDate";
 import isEmpty from "./isEmpty";
 import isNil from "./isNil";
 import isNull from "./isNull";
@@ -93,6 +94,7 @@ export {
   indexBy,
   isArray,
   isBoolean,
+  isDate,
   isEmpty,
   isNil,
   isNumber,
