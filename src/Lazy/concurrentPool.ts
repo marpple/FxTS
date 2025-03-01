@@ -1,5 +1,7 @@
 import { isAsyncIterable } from "../_internal/utils";
+import identity from "../identity";
 import type { Reject, Resolve } from "../types/Utils";
+import map from "./map";
 
 type Item<T> = {
   fail?: unknown;
@@ -38,6 +40,10 @@ function concurrentPool<A>(
   }
   if (!isAsyncIterable(iterable)) {
     throw new TypeError("'iterable' must be type of AsyncIterable");
+  }
+
+  if (length === 1) {
+    return map(identity, iterable);
   }
 
   /**

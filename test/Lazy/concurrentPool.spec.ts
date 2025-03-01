@@ -1,7 +1,25 @@
 import { concurrentPool, delay, pipe, toAsync } from "../../src/index";
 
 describe("concurrentPool", function () {
-  it("should be consumed 'AsyncIterable' concurrently", async function () {
+  it("should be consumed 'AsyncIterable' concurrently (concurrency 1)", async function () {
+    const res = concurrentPool(
+      1,
+      toAsync(
+        (function* () {
+          yield delay(1000, 1);
+          yield delay(1000, 2);
+          yield delay(1000, 3);
+        })(),
+      ),
+    );
+    const acc = [];
+    for await (const item of res) {
+      acc.push(item);
+    }
+    expect(acc).toEqual([1, 2, 3]);
+  }, 3050);
+
+  it("should be consumed 'AsyncIterable' concurrently (concurrency n)", async function () {
     const res = concurrentPool(
       2,
       toAsync(
