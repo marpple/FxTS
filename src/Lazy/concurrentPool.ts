@@ -46,9 +46,6 @@ function concurrentPool<A>(
     return map(identity, iterable);
   }
 
-  /**
-   * @TODO ppeeou: Considering id circulation
-   */
   let fillId = 1;
   let consumeId = 1;
   let idleWorkers = length;
@@ -67,6 +64,7 @@ function concurrentPool<A>(
 
     idleWorkers--;
     const id = fillId++;
+    fillId = fillId % Number.MAX_SAFE_INTEGER;
     try {
       const item = {
         success: await iterator.next(),
@@ -161,6 +159,7 @@ function concurrentPool<A>(
     async next() {
       return new Promise((resolve, reject) => {
         const id = consumeId++;
+        consumeId = consumeId % Number.MAX_SAFE_INTEGER;
         const task: [Resolve<A>, Reject, number] = [resolve, reject, id];
 
         consumer.push(task);
