@@ -133,18 +133,6 @@ function concurrentPool<A>(
   }
 
   async function processQueue() {
-    const id = consumer.at(0)?.[2];
-    if (id != null && itemMap.has(id)) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const [resolve, reject, id] = consumer.shift()!;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const value = itemMap.get(id)!;
-      itemMap.delete(id);
-      value.fail ? reject(value.fail) : resolve(value.success);
-
-      return;
-    }
-
     if (idleWorkers == 0) {
       return;
     }
