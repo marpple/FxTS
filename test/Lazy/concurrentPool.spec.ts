@@ -19,7 +19,7 @@ describe("concurrentPool", function () {
     expect(acc).toEqual([1, 2, 3]);
   }, 3050);
 
-  it("should be consumed 'AsyncIterable' concurrently (concurrency n)", async function () {
+  it("should be consumed 'AsyncIterable' concurrently (concurrency 2)", async function () {
     const res = concurrentPool(
       2,
       toAsync(
@@ -39,6 +39,27 @@ describe("concurrentPool", function () {
     }
     expect(acc).toEqual([1, 2, 3, 4, 5, 6]);
   }, 1950);
+
+  it("should be consumed 'AsyncIterable' concurrently (concurrency n)", async function () {
+    const res = concurrentPool(
+      3,
+      toAsync(
+        (function* () {
+          yield delay(300, 1);
+          yield delay(1000, 2);
+          yield delay(600, 3);
+          yield delay(1000, 4);
+          yield delay(600, 5);
+          yield delay(300, 6);
+        })(),
+      ),
+    );
+    const acc = [];
+    for await (const item of res) {
+      acc.push(item);
+    }
+    expect(acc).toEqual([1, 2, 3, 4, 5, 6]);
+  }, 1350);
 
   it("should be able to be used as a curried function in the pipeline", async function () {
     const iter = pipe(
