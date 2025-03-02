@@ -11,7 +11,17 @@ type Item<T> = {
 };
 
 /**
- * @experimental concurrentPool
+ * Ensures consistency in the level of concurrency based on the given number of concurrent tasks.
+ *
+ * @example
+ * ```ts
+ * await pipe(
+ *   [1, 2, 3, 4, 5, 6],
+ *   toAsync,
+ *   map((a) => delay(100 * a, a)),
+ *   concurrentPool(3),
+ *   each(console.log), // log 1, 2, 3, 4, 5, 6
+ * ); // 2 seconds
  */
 function concurrentPool<A>(
   length: number,
