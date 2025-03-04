@@ -121,6 +121,7 @@ describe("concurrent", function () {
   }, 1050);
 
   it("should be able to handle an error when working concurrent", async function () {
+    const fn = jest.fn();
     const res = concurrent(
       2,
       toAsync(
@@ -142,8 +143,10 @@ describe("concurrent", function () {
         acc.push(item);
       }
     } catch (err) {
+      fn();
       expect(err).toEqual("err");
     }
+    expect(fn).toBeCalled();
     expect(acc).toEqual([1, 2, 3]);
   }, 2050);
 });
