@@ -1,11 +1,11 @@
 import identity from "./identity";
 import isUndefined from "./isUndefined";
+import pipe from "./pipe";
+import throwIf from "./throwIf";
 
 /**
- * This function returns the second argument (a function or a value) if a given condition is met.
- * If the condition is not met, it simply returns the original input as is.
- *
- * This allows for concise conditional value transformation within a pipeline.
+ * This function executes the second argument function based on the condition of the first argument.
+ * If the executed function returns a value, that value is returned. If there is no return value, the pipeLine terminates.
  *
  * @example
  * ```ts
@@ -17,7 +17,16 @@ import isUndefined from "./isUndefined";
  *       console.log(list) // [1, 2, 3, 4]
  *     }
  *   ),
- * ) // undefined
+ * ) // throw undefined
+ *
+ * pipe(
+ *   [1, 2, 3, 4],
+ *   when(
+ *     (list) => pipe(list, sum) >= 10,
+ *     (list) => list
+ *   ),
+ *   sum
+ * ) // 10
  *
  * pipe(
  *   [1, 2, 3],
@@ -30,11 +39,11 @@ import isUndefined from "./isUndefined";
  * ) // [1, 2, 3]
  */
 
-function when<T>(
+function when<T, R = any>(
   predicate: (input: T) => boolean,
   callback: (input: T) => void,
 ): (iterator: T) => T;
-function when<T>(
+function when<T, R = any>(
   predicate: (input: T) => boolean,
   callback: (input: T) => void,
   iterator: T,
@@ -47,7 +56,12 @@ function when<T>(
 ) {
   if (isUndefined(iterator))
     return (currentIterator: T) => when(predicate, callback, currentIterator);
-  if (predicate(iterator)) throw callback(iterator);
+  if (predicate(iterator)) {
+    return pipe(
+      callback(iterator),
+      throwIf(isUndefined, () => undefined),
+    );
+  }
 
   return iterator;
 }
