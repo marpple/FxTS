@@ -47,7 +47,7 @@ function when<T>(
 ) {
   if (isUndefined(iterator))
     return (currentIterator: T) => when(predicate, callback, currentIterator);
-  if (predicate(iterator)) return callback(iterator);
+  if (predicate(iterator)) throw callback(iterator);
 
   return iterator;
 }
