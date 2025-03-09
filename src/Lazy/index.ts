@@ -4,6 +4,7 @@ import compact from "./compact";
 import compress from "./compress";
 import concat from "./concat";
 import concurrent from "./concurrent";
+import concurrentPool from "./concurrentPool";
 import cycle from "./cycle";
 import difference from "./difference";
 import differenceBy from "./differenceBy";
@@ -50,6 +51,7 @@ export {
   compress,
   concat,
   concurrent,
+  concurrentPool,
   cycle,
   difference,
   differenceBy,

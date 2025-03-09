@@ -6,6 +6,7 @@
     "compress",
     "concat",
     "concurrent",
+    "concurrentPool",
     "cycle",
     "drop",
     "dropRight",
