@@ -1,24 +1,22 @@
 import { isNumber, isString, pipe, when } from "../src";
 
 describe("when", function () {
-  const test = <T = any>(value: T) =>
+  const test = <T>(value: T) =>
     pipe(
       value,
-      when(isNumber, (value) => {
-        expect(value).toBeTruthy();
-      }),
+      when(
+        (value) => value === 100,
+        (value) => {
+          expect(value).toBeTruthy();
+        },
+      ),
       when(isString, () => "Hello fxts"),
-      (value) => value,
     );
 
   it("If the input value is a number, it will be filtered out by the first 'when' function. And throw undefined.", () => {
     const INPUT_VALUE = 100;
 
-    try {
-      test(INPUT_VALUE);
-    } catch (value) {
-      expect(value).toBeUndefined();
-    }
+    test(INPUT_VALUE);
   });
   it("If the input value is a string, it will be filtered out by the second 'when' function. And return value is 'Hello fxts'", () => {
     const INPUT_VALUE = "Hello World";
