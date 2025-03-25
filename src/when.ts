@@ -1,67 +1,55 @@
-import identity from "./identity";
 import isUndefined from "./isUndefined";
-import pipe from "./pipe";
-import throwIf from "./throwIf";
 
 /**
- * This function executes the second argument function based on the condition of the first argument.
- * If the executed function returns a value, that value is returned. If there is no return value, the pipeLine terminates.
+ * It returns the original value based on the condition of the first argument or the result of executing the function passed as the second argument.
  *
  * @example
  * ```ts
  * pipe(
- *   [1, 2, 3, 4],
+ *   100,
  *   when(
- *     (list) => pipe(list, sum) >= 10,
- *     (list) => {
- *       console.log(list) // [1, 2, 3, 4]
- *     }
- *   ),
- * ) // throw undefined
+ *     isNumber,
+ *     () => `This is number`
+ *   )
+ * ) // This is number
  *
  * pipe(
- *   [1, 2, 3, 4],
+ *   100,
  *   when(
- *     (list) => pipe(list, sum) >= 10,
- *     (list) => list
- *   ),
- *   sum
- * ) // 10
+ *     isNumber,
+ *     (value) => value * 2
+ *   )
+ * ) // 200
  *
  * pipe(
- *   [1, 2, 3],
+ *   100,
  *   when(
- *     (list) => pipe(list, sum) >= 10,
- *     (list) => {
- *       // Not work..
- *     }
+ *     isString,
+ *     () => `This is number` // not work
  *   ),
- * ) // [1, 2, 3]
+ * ) // 100
  */
 
-function when<T, R = any>(
-  predicate: (input: T) => boolean,
-  callback: (input: T) => void,
-): (iterator: T) => T;
-function when<T, R = any>(
-  predicate: (input: T) => boolean,
-  callback: (input: T) => void,
+function when<T, S extends T, R>(
+  predicate: (input: T) => input is S,
+  callback: (input: S) => R,
+): (
   iterator: T,
-): T;
+) => ReturnType<typeof predicate> extends true ? R : Exclude<T, S>;
+function when<T, S extends T, R>(
+  predicate: (input: T) => input is S,
+  callback: (input: S) => R,
+  iterator: T,
+): ReturnType<typeof predicate> extends true ? R : Exclude<T, S>;
 
-function when<T>(
-  predicate: (input: T) => boolean,
-  callback: (input: T) => void = identity,
+function when<T, S extends T, R>(
+  predicate: (input: T) => input is S,
+  callback: (input: S) => R,
   iterator?: T,
 ) {
   if (isUndefined(iterator))
     return (currentIterator: T) => when(predicate, callback, currentIterator);
-  if (predicate(iterator)) {
-    return pipe(
-      callback(iterator),
-      throwIf(isUndefined, () => undefined),
-    );
-  }
+  if (predicate(iterator)) return callback(iterator);
 
   return iterator;
 }
