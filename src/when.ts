@@ -33,18 +33,25 @@ import isUndefined from "./isUndefined";
 function when<T, S extends T, R>(
   predicate: (input: T) => input is S,
   callback: (input: S) => R,
-): (
-  iterator: T,
-) => ReturnType<typeof predicate> extends true ? R : Exclude<T, S>;
+): (iterator: T) => Exclude<T, S>;
+function when<T, R>(
+  predicate: (input: T) => boolean,
+  callback: (input: T) => R,
+): (iterator: T) => T | R;
 function when<T, S extends T, R>(
   predicate: (input: T) => input is S,
   callback: (input: S) => R,
   iterator: T,
-): ReturnType<typeof predicate> extends true ? R : Exclude<T, S>;
+): Exclude<T, S>;
+function when<T, R>(
+  predicate: (input: T) => boolean,
+  callback: (input: T) => R,
+  iterator: T,
+): T | R;
 
-function when<T, S extends T, R>(
-  predicate: (input: T) => input is S,
-  callback: (input: S) => R,
+function when<T, R>(
+  predicate: (input: T) => boolean,
+  callback: (input: T) => R,
   iterator?: T,
 ) {
   if (isUndefined(iterator))
