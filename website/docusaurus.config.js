@@ -116,7 +116,10 @@ const config = {
         indexName: "fxts",
       },
     }),
-  clientModules: [require.resolve("./analytics.js")],
+  clientModules: [
+    require.resolve("./analytics.js"),
+    require.resolve("./console.js"),
+  ],
   scripts: [
     {
       src: "https://cdn.jsdelivr.net/npm/@fxts/core/dist/fx.min.js",
