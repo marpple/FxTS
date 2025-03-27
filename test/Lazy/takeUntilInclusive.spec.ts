@@ -8,31 +8,35 @@ import {
   peek,
   pipe,
   range,
-  takeUntil,
+  takeUntilInclusive,
   toArray,
   toAsync,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
 
-describe("takeUntil", function () {
+describe("takeUntilInclusive", function () {
   describe("sync", function () {
     it("should be able to take the element until the callback result is truthy", function () {
       const res = [];
-      for (const item of takeUntil((a) => a % 2 === 0, [1, 2, 3, 4])) {
+      for (const item of takeUntilInclusive((a) => a % 2 === 0, [1, 2, 3, 4])) {
         res.push(item);
       }
       expect(res).toEqual([1, 2]);
 
-      const res1 = toArray(takeUntil((a) => a % 2 === 0, [1, 2, 3, 4]));
+      const res1 = toArray(
+        takeUntilInclusive((a) => a % 2 === 0, [1, 2, 3, 4]),
+      );
       expect(res1).toEqual([1, 2]);
 
-      const res2 = toArray(takeUntil((a) => a > 5, [1, 2, 3, 4]));
+      const res2 = toArray(takeUntilInclusive((a) => a > 5, [1, 2, 3, 4]));
       expect(res2).toEqual([1, 2, 3, 4]);
     });
 
     it("should throw an erorr when the callback is asynchronous", function () {
-      const res = () => [...takeUntil(async (a) => a % 2 === 0, [1, 2, 3, 4])];
+      const res = () => [
+        ...takeUntilInclusive(async (a) => a % 2 === 0, [1, 2, 3, 4]),
+      ];
       expect(res).toThrowError(new AsyncFunctionException());
     });
 
@@ -41,7 +45,7 @@ describe("takeUntil", function () {
         [1, 2, 3, 4],
         map((a) => a + 10),
         filter((a) => a % 2 === 0),
-        takeUntil((a) => a > 12),
+        takeUntilInclusive((a) => a > 12),
         toArray,
       );
 
@@ -52,7 +56,7 @@ describe("takeUntil", function () {
       const res = fx([1, 2, 3, 4])
         .map((a) => a + 10)
         .filter((a) => a % 2 === 0)
-        .takeUntil((a) => a > 12)
+        .takeUntilInclusive((a) => a > 12)
         .toArray();
 
       expect(res).toEqual([12, 14]);
@@ -63,17 +67,17 @@ describe("takeUntil", function () {
     it("should be able to take the element until the callback result is truthy", async function () {
       const res = [];
       // prettier-ignore
-      for await (const item of takeUntil((a) => a % 2 === 0, toAsync([1, 2, 3, 4]))) {
+      for await (const item of takeUntilInclusive((a) => a % 2 === 0, toAsync([1, 2, 3, 4]))) {
       res.push(item);
     }
       expect(res).toEqual([1, 2]);
 
       // prettier-ignore
-      const res1 = await toArray(takeUntil((a) => a % 2 === 0, toAsync([1, 2, 3, 4])));
+      const res1 = await toArray(takeUntilInclusive((a) => a % 2 === 0, toAsync([1, 2, 3, 4])));
       expect(res1).toEqual([1, 2]);
 
       const res2 = await toArray(
-        takeUntil((a) => a > 5, toAsync([1, 2, 3, 4])),
+        takeUntilInclusive((a) => a > 5, toAsync([1, 2, 3, 4])),
       );
       expect(res2).toEqual([1, 2, 3, 4]);
     });
@@ -81,17 +85,17 @@ describe("takeUntil", function () {
     it("should be able to take the element until the async callback result is truthy", async function () {
       const res = [];
       // prettier-ignore
-      for await (const item of takeUntil((a) => a % 2 === 0, toAsync([1, 2, 3, 4]))) {
+      for await (const item of takeUntilInclusive((a) => a % 2 === 0, toAsync([1, 2, 3, 4]))) {
       res.push(item);
     }
       expect(res).toEqual([1, 2]);
 
       // prettier-ignore
-      const res1 = await toArray(takeUntil(async(a) => a % 2 === 0, toAsync([1, 2, 3, 4])));
+      const res1 = await toArray(takeUntilInclusive(async(a) => a % 2 === 0, toAsync([1, 2, 3, 4])));
       expect(res1).toEqual([1, 2]);
 
       // prettier-ignore
-      const res2 = await toArray(takeUntil(async(a) => a > 5, toAsync([1, 2, 3, 4])));
+      const res2 = await toArray(takeUntilInclusive(async(a) => a > 5, toAsync([1, 2, 3, 4])));
       expect(res2).toEqual([1, 2, 3, 4]);
     });
 
@@ -100,7 +104,7 @@ describe("takeUntil", function () {
         toAsync([1, 2, 3, 4]),
         map((a) => a + 10),
         filter((a) => a % 2 === 0),
-        takeUntil((a) => a > 12),
+        takeUntilInclusive((a) => a > 12),
         toArray,
       );
 
@@ -111,7 +115,7 @@ describe("takeUntil", function () {
       const res = await fx(toAsync([1, 2, 3, 4]))
         .map((a) => a + 10)
         .filter((a) => a % 2 === 0)
-        .takeUntil((a) => a > 12)
+        .takeUntilInclusive((a) => a > 12)
         .toArray();
 
       expect(res).toEqual([12, 14]);
@@ -123,7 +127,7 @@ describe("takeUntil", function () {
         toAsync([3, 3, 1, 0, 0]),
         peek(fn),
         map((a) => delay(100, a)),
-        takeUntil((a) => a < 3),
+        takeUntilInclusive((a) => a < 3),
         toArray,
       );
 
@@ -134,7 +138,7 @@ describe("takeUntil", function () {
     it("should be able to take the element until the callback result is truthy concurrently", async function () {
       const res = await pipe(
         toAsync(range(1, 20)),
-        takeUntil((a) => a > 12),
+        takeUntilInclusive((a) => a > 12),
         concurrent(4),
         toArray,
       );
@@ -146,7 +150,7 @@ describe("takeUntil", function () {
       const res = pipe(
         toAsync(range(1, 500)),
         map((a) => delay(100, a + 10)),
-        takeUntil((a) => a > 14),
+        takeUntilInclusive((a) => a > 14),
         concurrent(2),
       );
 
@@ -166,7 +170,7 @@ describe("takeUntil", function () {
         toAsync(range(1, 500)),
         map((a) => delay(100, a + 10)),
         filter((a) => a % 2 === 0),
-        takeUntil((a) => a > 20),
+        takeUntilInclusive((a) => a > 20),
         concurrent(2),
         toArray,
       );
@@ -175,7 +179,7 @@ describe("takeUntil", function () {
 
     it("should be passed concurrent object when job works concurrently", async function () {
       const mock = generatorMock();
-      const iter = takeUntil((a) => a, mock);
+      const iter = takeUntilInclusive((a) => a, mock);
       const concurrent = Concurrent.of(2) as any;
 
       await iter.next(concurrent);
@@ -189,7 +193,7 @@ describe("takeUntil", function () {
           toAsync,
           map((a) => delay(100, a + 10)),
           filter((a) => a % 2 === 0),
-          takeUntil((a) => {
+          takeUntilInclusive((a) => {
             if (a > 15) {
               throw new Error("err");
             }
@@ -216,7 +220,7 @@ describe("takeUntil", function () {
             yield delay(200, 9);
           })(),
         ),
-        takeUntil((a) => a > 8),
+        takeUntilInclusive((a) => a > 8),
         concurrent(5),
         toArray,
       );

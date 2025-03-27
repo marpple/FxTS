@@ -26,7 +26,7 @@ import peek from "./peek";
 import reject from "./reject";
 import slice from "./slice";
 import take from "./take";
-import takeUntil from "./takeUntil";
+import takeUntilInclusive from "./takeUntilInclusive";
 import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
 
@@ -135,10 +135,20 @@ class FxAsyncIterable<A> {
   /**
    * Returns AsyncIterable that taken values until truthy when given `f` is applied.
    *
+   * @deprecated Use `takeUntilInclusive` instead of this function.
    * see {@link https://fxts.dev/docs/takeUntil | takeUntil}
    */
   takeUntil(f: (a: A) => unknown): FxAsyncIterable<A> {
-    return new FxAsyncIterable(takeUntil(f, this.asyncIterable));
+    return new FxAsyncIterable(takeUntilInclusive(f, this.asyncIterable));
+  }
+
+  /**
+   * Returns AsyncIterable that taken values until truthy when given `f` is applied.
+   *
+   * see {@link https://fxts.dev/docs/takeUntilInclusive | takeUntilInclusive}
+   */
+  takeUntilInclusive(f: (a: A) => unknown): FxAsyncIterable<A> {
+    return new FxAsyncIterable(takeUntilInclusive(f, this.asyncIterable));
   }
 
   /**
@@ -440,10 +450,20 @@ export class FxIterable<A> {
   /**
    * Returns Iterable that taken values until truthy when given `f` is applied.
    *
+   * @deprecated Use `takeUntilInclusive` instead of this function.
    * see {@link https://fxts.dev/docs/takeUntil | takeUntil}
    */
   takeUntil(f: (a: A) => unknown): FxIterable<A> {
-    return new FxIterable(takeUntil(f, this.iterable));
+    return new FxIterable(takeUntilInclusive(f, this.iterable));
+  }
+
+  /**
+   * Returns AsyncIterable that taken values until truthy when given `f` is applied.
+   *
+   * see {@link https://fxts.dev/docs/takeUntilInclusive | takeUntilInclusive}
+   */
+  takeUntilInclusive(f: (a: A) => unknown): FxIterable<A> {
+    return new FxIterable(takeUntilInclusive(f, this.iterable));
   }
 
   /**
