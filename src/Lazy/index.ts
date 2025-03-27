@@ -35,6 +35,7 @@ import split from "./split";
 import take from "./take";
 import takeRight from "./takeRight";
 import takeUntil from "./takeUntil";
+import takeUntilInclusive from "./takeUntilInclusive";
 import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
 import uniq from "./uniq";
@@ -82,6 +83,7 @@ export {
   split,
   take,
   takeUntil,
+  takeUntilInclusive,
   takeRight,
   takeWhile,
   toAsync,
