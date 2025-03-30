@@ -4,7 +4,17 @@ import isUndefined from "./isUndefined";
  * It returns the original value based on the condition of the first argument or the result of executing the function passed as the second argument.
  *
  * @example
- * ```ts
+ * ```typescript
+ * when(
+ *   isNumber,
+ *   () => `This is number`
+ *   100,
+ * ); // This is number
+ * ```
+ *
+ * with pipe
+ *
+ * ```typescript
  * pipe(
  *   100,
  *   when(
@@ -28,6 +38,7 @@ import isUndefined from "./isUndefined";
  *     () => `This is number` // not work
  *   ),
  * ) // 100
+ * ```
  */
 
 function when<T, S extends T, R>(
