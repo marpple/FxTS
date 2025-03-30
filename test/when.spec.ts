@@ -1,4 +1,4 @@
-import { isNumber, isString, pipe, when } from "../src";
+import { isString, pipe, when } from "../src";
 
 describe("when", function () {
   const test = <T>(value: T) =>
