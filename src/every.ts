@@ -1,7 +1,7 @@
 import { throwIfPromiseError } from "./_internal/error";
 import { isAsyncIterable, isIterable } from "./_internal/utils";
 import map from "./Lazy/map";
-import takeUntil from "./Lazy/takeUntil";
+import takeUntilInclusive from "./Lazy/takeUntilInclusive";
 import not from "./not";
 import pipe from "./pipe";
 import reduce from "./reduce";
@@ -58,7 +58,7 @@ function every<
   if (isIterable<IterableInfer<A>>(iterable)) {
     return pipe(
       map((a) => throwIfPromiseError(f(a)), iterable),
-      takeUntil(not),
+      takeUntilInclusive(not),
       (acc) =>
         reduce(
           (a: boolean, b: boolean) => a && b,
@@ -73,7 +73,7 @@ function every<
   if (isAsyncIterable<IterableInfer<A>>(iterable)) {
     return pipe(
       map(f, iterable),
-      takeUntil(not),
+      takeUntilInclusive(not),
       (acc) =>
         reduce(
           (a: boolean, b: boolean) => a && b,

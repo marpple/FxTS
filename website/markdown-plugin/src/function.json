@@ -36,7 +36,7 @@
     "split",
     "take",
     "takeRight",
-    "takeUntil",
+    "takeUntilInclusive",
     "takeWhile",
     "toAsync",
     "uniq",
