@@ -110,6 +110,7 @@
     "throwIf",
     "toArray",
     "unicodeToArray",
-    "unless"
+    "unless",
+    "when"
   ]
 }

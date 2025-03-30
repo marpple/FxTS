@@ -40,36 +40,38 @@ import isUndefined from "./isUndefined";
  * ) // 100
  * ```
  */
-
 function when<T, S extends T, R>(
   predicate: (input: T) => input is S,
   callback: (input: S) => R,
-): (iterator: T) => Exclude<T, S>;
+): (a: T) => Exclude<T, S>;
 function when<T, R>(
   predicate: (input: T) => boolean,
   callback: (input: T) => R,
-): (iterator: T) => T | R;
+): (a: T) => T | R;
 function when<T, S extends T, R>(
   predicate: (input: T) => input is S,
   callback: (input: S) => R,
-  iterator: T,
+  a: T,
 ): Exclude<T, S>;
 function when<T, R>(
   predicate: (input: T) => boolean,
   callback: (input: T) => R,
-  iterator: T,
+  a: T,
 ): T | R;
 
 function when<T, R>(
   predicate: (input: T) => boolean,
   callback: (input: T) => R,
-  iterator?: T,
+  a?: T,
 ) {
-  if (isUndefined(iterator))
-    return (currentIterator: T) => when(predicate, callback, currentIterator);
-  if (predicate(iterator)) return callback(iterator);
+  if (isUndefined(a)) {
+    return (b: T) => when(predicate, callback, b);
+  }
+  if (predicate(a)) {
+    return callback(a);
+  }
 
-  return iterator;
+  return a;
 }
 
 export default when;
