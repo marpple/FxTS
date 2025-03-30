@@ -64,6 +64,7 @@ import throwIf from "./throwIf";
 import toArray from "./toArray";
 import unicodeToArray from "./unicodeToArray";
 import unless from "./unless";
+import when from "./when";
 
 export {
   add,
@@ -136,6 +137,7 @@ export {
   throwIf,
   toArray,
   unicodeToArray,
+  when,
 };
 
 export * from "./Lazy/index";
