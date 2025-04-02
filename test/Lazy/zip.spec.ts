@@ -1,6 +1,7 @@
 import {
   concurrent,
   delay,
+  fx,
   map,
   pipe,
   toArray,
@@ -94,6 +95,24 @@ describe("zip", function () {
         [4, 8],
       ]);
     });
+
+    it("should be able to be used as a chaining method in the `fx`", function () {
+      const res1 = fx([1, 2, 3]).zip(["5", "6", "7", "8"]).toArray();
+
+      expect(res1).toEqual([
+        [1, "5"],
+        [2, "6"],
+        [3, "7"],
+      ]);
+
+      const res2 = fx([1, 2, 3, 4]).zip(["5", "6", "7"]).toArray();
+
+      expect(res2).toEqual([
+        [1, "5"],
+        [2, "6"],
+        [3, "7"],
+      ]);
+    });
   });
 
   const sum = (a: number, b: number) => a + b;
@@ -174,6 +193,30 @@ describe("zip", function () {
       );
 
       expect(res).toEqual([[6], [8], [10], [12]]);
+    });
+
+    it("should be able to be used as a chaining method in the `fx`", async function () {
+      const res1 = await fx([1, 2, 3])
+        .toAsync()
+        .zip(["5", "6", "7", "8"])
+        .toArray();
+
+      expect(res1).toEqual([
+        [1, "5"],
+        [2, "6"],
+        [3, "7"],
+      ]);
+
+      const res2 = await fx([1, 2, 3, 4])
+        .toAsync()
+        .zip(["5", "6", "7"])
+        .toArray();
+
+      expect(res2).toEqual([
+        [1, "5"],
+        [2, "6"],
+        [3, "7"],
+      ]);
     });
 
     it("should be zipped each 'AsyncIterable' having a different type", async function () {

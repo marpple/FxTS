@@ -29,6 +29,7 @@ import take from "./take";
 import takeUntilInclusive from "./takeUntilInclusive";
 import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
+import zip from "./zip";
 
 class FxAsyncIterable<A> {
   private asyncIterable: AsyncIterable<A>;
@@ -217,6 +218,17 @@ class FxAsyncIterable<A> {
    */
   chunk(size: number) {
     return new FxAsyncIterable(chunk(size, this.asyncIterable));
+  }
+
+  /**
+   * Merges the values of each of the arrays with the values at the corresponding position together.
+   * Useful when you have separate data sources that are coordinated through matching array indices.
+   * It works the same way as `zip`.
+   *
+   * see {@link https://fxts.dev/docs/zip | zip}
+   */
+  zip<B>(iterable: Iterable<B> | AsyncIterable<B>): FxAsyncIterable<[A, B]> {
+    return new FxAsyncIterable(zip(this.asyncIterable, iterable));
   }
 
   /**
@@ -530,6 +542,17 @@ export class FxIterable<A> {
    */
   chunk(size: number) {
     return new FxIterable(chunk(size, this.iterable));
+  }
+
+  /**
+   * Merges the values of each of the arrays with the values at the corresponding position together.
+   * Useful when you have separate data sources that are coordinated through matching array indices.
+   * It works the same way as `zip`.
+   *
+   * see {@link https://fxts.dev/docs/zip | zip}
+   */
+  zip<B>(iterable: Iterable<B>): FxIterable<[A, B]> {
+    return new FxIterable(zip(this.iterable, iterable));
   }
 
   /**
