@@ -5,6 +5,7 @@ import every from "../every";
 import find from "../find";
 import findIndex from "../findIndex";
 import groupBy from "../groupBy";
+import head from "../head";
 import indexBy from "../indexBy";
 import isUndefined from "../isUndefined";
 import join from "../join";
@@ -346,6 +347,16 @@ class FxAsyncIterable<A> {
   }
 
   /**
+   * Returns the first element of Iterable/AsyncIterable.
+   * It works the same way as `head`.
+   *
+   * see {@link https://fxts.dev/docs/head | head}
+   */
+  async head(): Promise<A | undefined> {
+    return head(this.asyncIterable);
+  }
+
+  /**
    * Takes item from AsyncIterable and returns an array.
    *
    * see {@link https://fxts.dev/docs/toArray | toArray}
@@ -659,6 +670,16 @@ export class FxIterable<A> {
    */
   forEach(f: (a: A) => unknown): void {
     return each(f, this.iterable);
+  }
+
+  /**
+   * Returns the first element of Iterable/AsyncIterable.
+   * It works the same way as `head`.
+   *
+   * see {@link https://fxts.dev/docs/head | head}
+   */
+  head(): A | undefined {
+    return head(this.iterable);
   }
 
   /**
