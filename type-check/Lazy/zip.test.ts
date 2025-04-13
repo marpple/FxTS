@@ -24,6 +24,6 @@ checks([
   check<typeof res4, IterableIterator<[string, number]>, Test.Pass>(),
   check<typeof res5, AsyncIterableIterator<[string, number]>, Test.Pass>(),
   check<typeof res6, AsyncIterableIterator<[string, number]>, Test.Pass>(),
-  check<typeof res7, [number, string][], Test.Pass>(),
-  check<typeof res8, Promise<[number, string][]>, Test.Pass>(),
+  check<typeof res7, [string, number][], Test.Pass>(),
+  check<typeof res8, Promise<[string, number][]>, Test.Pass>(),
 ]);

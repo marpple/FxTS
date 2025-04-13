@@ -228,8 +228,13 @@ class FxAsyncIterable<A> {
    *
    * see {@link https://fxts.dev/docs/zip | zip}
    */
-  zip<B>(iterable: Iterable<B> | AsyncIterable<B>): FxAsyncIterable<[A, B]> {
-    return new FxAsyncIterable(zip(this.asyncIterable, iterable));
+  zip<B>(iterable: Iterable<B> | AsyncIterable<B>): FxAsyncIterable<[B, A]> {
+    return new FxAsyncIterable(
+      zip(
+        isAsyncIterable(iterable) ? iterable : toAsync(iterable),
+        this.asyncIterable,
+      ),
+    );
   }
 
   /**
@@ -562,8 +567,8 @@ export class FxIterable<A> {
    *
    * see {@link https://fxts.dev/docs/zip | zip}
    */
-  zip<B>(iterable: Iterable<B>): FxIterable<[A, B]> {
-    return new FxIterable(zip(this.iterable, iterable));
+  zip<B>(iterable: Iterable<B>): FxIterable<[B, A]> {
+    return new FxIterable(zip(iterable, this.iterable));
   }
 
   /**

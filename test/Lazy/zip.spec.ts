@@ -100,17 +100,17 @@ describe("zip", function () {
       const res1 = fx([1, 2, 3]).zip(["5", "6", "7", "8"]).toArray();
 
       expect(res1).toEqual([
-        [1, "5"],
-        [2, "6"],
-        [3, "7"],
+        ["5", 1],
+        ["6", 2],
+        ["7", 3],
       ]);
 
       const res2 = fx([1, 2, 3, 4]).zip(["5", "6", "7"]).toArray();
 
       expect(res2).toEqual([
-        [1, "5"],
-        [2, "6"],
-        [3, "7"],
+        ["5", 1],
+        ["6", 2],
+        ["7", 3],
       ]);
     });
   });
@@ -202,9 +202,9 @@ describe("zip", function () {
         .toArray();
 
       expect(res1).toEqual([
-        [1, "5"],
-        [2, "6"],
-        [3, "7"],
+        ["5", 1],
+        ["6", 2],
+        ["7", 3],
       ]);
 
       const res2 = await fx([1, 2, 3, 4])
@@ -213,9 +213,9 @@ describe("zip", function () {
         .toArray();
 
       expect(res2).toEqual([
-        [1, "5"],
-        [2, "6"],
-        [3, "7"],
+        ["5", 1],
+        ["6", 2],
+        ["7", 3],
       ]);
     });
 
