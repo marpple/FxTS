@@ -24,6 +24,10 @@ const res7 = fx(toAsync([1, 2, 3]))
 const res8 = [...fx([1, 2, 3])];
 const res9 = [...fx("abc")];
 
+const res10 = fx([1, null, 2, null, 3])
+  .filter((n): n is number => n !== null)
+  .toArray();
+
 checks([
   check<typeof res1, Cast<Iterable<number>, typeof res1>, Test.Pass>(),
   check<typeof res2, number[], Test.Pass>(),
@@ -34,4 +38,5 @@ checks([
   check<typeof res7, Promise<number[]>, Test.Pass>(),
   check<typeof res8, number[], Test.Pass>(),
   check<typeof res9, string[], Test.Pass>(),
+  check<typeof res10, number[], Test.Pass>(),
 ]);
