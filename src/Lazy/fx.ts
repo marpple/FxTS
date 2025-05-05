@@ -111,6 +111,8 @@ class FxAsyncIterable<A> {
    *
    * see {@link https://fxts.dev/docs/filter | filter}
    */
+  filter<B extends A>(f: (a: A) => a is B): FxAsyncIterable<B>;
+  filter(f: (a: A) => unknown): FxAsyncIterable<A>;
   filter(f: (a: A) => unknown): FxAsyncIterable<A> {
     return new FxAsyncIterable(filter(f, this.asyncIterable));
   }
@@ -452,6 +454,8 @@ export class FxIterable<A> {
    *
    * see {@link https://fxts.dev/docs/filter | filter}
    */
+  filter<B extends A>(f: (a: A) => a is B): FxIterable<B>;
+  filter(f: (a: A) => unknown): FxIterable<A>;
   filter(f: (a: A) => unknown): FxIterable<A> {
     return new FxIterable(filter(f, this.iterable));
   }
