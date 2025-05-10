@@ -5,6 +5,7 @@ import every from "../every";
 import find from "../find";
 import findIndex from "../findIndex";
 import groupBy from "../groupBy";
+import head from "../head";
 import indexBy from "../indexBy";
 import isUndefined from "../isUndefined";
 import join from "../join";
@@ -26,9 +27,10 @@ import peek from "./peek";
 import reject from "./reject";
 import slice from "./slice";
 import take from "./take";
-import takeUntil from "./takeUntil";
+import takeUntilInclusive from "./takeUntilInclusive";
 import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
+import zip from "./zip";
 
 class FxAsyncIterable<A> {
   private asyncIterable: AsyncIterable<A>;
@@ -109,6 +111,8 @@ class FxAsyncIterable<A> {
    *
    * see {@link https://fxts.dev/docs/filter | filter}
    */
+  filter<B extends A>(f: (a: A) => a is B): FxAsyncIterable<B>;
+  filter(f: (a: A) => unknown): FxAsyncIterable<A>;
   filter(f: (a: A) => unknown): FxAsyncIterable<A> {
     return new FxAsyncIterable(filter(f, this.asyncIterable));
   }
@@ -135,10 +139,20 @@ class FxAsyncIterable<A> {
   /**
    * Returns AsyncIterable that taken values until truthy when given `f` is applied.
    *
+   * @deprecated Use `takeUntilInclusive` instead of this function.
    * see {@link https://fxts.dev/docs/takeUntil | takeUntil}
    */
   takeUntil(f: (a: A) => unknown): FxAsyncIterable<A> {
-    return new FxAsyncIterable(takeUntil(f, this.asyncIterable));
+    return new FxAsyncIterable(takeUntilInclusive(f, this.asyncIterable));
+  }
+
+  /**
+   * Returns AsyncIterable that taken values until truthy when given `f` is applied.
+   *
+   * see {@link https://fxts.dev/docs/takeUntilInclusive | takeUntilInclusive}
+   */
+  takeUntilInclusive(f: (a: A) => unknown): FxAsyncIterable<A> {
+    return new FxAsyncIterable(takeUntilInclusive(f, this.asyncIterable));
   }
 
   /**
@@ -207,6 +221,22 @@ class FxAsyncIterable<A> {
    */
   chunk(size: number) {
     return new FxAsyncIterable(chunk(size, this.asyncIterable));
+  }
+
+  /**
+   * Merges the values of each of the arrays with the values at the corresponding position together.
+   * Useful when you have separate data sources that are coordinated through matching array indices.
+   * It works the same way as `zip`.
+   *
+   * see {@link https://fxts.dev/docs/zip | zip}
+   */
+  zip<B>(iterable: Iterable<B> | AsyncIterable<B>): FxAsyncIterable<[B, A]> {
+    return new FxAsyncIterable(
+      zip(
+        isAsyncIterable(iterable) ? iterable : toAsync(iterable),
+        this.asyncIterable,
+      ),
+    );
   }
 
   /**
@@ -324,6 +354,16 @@ class FxAsyncIterable<A> {
   }
 
   /**
+   * Returns the first element of Iterable/AsyncIterable.
+   * It works the same way as `head`.
+   *
+   * see {@link https://fxts.dev/docs/head | head}
+   */
+  async head(): Promise<A | undefined> {
+    return head(this.asyncIterable);
+  }
+
+  /**
    * Takes item from AsyncIterable and returns an array.
    *
    * see {@link https://fxts.dev/docs/toArray | toArray}
@@ -414,6 +454,8 @@ export class FxIterable<A> {
    *
    * see {@link https://fxts.dev/docs/filter | filter}
    */
+  filter<B extends A>(f: (a: A) => a is B): FxIterable<B>;
+  filter(f: (a: A) => unknown): FxIterable<A>;
   filter(f: (a: A) => unknown): FxIterable<A> {
     return new FxIterable(filter(f, this.iterable));
   }
@@ -440,10 +482,20 @@ export class FxIterable<A> {
   /**
    * Returns Iterable that taken values until truthy when given `f` is applied.
    *
+   * @deprecated Use `takeUntilInclusive` instead of this function.
    * see {@link https://fxts.dev/docs/takeUntil | takeUntil}
    */
   takeUntil(f: (a: A) => unknown): FxIterable<A> {
-    return new FxIterable(takeUntil(f, this.iterable));
+    return new FxIterable(takeUntilInclusive(f, this.iterable));
+  }
+
+  /**
+   * Returns AsyncIterable that taken values until truthy when given `f` is applied.
+   *
+   * see {@link https://fxts.dev/docs/takeUntilInclusive | takeUntilInclusive}
+   */
+  takeUntilInclusive(f: (a: A) => unknown): FxIterable<A> {
+    return new FxIterable(takeUntilInclusive(f, this.iterable));
   }
 
   /**
@@ -510,6 +562,17 @@ export class FxIterable<A> {
    */
   chunk(size: number) {
     return new FxIterable(chunk(size, this.iterable));
+  }
+
+  /**
+   * Merges the values of each of the arrays with the values at the corresponding position together.
+   * Useful when you have separate data sources that are coordinated through matching array indices.
+   * It works the same way as `zip`.
+   *
+   * see {@link https://fxts.dev/docs/zip | zip}
+   */
+  zip<B>(iterable: Iterable<B>): FxIterable<[B, A]> {
+    return new FxIterable(zip(iterable, this.iterable));
   }
 
   /**
@@ -616,6 +679,16 @@ export class FxIterable<A> {
    */
   forEach(f: (a: A) => unknown): void {
     return each(f, this.iterable);
+  }
+
+  /**
+   * Returns the first element of Iterable/AsyncIterable.
+   * It works the same way as `head`.
+   *
+   * see {@link https://fxts.dev/docs/head | head}
+   */
+  head(): A | undefined {
+    return head(this.iterable);
   }
 
   /**

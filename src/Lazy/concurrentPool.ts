@@ -22,6 +22,7 @@ type Item<T> = {
  *   concurrentPool(3),
  *   each(console.log), // log 1, 2, 3, 4, 5, 6
  * ); // 2 seconds
+ * ```
  */
 function concurrentPool<A>(
   length: number,

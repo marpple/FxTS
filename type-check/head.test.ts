@@ -1,4 +1,4 @@
-import { head, pipe, toAsync } from "../src";
+import { fx, head, pipe, toAsync } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
@@ -15,6 +15,7 @@ const res5 = pipe([1, 2, 3], toAsync, head);
 const res6 = head([] as const);
 const res7 = head([1] as const);
 const res8 = head([1, "2"] as const);
+const res9 = fx([1, 2]).head();
 
 checks([
   check<typeof res1, undefined, Test.Pass>(),
@@ -27,4 +28,5 @@ checks([
   check<typeof res6, undefined, Test.Pass>(),
   check<typeof res7, 1, Test.Pass>(),
   check<typeof res8, 1, Test.Pass>(),
+  check<typeof res9, number | undefined, Test.Pass>(),
 ]);
