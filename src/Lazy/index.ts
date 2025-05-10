@@ -40,6 +40,7 @@ import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
 import uniq from "./uniq";
 import uniqBy from "./uniqBy";
+import unzip from "./unzip";
 import values from "./values";
 import zip from "./zip";
 import zipWith from "./zipWith";
@@ -89,6 +90,7 @@ export {
   toAsync,
   uniq,
   uniqBy,
+  unzip,
   values,
   zip,
   zipWith,
