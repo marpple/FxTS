@@ -7,6 +7,7 @@ describe("prop", () => {
     expect(prop("a", obj)).toBe(1);
     expect(prop("b", obj)).toBe("2");
     expect(prop("c", obj)).toBe(undefined);
+    expect(prop("d", null)).toBe(undefined);
   });
 
   it("should be able to operate on arrays", () => {
