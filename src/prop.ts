@@ -27,7 +27,9 @@ type Prop<T, K extends Key> = T extends null
  * ```
  */
 function prop<K extends Key, T>(key: K, obj: T): Prop<T, K>;
-function prop<K extends Key>(key: K): <T>(obj: T) => Prop<T, K>;
+function prop<K extends Key>(
+  key: K,
+): <T extends Record<Key, any> | null>(obj: T) => Prop<T, K>;
 
 function prop<K extends Key, T>(key: K, obj?: T) {
   if (obj === null) return undefined;
