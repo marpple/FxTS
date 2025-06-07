@@ -1,4 +1,4 @@
-import { map, pipe, prop, toArray } from "../src";
+import { indexBy, map, pipe, prop, toArray } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
@@ -24,6 +24,7 @@ const res11 = pipe(
   map(prop("str")),
   toArray,
 );
+const res12 = pipe([{ str: "foo" }, { str: "bar" }], indexBy(prop("str")));
 
 checks([
   check<typeof res1, "value", Test.Pass>(),
@@ -37,4 +38,5 @@ checks([
   check<typeof res9, number, Test.Pass>(),
   check<typeof res10, string, Test.Pass>(),
   check<typeof res11, string[], Test.Pass>(),
+  check<typeof res12, { [x: string]: { str: string } }, Test.Pass>(),
 ]);
