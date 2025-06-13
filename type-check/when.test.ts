@@ -22,7 +22,7 @@ const check4 = when(
 checks([
   check<typeof VALUE_1, 100, Test.Pass>(),
   check<typeof check1, string, Test.Pass>(),
-  check<typeof check2, number, Test.Pass>(),
+  check<typeof check2, string | number, Test.Pass>(),
   check<typeof check3, typeof VALUE_2 | string, Test.Pass>(),
   check<typeof check4, typeof VALUE_2 | string, Test.Pass>(),
 ]);
