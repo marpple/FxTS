@@ -18,11 +18,17 @@ import { generatorMock } from "../utils";
 describe("transpose", function () {
   describe("sync", function () {
     it("should be merged values of each 'Iterable' with value at the corresponding position", function () {
-      const res = toArray(transpose([1, 5], [2, 6], [3, 7], [4, 8]));
+      const res = toArray(transpose([1, "a"], [2, "b"], [3, "c"], [4, "d"]));
 
       expect(res).toEqual([
         [1, 2, 3, 4],
-        [5, 6, 7, 8],
+        ["a", "b", "c", "d"],
+      ]);
+      expect(toArray(transpose(...res))).toEqual([
+        [1, "a"],
+        [2, "b"],
+        [3, "c"],
+        [4, "d"],
       ]);
     });
 
