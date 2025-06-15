@@ -66,10 +66,15 @@ function async(
  *
  * @example
  * ```ts
- * const iter = transpose([1, 2], [3], [], [4, 5, 6], [7], [8, 9]);
- * iter.next() // {done:false, value: [1, 3, 4, 7, 8]}
- * iter.next() // {done:false, value: [2, 5, 9]}
- * iter.next() // {done:false, value: [6]}
+ * const iter = transpose([1, 'a'], [2, 'b'], [3, 'c']);
+ * iter.next() // {done:false, value: [1, 2, 3]}
+ * iter.next() // {done:false, value: ['a', 'b', 'c']}
+ * iter.next() // {done:true, value: undefined}
+ *
+ * const iter = transpose([1, 2, 3], ['a', 'b', 'c']);
+ * iter.next() // {done:false, value: [1, 'a']}
+ * iter.next() // {done:false, value: [2, 'b']}
+ * iter.next() // {done:false, value: [3, 'c']}
  * iter.next() // {done:true, value: undefined}
  *
  * // How transpose differs from `zip`
