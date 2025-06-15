@@ -7,7 +7,8 @@
  * isArray(2); // false
  * ```
  */
-const isArray = <T>(input: T): input is T & (unknown[] | Readonly<unknown[]>) =>
-  Array.isArray(input);
+const isArray = <T>(
+  input: T,
+): input is Extract<T, unknown[] | Readonly<unknown[]>> => Array.isArray(input);
 
 export default isArray;

@@ -1,4 +1,4 @@
-import { isArray, negate, pipe, throwIf } from "../src";
+import { isArray, map, negate, pipe, prop, throwIf, when } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
@@ -18,9 +18,27 @@ const res4 = pipe(
   throwIf(negate(isArray)),
 );
 
+type Profile = {
+  thumbnail: string;
+  nickname?: string;
+  id: string;
+};
+
+type UserState = {
+  profiles: Profile[];
+};
+
+declare const state: UserState;
+
+const res5 = pipe(prop("profiles", state), throwIf(negate(isArray)));
+
 checks([
   check<typeof res1, boolean, Test.Pass>(),
   check<typeof res2, boolean, Test.Pass>(),
   check<typeof res3, readonly [1, 2, 3], Test.Pass>(),
   check<typeof res4, number[], Test.Pass>(),
+
+  // this type test prove #317 issue is resolved
+  // isArray type guard infer generic type `T` to `Profile[]` type instead of `unknown[]` type
+  check<typeof res5, Profile[], Test.Pass>(),
 ]);
