@@ -22,6 +22,11 @@ type Obj = {
 const fn = (obj: Obj) => entries(obj);
 const res3 = fn({ hello: 3 });
 
+const obj2: {
+  [x: number]: string;
+} = { 2025: "year", 2024: "year" };
+const res4 = entries(obj2);
+
 checks([
   check<
     typeof res1,
@@ -51,4 +56,9 @@ checks([
   >(),
 
   check<typeof res3, Generator<[string, number], void, unknown>, Test.Pass>(),
+  check<
+    typeof res4,
+    Generator<[`${number}`, string], void, unknown>,
+    Test.Pass
+  >(),
 ]);
