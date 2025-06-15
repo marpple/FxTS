@@ -1,7 +1,14 @@
-type Entries<
-  T extends Record<string, any>,
-  K extends keyof T,
-> = K extends string ? [K, T[K]] : never;
+import type Key from "../types/Key";
+
+type NumberToString<T extends number> = `${T}` extends infer R extends string
+  ? R
+  : never;
+
+type Entries<T extends Record<Key, any>, K extends keyof T> = K extends number
+  ? [NumberToString<K>, T[K]]
+  : K extends Key
+  ? [K, T[K]]
+  : never;
 
 /**
  *
@@ -18,7 +25,7 @@ type Entries<
  * see {@link https://fxts.dev/docs/fromEntries | fromEntries}
  */
 
-function* entries<T extends Record<string, any>>(
+function* entries<T extends Record<Key, any>>(
   obj: T,
 ): Generator<Entries<T, keyof T>, void> {
   for (const k in obj) {
