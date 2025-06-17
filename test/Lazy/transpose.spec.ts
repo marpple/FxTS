@@ -9,7 +9,6 @@ import {
   toArray,
   toAsync,
   transpose,
-  zip,
 } from "../../src/index";
 import { Concurrent } from "../../src/Lazy/concurrent";
 import { generatorMock } from "../utils";
@@ -135,7 +134,7 @@ describe("transpose", function () {
         [4, 8],
       ]);
     });
-    
+
     it("should be transposed each 'AsyncIterable' having a different type", async function () {
       const res = await pipe(
         ["a", "b", "c", "d"],
