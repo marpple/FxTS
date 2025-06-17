@@ -1,6 +1,6 @@
 {
   "name": "@fxts/core",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "description": "A functional library for TypeScript/JavaScript programmers.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
