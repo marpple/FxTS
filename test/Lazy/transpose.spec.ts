@@ -1,7 +1,6 @@
 import {
   concurrent,
   delay,
-  // fx,
   join,
   map,
   pipe,
@@ -71,12 +70,6 @@ describe("transpose", function () {
         [4, 8],
       ]);
     });
-
-    // TODO: FX 부분 추가할 것
-    it("should be able to be used as a chaining method in the `fx`", function () {
-      // const res1 = fx([1, 2, 3]).transpose(["5", "6", "7", "8"]).toArray();
-      // expect(res1).toEqual([["5", 1], ["6", 2], ["7", 3], ["8"]]);
-    });
   });
 
   describe("async", function () {
@@ -142,10 +135,7 @@ describe("transpose", function () {
         [4, 8],
       ]);
     });
-
-    // TODO: FX 부분 추가할 것
-    // it("should be able to be used as a chaining method in the `fx`", async function () {});
-
+    
     it("should be transposed each 'AsyncIterable' having a different type", async function () {
       const res = await pipe(
         ["a", "b", "c", "d"],
