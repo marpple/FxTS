@@ -39,6 +39,7 @@
     "takeUntilInclusive",
     "takeWhile",
     "toAsync",
+    "transpose",
     "uniq",
     "uniqBy",
     "values",
