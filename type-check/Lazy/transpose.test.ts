@@ -11,9 +11,6 @@ const res4 = pipe([1, 2, 3], transpose("abc"));
 const res5 = pipe([1, 2, 3], toAsync, transpose("abc"));
 const res6 = pipe([1, 2, 3], transpose(toAsync("abc")));
 
-// const res7 = fx([1, 2, 3]).transpose(["a", "b", "c"]).toArray();
-// const res8 = fx([1, 2, 3]).toAsync().transpose(["a", "b", "c"]).toArray();
-
 checks([
   check<typeof res1, IterableIterator<[number, string, boolean]>, Test.Pass>(),
   check<typeof res2, IterableIterator<[number, string, boolean]>, Test.Pass>(),
@@ -26,7 +23,4 @@ checks([
   check<typeof res4, IterableIterator<[string, number]>, Test.Pass>(),
   check<typeof res5, AsyncIterableIterator<[string, number]>, Test.Pass>(),
   check<typeof res6, AsyncIterableIterator<[string, number]>, Test.Pass>(),
-
-  // check<typeof res7, [string, number][], Test.Pass>(),
-  // check<typeof res8, Promise<[string, number][]>, Test.Pass>(),
 ]);
