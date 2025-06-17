@@ -20,16 +20,18 @@ export const SignatureOut = {
 
 export const FuncParameters = {
   text: "## Parameters",
-  skip: 2,
-};
+  skip: (index: number, splited: string[]) => {
+    for (let i = index + 1; i < splited.length; i++) {
+      if (splited[i] === "## Example") {
+        return i - index;
+      }
+    }
 
-export const FuncReturn = {
-  text: "<b>Returns:</b>",
-  skip: 2,
+    return 0;
+  },
 };
 
 export type SignatureType =
   | typeof Signature
   | typeof SignatureOut
-  | typeof FuncParameters
-  | typeof FuncReturn;
+  | typeof FuncParameters;

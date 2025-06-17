@@ -112,5 +112,6 @@
     "unicodeToArray",
     "unless",
     "when"
-  ]
+  ],
+  "Util": ["debounce"]
 }
