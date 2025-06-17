@@ -1,4 +1,4 @@
-import { isArray, map, negate, pipe, prop, throwIf, when } from "../src";
+import { isArray, negate, pipe, prop, throwIf } from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
