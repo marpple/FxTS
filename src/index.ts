@@ -140,4 +140,5 @@ export {
   when,
 };
 
-export * from "./Lazy/index";
+export * from "./Lazy";
+export * from "./Util";
