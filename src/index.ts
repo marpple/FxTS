@@ -53,6 +53,7 @@ import prop from "./prop";
 import props from "./props";
 import reduce from "./reduce";
 import reduceLazy from "./reduceLazy";
+import shuffle from "./shuffle";
 import size from "./size";
 import some from "./some";
 import sort from "./sort";
@@ -126,6 +127,7 @@ export {
   props,
   reduce,
   reduceLazy,
+  shuffle,
   size,
   unless,
   some,
