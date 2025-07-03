@@ -21,7 +21,7 @@ type Item<T> = {
  *   map((a) => delay(100 * a, a)),
  *   concurrentPool(3),
  *   each(console.log), // log 1, 2, 3, 4, 5, 6
- * ); // 2 seconds
+ * ); // 0.9 seconds
  * ```
  */
 function concurrentPool<A>(
