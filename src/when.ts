@@ -43,7 +43,7 @@ import isUndefined from "./isUndefined";
 function when<T, S extends T, R>(
   predicate: (input: T) => input is S,
   callback: (input: S) => R,
-): (a: T) => Exclude<T, S>;
+): (a: T) => R | Exclude<T, S>;
 function when<T, R>(
   predicate: (input: T) => boolean,
   callback: (input: T) => R,
@@ -52,7 +52,7 @@ function when<T, S extends T, R>(
   predicate: (input: T) => input is S,
   callback: (input: S) => R,
   a: T,
-): Exclude<T, S>;
+): R | Exclude<T, S>;
 function when<T, R>(
   predicate: (input: T) => boolean,
   callback: (input: T) => R,
