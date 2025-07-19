@@ -1,3 +1,4 @@
 import debounce from "./debounce";
+import shuffle from "./shuffle";
 
-export { debounce };
+export { debounce, shuffle };
