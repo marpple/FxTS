@@ -30,7 +30,6 @@ import reject from "./reject";
 import repeat from "./repeat";
 import reverse from "./reverse";
 import scan from "./scan";
-import shuffle from "./shuffle";
 import slice from "./slice";
 import split from "./split";
 import take from "./take";
@@ -81,7 +80,6 @@ export {
   repeat,
   reverse,
   scan,
-  shuffle,
   slice,
   split,
   take,

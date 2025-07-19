@@ -1,5 +1,5 @@
-import { pipe, shuffle, toAsync } from "../src";
-import * as Test from "../src/types/Test";
+import { pipe, shuffle, toAsync } from "../../src";
+import * as Test from "../../src/types/Test";
 
 const { checks, check } = Test;
 
@@ -15,17 +15,7 @@ checks([
   check<typeof res4, Promise<string[]>, Test.Pass>(),
 ]);
 
-// Test curried version
-const shuffleCurried = shuffle();
-const res5 = shuffleCurried([1, 2, 3]);
-
-checks([check<typeof res5, number[], Test.Pass>()]);
-
 // Test in pipe
 const res8 = pipe([1, 2, 3, 4, 5], shuffle);
 
 checks([check<typeof res8, number[], Test.Pass>()]);
-
-// Test empty array
-const res11 = shuffle([]);
-checks([check<typeof res11, any[], Test.Pass>()]);

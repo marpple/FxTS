@@ -25,7 +25,6 @@ import flatMap from "./flatMap";
 import map from "./map";
 import peek from "./peek";
 import reject from "./reject";
-import shuffle from "./shuffle";
 import slice from "./slice";
 import take from "./take";
 import takeUntilInclusive from "./takeUntilInclusive";
@@ -193,15 +192,6 @@ class FxAsyncIterable<A> {
     return isUndefined(end)
       ? new FxAsyncIterable(slice(start, this.asyncIterable))
       : new FxAsyncIterable(slice(start, end, this.asyncIterable));
-  }
-
-  /**
-   * Returns AsyncIterable of the given elements in random order using Fisher-Yates algorithm.
-   *
-   * see {@link https://fxts.dev/docs/shuffle | shuffle}
-   */
-  shuffle(): FxAsyncIterable<A> {
-    return new FxAsyncIterable(shuffle(this.asyncIterable));
   }
 
   /**
@@ -545,15 +535,6 @@ export class FxIterable<A> {
     return isUndefined(end)
       ? new FxIterable(slice(start, this.iterable))
       : new FxIterable(slice(start, end, this.iterable));
-  }
-
-  /**
-   * Returns Iterable of the given elements in random order using Fisher-Yates algorithm.
-   *
-   * see {@link https://fxts.dev/docs/shuffle | shuffle}
-   */
-  shuffle(): FxIterable<A> {
-    return new FxIterable(shuffle(this.iterable));
   }
 
   /**
