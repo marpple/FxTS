@@ -279,6 +279,8 @@ class MarkdownFeature extends MarkdownDocumenterFeature {
     const path = [];
     if (FunctionJson.Lazy.includes(id)) {
       path.push("Lazy");
+    } else if (FunctionJson.Util.includes(id)) {
+      path.push("Util");
     }
 
     path.push(`${id}.ts`);
