@@ -16,7 +16,6 @@
  * Also, with this function, you can define `asyncEvolve` simply.
  *
  * ```ts
- * import { evolve, pipe, resolveProps } from "@fx-ts/core";
  *
  * const asyncEvolve = <T extends object>(transformation:Transformation<T>) =>
  *   (obj:T) => pipe(obj, evolve(transformation), resolveProps)
