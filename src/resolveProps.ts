@@ -25,15 +25,14 @@
  * console.log(a); // { a: 2 }
  *
  * const resultByFormat = await asyncEvolve<Request>({
- *   json: async (res) => await res.clone().json(),
- *   text: async (res) => await res.clone().text(),
+ *   foo: async (foo) => await fetch(`https://example.com/foo/${foo}`).json(),
+ *   bar: async (bar) => await fetch(`https://example.com/bar/${bar}`).text(),
  * })
- * const res = await fetch("https://example.com");
- * const result = await resultByFormat(res);
+ * const result = await resultByFormat({foo: "foo", bar: "bar"});
  *
  * console.log({
- *  json: result.json,
- *  text: result.text,
+ *  foo: result.foo,
+ *  bar: result.bar,
  * })
  * ```
  *
