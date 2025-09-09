@@ -101,6 +101,7 @@
     "props",
     "reduce",
     "reduceLazy",
+    "resolveProps",
     "size",
     "some",
     "sort",
