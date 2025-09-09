@@ -53,6 +53,7 @@ import prop from "./prop";
 import props from "./props";
 import reduce from "./reduce";
 import reduceLazy from "./reduceLazy";
+import resolveProps from "./resolveProps";
 import size from "./size";
 import some from "./some";
 import sort from "./sort";
@@ -98,11 +99,11 @@ export {
   isDate,
   isEmpty,
   isNil,
+  isNull,
   isNumber,
   isObject,
   isString,
   isUndefined,
-  isNull,
   join,
   juxt,
   last,
@@ -126,8 +127,8 @@ export {
   props,
   reduce,
   reduceLazy,
+  resolveProps,
   size,
-  unless,
   some,
   sort,
   sortBy,
@@ -137,6 +138,7 @@ export {
   throwIf,
   toArray,
   unicodeToArray,
+  unless,
   when,
 };
 
