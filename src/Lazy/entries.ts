@@ -6,7 +6,7 @@ type NumberToString<T extends number> = `${T}` extends infer R extends string
 
 type Entries<T extends Record<Key, any>, K extends keyof T> = K extends number
   ? [NumberToString<K>, T[K]]
-  : K extends Extract<Key, string>
+  : K extends string
   ? [K, T[K]]
   : never;
 
