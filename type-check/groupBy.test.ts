@@ -1,4 +1,12 @@
-import { groupBy, pipe, toAsync } from "../src";
+import {
+  entries,
+  fromEntries,
+  groupBy,
+  map,
+  pipe,
+  reduce,
+  toAsync,
+} from "../src";
 import * as Test from "../src/types/Test";
 
 const { checks, check } = Test;
@@ -30,19 +38,11 @@ const res4 = pipe(
   groupBy((a) => Promise.resolve(a.name)),
 );
 
+// Type narrowing is no longer applied, so the type is simpler
 type Res5To8 = {
-  a: {
-    type: "a";
-    value: number;
-  }[];
-  b: {
-    type: "b";
-    value: number;
-  }[];
-  c: {
-    type: "c";
-    value: number;
-  }[];
+  a: { type: "a" | "b" | "c"; value: number }[];
+  b: { type: "a" | "b" | "c"; value: number }[];
+  c: { type: "a" | "b" | "c"; value: number }[];
 };
 
 type NarrowedAlphabetListResult = { a: "a"[]; b: "b"[]; c: "c"[] };
@@ -127,6 +127,58 @@ const res20 = pipe(
   groupBy((a) => a.value),
 );
 
+// ============= New Test Cases for Issue #233 =============
+
+// Enum type test
+enum Status {
+  Todo = "TODO",
+  InProgress = "IN_PROGRESS",
+  Done = "DONE",
+}
+
+type TaskData = { id: number; status: Status; priority: number };
+
+const tasks: TaskData[] = [
+  { id: 1, status: Status.Todo, priority: 1 },
+  { id: 2, status: Status.InProgress, priority: 2 },
+  { id: 3, status: Status.Done, priority: 3 },
+];
+
+const enumTest1 = groupBy((t) => t.status, tasks);
+const enumTest2 = pipe(
+  tasks,
+  groupBy((t) => t.status),
+);
+
+// String union type test
+type Color = "red" | "green" | "blue";
+type ColorData = { name: string; color: Color; value: number };
+
+const colors: ColorData[] = [
+  { name: "apple", color: "red", value: 1 },
+  { name: "grass", color: "green", value: 2 },
+  { name: "sky", color: "blue", value: 3 },
+];
+
+const unionTest1 = groupBy((c) => c.color, colors);
+const unionTest2 = pipe(
+  colors,
+  groupBy((c) => c.color),
+);
+
+// The critical entries + reduce pattern from issue #233
+const entriesReduceTest = pipe(
+  tasks,
+  groupBy((t) => t.status),
+  entries,
+  map(
+    ([status, items]) =>
+      [status, reduce((sum, item) => sum + item.priority, 0, items)] as const,
+  ),
+  fromEntries,
+);
+
+// Type checks
 checks([
   check<typeof res1, { [p: string]: Data[] }, Test.Pass>(),
   check<typeof res2, { [p: string]: Data[] }, Test.Pass>(),
@@ -156,4 +208,12 @@ checks([
     Promise<{ a: Data2[]; b: Data2[]; c: Data2[] }>,
     Test.Pass
   >(),
+  // New enum type tests
+  check<typeof enumTest1, { [K in Status]: TaskData[] }, Test.Pass>(),
+  check<typeof enumTest2, { [K in Status]: TaskData[] }, Test.Pass>(),
+  // New string union type tests
+  check<typeof unionTest1, { [K in Color]: ColorData[] }, Test.Pass>(),
+  check<typeof unionTest2, { [K in Color]: ColorData[] }, Test.Pass>(),
+  // Entries + reduce pattern test (this should pass now!)
+  check<typeof entriesReduceTest, { [K in Status]: number }, Test.Pass>(),
 ]);

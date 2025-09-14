@@ -27,6 +27,8 @@ const obj2: {
 } = { 2025: "year", 2024: "year" };
 const res4 = entries(obj2);
 
+const res5 = entries({ 1: 1, a: "a", [Symbol("a")]: "a" });
+
 checks([
   check<
     typeof res1,
@@ -59,6 +61,11 @@ checks([
   check<
     typeof res4,
     Generator<[`${number}`, string], void, unknown>,
+    Test.Pass
+  >(),
+  check<
+    typeof res5,
+    Generator<["1", number] | ["a", string], void>,
     Test.Pass
   >(),
 ]);

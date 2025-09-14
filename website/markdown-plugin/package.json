@@ -12,7 +12,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@microsoft/api-documenter": "^7.13.63",
+    "@microsoft/api-documenter": "7.26.26",
     "@microsoft/api-extractor-model": "^7.13.13",
     "@microsoft/tsdoc": "^0.13.2"
   },

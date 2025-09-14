@@ -39,6 +39,7 @@
     "takeUntilInclusive",
     "takeWhile",
     "toAsync",
+    "transpose",
     "uniq",
     "uniqBy",
     "values",
@@ -100,6 +101,7 @@
     "props",
     "reduce",
     "reduceLazy",
+    "resolveProps",
     "size",
     "some",
     "sort",
@@ -112,5 +114,6 @@
     "unicodeToArray",
     "unless",
     "when"
-  ]
+  ],
+  "Util": ["debounce", "shuffle"]
 }

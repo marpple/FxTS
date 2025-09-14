@@ -38,6 +38,7 @@ import takeUntil from "./takeUntil";
 import takeUntilInclusive from "./takeUntilInclusive";
 import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
+import transpose from "./transpose";
 import uniq from "./uniq";
 import uniqBy from "./uniqBy";
 import values from "./values";
@@ -89,6 +90,7 @@ export {
   toAsync,
   uniq,
   uniqBy,
+  transpose,
   values,
   zip,
   zipWith,

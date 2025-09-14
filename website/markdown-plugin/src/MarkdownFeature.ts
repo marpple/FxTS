@@ -11,7 +11,6 @@ import FunctionJson from "./function.json"; // Same file as /website/function.js
 
 import {
   FuncParameters,
-  FuncReturn,
   Signature,
   SignatureOut,
   SignatureType,
@@ -29,7 +28,6 @@ const packageNameMap = new Map(); // to find an exact filename
 type MarkDownType =
   | typeof Signature
   | typeof FuncParameters
-  | typeof FuncReturn
   | typeof SignatureOut;
 
 class MarkdownFeature extends MarkdownDocumenterFeature {
@@ -69,13 +67,12 @@ class MarkdownFeature extends MarkdownDocumenterFeature {
     this.saveSignatureInfo(eventArgs, splitedPageContent);
     this.removeUnlessText(splitedPageContent);
 
-    // prettier-ignore
     eventArgs.pageContent = [
       this.header.join("\n"),
       splitedPageContent.join("\n\n"),
       this.sourceCodeLink.join("\n"),
-      this.footer.join("\n")
-    ].join('\n');
+      this.footer.join("\n"),
+    ].join("\n");
     this._apiItemsWithPages.add(eventArgs.apiItem);
   }
 
@@ -116,11 +113,7 @@ class MarkdownFeature extends MarkdownDocumenterFeature {
       splitedPageContent,
       FuncParameters,
     );
-    const returnStartEndIdx = this.findTextStartEndIndex(
-      splitedPageContent,
-      FuncReturn,
-    );
-    this.spliceText(splitedPageContent, returnStartEndIdx);
+
     this.spliceText(splitedPageContent, paramterStartEndIdx);
   }
 
@@ -286,6 +279,8 @@ class MarkdownFeature extends MarkdownDocumenterFeature {
     const path = [];
     if (FunctionJson.Lazy.includes(id)) {
       path.push("Lazy");
+    } else if (FunctionJson.Util.includes(id)) {
+      path.push("Util");
     }
 
     path.push(`${id}.ts`);
