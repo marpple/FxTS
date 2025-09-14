@@ -53,14 +53,14 @@ function groupBy<A extends object, B extends Key & A[keyof A]>(
   f: (a: A) => B,
   iterable: Iterable<A>,
 ): {
-  [K in B]: (A & { [K2 in GetKeyOf<A, B>]: K })[];
+  [K in B]: A[];
 };
 
 function groupBy<A extends object, B extends Key & A[keyof A]>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): Promise<{
-  [K in B]: (A & { [K2 in GetKeyOf<A, B>]: K })[];
+  [K in B]: A[];
 }>;
 
 function groupBy<
@@ -75,9 +75,7 @@ function groupBy<
         [key1 in Awaited<ReturnType<F>>]: key1[];
       }
     : {
-        [key1 in Awaited<ReturnType<F>>]: (IterableInfer<I> & {
-          [key2 in GetKeyOf<Cast<IterableInfer<I>, object>, key1>]: key1;
-        })[];
+        [key1 in Awaited<ReturnType<F>>]: IterableInfer<I>[];
       }
 >;
 
