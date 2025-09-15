@@ -35,6 +35,7 @@ import juxt from "./juxt";
 import last from "./last";
 import lt from "./lt";
 import lte from "./lte";
+import match from "./match";
 import max from "./max";
 import memoize from "./memoize";
 import min from "./min";
@@ -109,6 +110,7 @@ export {
   last,
   lt,
   lte,
+  match,
   max,
   memoize,
   min,
