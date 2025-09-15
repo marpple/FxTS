@@ -1,9 +1,7 @@
 import { AsyncFunctionException } from "./_internal/error";
 import { isAsyncIterable, isIterable, isPromise } from "./_internal/utils";
 import reduce from "./reduce";
-import type Cast from "./types/Cast";
 import type Equals from "./types/Equals";
-import type { GetKeyOf } from "./types/GetKeyOf";
 import type IterableInfer from "./types/IterableInfer";
 import type Key from "./types/Key";
 import type ReturnValueType from "./types/ReturnValueType";
