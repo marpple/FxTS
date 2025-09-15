@@ -5,7 +5,6 @@ import type Cast from "./types/Cast";
 import type Equals from "./types/Equals";
 import type { GetKeyOf } from "./types/GetKeyOf";
 import type IterableInfer from "./types/IterableInfer";
-import type iterableInfer from "./types/IterableInfer";
 import type Key from "./types/Key";
 import type ReturnValueType from "./types/ReturnValueType";
 
@@ -135,7 +134,7 @@ function groupBy<
     );
   }
 
-  if (isAsyncIterable<iterableInfer<A>>(iterable)) {
+  if (isAsyncIterable<IterableInfer<A>>(iterable)) {
     return reduce(
       async (group, a) => {
         const key = await f(a);
