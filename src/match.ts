@@ -85,6 +85,8 @@ type MatchPair<U, T extends U, R> = [Predicate<U, T>, Mapper<T, R>];
  *   toArray,
  * );
  * ```
+ *
+ * See {@link https://fxts.dev/docs/cases | cases}
  */
 function match(): (value: unknown) => never;
 function match<U, R>(...fns: [DefaultFn<U, never, R>]): (value: U) => R;
