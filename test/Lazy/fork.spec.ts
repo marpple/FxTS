@@ -291,4 +291,52 @@ describe("fork", function () {
       expect(pf7).toEqual({ value: undefined, done: true });
     }, 1050);
   });
+
+  describe("error propagation", function () {
+    it("should propagate errors from sync iterator to all forked iterators", function () {
+      const errorMsg = "sync error";
+      const errorIterator = (function* () {
+        yield 1;
+        yield 2;
+        throw new Error(errorMsg);
+      })();
+
+      const iter1 = fork(errorIterator);
+      const iter2 = fork(errorIterator);
+
+      expect(errorIterator.next()).toEqual({ value: 1, done: false });
+      expect(iter1.next()).toEqual({ value: 1, done: false });
+      expect(iter2.next()).toEqual({ value: 1, done: false });
+
+      expect(errorIterator.next()).toEqual({ value: 2, done: false });
+      expect(iter1.next()).toEqual({ value: 2, done: false });
+
+      expect(() => errorIterator.next()).toThrow(errorMsg);
+      expect(() => iter1.next()).toThrow(errorMsg);
+      expect(() => iter2.next()).toThrow(errorMsg);
+    });
+
+    it("should propagate errors from async iterator to all forked iterators", async function () {
+      const errorMsg = "async error";
+      const errorIterator = (async function* () {
+        yield 1;
+        yield 2;
+        throw new Error(errorMsg);
+      })();
+
+      const iter1 = fork(errorIterator);
+      const iter2 = fork(errorIterator);
+
+      expect(await errorIterator.next()).toEqual({ value: 1, done: false });
+      expect(await iter1.next()).toEqual({ value: 1, done: false });
+      expect(await iter2.next()).toEqual({ value: 1, done: false });
+
+      expect(await errorIterator.next()).toEqual({ value: 2, done: false });
+      expect(await iter1.next()).toEqual({ value: 2, done: false });
+
+      await expect(errorIterator.next()).rejects.toThrow(errorMsg);
+      await expect(iter1.next()).rejects.toThrow(errorMsg);
+      await expect(iter2.next()).rejects.toThrow(errorMsg);
+    });
+  });
 });

@@ -16,6 +16,7 @@ type Value = any;
 type ForkItem = {
   queue: LinkedList<IteratorResult<Value>>;
   next: () => IteratorResult<Value, any>;
+  error?: any;
 };
 
 const forkMap = new WeakMap<Iterator<Value>, ForkItem>();
@@ -38,6 +39,10 @@ function sync<T>(iterable: Iterable<T>) {
 
     let isDone = false;
     const next = () => {
+      if (forkItem.error) {
+        throw forkItem.error;
+      }
+
       if (isDone) {
         return done();
       }
@@ -45,15 +50,20 @@ function sync<T>(iterable: Iterable<T>) {
       const item = current?.getNext();
 
       if (isNil(item) || item === forkItem.queue.getTail()) {
-        const node = forkItem.next();
+        try {
+          const node = forkItem.next();
 
-        current = forkItem.queue.insertLast(node);
-        isDone = node.done ?? true;
-        if (isDone) {
-          return done();
+          current = forkItem.queue.insertLast(node);
+          isDone = node.done ?? true;
+          if (isDone) {
+            return done();
+          }
+
+          return node;
+        } catch (error) {
+          forkItem.error = error;
+          throw error;
         }
-
-        return node;
       }
 
       current = item;
@@ -70,6 +80,7 @@ function sync<T>(iterable: Iterable<T>) {
     forkItem = {
       queue: new LinkedList(),
       next: originNext,
+      error: undefined,
     };
 
     iterator.next = getNext(forkItem);
@@ -91,6 +102,7 @@ type ForkAsyncItem = {
   queue: LinkedList<IteratorResult<Value>>;
   next: (...args: any) => Promise<IteratorResult<Value, any>>;
   done: boolean;
+  error?: any;
 };
 
 const forkAsyncMap = new WeakMap<AsyncIterator<Value>, ForkAsyncItem>();
@@ -127,6 +139,7 @@ function async<T>(iterable: AsyncIterable<T>) {
         })
         .catch((reason) => {
           forkItem.done = true;
+          forkItem.error = reason;
           while (settlementQueue.length > 0) {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const [, reject] = settlementQueue.shift()!;
@@ -162,6 +175,10 @@ function async<T>(iterable: AsyncIterable<T>) {
     }
 
     const next = async (concurrent: Concurrent) => {
+      if (forkItem.error) {
+        throw forkItem.error;
+      }
+
       if (forkItem.done && !forkItem.queue.hasNext(currentNode)) {
         return { done: true, value: undefined };
       }
@@ -183,6 +200,7 @@ function async<T>(iterable: AsyncIterable<T>) {
       queue: new LinkedList(),
       next: originNext,
       done: false,
+      error: undefined,
     };
 
     iterator.next = getNext(forkItem) as any;
