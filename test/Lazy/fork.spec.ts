@@ -9,9 +9,9 @@ import {
   toAsync,
 } from "../../src/index";
 
-describe("fork", function () {
-  describe("sync", function () {
-    it("should be forked iterable(number)", function () {
+describe("fork", () => {
+  describe("sync", () => {
+    it("should be forked iterable(number)", () => {
       const arr = [1, 2, 3];
 
       const iter1 = fork(arr);
@@ -28,7 +28,7 @@ describe("fork", function () {
       expect(iter2.next()).toEqual({ value: undefined, done: true });
     });
 
-    it("should be forked iterable(string)", function () {
+    it("should be forked iterable(string)", () => {
       const arr = "abc";
 
       const iter1 = fork(arr);
@@ -45,7 +45,7 @@ describe("fork", function () {
       expect(iter2.next()).toEqual({ value: undefined, done: true });
     });
 
-    it("should be able to be used as a forked function in the pipeline", function () {
+    it("should be able to be used as a forked function in the pipeline", () => {
       const arr = pipe(
         [1, 2, 3],
         map((a) => a + 10),
@@ -76,7 +76,7 @@ describe("fork", function () {
       expect(iter2.next()).toEqual({ value: undefined, done: true });
     });
 
-    it("forked iterator proceeds independently even if there is no data to process from the original.", function () {
+    it("forked iterator proceeds independently even if there is no data to process from the original.", () => {
       const arr = pipe(
         [1, 2, 3],
         map((a) => a + 10),
@@ -94,7 +94,7 @@ describe("fork", function () {
       expect(iter1.next()).toEqual({ value: undefined, done: true });
     });
 
-    it("should be forked in the middle of iterable progress", function () {
+    it("should be forked in the middle of iterable progress", () => {
       const arr = pipe(
         [1, 2, 3],
         map((a) => a + 10),
@@ -119,8 +119,8 @@ describe("fork", function () {
     });
   });
 
-  describe("async", function () {
-    it("should be forked iterable(number)", async function () {
+  describe("async", () => {
+    it("should be forked iterable(number)", async () => {
       const arr = toAsync([1, 2, 3]);
 
       const iter1 = fork(arr);
@@ -138,7 +138,7 @@ describe("fork", function () {
       expect(await iter2.next()).toEqual({ value: undefined, done: true });
     });
 
-    it("should be forked iterable(string)", async function () {
+    it("should be forked iterable(string)", async () => {
       const arr = toAsync("abc");
 
       const iter1 = fork(arr);
@@ -155,7 +155,7 @@ describe("fork", function () {
       expect(await iter2.next()).toEqual({ value: undefined, done: true });
     });
 
-    it("should be able to be used as a forked function in the pipeline", async function () {
+    it("should be able to be used as a forked function in the pipeline", async () => {
       const arr = pipe(
         toAsync([1, 2, 3]),
         map((a) => a + 10),
@@ -181,7 +181,7 @@ describe("fork", function () {
       expect(await iter2.next()).toEqual({ value: undefined, done: true });
     });
 
-    it("forked iterator proceeds independently even if there is no data to process from the original", async function () {
+    it("forked iterator proceeds independently even if there is no data to process from the original", async () => {
       const arr = pipe(
         toAsync([1, 2, 3]),
         map((a) => a + 10),
@@ -199,7 +199,7 @@ describe("fork", function () {
       expect(await iter1.next()).toEqual({ value: undefined, done: true });
     });
 
-    it("should be forked in the middle of iterable progress", async function () {
+    it("should be forked in the middle of iterable progress", async () => {
       const arr = pipe(
         toAsync([1, 2, 3]),
         map((a) => a + 10),
@@ -222,7 +222,7 @@ describe("fork", function () {
       expect(await iter4.next()).toEqual({ value: 12, done: false });
     });
 
-    it("forked iterable should be consumed concurrently", async function () {
+    it("forked iterable should be consumed concurrently", async () => {
       const iter = pipe(
         toAsync(range(10)),
         map((a) => delay(500, a)),
@@ -236,7 +236,7 @@ describe("fork", function () {
       expect(arr2).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
     }, 1050);
 
-    it("forked iterable should be consumed concurrently (forked iterable first)", async function () {
+    it("forked iterable should be consumed concurrently (forked iterable first)", async () => {
       const iter = pipe(
         toAsync(range(10)),
         map((a) => delay(500, a)),
@@ -250,7 +250,7 @@ describe("fork", function () {
       expect(arr2).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
     }, 1050);
 
-    it("forked iterable and origin iterable must each be consumable.", async function () {
+    it("forked iterable and origin iterable must each be consumable.", async () => {
       const origin = pipe(
         toAsync(range(6)),
         map((a) => delay(500, a)),
@@ -292,8 +292,8 @@ describe("fork", function () {
     }, 1050);
   });
 
-  describe("error propagation", function () {
-    it("should propagate errors from sync iterator to all forked iterators", function () {
+  describe("error propagation", () => {
+    it("should propagate errors from sync iterator to all forked iterators", () => {
       const errorMsg = "sync error";
       const errorIterator = (function* () {
         yield 1;
@@ -316,7 +316,7 @@ describe("fork", function () {
       expect(() => iter2.next()).toThrow(errorMsg);
     });
 
-    it("should propagate errors from async iterator to all forked iterators", async function () {
+    it("should propagate errors from async iterator to all forked iterators", async () => {
       const errorMsg = "async error";
       const errorIterator = (async function* () {
         yield 1;
@@ -337,6 +337,116 @@ describe("fork", function () {
       await expect(errorIterator.next()).rejects.toThrow(errorMsg);
       await expect(iter1.next()).rejects.toThrow(errorMsg);
       await expect(iter2.next()).rejects.toThrow(errorMsg);
+    });
+  });
+
+  describe("memory optimization", () => {
+    it("should handle large datasets with multiple forks (sync)", () => {
+      const arr = pipe(
+        range(500),
+        map((a) => a + 1),
+      );
+
+      const fork1 = fork(arr);
+      const fork2 = fork(arr);
+      const fork3 = fork(arr);
+
+      // Fork1 reads first 100
+      const results1 = [];
+      for (let i = 0; i < 100; i++) {
+        results1.push(fork1.next().value);
+      }
+
+      // Fork2 reads first 50
+      const results2 = [];
+      for (let i = 0; i < 50; i++) {
+        results2.push(fork2.next().value);
+      }
+
+      // Fork3 reads all
+      const results3 = [];
+      let result = fork3.next();
+      while (!result.done) {
+        results3.push(result.value);
+        result = fork3.next();
+      }
+
+      // Verify all forks can still read their data correctly
+      expect(results1[0]).toBe(1);
+      expect(results1[99]).toBe(100);
+      expect(results2[0]).toBe(1);
+      expect(results2[49]).toBe(50);
+      expect(results3.length).toBe(500);
+      expect(results3[0]).toBe(1);
+      expect(results3[499]).toBe(500);
+    });
+
+    it("should handle large datasets with multiple forks (async)", async () => {
+      const arr = pipe(
+        toAsync(range(200)),
+        map((a) => a + 1),
+      );
+
+      const fork1 = fork(arr);
+      const fork2 = fork(arr);
+
+      // Fork1 reads first 50
+      const results1 = [];
+      for (let i = 0; i < 50; i++) {
+        results1.push((await fork1.next()).value);
+      }
+
+      // Fork2 reads all
+      const results2 = [];
+      let result = await fork2.next();
+      while (!result.done) {
+        results2.push(result.value);
+        result = await fork2.next();
+      }
+
+      // Fork1 continues reading
+      let result1 = await fork1.next();
+      while (!result1.done) {
+        results1.push(result1.value);
+        result1 = await fork1.next();
+      }
+
+      expect(results1.length).toBe(200);
+      expect(results1[0]).toBe(1);
+      expect(results1[199]).toBe(200);
+      expect(results2.length).toBe(200);
+      expect(results2[0]).toBe(1);
+      expect(results2[199]).toBe(200);
+    });
+
+    it("should remove fork from tracking when completed (sync)", () => {
+      const arr = [1, 2, 3];
+      const iter1 = fork(arr);
+      const iter2 = fork(arr);
+
+      // Consume all from iter1
+      while (!iter1.next().done);
+
+      // iter2 should still work
+      expect(iter2.next()).toEqual({ value: 1, done: false });
+      expect(iter2.next()).toEqual({ value: 2, done: false });
+      expect(iter2.next()).toEqual({ value: 3, done: false });
+      expect(iter2.next().done).toBe(true);
+    });
+
+    it("should remove fork from tracking when completed (async)", async () => {
+      const arr = toAsync([1, 2, 3]);
+      const iter1 = fork(arr);
+      const iter2 = fork(arr);
+
+      // Consume all from iter1
+      while (!(await iter1.next()).done);
+
+      // iter2 should still work
+      expect(await iter2.next()).toEqual({ value: 1, done: false });
+      expect(await iter2.next()).toEqual({ value: 2, done: false });
+      expect(await iter2.next()).toEqual({ value: 3, done: false });
+      expect((await iter2.next()).done).toBe(true);
     });
   });
 });

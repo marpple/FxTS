@@ -79,6 +79,20 @@ export class LinkedList<T> {
     return node.getNext() !== this.tail;
   }
 
+  removeNodesBefore(node: LinkedListNode<T>): void {
+    let current = this.head.getNext();
+
+    while (current && current !== node && current !== this.tail) {
+      const next = current.getNext();
+      current.setPrevNode(null);
+      current.setNextNode(null);
+      current = next;
+    }
+
+    this.head.setNextNode(node);
+    node.setPrevNode(this.head);
+  }
+
   toArray() {
     const arr = [];
     let cur = this.head;

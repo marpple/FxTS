@@ -17,9 +17,12 @@ type ForkItem = {
   queue: LinkedList<IteratorResult<Value>>;
   next: () => IteratorResult<Value, any>;
   error?: any;
+  forks: Set<LinkedListNode<IteratorResult<Value>> | null>;
 };
 
 const forkMap = new WeakMap<Iterator<Value>, ForkItem>();
+
+const DONE_RESULT = Object.freeze({ done: true, value: undefined } as const);
 
 function sync<T>(iterable: Iterable<T>) {
   const iterator = iterable[Symbol.iterator]();
@@ -28,16 +31,19 @@ function sync<T>(iterable: Iterable<T>) {
     let current: LinkedListNode<IteratorResult<T>> | null =
       forkItem.queue.getLastNode();
 
+    // Register this fork
+    forkItem.forks.add(current);
+
     const done = () => {
       iterator.next = forkItem.next;
+      // Unregister this fork when done
+      forkItem.forks.delete(current);
 
-      return {
-        done: true,
-        value: undefined,
-      } as const;
+      return DONE_RESULT;
     };
 
     let isDone = false;
+
     const next = () => {
       if (forkItem.error) {
         throw forkItem.error;
@@ -67,6 +73,14 @@ function sync<T>(iterable: Iterable<T>) {
       }
 
       current = item;
+
+      // Update this fork's position
+      const prevNode = current.getPrev();
+      if (prevNode) {
+        forkItem.forks.delete(prevNode);
+      }
+      forkItem.forks.add(current);
+
       return current.getValue();
     };
 
@@ -81,6 +95,7 @@ function sync<T>(iterable: Iterable<T>) {
       queue: new LinkedList(),
       next: originNext,
       error: undefined,
+      forks: new Set(),
     };
 
     iterator.next = getNext(forkItem);
@@ -103,6 +118,7 @@ type ForkAsyncItem = {
   next: (...args: any) => Promise<IteratorResult<Value, any>>;
   done: boolean;
   error?: any;
+  forks: Set<LinkedListNode<IteratorResult<Value>> | null>;
 };
 
 const forkAsyncMap = new WeakMap<AsyncIterator<Value>, ForkAsyncItem>();
@@ -118,6 +134,9 @@ function async<T>(iterable: AsyncIterable<T>) {
     let resolvedCount = 0;
     let prevItem = Promise.resolve();
 
+    // Register this fork
+    forkItem.forks.add(currentNode);
+
     const fillBuffer = (concurrent: Concurrent) => {
       const nextItem = forkItem.next(concurrent);
 
@@ -128,10 +147,13 @@ function async<T>(iterable: AsyncIterable<T>) {
             while (settlementQueue.length > 0) {
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               const [resolve] = settlementQueue.shift()!;
-              resolve({ done: true, value: undefined });
+              resolve(DONE_RESULT);
             }
 
-            return void (forkItem.done = true);
+            // Unregister this fork when done
+            forkItem.forks.delete(currentNode);
+            forkItem.done = true;
+            return;
           }
 
           forkItem.queue.insertLast({ done: false, value });
@@ -140,6 +162,8 @@ function async<T>(iterable: AsyncIterable<T>) {
         .catch((reason) => {
           forkItem.done = true;
           forkItem.error = reason;
+          // Unregister this fork on error
+          forkItem.forks.delete(currentNode);
           while (settlementQueue.length > 0) {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const [, reject] = settlementQueue.shift()!;
@@ -153,9 +177,16 @@ function async<T>(iterable: AsyncIterable<T>) {
         forkItem.queue.hasNext(currentNode) &&
         nextCallCount > resolvedCount
       ) {
+        // Update this fork's position
+        const prevNode = currentNode;
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const result = currentNode.getNext()!.getValue()!;
         currentNode = currentNode.getNext();
+
+        if (prevNode !== null) {
+          forkItem.forks.delete(prevNode);
+        }
+        forkItem.forks.add(currentNode);
 
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const [resolve] = settlementQueue.shift()!;
@@ -180,7 +211,9 @@ function async<T>(iterable: AsyncIterable<T>) {
       }
 
       if (forkItem.done && !forkItem.queue.hasNext(currentNode)) {
-        return { done: true, value: undefined };
+        // Unregister this fork when done
+        forkItem.forks.delete(currentNode);
+        return DONE_RESULT;
       }
 
       nextCallCount++;
@@ -201,6 +234,7 @@ function async<T>(iterable: AsyncIterable<T>) {
       next: originNext,
       done: false,
       error: undefined,
+      forks: new Set(),
     };
 
     iterator.next = getNext(forkItem) as any;

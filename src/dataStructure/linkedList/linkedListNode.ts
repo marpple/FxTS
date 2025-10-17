@@ -9,13 +9,13 @@ export class LinkedListNode<T> {
     this.prev = null;
   }
 
-  setNextNode(node: LinkedListNode<T>) {
+  setNextNode(node: LinkedListNode<T> | null) {
     this.next = node;
 
     return node;
   }
 
-  setPrevNode(node: LinkedListNode<T>) {
+  setPrevNode(node: LinkedListNode<T> | null) {
     this.prev = node;
 
     return node;
