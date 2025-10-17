@@ -253,6 +253,7 @@ function async<T>(iterable: AsyncIterable<T>) {
 /**
  * Returns an iterable of forks of original source. Each fork contains the same values as source, and can be consumed independently.
  *
+ * @experimental
  * @example
  * ```ts
  * const arr = [1, 2, 3];
