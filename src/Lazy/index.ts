@@ -16,6 +16,7 @@ import entries from "./entries";
 import filter from "./filter";
 import flat from "./flat";
 import flatMap from "./flatMap";
+import fork from "./fork";
 import fx from "./fx";
 import intersection from "./intersection";
 import intersectionBy from "./intersectionBy";
@@ -65,6 +66,7 @@ export {
   filter,
   flat,
   flatMap,
+  fork,
   fx,
   intersection,
   intersectionBy,

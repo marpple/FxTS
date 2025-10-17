@@ -18,6 +18,7 @@
     "filter",
     "flat",
     "flatMap",
+    "fork",
     "fx",
     "intersection",
     "intersectionBy",
