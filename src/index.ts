@@ -2,6 +2,7 @@ import add from "./add";
 import always from "./always";
 import apply from "./apply";
 import average from "./average";
+import cases from "./cases";
 import compactObject from "./compactObject";
 import consume from "./consume";
 import countBy from "./countBy";
@@ -35,6 +36,7 @@ import juxt from "./juxt";
 import last from "./last";
 import lt from "./lt";
 import lte from "./lte";
+import match from "./match";
 import max from "./max";
 import memoize from "./memoize";
 import min from "./min";
@@ -73,6 +75,7 @@ export {
   apply,
   average,
   average as mean,
+  cases,
   compactObject,
   consume,
   countBy,
@@ -109,6 +112,7 @@ export {
   last,
   lt,
   lte,
+  match,
   max,
   memoize,
   min,
