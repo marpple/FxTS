@@ -4,8 +4,9 @@ type Predicate<T> = (value: T) => boolean;
 type Refinement<T, T1 extends T> = (value: T) => value is T1;
 type Mapper<T, R> = (value: T) => R;
 type MapperByRefinement<Pred, R> = Pred extends (value: infer T) => boolean
-  ? Pred extends Refinement<T, infer T1> ? Mapper<T1, R>
-  : Mapper<T, R>
+  ? Pred extends Refinement<T, infer T1>
+    ? Mapper<T1, R>
+    : Mapper<T, R>
   : never;
 type Thrower<T> = (error: T) => never;
 type DefaultFn<T, R> = Mapper<T, R> | Thrower<T>;
@@ -189,11 +190,9 @@ function cases<T, R>(...fns: ((x: T) => boolean | R)[]) {
   return function (
     value: T,
   ): typeof fns extends EvenArray ? R | typeof value : R {
-    for (
-      const pair of chunk(2, fns) as Generator<
-        [Predicate<T>, Mapper<T, R>] | [DefaultFn<T, R>, undefined]
-      >
-    ) {
+    for (const pair of chunk(2, fns) as Generator<
+      [Predicate<T>, Mapper<T, R>] | [DefaultFn<T, R>, undefined]
+    >) {
       if (!pair[1]) {
         return pair[0](value);
       }
