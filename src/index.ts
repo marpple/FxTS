@@ -2,6 +2,7 @@ import add from "./add";
 import always from "./always";
 import apply from "./apply";
 import average from "./average";
+import cases from "./cases";
 import compactObject from "./compactObject";
 import consume from "./consume";
 import countBy from "./countBy";
@@ -73,6 +74,7 @@ export {
   apply,
   average,
   average as mean,
+  cases,
   compactObject,
   consume,
   countBy,
