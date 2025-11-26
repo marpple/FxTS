@@ -1,4 +1,4 @@
-import { chunk } from "./Lazy";
+import chunk from "./Lazy/chunk";
 
 type Predicate<T> = (value: T) => boolean;
 type Refinement<T, T1 extends T> = (value: T) => value is T1;
@@ -187,9 +187,7 @@ function cases<
  * ```
  */
 function cases<T, R>(...fns: ((x: T) => boolean | R)[]) {
-  return function (
-    value: T,
-  ): typeof fns extends EvenArray ? R | typeof value : R {
+  return (value: T): typeof fns extends EvenArray ? R | typeof value : R => {
     for (const pair of chunk(2, fns) as Generator<
       [Predicate<T>, Mapper<T, R>] | [DefaultFn<T, R>, undefined]
     >) {
