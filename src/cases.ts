@@ -12,6 +12,45 @@ type Thrower<T> = (error: T) => never;
 type DefaultFn<T, R> = Mapper<T, R> | Thrower<T>;
 type EvenArray = unknown[] & { length: 0 | 2 | 4 | 6 | 8 | 10 | 12 };
 
+/**
+ * Returns a mapped value based on the first matching predicate.
+ * The predicates can return boolean or be type refinements.
+ *
+ * If the predicate is a type refinement, the corresponding mapper will receive the narrowed type.
+ * Else, the mapper will receive the original type.
+ * If there's no match, the input value is returned as is. (if the number of functions is even)
+ * Or the `default` function (the last function without paired predicate) is executed if provided.
+ * (if the number of functions is odd)
+ *
+ * @example
+ * ```ts
+ * pipe(
+ *   [10, 20, 30],
+ *   map(cases(
+ *     lt(15), (n) => n + 20,
+ *     lt(25), (n) => n + 10,
+ *   )),
+ *   toArray,
+ * ) // [30, 30, 30]
+ * ```
+ *
+ * @example
+ * with type refinement
+ *
+ * ```ts
+ * type A = { a: string; }
+ * type B = A & { b: string; }
+ *
+ * pipe(
+ *   [{ a: "A", b: "B" }, { a: "A" }] as A[],
+ *   map(cases(
+ *    (n): n is B => "b" in n, (n) => n.b,
+ *    (n) => n.a,
+ *   )),
+ *  toArray,
+ * ) // ["B", "A"]
+ * ```
+ */
 function cases(): (value: unknown) => typeof value;
 function cases<T, R>(defaultFn: DefaultFn<T, R>): (value: T) => R;
 function cases<T, P1 extends Predicate<T> | Refinement<T, T>, R>(
@@ -151,41 +190,6 @@ function cases<
   mapper5: MapperByRefinement<typeof pred5, R>,
   defaultFn: DefaultFn<T, R>,
 ): (value: T) => R;
-/**
- * Returns a mapped value based on the first matching predicate.
- * The predicates can return boolean or be type refinements.
- *
- * ```ts
- * pipe(
- *   [10, 20, 30],
- *   map(cases(
- *     lt(15), (n) => n + 20,
- *     lt(25), (n) => n + 10,
- *   )),
- *   toArray,
- * ) // [30, 30, 30]
- * ```
- *
- * If the predicate is a type refinement, the corresponding mapper will receive the narrowed type.
- * Else, the mapper will receive the original type.
- * If there's no match, the input value is returned as is. (if the number of functions is even)
- * Or the `default` function (the last function without paired predicate) is executed if provided.
- * (if the number of functions is odd)
- *
- * ```ts
- * type A = { a: string; }
- * type B = A & { b: string; }
- *
- * pipe(
- *   [{ a: "A", b: "B" }, { a: "A" }] as A[],
- *   map(cases(
- *    (n): n is B => "b" in n, (n) => n.b,
- *    (n) => n.a,
- *   )),
- *  toArray,
- * ) // ["B", "A"]
- * ```
- */
 function cases<T, R>(...fns: ((x: T) => boolean | R)[]) {
   return (value: T): typeof fns extends EvenArray ? R | typeof value : R => {
     for (const pair of chunk(2, fns) as Generator<
