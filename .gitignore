@@ -4,3 +4,7 @@
 node_modules/
 dist/
 coverage/
+
+# VitePress
+.vitepress/cache
+.vitepress/dist
