@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# VitePress build output
+.vitepress/cache
+.vitepress/dist
+
+# Generated API docs
+docs/api/
+
+# Misc
+.DS_Store
+*.local

@@ -1,0 +1,4 @@
+markdown-plugin-*
+lib/
+dist/
+node_modules/

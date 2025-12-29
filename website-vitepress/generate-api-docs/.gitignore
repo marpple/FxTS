@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# Generated files
+/temp
+
+# Misc
+.DS_Store
