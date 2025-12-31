@@ -1,0 +1,203 @@
+# FxTS
+
+> A functional programming library for TypeScript/JavaScript with lazy evaluation and concurrency support.
+
+FxTS is a functional library that provides lazy evaluation, concurrent processing, and strong type inference for TypeScript/JavaScript programmers. It follows the Iterable/AsyncIterable protocols.
+
+## Core Concepts
+
+- **Lazy Evaluation**: Defers computation until values are actually needed
+- **Pipe Composition**: Compose functions using `pipe()` for readable data transformations
+- **Concurrent Processing**: Handle async operations in parallel with `concurrent()`
+- **Iteration Protocols**: Full support for Iterable/AsyncIterable standards
+
+## Usage Patterns
+
+### Pipe Style
+```ts
+import { pipe, map, filter, take, toArray } from "@fxts/core";
+
+pipe(
+  [1, 2, 3, 4, 5],
+  map(a => a * 2),
+  filter(a => a > 4),
+  take(2),
+  toArray
+); // [6, 8]
+```
+
+### Chaining Style
+```ts
+import { fx } from "@fxts/core";
+
+fx([1, 2, 3, 4, 5])
+  .map(a => a * 2)
+  .filter(a => a > 4)
+  .take(2)
+  .toArray(); // [6, 8]
+```
+
+### Async with Concurrency
+```ts
+import { pipe, toAsync, map, concurrent, toArray } from "@fxts/core";
+
+await pipe(
+  [1, 2, 3, 4],
+  toAsync,
+  map(async a => await fetchData(a)),
+  concurrent(2), // Process 2 items in parallel
+  toArray
+);
+```
+
+## Project Structure
+
+- `src/Lazy/` - Lazy evaluation functions (map, filter, take, etc.)
+- `src/*.ts` - Strict/eager evaluation functions (reduce, each, find, etc.)
+- `src/Util/` - Utility functions
+- `src/types/` - TypeScript type definitions
+- `test/` - Test files
+
+## Code Conventions
+
+- All functions support currying (iterable as the last argument)
+- Dual implementation supporting both Iterable and AsyncIterable
+- JSDoc-style documentation with example code
+- Apache 2.0 License
+
+## Key Functions
+
+### Lazy Functions (returns Iterator)
+
+- [append](https://fxts.dev/api/append)
+- [chunk](https://fxts.dev/api/chunk)
+- [compact](https://fxts.dev/api/compact)
+- [compress](https://fxts.dev/api/compress)
+- [concat](https://fxts.dev/api/concat)
+- [concurrent](https://fxts.dev/api/concurrent)
+- [concurrentPool](https://fxts.dev/api/concurrentPool)
+- [cycle](https://fxts.dev/api/cycle)
+- [difference](https://fxts.dev/api/difference)
+- [differenceBy](https://fxts.dev/api/differenceBy)
+- [drop](https://fxts.dev/api/drop)
+- [dropRight](https://fxts.dev/api/dropRight)
+- [dropUntil](https://fxts.dev/api/dropUntil)
+- [dropWhile](https://fxts.dev/api/dropWhile)
+- [entries](https://fxts.dev/api/entries)
+- [filter](https://fxts.dev/api/filter)
+- [flat](https://fxts.dev/api/flat)
+- [flatMap](https://fxts.dev/api/flatMap)
+- [fx](https://fxts.dev/api/fx)
+- [intersection](https://fxts.dev/api/intersection)
+- [intersectionBy](https://fxts.dev/api/intersectionBy)
+- [keys](https://fxts.dev/api/keys)
+- [map](https://fxts.dev/api/map)
+- [peek](https://fxts.dev/api/peek)
+- [pipeLazy](https://fxts.dev/api/pipeLazy)
+- [pluck](https://fxts.dev/api/pluck)
+- [prepend](https://fxts.dev/api/prepend)
+- [range](https://fxts.dev/api/range)
+- [reject](https://fxts.dev/api/reject)
+- [repeat](https://fxts.dev/api/repeat)
+- [reverse](https://fxts.dev/api/reverse)
+- [scan](https://fxts.dev/api/scan)
+- [slice](https://fxts.dev/api/slice)
+- [split](https://fxts.dev/api/split)
+- [take](https://fxts.dev/api/take)
+- [takeRight](https://fxts.dev/api/takeRight)
+- [takeUntil](https://fxts.dev/api/takeUntil)
+- [takeUntilInclusive](https://fxts.dev/api/takeUntilInclusive)
+- [takeWhile](https://fxts.dev/api/takeWhile)
+- [toAsync](https://fxts.dev/api/toAsync)
+- [transpose](https://fxts.dev/api/transpose)
+- [uniq](https://fxts.dev/api/uniq)
+- [uniqBy](https://fxts.dev/api/uniqBy)
+- [values](https://fxts.dev/api/values)
+- [zip](https://fxts.dev/api/zip)
+- [zipWith](https://fxts.dev/api/zipWith)
+- [zipWithIndex](https://fxts.dev/api/zipWithIndex)
+
+### Strict Functions (returns value)
+
+- [add](https://fxts.dev/api/add)
+- [always](https://fxts.dev/api/always)
+- [apply](https://fxts.dev/api/apply)
+- [average](https://fxts.dev/api/average) (alias: mean)
+- [compactObject](https://fxts.dev/api/compactObject)
+- [consume](https://fxts.dev/api/consume)
+- [countBy](https://fxts.dev/api/countBy)
+- [curry](https://fxts.dev/api/curry)
+- [delay](https://fxts.dev/api/delay)
+- [each](https://fxts.dev/api/each) (alias: forEach)
+- [every](https://fxts.dev/api/every)
+- [evolve](https://fxts.dev/api/evolve)
+- [find](https://fxts.dev/api/find)
+- [findIndex](https://fxts.dev/api/findIndex)
+- [fromEntries](https://fxts.dev/api/fromEntries)
+- [groupBy](https://fxts.dev/api/groupBy)
+- [gt](https://fxts.dev/api/gt)
+- [gte](https://fxts.dev/api/gte)
+- [head](https://fxts.dev/api/head) (alias: first)
+- [identity](https://fxts.dev/api/identity)
+- [includes](https://fxts.dev/api/includes) (alias: contains)
+- [indexBy](https://fxts.dev/api/indexBy)
+- [join](https://fxts.dev/api/join)
+- [juxt](https://fxts.dev/api/juxt)
+- [last](https://fxts.dev/api/last)
+- [lt](https://fxts.dev/api/lt)
+- [lte](https://fxts.dev/api/lte)
+- [max](https://fxts.dev/api/max)
+- [memoize](https://fxts.dev/api/memoize)
+- [min](https://fxts.dev/api/min)
+- [negate](https://fxts.dev/api/negate)
+- [noop](https://fxts.dev/api/noop)
+- [not](https://fxts.dev/api/not)
+- [nth](https://fxts.dev/api/nth)
+- [omit](https://fxts.dev/api/omit)
+- [omitBy](https://fxts.dev/api/omitBy)
+- [partition](https://fxts.dev/api/partition)
+- [pick](https://fxts.dev/api/pick)
+- [pickBy](https://fxts.dev/api/pickBy)
+- [pipe](https://fxts.dev/api/pipe)
+- [pipe1](https://fxts.dev/api/pipe1)
+- [prop](https://fxts.dev/api/prop)
+- [props](https://fxts.dev/api/props)
+- [reduce](https://fxts.dev/api/reduce)
+- [reduceLazy](https://fxts.dev/api/reduceLazy)
+- [resolveProps](https://fxts.dev/api/resolveProps)
+- [size](https://fxts.dev/api/size)
+- [some](https://fxts.dev/api/some)
+- [sort](https://fxts.dev/api/sort)
+- [sortBy](https://fxts.dev/api/sortBy)
+- [sum](https://fxts.dev/api/sum)
+- [tap](https://fxts.dev/api/tap)
+- [throwError](https://fxts.dev/api/throwError)
+- [throwIf](https://fxts.dev/api/throwIf)
+- [toArray](https://fxts.dev/api/toArray)
+- [unicodeToArray](https://fxts.dev/api/unicodeToArray)
+- [unless](https://fxts.dev/api/unless)
+- [when](https://fxts.dev/api/when)
+
+### Type Guard Functions
+
+- [isArray](https://fxts.dev/api/isArray)
+- [isBoolean](https://fxts.dev/api/isBoolean)
+- [isDate](https://fxts.dev/api/isDate)
+- [isEmpty](https://fxts.dev/api/isEmpty)
+- [isNil](https://fxts.dev/api/isNil)
+- [isNull](https://fxts.dev/api/isNull)
+- [isNumber](https://fxts.dev/api/isNumber)
+- [isObject](https://fxts.dev/api/isObject)
+- [isString](https://fxts.dev/api/isString)
+- [isUndefined](https://fxts.dev/api/isUndefined)
+
+### Utility Functions
+
+- [debounce](https://fxts.dev/api/debounce)
+- [shuffle](https://fxts.dev/api/shuffle)
+
+## Docs
+
+- [Official Documentation](https://fxts.dev/api/)
+- [Getting Started](https://fxts.dev/getting-started)
+- [API Reference](https://fxts.dev/api/)

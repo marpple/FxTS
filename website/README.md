@@ -1,31 +1,69 @@
-# FxTS website
+# FxTS Documentation (VitePress)
 
-## Prerequisite
+Official documentation site for FxTS, built with [VitePress](https://vitepress.dev/).
 
-- api-extractor
-  ```
-  npm install -g @microsoft/api-extractor@7.52.6
-  ```
-- api-documenter
-  ```
-  npm install -g @microsoft/api-documenter@7.26.26
-  ```
-
-## Install / Update plugin markdown-plugin
+## Project Structure
 
 ```
-$ make install
-$ make plugin
+website/
+├── docs/                    # Documentation source files
+│   ├── .vitepress/          # VitePress config and theme
+│   ├── api/                 # Auto-generated API docs (do not edit manually)
+│   ├── guide/               # Guide articles
+│   └── public/              # Static assets (images, favicon)
+└── generate-api-docs/       # API documentation generator
+    ├── markdown-plugin/     # Custom api-documenter plugin
+    ├── scripts/             # Build scripts
+    └── function.json        # Function categories for sidebar
 ```
 
-## Document build
+**Note**: Files in `docs/api/` are auto-generated. Edit source code TSDoc comments instead.
+
+## Setup
+
+```bash
+npm install
+```
+
+## Development
+
+```bash
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## API Docs Generation
+
+API docs are auto-generated from TypeScript source code using `@microsoft/api-extractor` and `@microsoft/api-documenter`.
+
+```bash
+cd generate-api-docs
+make
+```
+
+Output: `docs/api/`
+
+### Structure
 
 ```
-$ make build
+generate-api-docs/
+├── markdown-plugin/     # Custom api-documenter plugin
+├── scripts/             # Build scripts
+├── api-extractor.json   # Extracts API info from dist/types
+├── api-documenter.json  # Configures markdown generation
+└── function.json        # Function categories for index page
 ```
 
-## Start
+### Updating API Docs
 
-```
-$ npm run start
-```
+1. Build FxTS first: `npm run build` (in root)
+2. Run `make` in `generate-api-docs/`
+
+### Adding New Functions
+
+Edit `generate-api-docs/function.json` to categorize new functions.
