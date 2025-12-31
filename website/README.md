@@ -28,13 +28,13 @@ npm install
 ## Development
 
 ```bash
-npm run docs:dev
+npm run dev
 ```
 
 ## Build
 
 ```bash
-npm run docs:build
+npm run build
 ```
 
 ## API Docs Generation

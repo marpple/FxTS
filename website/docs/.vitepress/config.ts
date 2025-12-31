@@ -70,7 +70,7 @@ export default defineConfig({
 
     footer: {
       message: "Released under the Apache-2.0 License.",
-      copyright: `Copyright © ${new Date().getFullYear()} MARPPLE CORP.`,
+      copyright: `Copyright © ${new Date().getFullYear()} <a href="https://www.marpplecorp.com/">MARPPLE CORP.</a>`,
     },
 
     search: {
