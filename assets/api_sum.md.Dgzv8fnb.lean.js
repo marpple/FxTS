@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as h,aj as t}from"./chunks/framework.qjBC5Ck2.js";const g=JSON.parse('{"title":"","description":"","frontmatter":{"id":"sum"},"headers":[],"relativePath":"api/sum.md","filePath":"api/sum.md"}'),k={name:"api/sum.md"};function n(l,s,e,p,r,d){return h(),a("div",null,[...s[0]||(s[0]=[t("",7)])])}const y=i(k,[["render",n]]);export{g as __pageData,y as default};
