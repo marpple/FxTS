@@ -2,10 +2,10 @@ import * as fs from "fs";
 import * as path from "path";
 import * as util from "util";
 import {
-  IMarkdownDocumenterFeatureOnBeforeWritePageArgs,
   MarkdownDocumenterFeature,
+  type IMarkdownDocumenterFeatureOnBeforeWritePageArgs,
 } from "@microsoft/api-documenter";
-import { ApiItem } from "@microsoft/api-extractor-model";
+import type { ApiItem } from "@microsoft/api-extractor-model";
 
 import FunctionJson from "./function.json"; // Same file as /website/function.json. Used to judge path inside markdown-plugin, copy inside because of file path issue after build.
 
@@ -13,7 +13,7 @@ import {
   FuncParameters,
   Signature,
   SignatureOut,
-  SignatureType,
+  type SignatureType,
 } from "./Signature";
 import SignatureMap from "./SignatureMap";
 
@@ -136,7 +136,45 @@ class MarkdownFeature extends MarkdownDocumenterFeature {
 
   private async rewriteSignatures() {
     const files = fs.readdirSync(this.context.outputFolder);
-    await Promise.all(files.map((file) => this.rewriteSignature(file)));
+    // Group files by package name to handle overloads
+    const filesByPackage = new Map<string, string[]>();
+
+    for (const file of files) {
+      const packageName = this.getPackageName(file);
+      if (!filesByPackage.has(packageName)) {
+        filesByPackage.set(packageName, []);
+      }
+      const pkgFiles = filesByPackage.get(packageName);
+      if (pkgFiles) {
+        pkgFiles.push(file);
+      }
+    }
+
+    // Process only the first file for each package (overloads are already merged in signature)
+    const filesToProcess: string[] = [];
+    const filesToDelete: string[] = [];
+
+    for (const [, pkgFiles] of filesByPackage) {
+      if (pkgFiles.length > 0) {
+        // Sort to ensure consistent order (process base file first if exists)
+        pkgFiles.sort();
+        filesToProcess.push(pkgFiles[0]);
+        // Delete other overload files
+        for (let i = 1; i < pkgFiles.length; i++) {
+          filesToDelete.push(pkgFiles[i]);
+        }
+      }
+    }
+
+    // Process main files
+    await Promise.all(
+      filesToProcess.map((file) => this.rewriteSignature(file)),
+    );
+
+    // Delete overload files
+    await Promise.all(
+      filesToDelete.map((file) => unLinkP(this.getFilePath(file))),
+    );
   }
 
   private async rewriteSignature(file: string): Promise<void> {
@@ -171,7 +209,10 @@ class MarkdownFeature extends MarkdownDocumenterFeature {
   }
 
   private getPackageName(file: string) {
-    return file.split(".")[1];
+    // Extract package name from file like "fxts-website.add_1.md" or "fxts-website.add.md"
+    // and remove overload suffix (_1, _2, etc)
+    const packageName = file.split(".")[1];
+    return packageName ? packageName.replace(/_\d+$/, "") : packageName;
   }
 
   private spliceText(
