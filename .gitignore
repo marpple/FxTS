@@ -1,6 +1,24 @@
+# IDE
 .idea
-.DS_Store
 .vscode
+
+# Dependencies
 node_modules/
+
+# Build output
 dist/
+lib/
 coverage/
+
+# VitePress
+**/.vitepress/cache/
+**/.vitepress/dist/
+
+# Generated files
+website/generate-api-docs/temp/
+website/generate-api-docs/markdown-plugin/markdown-plugin-*
+website/docs/api/
+
+# Misc
+.DS_Store
+*.local

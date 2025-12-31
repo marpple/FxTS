@@ -4,28 +4,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Generate API docs
+        working-directory: website/generate-api-docs
+        run: make all
       - name: Build website
         working-directory: website
         run: |
           npm ci
-          npm install -g @microsoft/api-extractor@7.52.6
-          npm install -g @microsoft/api-documenter@7.26.26
-          make all
           npm run build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Build output to publish to the `gh-pages` branch:
-          publish_dir: ./website/build
+          publish_dir: ./website/docs/.vitepress/dist
           cname: fxts.dev
-          # Assign commit authorship to the official GH-Actions bot for deploys to `gh-pages` branch:
-          # https://github.com/actions/checkout/issues/13#issuecomment-724415212
-          # The GH actions bot is used by default if you didn't specify the two fields.
-          # You can swap them out with your own user credentials.
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
