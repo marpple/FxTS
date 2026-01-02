@@ -64,6 +64,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-takewhile-e6gqt)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/ko/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ko/api/toAsync)<!-- -->, [toArray](https://fxts.dev/ko/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/takeWhile.ts)

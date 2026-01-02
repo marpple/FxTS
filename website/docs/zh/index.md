@@ -14,7 +14,7 @@ hero:
       link: /zh/guide/getting-started
     - theme: alt
       text: API 文档
-      link: /api/
+      link: /zh/api/
 
 features:
   - icon: "⚡"

@@ -3,7 +3,7 @@ import identity from "./identity";
 /**
  * throw return of `err` if predicate function return true
  *
- * default throw function is {@link https://fxts.dev/docs/identity | identity }
+ * default throw function is {@link https://fxts.dev/api/identity | identity }
  *
  * @example
  * ```ts

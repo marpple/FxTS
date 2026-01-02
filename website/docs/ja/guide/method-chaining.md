@@ -1,6 +1,6 @@
 # メソッドチェーン
 
-[pipe](/api/pipe)で Iterable/AsyncIterable を処理できますが、`fxts`はメソッドチェーン形式でのデータ変換も提供しています。
+[pipe](/ja/api/pipe)で Iterable/AsyncIterable を処理できますが、`fxts`はメソッドチェーン形式でのデータ変換も提供しています。
 
 ```ts
 fx([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -17,7 +17,7 @@ fx("abc")
 
 **注意: `fx`はデフォルトで遅延評価を使用するため、`toArray`、`groupBy`、`indexBy`、`some`などの即時評価メソッドが実行されるまで実際には評価されません。**
 
-遅延評価の詳細については、/api/lazy-evaluation を参照してください。
+遅延評価の詳細については、/ja/api/lazy-evaluation を参照してください。
 
 ### AsyncIterable の処理サポート
 
@@ -40,7 +40,7 @@ await fx([1, 2, 3, 4])
 
 `fx`は並行操作をサポートしています。concurrent で見たように、concurrent は asyncIterable でのみ使用できます。
 
-`fxts`での並行処理の詳細については、/api/handle-concurrency を参照してください。
+`fxts`での並行処理の詳細については、/ja/api/handle-concurrency を参照してください。
 
 ```ts
 /**

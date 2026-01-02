@@ -24,7 +24,7 @@ import type ReturnValueType from "./types/ReturnValueType";
  * ```
  *
  *
- * see {@link https://fxts.dev/docs/entries | entries}
+ * see {@link https://fxts.dev/api/entries | entries}
  */
 
 function fromEntries<

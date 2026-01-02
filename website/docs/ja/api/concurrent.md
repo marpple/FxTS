@@ -6,7 +6,7 @@ id: concurrent
 
 ## concurrent() function
 
-Concurrent は複数の非同期リクエストの負荷を分散するために使用されます。最初の引数は負荷の数を制御する数値を受け取り、2 番目の引数は AsyncIterable です。AsyncIterable を作成するには[toAsync](https://fxts.dev/docs/toAsync)を参照してください。
+Concurrent は複数の非同期リクエストの負荷を分散するために使用されます。最初の引数は負荷の数を制御する数値を受け取り、2 番目の引数は AsyncIterable です。AsyncIterable を作成するには[toAsync](https://fxts.dev/ja/api/toAsync)を参照してください。
 
 **Signature:**
 
@@ -56,6 +56,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-concurrent-4x58c)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray) [each](https://fxts.dev/docs/each)<!-- -->, [map](https://fxts.dev/docs/map)
+see [pipe](https://fxts.dev/ja/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ja/api/toAsync)<!-- -->, [toArray](https://fxts.dev/ja/api/toArray) [each](https://fxts.dev/ja/api/each)<!-- -->, [map](https://fxts.dev/ja/api/map)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/concurrent.ts)

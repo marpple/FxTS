@@ -8,7 +8,7 @@ id: throwIf
 
 述語関数が true を返す場合、`err`の戻り値をスローします。
 
-デフォルトのスロー関数は[identity](https://fxts.dev/docs/identity)です。
+デフォルトのスロー関数は[identity](https://fxts.dev/ja/api/identity)です。
 
 **Signature:**
 

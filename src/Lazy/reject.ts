@@ -7,7 +7,7 @@ import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType
 import filter from "./filter";
 
 /**
- * The opposite of {@link https://fxts.dev/docs/filter | filter}
+ * The opposite of {@link https://fxts.dev/api/filter | filter}
  * Iterable/AsyncIterable of all elements `f` returns falsy for
  *
  * @example
@@ -51,8 +51,8 @@ import filter from "./filter";
  *
  * {@link https://codesandbox.io/s/fxts-reject-vrc7d | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 
 function reject<A, B extends A>(

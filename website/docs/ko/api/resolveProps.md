@@ -54,6 +54,6 @@ console.log({
 });
 ```
 
-see [pipe](https://fxts.dev/docs/pipe) and [evolve](https://fxts.dev/docs/evolve)<!-- -->.
+see [pipe](https://fxts.dev/ko/api/pipe) and [evolve](https://fxts.dev/ko/api/evolve)<!-- -->.
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/resolveProps.ts)

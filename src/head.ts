@@ -43,7 +43,7 @@ type HeadReturnType<T> = T extends readonly [a: infer H, ...rest: any[]]
  *
  * {@link https://codesandbox.io/s/fxts-head-4sh8u | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync}
  */
 function head<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: T,

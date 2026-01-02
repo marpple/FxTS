@@ -4,7 +4,7 @@
 
 JavaScript에는 [Promise.all](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)로 여러 promise 값을 동시에 평가하는 함수가 있습니다.
 그러나 동시 요청의 부하를 처리할 수 없고 무한한 열거 가능한 데이터 집합에 대한 요청을 처리할 수 없습니다.
-[concurrent](/api/concurrent)는 무한 데이터 집합의 비동기 요청을 처리하고 부하의 요청 크기를 제어할 수 있습니다.
+[concurrent](/ko/api/concurrent)는 무한 데이터 집합의 비동기 요청을 처리하고 부하의 요청 크기를 제어할 수 있습니다.
 
 ```ts
 // prettier-ignore

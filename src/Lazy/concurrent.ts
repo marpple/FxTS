@@ -20,7 +20,7 @@ export const isConcurrent = (concurrent: unknown): concurrent is Concurrent => {
 /**
  * Concurrent is used to balance the load of multiple asynchronous requests.
  * The first argument receives a number that controls the number of loads, and the second argument is an AsyncIterable.
- * See {@link https://fxts.dev/docs/toAsync | toAsync} to create an AsyncIterable .
+ * See {@link https://fxts.dev/api/toAsync | toAsync} to create an AsyncIterable .
  *
  * @example
  * ```ts
@@ -60,8 +60,8 @@ export const isConcurrent = (concurrent: unknown): concurrent is Concurrent => {
  *
  * {@link https://codesandbox.io/s/fxts-concurrent-4x58c | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync}, {@link https://fxts.dev/docs/toArray | toArray}
- * {@link https://fxts.dev/docs/each | each}, {@link https://fxts.dev/docs/map | map}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync}, {@link https://fxts.dev/api/toArray | toArray}
+ * {@link https://fxts.dev/api/each | each}, {@link https://fxts.dev/api/map | map}
  */
 function concurrent<A>(
   length: number,

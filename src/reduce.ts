@@ -99,8 +99,8 @@ async function async<T, Acc>(
  *
  * {@link https://codesandbox.io/s/fxts-reduce-tf56j  | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/map | map}, {@link https://fxts.dev/docs/filter | filter}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/map | map}, {@link https://fxts.dev/api/filter | filter}
  *
  * @typeParam T - Type of values in `iterable` which would be consummed.
  * @typeParam Acc - Type of `acc` which is the type of accumulative value

@@ -35,7 +35,7 @@
  * })
  * ```
  *
- * see {@link https://fxts.dev/docs/pipe | pipe} and {@link https://fxts.dev/docs/evolve | evolve}.
+ * see {@link https://fxts.dev/api/pipe | pipe} and {@link https://fxts.dev/api/evolve | evolve}.
  *
  * @typeParam T - Type of input object
  * @typeParam Key - Alias type of Keys of input object which are not symbols

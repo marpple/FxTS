@@ -35,6 +35,6 @@ await pipe(range(4), toAsync, toArray); // [0, 1, 2, 3]
 
 [Try It](https://codesandbox.io/s/fxts-range-3phyd)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/ko/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ko/api/toAsync)<!-- -->, [toArray](https://fxts.dev/ko/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/range.ts)

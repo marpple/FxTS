@@ -6,6 +6,8 @@ export default defineConfig({
   title: "FxTS",
   description: "A functional library for TypeScript/JavaScript programmers.",
 
+  cleanUrls: true,
+
   head: [
     ["link", { rel: "icon", href: "/img/favicon.ico" }],
     [

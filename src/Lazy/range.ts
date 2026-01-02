@@ -32,8 +32,8 @@
  *
  * {@link https://codesandbox.io/s/fxts-range-3phyd | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 function range(length: number): IterableIterator<number>;
 function range(start: number, end: number): IterableIterator<number>;

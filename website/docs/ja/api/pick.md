@@ -44,6 +44,6 @@ const anonymousDeveloper = await pick(
 );
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [omit](https://fxts.dev/docs/omit)<!-- -->,
+see [pipe](https://fxts.dev/ja/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ja/api/toAsync)<!-- -->, [omit](https://fxts.dev/ja/api/omit)<!-- -->,
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/pick.ts)

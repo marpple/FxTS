@@ -6,7 +6,7 @@ id: concurrent
 
 ## concurrent() function
 
-Concurrent는 여러 비동기 요청의 부하를 분산하는 데 사용됩니다. 첫 번째 인자는 부하 수를 제어하는 숫자를 받고, 두 번째 인자는 AsyncIterable입니다. AsyncIterable을 만들려면 [toAsync](https://fxts.dev/docs/toAsync)를 참조하세요.
+Concurrent는 여러 비동기 요청의 부하를 분산하는 데 사용됩니다. 첫 번째 인자는 부하 수를 제어하는 숫자를 받고, 두 번째 인자는 AsyncIterable입니다. AsyncIterable을 만들려면 [toAsync](https://fxts.dev/ko/api/toAsync)를 참조하세요.
 
 **Signature:**
 
@@ -56,6 +56,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-concurrent-4x58c)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray) [each](https://fxts.dev/docs/each)<!-- -->, [map](https://fxts.dev/docs/map)
+see [pipe](https://fxts.dev/ko/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ko/api/toAsync)<!-- -->, [toArray](https://fxts.dev/ko/api/toArray) [each](https://fxts.dev/ko/api/each)<!-- -->, [map](https://fxts.dev/ko/api/map)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/concurrent.ts)

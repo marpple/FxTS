@@ -53,8 +53,8 @@ type ReturnFlatMapType<
  *
  * {@link https://codesandbox.io/s/fxts-flatmap-3g9k8 | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 function flatMap<A, B = unknown>(
   f: (a: A) => B,

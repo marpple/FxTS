@@ -22,8 +22,8 @@ import { isPromise } from "../_internal/utils";
  *
  * {@link https://codesandbox.io/s/fxts-toasync-00nxr | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 function toAsync<T>(iter: Iterable<T | Promise<T>>): AsyncIterableIterator<T> {
   const iterator = iter[Symbol.iterator]();

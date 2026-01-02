@@ -41,7 +41,7 @@ type LastReturnType<T> = T extends readonly [...rest: any[], a: infer L]
  *
  * {@link https://codesandbox.io/s/fxts-last-zbvq8 | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync}
  */
 function last<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: T,

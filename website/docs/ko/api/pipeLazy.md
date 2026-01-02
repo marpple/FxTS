@@ -55,6 +55,6 @@ await pipeLazy(
 ]); // [12, 14]
 ```
 
-see [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [map](https://fxts.dev/docs/map)<!-- -->, [filter](https://fxts.dev/docs/filter)
+see [toAsync](https://fxts.dev/ko/api/toAsync)<!-- -->, [map](https://fxts.dev/ko/api/map)<!-- -->, [filter](https://fxts.dev/ko/api/filter)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/pipeLazy.ts)

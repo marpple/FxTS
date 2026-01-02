@@ -11,7 +11,7 @@ async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
 
 /**
  * Takes item from Iterable/AsyncIterable and returns an array.
- * It is recommended to use {@link https://fxts.dev/docs/pipe | pipe} together.
+ * It is recommended to use {@link https://fxts.dev/api/pipe | pipe} together.
  *
  * @example
  * ```ts
@@ -56,8 +56,8 @@ async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
  *
  * {@link https://codesandbox.io/s/fxts-toarray-fy84i | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/map | map}, {@link https://fxts.dev/docs/filter | filter}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/map | map}, {@link https://fxts.dev/api/filter | filter}
  */
 function toArray<A extends Iterable<unknown> | AsyncIterable<unknown>>(
   iter: A,

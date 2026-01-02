@@ -42,7 +42,7 @@ type EntriesResult<T> = T extends Map<infer K, infer V>
  * // [[1, 1], [2, 2], [3, 3]]
  * ```
  *
- * see {@link https://fxts.dev/docs/fromEntries | fromEntries}
+ * see {@link https://fxts.dev/api/fromEntries | fromEntries}
  */
 
 function entries<T extends Map<any, any> | Set<any> | Record<Key, any>>(

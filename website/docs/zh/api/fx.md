@@ -8,7 +8,7 @@ id: fx
 
 `fx` 允许以方法链的形式使用现有 `fxts` 提供的函数。并非所有函数都以方法形式提供,必要时可以通过 `chain` 连接。
 
-see [guide](https://fxts.dev/docs/method-chaining)
+see [guide](https://fxts.dev/zh/api/method-chaining)
 
 **Signature:**
 

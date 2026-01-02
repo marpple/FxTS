@@ -71,7 +71,7 @@ function async<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<T> {
  * ); // "edcba"
  * ```
  *
- * see {@link https://fxts.dev/docs/pipe | pipe} {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe} {@link https://fxts.dev/api/toArray | toArray}
  */
 function reverse<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: T,

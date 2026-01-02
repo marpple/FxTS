@@ -6,7 +6,7 @@ id: toArray
 
 ## toArray() function
 
-Iterable/AsyncIterable から項目を取得し、配列を返します。[pipe](https://fxts.dev/docs/pipe)と一緒に使用することをお勧めします。
+Iterable/AsyncIterable から項目を取得し、配列を返します。[pipe](https://fxts.dev/ja/api/pipe)と一緒に使用することをお勧めします。
 
 **Signature:**
 
@@ -60,6 +60,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-toarray-fy84i)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [map](https://fxts.dev/docs/map)<!-- -->, [filter](https://fxts.dev/docs/filter)
+see [pipe](https://fxts.dev/ja/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ja/api/toAsync)<!-- -->, [map](https://fxts.dev/ja/api/map)<!-- -->, [filter](https://fxts.dev/ja/api/filter)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/toArray.ts)

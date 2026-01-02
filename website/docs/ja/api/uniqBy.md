@@ -6,7 +6,7 @@ id: uniqBy
 
 ## uniqBy() function
 
-[uniq](https://fxts.dev/docs/uniq)とは異なり、指定された Iterable/AsyncIterable 内で`f`を適用して重複値を削除した Iterable/AsyncIterable を返します。結果の値の順序は、配列内で出現する順序によって決定されます。
+[uniq](https://fxts.dev/ja/api/uniq)とは異なり、指定された Iterable/AsyncIterable 内で`f`を適用して重複値を削除した Iterable/AsyncIterable を返します。結果の値の順序は、配列内で出現する順序によって決定されます。
 
 **Signature:**
 
@@ -66,6 +66,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-uniqby-zb5d9)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/ja/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ja/api/toAsync)<!-- -->, [toArray](https://fxts.dev/ja/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/uniqBy.ts)

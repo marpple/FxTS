@@ -44,8 +44,8 @@ import type ReturnPipeType from "./types/ReturnPipeType";
  *
  * {@link https://codesandbox.io/s/fxts-toarray-fy84i | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/map | map}, {@link https://fxts.dev/docs/filter | filter}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/map | map}, {@link https://fxts.dev/api/filter | filter}
  */
 // eslint-disable-next-line
 // @ts-ignore

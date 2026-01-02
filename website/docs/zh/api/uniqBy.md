@@ -6,7 +6,7 @@ id: uniqBy
 
 ## uniqBy() function
 
-与 [uniq](https://fxts.dev/docs/uniq) 不同,返回通过在给定的 Iterable/AsyncIterable 内应用 `f` 来移除重复值的 Iterable/AsyncIterable。结果值的顺序由它们在数组中出现的顺序决定。
+与 [uniq](https://fxts.dev/zh/api/uniq) 不同,返回通过在给定的 Iterable/AsyncIterable 内应用 `f` 来移除重复值的 Iterable/AsyncIterable。结果值的顺序由它们在数组中出现的顺序决定。
 
 **Signature:**
 
@@ -66,6 +66,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-uniqby-zb5d9)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/zh/api/pipe)<!-- -->, [toAsync](https://fxts.dev/zh/api/toAsync)<!-- -->, [toArray](https://fxts.dev/zh/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/uniqBy.ts)

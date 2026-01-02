@@ -8,7 +8,7 @@ id: throwIf
 
 如果谓词函数返回 true,则抛出 `err` 的返回值。
 
-default throw function is [identity](https://fxts.dev/docs/identity)
+default throw function is [identity](https://fxts.dev/zh/api/identity)
 
 **Signature:**
 

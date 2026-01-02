@@ -63,6 +63,6 @@ await pipe(
 ); // [5, 1, 2]
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/zh/api/pipe)<!-- -->, [toAsync](https://fxts.dev/zh/api/toAsync)<!-- -->, [toArray](https://fxts.dev/zh/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/dropUntil.ts)

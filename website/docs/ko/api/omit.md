@@ -41,6 +41,6 @@ pipe(person, omit(["team", "preferredLanguage"]));
 const anonymous = await omit(toAsync(["name"] as const), person);
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [pick](https://fxts.dev/docs/pick)<!-- -->,
+see [pipe](https://fxts.dev/ko/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ko/api/toAsync)<!-- -->, [pick](https://fxts.dev/ko/api/pick)<!-- -->,
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/omit.ts)

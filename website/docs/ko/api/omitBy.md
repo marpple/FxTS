@@ -38,6 +38,6 @@ await pipe(
 );
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [omit](https://fxts.dev/docs/omit)<!-- -->,
+see [pipe](https://fxts.dev/ko/api/pipe)<!-- -->, [omit](https://fxts.dev/ko/api/omit)<!-- -->,
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/omitBy.ts)

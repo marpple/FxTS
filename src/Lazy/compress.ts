@@ -28,7 +28,7 @@ import zip from "./zip";
  * ); // [2, 3]
  * ```
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toArray | toArray}
  */
 function compress<A, B>(
   selector: Array<A>,

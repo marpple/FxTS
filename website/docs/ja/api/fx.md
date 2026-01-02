@@ -8,7 +8,7 @@ id: fx
 
 `fx` は既存の `fxts` が提供する関数をメソッドチェーンで使用できるようにします。すべての関数がメソッドとして提供されているわけではなく、必要に応じて `chain` を通じて接続できます。
 
-see [guide](https://fxts.dev/docs/method-chaining)
+see [guide](https://fxts.dev/ja/api/method-chaining)
 
 **Signature:**
 

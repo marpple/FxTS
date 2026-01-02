@@ -4,7 +4,7 @@
 
 JavaScript には、[Promise.all](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)で複数の promise 値を同時に評価する関数があります。
 しかし、同時リクエストの負荷を処理できず、無限の列挙可能なデータセットへのリクエストを処理できません。
-[concurrent](/api/concurrent)は、無限データセットの非同期リクエストを処理し、負荷のリクエストサイズを制御できます。
+[concurrent](/ja/api/concurrent)は、無限データセットの非同期リクエストを処理し、負荷のリクエストサイズを制御できます。
 
 ```ts
 // prettier-ignore

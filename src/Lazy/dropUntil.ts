@@ -105,8 +105,8 @@ function async<A, B>(
  *  toArray,
  * ); // [5, 1, 2]
  * ```
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 function dropUntil<A, B = unknown>(
   f: (a: A) => B,
