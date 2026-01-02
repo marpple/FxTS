@@ -1,9 +1,8 @@
 import { defineConfig } from "vitepress";
 
-import { generateSidebar } from "./sidebar";
+import { enConfig, jaConfig, koConfig, zhConfig } from "./locales";
 
 export default defineConfig({
-  lang: "en",
   title: "FxTS",
   description: "A functional library for TypeScript/JavaScript programmers.",
 
@@ -26,47 +25,24 @@ export default defineConfig({
     ],
   ],
 
+  locales: {
+    root: {
+      ...enConfig,
+    },
+    ko: {
+      ...koConfig,
+    },
+    ja: {
+      ...jaConfig,
+    },
+    zh: {
+      ...zhConfig,
+    },
+  },
+
   themeConfig: {
     logo: "/img/fxts.png",
     siteTitle: "FxTS",
-
-    nav: [
-      { text: "Guide", link: "/guide/getting-started", activeMatch: "/guide/" },
-      { text: "API", link: "/api/", activeMatch: "/api/" },
-      { text: "GitHub", link: "https://github.com/marpple/fxts" },
-    ],
-
-    sidebar: {
-      "/": [
-        {
-          text: "Getting Started",
-          link: "/guide/getting-started",
-        },
-        {
-          text: "Core Concepts",
-          collapsed: false,
-          items: [
-            {
-              text: "Function Composition",
-              link: "/guide/function-composition",
-            },
-            { text: "Lazy Evaluation", link: "/guide/lazy-evaluation" },
-            { text: "Handle Concurrency", link: "/guide/handle-concurrency" },
-            { text: "Error Handling", link: "/guide/error-handling" },
-            { text: "Method Chaining", link: "/guide/method-chaining" },
-          ],
-        },
-        {
-          text: "FAQ",
-          collapsed: false,
-          items: [
-            { text: "When to use toAsync?", link: "/guide/to-async" },
-            { text: "How to debug in pipeline?", link: "/guide/how-to-debug" },
-          ],
-        },
-      ],
-      "/api/": generateSidebar(),
-    },
 
     footer: {
       message: "Released under the Apache-2.0 License.",
@@ -79,6 +55,40 @@ export default defineConfig({
         appId: "0G39LGZ9QE",
         apiKey: "6234b2f489b3f43928034ab6c128f06c",
         indexName: "fxts",
+        locales: {
+          root: {
+            placeholder: "Search docs",
+            translations: {
+              button: {
+                buttonText: "Search",
+              },
+            },
+          },
+          ko: {
+            placeholder: "문서 검색",
+            translations: {
+              button: {
+                buttonText: "검색",
+              },
+            },
+          },
+          ja: {
+            placeholder: "ドキュメント検索",
+            translations: {
+              button: {
+                buttonText: "検索",
+              },
+            },
+          },
+          zh: {
+            placeholder: "搜索文档",
+            translations: {
+              button: {
+                buttonText: "搜索",
+              },
+            },
+          },
+        },
       },
     },
   },
