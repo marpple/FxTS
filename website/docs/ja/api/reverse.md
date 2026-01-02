@@ -37,6 +37,6 @@ pipe([1, 2, 3, 4, 5], reverse, toArray); // [5, 4, 3, 2, 1]
 pipe("abcde", reverse, toArray); // "edcba"
 ```
 
-see [pipe](https://fxts.dev/docs/pipe) [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/ja/api/pipe) [toArray](https://fxts.dev/ja/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/reverse.ts)

@@ -34,6 +34,6 @@ const entries = (obj: { a: number; b: number }) =>
 entries({ a: 1, b: 2 }); // [ ["a", 1], ["b", 2] ]
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [apply](https://fxts.dev/docs/apply)
+see [pipe](https://fxts.dev/ko/api/pipe)<!-- -->, [apply](https://fxts.dev/ko/api/apply)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/juxt.ts)

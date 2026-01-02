@@ -34,8 +34,8 @@ import map from "./map";
  *  toArray,
  * ); // [21, 22 ,23]
  * ```
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 function pluck<O extends object, K extends keyof O>(
   key: K,

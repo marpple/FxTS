@@ -6,7 +6,7 @@ id: reject
 
 ## reject() function
 
-与 [filter](https://fxts.dev/docs/filter) 相反,返回 `f` 返回假值的所有元素的 Iterable/AsyncIterable。
+与 [filter](https://fxts.dev/zh/api/filter) 相反,返回 `f` 返回假值的所有元素的 Iterable/AsyncIterable。
 
 **Signature:**
 
@@ -66,6 +66,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-reject-vrc7d)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/zh/api/pipe)<!-- -->, [toAsync](https://fxts.dev/zh/api/toAsync)<!-- -->, [toArray](https://fxts.dev/zh/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/reject.ts)

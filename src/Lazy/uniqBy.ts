@@ -6,7 +6,7 @@ import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType
 import filter from "./filter";
 
 /**
- * Unlike {@link https://fxts.dev/docs/uniq | uniq} returns Iterable/AsyncIterable
+ * Unlike {@link https://fxts.dev/api/uniq | uniq} returns Iterable/AsyncIterable
  * with duplicate values removed by applying with `f` inside the given Iterable/AsyncIterable.
  * The order of result values is determined by the order they occur in the array.
  *
@@ -50,8 +50,8 @@ import filter from "./filter";
  *
  * {@link https://codesandbox.io/s/fxts-uniqby-zb5d9 | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 function uniqBy<A, B>(
   f: (a: A) => B,

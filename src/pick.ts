@@ -52,8 +52,8 @@ async function async<T extends object, U extends AsyncIterable<keyof T>>(
  * // if you want to use AsyncIterable as the list of property names
  * const anonymousDeveloper = await pick(toAsync(["preferredLanguage"] as const), person);
  * ```
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/omit | omit},
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/omit | omit},
  */
 
 function pick<T extends object, U extends readonly []>(

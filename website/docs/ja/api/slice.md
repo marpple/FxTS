@@ -41,6 +41,6 @@ pipe([1, 2, 3, 4, 5], slice(3), toArray); // [4, 5]
 pipe([1, 2, 3, 4, 5], slice(1, 3), toArray); // [2, 3]
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/ja/api/pipe)<!-- -->, [toArray](https://fxts.dev/ja/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/slice.ts)

@@ -41,7 +41,7 @@ import type ReturnPartitionType from "./types/ReturnPartitionType";
  *
  * {@link https://codesandbox.io/s/fxts-partition-7vns0 | Try It}
  *
- *  see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync}
+ *  see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync}
  */
 
 function partition<

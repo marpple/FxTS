@@ -8,7 +8,7 @@ id: throwIf
 
 조건자 함수가 true를 반환하면 `err`의 반환값을 throw합니다.
 
-default throw function is [identity](https://fxts.dev/docs/identity)
+default throw function is [identity](https://fxts.dev/ko/api/identity)
 
 **Signature:**
 

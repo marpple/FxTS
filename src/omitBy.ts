@@ -34,7 +34,7 @@ import type {
  *   omitBy(async ([key, value]) => key === "a" || value === true)
  * );
  * ```
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/omit | omit},
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/omit | omit},
  */
 
 function omitBy<T extends object, F extends AsyncEntryPredicate<T>>(

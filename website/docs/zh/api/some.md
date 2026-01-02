@@ -55,6 +55,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-some-inp3l)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [map](https://fxts.dev/docs/map)
+see [pipe](https://fxts.dev/zh/api/pipe)<!-- -->, [toAsync](https://fxts.dev/zh/api/toAsync)<!-- -->, [map](https://fxts.dev/zh/api/map)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/some.ts)

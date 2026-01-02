@@ -89,7 +89,7 @@ function async(
  * ); // ["1", "2", "3", "4", "5"]
  * ```
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toArray | toArray}
  */
 function split(
   sep: string,

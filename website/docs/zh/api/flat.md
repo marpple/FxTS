@@ -35,6 +35,6 @@ await pipe(Promise.resolve([1, [2, 3], [[4, 5]]]), flat, toArray); // [1, 2, 3, 
 
 [Try It](https://codesandbox.io/s/fxts-flat-6t2in)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/zh/api/pipe)<!-- -->, [toAsync](https://fxts.dev/zh/api/toAsync)<!-- -->, [toArray](https://fxts.dev/zh/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/flat.ts)

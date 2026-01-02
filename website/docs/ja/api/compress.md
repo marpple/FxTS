@@ -34,6 +34,6 @@ iter2.next(); // {value: undefined, done:true }
 pipe([1, 2, 3], compress([false, true, true]), toArray); // [2, 3]
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/ja/api/pipe)<!-- -->, [toArray](https://fxts.dev/ja/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/compress.ts)

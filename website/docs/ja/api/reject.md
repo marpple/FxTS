@@ -6,7 +6,7 @@ id: reject
 
 ## reject() function
 
-[filter](https://fxts.dev/docs/filter)の反対で、`f`が falsy を返すすべての要素の Iterable/AsyncIterable を返します。
+[filter](https://fxts.dev/ja/api/filter)の反対で、`f`が falsy を返すすべての要素の Iterable/AsyncIterable を返します。
 
 **Signature:**
 
@@ -66,6 +66,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-reject-vrc7d)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/ja/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ja/api/toAsync)<!-- -->, [toArray](https://fxts.dev/ja/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/reject.ts)

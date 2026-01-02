@@ -93,7 +93,7 @@ type JuxtReturnTypes<
  * entries({ a: 1, b: 2 }); // [ ["a", 1], ["b", 2] ]
  * ```
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/apply | apply}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/apply | apply}
  */
 
 function juxt<FS extends Array<Arrow>>(

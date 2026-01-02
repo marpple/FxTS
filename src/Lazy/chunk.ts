@@ -101,8 +101,8 @@ function async<T>(
  *
  * {@link https://codesandbox.io/s/fxts-chunk-gksly | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 function chunk<T>(size: number, iterable: Iterable<T>): IterableIterator<T[]>;
 function chunk<T>(

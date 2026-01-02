@@ -27,6 +27,6 @@ await average(toAsync([1, 2, 3, 4, 5])); // 3
 pipe([1, 2, 3, 4, 5], average); // 3
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)
+see [pipe](https://fxts.dev/ko/api/pipe)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/average.ts)

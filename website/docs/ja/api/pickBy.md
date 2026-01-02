@@ -38,6 +38,6 @@ await pipe(
 );
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [pick](https://fxts.dev/docs/pick)<!-- -->,
+see [pipe](https://fxts.dev/ja/api/pipe)<!-- -->, [pick](https://fxts.dev/ja/api/pick)<!-- -->,
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/pickBy.ts)

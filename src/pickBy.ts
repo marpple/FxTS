@@ -34,7 +34,7 @@ import type {
  *   pickBy(async ([key, value]) => key === "a" || value === true)
  * );
  * ```
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/pick | pick},
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/pick | pick},
  */
 
 function pickBy<T extends object, F extends AsyncEntryPredicate<T>>(

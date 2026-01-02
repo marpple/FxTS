@@ -31,6 +31,6 @@ declare function entries<T extends Map<any, any> | Set<any> | Record<Key, any>>(
 // [[1, 1], [2, 2], [3, 3]]
 ```
 
-see [fromEntries](https://fxts.dev/docs/fromEntries)
+see [fromEntries](https://fxts.dev/ja/api/fromEntries)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/entries.ts)

@@ -20,7 +20,7 @@ import type ReturnValueType from "./types/ReturnValueType";
  * ); // 3
  * ```
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}
+ * see {@link https://fxts.dev/api/pipe | pipe}
  */
 function average<T extends Iterable<number> | AsyncIterable<number>>(
   iterable: T,

@@ -40,8 +40,8 @@ import type ReturnValueType from "./types/ReturnValueType";
  *
  * {@link https://codesandbox.io/s/fxts-some-inp3l | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/map | map}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/map | map}
  */
 // prettier-ignore
 

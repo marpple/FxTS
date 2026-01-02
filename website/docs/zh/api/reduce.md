@@ -91,6 +91,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-reduce-tf56j)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [map](https://fxts.dev/docs/map)<!-- -->, [filter](https://fxts.dev/docs/filter)
+see [pipe](https://fxts.dev/zh/api/pipe)<!-- -->, [toAsync](https://fxts.dev/zh/api/toAsync)<!-- -->, [map](https://fxts.dev/zh/api/map)<!-- -->, [filter](https://fxts.dev/zh/api/filter)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/reduce.ts)

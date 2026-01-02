@@ -63,8 +63,8 @@ function async<A>(
  *
  * {@link https://codesandbox.io/s/fxts-prepend-70ymx | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 function prepend<A>(a: A, iterable: Iterable<A>): IterableIterator<A>;
 

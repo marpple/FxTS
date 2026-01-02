@@ -39,8 +39,8 @@ import filter from "./filter";
  *
  * {@link https://codesandbox.io/s/fxts-compact-lnvmd | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 function compact<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   iterable: T,

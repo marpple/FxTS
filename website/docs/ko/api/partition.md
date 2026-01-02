@@ -57,6 +57,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-partition-7vns0)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)
+see [pipe](https://fxts.dev/ko/api/pipe)<!-- -->, [toAsync](https://fxts.dev/ko/api/toAsync)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/partition.ts)

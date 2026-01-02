@@ -8,7 +8,7 @@ id: fx
 
 `fx`를 사용하면 기존 `fxts`에서 제공하는 함수를 메서드 체이닝으로 사용할 수 있습니다. 모든 함수가 메서드로 제공되는 것은 아니며 필요한 경우 `chain`을 통해 연결할 수 있습니다.
 
-see [guide](https://fxts.dev/docs/method-chaining)
+see [guide](https://fxts.dev/ko/api/method-chaining)
 
 **Signature:**
 

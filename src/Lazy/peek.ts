@@ -50,8 +50,8 @@ import map from "./map";
  *
  * {@link https://codesandbox.io/s/fxts-peek-xm1jh | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 // prettier-ignore
 function peek<T>(

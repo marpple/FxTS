@@ -38,8 +38,8 @@ import type ReturnPipeType from "../types/ReturnPipeType";
  * )([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4), Promise.resolve(5)]); // [12, 14]
  * ```
  *
- * see {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/map | map}, {@link https://fxts.dev/docs/filter | filter}
+ * see {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/map | map}, {@link https://fxts.dev/api/filter | filter}
  */
 // prettier-ignore
 function pipeLazy<T1, R>(

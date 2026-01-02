@@ -6,7 +6,7 @@ id: concurrent
 
 ## concurrent() function
 
-concurrent 用于平衡多个异步请求的负载。第一个参数接收一个控制负载数量的数字,第二个参数是 AsyncIterable。查看 [toAsync](https://fxts.dev/docs/toAsync) 来创建 AsyncIterable。
+concurrent 用于平衡多个异步请求的负载。第一个参数接收一个控制负载数量的数字,第二个参数是 AsyncIterable。查看 [toAsync](https://fxts.dev/zh/api/toAsync) 来创建 AsyncIterable。
 
 **Signature:**
 
@@ -56,6 +56,6 @@ await pipe(
 
 [Try It](https://codesandbox.io/s/fxts-concurrent-4x58c)
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toAsync](https://fxts.dev/docs/toAsync)<!-- -->, [toArray](https://fxts.dev/docs/toArray) [each](https://fxts.dev/docs/each)<!-- -->, [map](https://fxts.dev/docs/map)
+see [pipe](https://fxts.dev/zh/api/pipe)<!-- -->, [toAsync](https://fxts.dev/zh/api/toAsync)<!-- -->, [toArray](https://fxts.dev/zh/api/toArray) [each](https://fxts.dev/zh/api/each)<!-- -->, [map](https://fxts.dev/zh/api/map)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/concurrent.ts)

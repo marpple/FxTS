@@ -31,6 +31,6 @@ iter.next(); // undefined
 pipe("1,2,3,4,5", split(","), toArray); // ["1", "2", "3", "4", "5"]
 ```
 
-see [pipe](https://fxts.dev/docs/pipe)<!-- -->, [toArray](https://fxts.dev/docs/toArray)
+see [pipe](https://fxts.dev/ja/api/pipe)<!-- -->, [toArray](https://fxts.dev/ja/api/toArray)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/split.ts)

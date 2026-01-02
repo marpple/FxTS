@@ -81,8 +81,8 @@ function async<A>(
  *
  * {@link https://codesandbox.io/s/fxts-drop-2t0h0 | Try It}
  *
- * see {@link https://fxts.dev/docs/pipe | pipe}, {@link https://fxts.dev/docs/toAsync | toAsync},
- * {@link https://fxts.dev/docs/toArray | toArray}
+ * see {@link https://fxts.dev/api/pipe | pipe}, {@link https://fxts.dev/api/toAsync | toAsync},
+ * {@link https://fxts.dev/api/toArray | toArray}
  */
 // prettier-ignore
 function drop<A>(

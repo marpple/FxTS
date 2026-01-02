@@ -41,6 +41,6 @@ const arr = [
 fromEntries(arr); // { a: 1, b: true, c: 'hello', d: { d1: 1, d2: 3 } }
 ```
 
-see [entries](https://fxts.dev/docs/entries)
+see [entries](https://fxts.dev/zh/api/entries)
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/fromEntries.ts)
