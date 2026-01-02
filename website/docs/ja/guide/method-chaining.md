@@ -17,7 +17,7 @@ fx("abc")
 
 **注意: `fx`はデフォルトで遅延評価を使用するため、`toArray`、`groupBy`、`indexBy`、`some`などの即時評価メソッドが実行されるまで実際には評価されません。**
 
-遅延評価の詳細については、/ja/api/lazy-evaluation を参照してください。
+遅延評価の詳細については、/ja/guide/lazy-evaluation を参照してください。
 
 ### AsyncIterable の処理サポート
 

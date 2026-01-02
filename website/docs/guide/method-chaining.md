@@ -17,7 +17,7 @@ fx("abc")
 
 **Note: Since `fx` defaults to lazy evaluation, it is not actually evaluated until strict evaluation methods such as `toArray`, `groupBy`, `indexBy`, and `some` are executed.**
 
-For details on lazy evaluation, please refer to /api/lazy-evaluation.
+For details on lazy evaluation, please refer to /guide/lazy-evaluation.
 
 ### Support for handling AsyncIterable
 
@@ -40,7 +40,7 @@ await fx([1, 2, 3, 4])
 
 `fx` supports concurrent operation. As we saw in concurrent, concurrent can only be used in asyncIterable.
 
-For details on handling concurrent with `fxts`, please refer to /api/handle-concurrency
+For details on handling concurrent with `fxts`, please refer to /guide/handle-concurrency
 
 ```ts
 /**

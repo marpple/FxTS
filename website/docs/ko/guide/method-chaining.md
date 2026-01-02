@@ -17,7 +17,7 @@ fx("abc")
 
 **참고: `fx`는 기본적으로 지연 평가를 사용하므로, `toArray`, `groupBy`, `indexBy`, `some` 같은 즉시 평가 메서드가 실행될 때까지 실제로 평가되지 않습니다.**
 
-지연 평가에 대한 자세한 내용은 /ko/api/lazy-evaluation을 참조하세요.
+지연 평가에 대한 자세한 내용은 /ko/guide/lazy-evaluation을 참조하세요.
 
 ### AsyncIterable 처리 지원
 
@@ -40,7 +40,7 @@ await fx([1, 2, 3, 4])
 
 `fx`는 동시 작업을 지원합니다. concurrent에서 본 것처럼, concurrent는 asyncIterable에서만 사용할 수 있습니다.
 
-`fxts`로 동시성을 처리하는 방법에 대한 자세한 내용은 /ko/api/handle-concurrency를 참조하세요.
+`fxts`로 동시성을 처리하는 방법에 대한 자세한 내용은 /ko/guide/handle-concurrency를 참조하세요.
 
 ```ts
 /**

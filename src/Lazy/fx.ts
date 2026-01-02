@@ -709,7 +709,7 @@ export class FxIterable<A> {
  * `fx` allows functions provided by existing `fxts` to be used in a method chaining.
  *  Not all functions are provided as methods and can be connected through `chain` if necessary.
  *
- *  see {@link https://fxts.dev/api/method-chaining | guide}
+ *  see {@link https://fxts.dev/guide/method-chaining | guide}
  *
  * @example
  * ```ts
