@@ -14,7 +14,7 @@ hero:
       link: /ja/guide/getting-started
     - theme: alt
       text: APIドキュメント
-      link: /api/
+      link: /ja/api/
 
 features:
   - icon: "⚡"

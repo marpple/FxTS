@@ -4,7 +4,7 @@
 
 在 JavaScript 中，有一个使用 [Promise.all](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) 同时评估多个 promise 值的函数。
 但是，它无法处理并发请求的负载，也无法处理对无限可枚举数据集的请求。
-[concurrent](/api/concurrent) 可以处理无限数据集的异步请求，并可以控制负载的请求大小。
+[concurrent](/zh/api/concurrent) 可以处理无限数据集的异步请求，并可以控制负载的请求大小。
 
 ```ts
 // prettier-ignore

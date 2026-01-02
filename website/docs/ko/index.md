@@ -14,7 +14,7 @@ hero:
       link: /ko/guide/getting-started
     - theme: alt
       text: API 문서
-      link: /api/
+      link: /ko/api/
 
 features:
   - icon: "⚡"

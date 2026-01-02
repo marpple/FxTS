@@ -1,6 +1,6 @@
 # 方法链
 
-你可以通过 [pipe](/api/pipe) 处理 Iterable/AsyncIterable，但 `fxts` 也提供方法链形式的数据转换。
+你可以通过 [pipe](/zh/api/pipe) 处理 Iterable/AsyncIterable，但 `fxts` 也提供方法链形式的数据转换。
 
 ```ts
 fx([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -17,7 +17,7 @@ fx("abc")
 
 **注意：由于 `fx` 默认使用惰性求值，所以在执行 `toArray`、`groupBy`、`indexBy`、`some` 等即时评估方法之前，实际上不会进行评估。**
 
-有关惰性求值的详细信息，请参阅 /api/lazy-evaluation。
+有关惰性求值的详细信息，请参阅 /zh/api/lazy-evaluation。
 
 ### 支持处理 AsyncIterable
 
@@ -40,7 +40,7 @@ await fx([1, 2, 3, 4])
 
 `fx` 支持并发操作。正如我们在 concurrent 中看到的，concurrent 只能在 asyncIterable 中使用。
 
-有关使用 `fxts` 处理并发的详细信息，请参阅 /api/handle-concurrency
+有关使用 `fxts` 处理并发的详细信息，请参阅 /zh/api/handle-concurrency
 
 ```ts
 /**
