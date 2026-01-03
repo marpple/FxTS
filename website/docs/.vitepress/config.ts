@@ -8,6 +8,10 @@ export default defineConfig({
 
   cleanUrls: true,
 
+  sitemap: {
+    hostname: "https://fxts.dev",
+  },
+
   head: [
     ["link", { rel: "icon", href: "/img/favicon.ico" }],
     [
@@ -55,8 +59,9 @@ export default defineConfig({
       provider: "algolia",
       options: {
         appId: "0G39LGZ9QE",
-        apiKey: "6234b2f489b3f43928034ab6c128f06c",
+        apiKey: "a1f403fee5358950f84bd6ad27867cd6",
         indexName: "fxts",
+        askAi: "fxts_ai",
         locales: {
           root: {
             placeholder: "Search docs",
