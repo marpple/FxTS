@@ -69,6 +69,12 @@ await countWords(); // 4 seconds
 await countWords(2); // 2 seconds
 ```
 
+## Documentation
+
+For more information, visit [fxts.dev](https://fxts.dev).
+
+For LLM-friendly documentation, see [llms.txt](https://fxts.dev/llms.txt).
+
 ## Contributing
 
 We welcome contributions from everyone in the community. Please read our [Contributing Guide](./CONTRIBUTING.md).
