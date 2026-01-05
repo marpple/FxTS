@@ -1,16 +1,17 @@
-![Build Status](https://github.com/marpple/FxTS/actions/workflows/ci.yml/badge.svg)
-[![npm version](https://badge.fury.io/js/@fxts%2Fcore.svg)](https://badge.fury.io/js/@fxts%2Fcore)
+<img src="./website/docs/public/img/fxts.png" alt="FxTS Logo" width="120" />
 
-# ![fxts-icon](https://github.com/marpple/FxTS/assets/10924072/415500c9-12ce-4aec-8563-835514b94b22) FxTS
+# FxTS
 
-FxTS is a functional library for TypeScript/JavaScript programmers.
+[![Build Status](https://github.com/marpple/FxTS/actions/workflows/ci.yml/badge.svg)](https://github.com/marpple/FxTS/actions)
+[![npm version](https://badge.fury.io/js/@fxts%2Fcore.svg)](https://www.npmjs.com/package/@fxts/core)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](./LICENSE)
 
-### Why FxTS?
+FxTS is a functional programming library for TypeScript.
 
-- Lazy evaluation
-- Handling concurrent requests
-- Type inference
-- Follow [iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) Iterable / AsyncIterable
+- Provides [lazy evaluation](https://fxts.dev/docs/lazy-evaluation) for memory-efficient data processing with functions like [pipe](https://fxts.dev/docs/pipe), [map](https://fxts.dev/docs/map), [filter](https://fxts.dev/docs/filter), and [take](https://fxts.dev/docs/take).
+- Handles [concurrent requests](https://fxts.dev/docs/handle-concurrency) efficiently with [concurrent](https://fxts.dev/docs/concurrent) and [toAsync](https://fxts.dev/docs/toAsync).
+- Offers excellent TypeScript support with strong [type inference](https://fxts.dev/docs/getting-started#type-inference).
+- Follows standard [iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) (Iterable/AsyncIterable).
 
 ## Installation
 
@@ -18,11 +19,9 @@ FxTS is a functional library for TypeScript/JavaScript programmers.
 npm install @fxts/core
 ```
 
-## Documentation
-
-Please review the [API documentation](https://fxts.dev/api/)
-
 ## Usage
+
+Use `pipe` for function composition or `fx` for method chaining:
 
 ```ts
 import { each, filter, fx, map, pipe, range, take } from "@fxts/core";
@@ -43,7 +42,9 @@ fx(range(10))
   .each((a) => console.log(a));
 ```
 
-## Usage(concurrent)
+## Usage (concurrent)
+
+Handle multiple async operations in parallel with `concurrent`:
 
 ```ts
 import { concurrent, countBy, flat, fx, map, pipe, toAsync } from "@fxts/core";
@@ -68,20 +69,16 @@ await countWords(); // 4 seconds
 await countWords(2); // 2 seconds
 ```
 
-you can start [here](http://fxts.dev/docs/getting-started)
+## Documentation
 
-## Build
+For more information, visit [fxts.dev](https://fxts.dev).
 
-- `npm run build`
+For LLM-friendly documentation, see [llms.txt](https://fxts.dev/llms.txt).
 
-## Running Test
+## Contributing
 
-- `npm test`
-
-## Running Type Test
-
-- `npm run compile:check`
+We welcome contributions from everyone in the community. Please read our [Contributing Guide](./CONTRIBUTING.md).
 
 ## License
 
-Apache License 2.0
+Apache License 2.0 © [Marpple](https://www.marpple.com). See [LICENSE](./LICENSE) for details.
