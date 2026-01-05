@@ -10,7 +10,7 @@ FxTS is a functional programming library for TypeScript.
 
 - Provides [lazy evaluation](https://fxts.dev/guide/lazy-evaluation) for memory-efficient data processing with functions like [pipe](https://fxts.dev/api/pipe), [map](https://fxts.dev/api/map), [filter](https://fxts.dev/api/filter), and [take](https://fxts.dev/api/take).
 - Handles [concurrent requests](https://fxts.dev/guide/handle-concurrency) efficiently with [concurrent](https://fxts.dev/guide/concurrent) and [toAsync](https://fxts.dev/api/toAsync).
-- Offers excellent TypeScript support with strong [type inference](https://fxts.dev/guide/getting-started#type-inference).
+- Offers excellent TypeScript support with strong type inference.
 - Follows standard [iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) (Iterable/AsyncIterable).
 
 ## Installation
