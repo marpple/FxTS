@@ -1,3 +1,7 @@
+---
+description: "Master function composition with pipe and pipeLazy in FxTS for clean, readable code."
+---
+
 # Function Composition
 
 We are going to introduce [pipe](/api/pipe).

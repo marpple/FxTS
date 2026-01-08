@@ -1,3 +1,7 @@
+---
+description: "Tips and techniques for debugging functional pipelines in FxTS."
+---
+
 # How to debug in pipeline easily?
 
 ## Strict evaluation
