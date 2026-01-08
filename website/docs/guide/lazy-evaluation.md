@@ -1,3 +1,7 @@
+---
+description: "Understand lazy evaluation in FxTS to efficiently handle large or infinite data sets."
+---
+
 # Lazy Evaluation
 
 FxTS provides [lazy evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation).

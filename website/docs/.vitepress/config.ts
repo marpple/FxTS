@@ -8,6 +8,29 @@ export default defineConfig({
 
   cleanUrls: true,
 
+  transformPageData(pageData) {
+    const description =
+      pageData.frontmatter.description ||
+      "A functional library for TypeScript/JavaScript programmers.";
+    const title = pageData.frontmatter.id
+      ? `${pageData.frontmatter.id} - FxTS`
+      : pageData.title || "FxTS";
+    const ogImage = "https://fxts.dev/img/og_image.png";
+
+    pageData.frontmatter.head = pageData.frontmatter.head || [];
+    pageData.frontmatter.head.push(
+      ["meta", { name: "description", content: description }],
+      ["meta", { property: "og:title", content: title }],
+      ["meta", { property: "og:description", content: description }],
+      ["meta", { property: "og:type", content: "website" }],
+      ["meta", { property: "og:image", content: ogImage }],
+      ["meta", { name: "twitter:card", content: "summary_large_image" }],
+      ["meta", { name: "twitter:title", content: title }],
+      ["meta", { name: "twitter:description", content: description }],
+      ["meta", { name: "twitter:image", content: ogImage }],
+    );
+  },
+
   head: [
     ["link", { rel: "icon", href: "/img/favicon.ico" }],
     [

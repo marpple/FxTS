@@ -1,3 +1,7 @@
+---
+description: "Learn how to install and start using FxTS, a functional programming library for TypeScript and JavaScript."
+---
+
 # Getting Started
 
 ## Introduction

@@ -1,3 +1,7 @@
+---
+description: "When and how to use toAsync in FxTS for handling asynchronous iterables."
+---
+
 # When to use the `toAsync` function?
 
 Many functions in FxTS can handle both `Iterable` and `AsyncIterable`. For example, the `find` function can be used as follows.

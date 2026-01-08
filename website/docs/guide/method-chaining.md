@@ -1,3 +1,7 @@
+---
+description: "Use method chaining with fx for fluent, readable functional programming in FxTS."
+---
+
 # Method Chaining
 
 You can handle Iterable/AsyncIterable through a [pipe](/api/pipe), but `fxts` also provides data change in the form of method chaining.

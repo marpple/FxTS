@@ -1,3 +1,7 @@
+---
+description: "Error handling patterns and best practices when using FxTS functional utilities."
+---
+
 # Error handling
 
 Error handling is an essential part of any programming.
