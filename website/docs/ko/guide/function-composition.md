@@ -1,3 +1,7 @@
+---
+description: "FxTS의 pipe와 pipeLazy를 사용한 함수 합성으로 깔끔하고 읽기 쉬운 코드 작성하기."
+---
+
 # 함수 합성
 
 [pipe](/ko/api/pipe)에 대해 소개하겠습니다.

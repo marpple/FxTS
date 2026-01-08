@@ -1,3 +1,7 @@
+---
+description: "使用FxTS的fx进行方法链，实现流畅易读的函数式编程。"
+---
+
 # 方法链
 
 你可以通过 [pipe](/zh/api/pipe) 处理 Iterable/AsyncIterable，但 `fxts` 也提供方法链形式的数据转换。

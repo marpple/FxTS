@@ -1,3 +1,7 @@
+---
+description: "FxTS 설치 및 사용 방법을 배우는 TypeScript/JavaScript 함수형 프로그래밍 라이브러리 시작 가이드."
+---
+
 # 시작하기
 
 ## 소개

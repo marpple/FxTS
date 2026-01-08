@@ -1,3 +1,7 @@
+---
+description: "FxTSのconcurrentユーティリティで並行非同期操作を処理する方法。"
+---
+
 # 並行処理
 
 > `concurrent`は、複数の非同期値を一度に処理できる関数です。

@@ -1,3 +1,7 @@
+---
+description: "FxTSのpipeとpipeLazyを使った関数合成で、クリーンで読みやすいコードを書く方法。"
+---
+
 # 関数合成
 
 [pipe](/ja/api/pipe)について紹介します。

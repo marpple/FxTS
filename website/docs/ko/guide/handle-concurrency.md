@@ -1,3 +1,7 @@
+---
+description: "FxTS concurrent 유틸리티로 동시 비동기 작업을 처리하는 방법."
+---
+
 # 동시성 처리
 
 > `concurrent`는 여러 비동기 값을 한 번에 처리할 수 있는 함수입니다.

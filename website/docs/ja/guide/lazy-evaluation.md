@@ -1,3 +1,7 @@
+---
+description: "FxTSの遅延評価を理解し、大規模または無限のデータセットを効率的に処理する方法。"
+---
+
 # 遅延評価
 
 FxTS は[遅延評価](https://ja.wikipedia.org/wiki/%E9%81%85%E5%BB%B6%E8%A9%95%E4%BE%A1)を提供します。
