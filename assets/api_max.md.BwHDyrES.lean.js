@@ -1,1 +1,0 @@
-import{_ as s,c as a,o as t,aj as h}from"./chunks/framework.qjBC5Ck2.js";const g=JSON.parse('{"title":"","description":"","frontmatter":{"id":"max"},"headers":[],"relativePath":"api/max.md","filePath":"api/max.md"}'),n={name:"api/max.md"};function k(l,i,e,p,r,d){return t(),a("div",null,[...i[0]||(i[0]=[h("",7)])])}const y=s(n,[["render",k]]);export{g as __pageData,y as default};

@@ -1,1 +1,0 @@
-import{_ as i,c as a,o as t,aj as e}from"./chunks/framework.qjBC5Ck2.js";const g=JSON.parse('{"title":"","description":"","frontmatter":{"id":"not"},"headers":[],"relativePath":"api/not.md","filePath":"api/not.md"}'),n={name:"api/not.md"};function h(l,s,p,k,r,d){return t(),a("div",null,[...s[0]||(s[0]=[e("",8)])])}const c=i(n,[["render",h]]);export{g as __pageData,c as default};
