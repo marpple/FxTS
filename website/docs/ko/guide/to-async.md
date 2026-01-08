@@ -1,3 +1,7 @@
+---
+description: "FxTS에서 비동기 이터러블을 처리하기 위해 toAsync를 사용하는 시기와 방법."
+---
+
 # `toAsync` 함수는 언제 사용하나요?
 
 FxTS의 많은 함수는 `Iterable`과 `AsyncIterable`을 모두 처리할 수 있습니다. 예를 들어, `find` 함수는 다음과 같이 사용할 수 있습니다.

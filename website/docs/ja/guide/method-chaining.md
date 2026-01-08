@@ -1,3 +1,7 @@
+---
+description: "FxTSのfxを使ったメソッドチェーンで、流暢で読みやすい関数型プログラミング。"
+---
+
 # メソッドチェーン
 
 [pipe](/ja/api/pipe)で Iterable/AsyncIterable を処理できますが、`fxts`はメソッドチェーン形式でのデータ変換も提供しています。

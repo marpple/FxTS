@@ -1,3 +1,7 @@
+---
+description: "理解FxTS中的惰性求值，高效处理大型或无限数据集。"
+---
+
 # 惰性求值
 
 FxTS 提供[惰性求值](https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E6%B1%82%E5%80%BC)。

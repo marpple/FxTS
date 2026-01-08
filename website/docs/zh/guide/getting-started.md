@@ -1,3 +1,7 @@
+---
+description: "学习如何安装和使用FxTS，TypeScript/JavaScript函数式编程库入门指南。"
+---
+
 # 快速开始
 
 ## 介绍

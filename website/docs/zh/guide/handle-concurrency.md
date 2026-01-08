@@ -1,3 +1,7 @@
+---
+description: "学习使用FxTS concurrent工具处理并发异步操作的方法。"
+---
+
 # 并发处理
 
 > `concurrent` 是一个可以一次处理多个异步值的函数。

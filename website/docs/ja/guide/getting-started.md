@@ -1,3 +1,7 @@
+---
+description: "FxTSのインストールと使い方を学ぶ、TypeScript/JavaScript関数型プログラミングライブラリの入門ガイド。"
+---
+
 # はじめに
 
 ## 紹介

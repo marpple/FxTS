@@ -1,3 +1,7 @@
+---
+description: "FxTSで非同期イテラブルを処理するためにtoAsyncを使用するタイミングと方法。"
+---
+
 # `toAsync`関数はいつ使うべきですか？
 
 FxTS の多くの関数は、`Iterable`と`AsyncIterable`の両方を処理できます。例えば、`find`関数は次のように使用できます。

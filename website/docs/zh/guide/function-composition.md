@@ -1,3 +1,7 @@
+---
+description: "使用FxTS的pipe和pipeLazy进行函数组合，编写简洁易读的代码。"
+---
+
 # 函数组合
 
 我们将介绍 [pipe](/zh/api/pipe)。

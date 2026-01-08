@@ -1,3 +1,7 @@
+---
+description: "FxTS의 지연 평가를 이해하고 대용량 또는 무한 데이터를 효율적으로 처리하는 방법."
+---
+
 # 지연 평가
 
 FxTS는 [지연 평가](https://ko.wikipedia.org/wiki/%EB%8A%90%EA%B8%8B%ED%95%9C_%EA%B3%84%EC%82%B0%EB%B2%95)를 제공합니다.

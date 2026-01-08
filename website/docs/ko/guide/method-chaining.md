@@ -1,3 +1,7 @@
+---
+description: "FxTS의 fx를 사용한 메서드 체이닝으로 유창하고 읽기 쉬운 함수형 프로그래밍."
+---
+
 # 메서드 체이닝
 
 [pipe](/ko/api/pipe)를 통해 Iterable/AsyncIterable을 처리할 수 있지만, `fxts`는 메서드 체이닝 형태로도 데이터 변환을 제공합니다.

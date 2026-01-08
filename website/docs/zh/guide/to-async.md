@@ -1,3 +1,7 @@
+---
+description: "在FxTS中何时以及如何使用toAsync处理异步可迭代对象。"
+---
+
 # 何时使用 `toAsync` 函数？
 
 FxTS 中的许多函数可以处理 `Iterable` 和 `AsyncIterable`。例如，`find` 函数可以如下使用。
