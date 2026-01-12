@@ -3,8 +3,7 @@ import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
 import { generateSidebar } from "../sidebar";
 
 export const koConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
-  label: "한국어",
-  lang: "ko-KR",
+  lang: "ko",
   themeConfig: {
     nav: [
       {
