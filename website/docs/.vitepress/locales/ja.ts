@@ -3,7 +3,6 @@ import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
 import { generateSidebar } from "../sidebar";
 
 export const jaConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
-  label: "日本語",
   lang: "ja",
   themeConfig: {
     nav: [

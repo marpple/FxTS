@@ -5,7 +5,6 @@ import { enConfig, jaConfig, koConfig, zhConfig } from "./locales";
 export default defineConfig({
   title: "FxTS",
   description: "A functional library for TypeScript/JavaScript programmers.",
-
   cleanUrls: true,
 
   transformPageData(pageData) {
@@ -53,15 +52,19 @@ export default defineConfig({
   locales: {
     root: {
       ...enConfig,
+      label: "English",
     },
     ko: {
       ...koConfig,
+      label: "한국어",
     },
     ja: {
       ...jaConfig,
+      label: "日本語",
     },
     zh: {
       ...zhConfig,
+      label: "中文",
     },
   },
 

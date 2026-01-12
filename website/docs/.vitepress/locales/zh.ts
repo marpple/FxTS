@@ -3,8 +3,7 @@ import type { DefaultTheme, LocaleSpecificConfig } from "vitepress";
 import { generateSidebar } from "../sidebar";
 
 export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
-  label: "中文",
-  lang: "zh-CN",
+  lang: "zh",
   themeConfig: {
     nav: [
       {
