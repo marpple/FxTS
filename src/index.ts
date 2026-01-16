@@ -64,6 +64,7 @@ import tap from "./tap";
 import throwError from "./throwError";
 import throwIf from "./throwIf";
 import toArray from "./toArray";
+import toSorted from "./toSorted";
 import unicodeToArray from "./unicodeToArray";
 import unless from "./unless";
 import when from "./when";
@@ -139,6 +140,7 @@ export {
   throwError,
   throwIf,
   toArray,
+  toSorted,
   unicodeToArray,
   unless,
   when,
