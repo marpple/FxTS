@@ -55,35 +55,39 @@ function toSorted<T extends Iterable<unknown> | AsyncIterable<unknown>>(
   | ((iterable: T) => ReturnValueType<T, IterableInfer<T>[]>) {
   if (iterable === undefined) {
     return (iterable: T) => {
-      return toSorted(f, iterable as any) as ReturnValueType<
-        T,
-        IterableInfer<T>[]
-      >;
+      // @ts-expect-error - Type narrowing needed for curried function
+      return toSorted(f, iterable) as ReturnValueType<T, IterableInfer<T>[]>;
     };
   }
 
   if (isArray(iterable)) {
     // Check if native toSorted is available (ES2023+)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const arrayProto = Array.prototype as any;
-    if (typeof arrayProto.toSorted === "function") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return (iterable as any).toSorted(f as any);
+    // Note: Array.prototype.toSorted is not in TypeScript lib types until TS 5.2+
+    // @ts-expect-error - toSorted is available in ES2023 but not in current lib types
+    if (typeof Array.prototype.toSorted === "function") {
+      // @ts-expect-error - toSorted is available in ES2023 but not in current lib types
+      return iterable.toSorted(f);
     }
     // Fallback: create a copy and sort it
-    const result = Array.from(iterable as any[]);
-    return result.sort(f as any);
+    const result = Array.from(iterable) as IterableInfer<T>[];
+    // @ts-expect-error - sort expects (a, b) => number but f returns unknown
+    return result.sort(f);
   }
 
   if (isIterable(iterable)) {
-    return pipe1(toArray(iterable as Iterable<IterableInfer<T>>), (arr) =>
-      arr.sort(f as any),
-    );
+    return pipe1(toArray(iterable as Iterable<IterableInfer<T>>), (arr) => {
+      // @ts-expect-error - sort expects (a, b) => number but f returns unknown
+      return arr.sort(f);
+    });
   }
 
   if (isAsyncIterable(iterable)) {
-    return pipe1(toArray(iterable as AsyncIterable<IterableInfer<T>>), (arr) =>
-      arr.sort(f as any),
+    return pipe1(
+      toArray(iterable as AsyncIterable<IterableInfer<T>>),
+      (arr) => {
+        // @ts-expect-error - sort expects (a, b) => number but f returns unknown
+        return arr.sort(f);
+      },
     );
   }
 
