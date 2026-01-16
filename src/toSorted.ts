@@ -25,17 +25,10 @@ import type ReturnValueType from "./types/ReturnValueType";
  * ); // [1, 3, 5]
  * ```
  */
-// prettier-ignore
-function toSorted(
-    f: (a: any, b: any) => unknown,
-    iterable: readonly []
-): any[];
 
-// prettier-ignore
-function toSorted<T>(
-  f: (a: T, b: T) => unknown,
-  iterable: Iterable<T>
-): T[];
+function toSorted(f: (a: any, b: any) => unknown, iterable: readonly []): any[];
+
+function toSorted<T>(f: (a: T, b: T) => unknown, iterable: Iterable<T>): T[];
 
 function toSorted<T>(
   f: (a: T, b: T) => unknown,
