@@ -117,5 +117,5 @@
     "unless",
     "when"
   ],
-  "Util": ["debounce", "shuffle"]
+  "Util": ["debounce", "shuffle", "throttle"]
 }
