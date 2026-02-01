@@ -112,6 +112,7 @@
     "throwError",
     "throwIf",
     "toArray",
+    "toSorted",
     "unicodeToArray",
     "unless",
     "when"
