@@ -1,6 +1,6 @@
 import { filter, map, pipe, sort, toAsync, toSorted } from "../src";
 
-describe("toSorted", function () {
+describe("toSorted", () => {
   const sortFn = (a: number | string, b: number | string) => {
     if (a === b) {
       return 0;
@@ -11,7 +11,7 @@ describe("toSorted", function () {
     return -1;
   };
 
-  describe("sync", function () {
+  describe("sync", () => {
     it.each([
       [[], []],
       [
@@ -19,40 +19,40 @@ describe("toSorted", function () {
         [1, 2, 2, 3, 4, 5],
       ],
       ["bcdaef", ["a", "b", "c", "d", "e", "f"]],
-    ])("should sort the elements", function (iterable, result) {
+    ])("should sort the elements", (iterable, result) => {
       expect(toSorted(sortFn, iterable as Iterable<any>)).toEqual(result);
     });
 
-    it("should handle empty array", function () {
+    it("should handle empty array", () => {
       const result = toSorted(sortFn, []);
       expect(result).toEqual([]);
     });
 
-    it("should handle single element", function () {
+    it("should handle single element", () => {
       const result = toSorted(sortFn, [42]);
       expect(result).toEqual([42]);
     });
 
-    it("should handle array with identical elements", function () {
+    it("should handle array with identical elements", () => {
       const result = toSorted(sortFn, [5, 5, 5, 5]);
       expect(result).toEqual([5, 5, 5, 5]);
     });
 
-    it("should be immutable - original array should not be changed", function () {
+    it("should be immutable - original array should not be changed", () => {
       const original = [3, 4, 1, 2, 5, 2];
       const result = toSorted(sortFn, original);
       expect(original !== result).toBe(true);
       expect(original).toEqual([3, 4, 1, 2, 5, 2]);
     });
 
-    it("should be immutable - original string should not be changed", function () {
+    it("should be immutable - original string should not be changed", () => {
       const original = "bcdaef";
       const result = toSorted(sortFn, original);
       expect(original).toBe("bcdaef");
       expect(result).toEqual(["a", "b", "c", "d", "e", "f"]);
     });
 
-    it("should return the same result as sort but without mutating", function () {
+    it("should return the same result as sort but without mutating", () => {
       const arr1 = [3, 4, 1, 2, 5, 2];
       const arr2 = [3, 4, 1, 2, 5, 2];
       const sortedResult = sort(sortFn, arr1);
@@ -65,7 +65,7 @@ describe("toSorted", function () {
       expect(arr2).toEqual([3, 4, 1, 2, 5, 2]);
     });
 
-    it("should be able to be used as a curried function in the pipeline", function () {
+    it("should be able to be used as a curried function in the pipeline", () => {
       const res = pipe(
         [3, 4, 1, 2, 5, 2],
         filter((a) => a % 2 !== 0),
@@ -74,7 +74,7 @@ describe("toSorted", function () {
       expect(res).toEqual([1, 3, 5]);
     });
 
-    it("should work with other functions in pipeline", function () {
+    it("should work with other functions in pipeline", () => {
       const res = pipe(
         [3, 4, 1, 2, 5, 2],
         map((a) => a * 2),
@@ -84,7 +84,7 @@ describe("toSorted", function () {
       expect(res).toEqual([6, 8, 10]);
     });
 
-    it("should preserve immutability in pipeline", function () {
+    it("should preserve immutability in pipeline", () => {
       const original = [3, 4, 1, 2, 5, 2];
       const originalCopy = [...original];
       const res = pipe(original, toSorted(sortFn));
@@ -93,7 +93,7 @@ describe("toSorted", function () {
     });
   });
 
-  describe("async", function () {
+  describe("async", () => {
     it.each([
       [[], []],
       [
@@ -101,12 +101,12 @@ describe("toSorted", function () {
         [1, 2, 2, 3, 4, 5],
       ],
       ["bcdaef", ["a", "b", "c", "d", "e", "f"]],
-    ])("should sort the elements", async function (iterable, result) {
+    ])("should sort the elements", async (iterable, result) => {
       const res = await toSorted(sortFn, toAsync(iterable as Iterable<any>));
       expect(res).toEqual(result);
     });
 
-    it("should be able to be used as a curried function in the pipeline", async function () {
+    it("should be able to be used as a curried function in the pipeline", async () => {
       const res = await pipe(
         [3, 4, 1, 2, 5, 2],
         toAsync,
@@ -116,7 +116,7 @@ describe("toSorted", function () {
       expect(res).toEqual([1, 3, 5]);
     });
 
-    it("should work with other functions in async pipeline", async function () {
+    it("should work with other functions in async pipeline", async () => {
       const res = await pipe(
         [3, 4, 1, 2, 5, 2],
         toAsync,
