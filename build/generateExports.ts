@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
 import { glob } from "glob";
 
-import { drop, filter, identity, map, not, pipe, reduce } from "../src/index";
+import { filter, identity, map, not, pipe, reduce } from "../src/index";
 
 const SOURCE_DIR = "./src";
 const OUTPUT_DIR = "./dist";
@@ -48,7 +48,7 @@ async function generateExports() {
       .flat()
       .filter((a) => not(a.endsWith("index.ts")))
       .map((fileName) =>
-        [...drop(2, fileName.split("/"))].join("/").replace(".ts", ""),
+        fileName.replace(/^(\.\/)?src\//, "").replace(/\.ts$/, ""),
       ),
   );
 
@@ -56,16 +56,19 @@ async function generateExports() {
     fileNames,
     filter(identity),
     map((name) => {
+      const exportName = name
+        .replace(/^Lazy\//, "")
+        .replace(/^_internal\//, "");
       const conditionalSubPaths = {
         types: `${TYPES_ROOT_DIR}/${name}.d.ts`,
         import: `${ESM_ROOT_DIR}/${name}.js`,
         require: `${CJS_ROOT_DIR}/${name}.js`,
       };
       return {
-        [`./${name}`]: conditionalSubPaths,
-        [`./${name}.js`]: conditionalSubPaths,
-        [`./esm5/${name}`]: `${ESM5_ROOT_DIR}/${name}.js`,
-        [`./esm5/${name}.js`]: `${ESM5_ROOT_DIR}/${name}.js`,
+        [`./${exportName}`]: conditionalSubPaths,
+        [`./${exportName}.js`]: conditionalSubPaths,
+        [`./esm5/${exportName}`]: `${ESM5_ROOT_DIR}/${name}.js`,
+        [`./esm5/${exportName}.js`]: `${ESM5_ROOT_DIR}/${name}.js`,
       };
     }),
     (iter) => reduce((acc, field) => Object.assign(acc, field), {}, iter),
