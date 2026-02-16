@@ -56,19 +56,16 @@ async function generateExports() {
     fileNames,
     filter(identity),
     map((name) => {
-      const exportName = name
-        .replace(/^Lazy\//, "")
-        .replace(/^_internal\//, "");
       const conditionalSubPaths = {
         types: `${TYPES_ROOT_DIR}/${name}.d.ts`,
         import: `${ESM_ROOT_DIR}/${name}.js`,
         require: `${CJS_ROOT_DIR}/${name}.js`,
       };
       return {
-        [`./${exportName}`]: conditionalSubPaths,
-        [`./${exportName}.js`]: conditionalSubPaths,
-        [`./esm5/${exportName}`]: `${ESM5_ROOT_DIR}/${name}.js`,
-        [`./esm5/${exportName}.js`]: `${ESM5_ROOT_DIR}/${name}.js`,
+        [`./${name}`]: conditionalSubPaths,
+        [`./${name}.js`]: conditionalSubPaths,
+        [`./esm5/${name}`]: `${ESM5_ROOT_DIR}/${name}.js`,
+        [`./esm5/${name}.js`]: `${ESM5_ROOT_DIR}/${name}.js`,
       };
     }),
     (iter) => reduce((acc, field) => Object.assign(acc, field), {}, iter),
