@@ -25,6 +25,7 @@ import isArray from "./isArray";
 import isBoolean from "./isBoolean";
 import isDate from "./isDate";
 import isEmpty from "./isEmpty";
+import isMatch from "./isMatch";
 import isNil from "./isNil";
 import isNull from "./isNull";
 import isNumber from "./isNumber";
@@ -100,6 +101,7 @@ export {
   isBoolean,
   isDate,
   isEmpty,
+  isMatch,
   isNil,
   isNull,
   isNumber,
