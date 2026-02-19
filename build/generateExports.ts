@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
 import { glob } from "glob";
 
-import { drop, filter, identity, map, not, pipe, reduce } from "../src/index";
+import { filter, identity, map, not, pipe, reduce } from "../src/index";
 
 const SOURCE_DIR = "./src";
 const OUTPUT_DIR = "./dist";
@@ -48,7 +48,7 @@ async function generateExports() {
       .flat()
       .filter((a) => not(a.endsWith("index.ts")))
       .map((fileName) =>
-        [...drop(2, fileName.split("/"))].join("/").replace(".ts", ""),
+        fileName.replace(/^(\.\/)?src\//, "").replace(/\.ts$/, ""),
       ),
   );
 
