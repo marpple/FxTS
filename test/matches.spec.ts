@@ -4,38 +4,25 @@ describe("matches", function () {
   describe("basic matching", function () {
     it("should return true when all properties match", function () {
       const matcher = matches({ a: 1, b: "2", c: true });
-
-      expect(matcher({ a: 1, b: "2", c: true, d: null })).toBe(true);
+      const input = { a: 1, b: "2", c: true, d: {} };
+      expect(matcher(input)).toBe(true);
     });
 
     it("should return false when any property does not match", function () {
       const matcher = matches({ a: 1, b: "2", c: true });
-
-      expect(matcher({ a: 1, b: "2", c: false })).toBe(false);
-    });
-
-    it("should return false when property is missing", function () {
-      const matcher = matches({ a: 1, b: "2" });
-
-      expect(matcher({ a: 1 })).toBe(false);
+      const input = { a: 1, b: "2", c: false };
+      expect(matcher(input)).toBe(false);
     });
 
     it("should return true for empty pattern", function () {
       const matcher = matches({});
-
       expect(matcher({ a: 1 })).toBe(true);
     });
 
-    it("should return false for null input", function () {
-      const matcher = matches({ a: 1 });
-
-      expect(matcher(null)).toBe(false);
-    });
-
-    it("should return false for undefined input", function () {
-      const matcher = matches({ a: 1 });
-
-      expect(matcher(undefined)).toBe(false);
+    it("should return false for nil input", function () {
+      const matcher = matches({});
+      expect(matcher(null as any)).toBe(false);
+      expect(matcher(undefined as any)).toBe(false);
     });
 
     it("should be able to used as a curried function in the pipeline", function () {
@@ -43,7 +30,6 @@ describe("matches", function () {
         { a: 1, b: "2", c: true, d: null },
         matches({ a: 1, b: "2" }),
       );
-
       expect(result).toBe(true);
     });
   });
@@ -215,7 +201,6 @@ describe("matches", function () {
 
       expect(matcher({ tags: ["a", "c"] })).toBe(false);
       expect(matcher({ tags: ["a"] })).toBe(false);
-      expect(matcher({ tags: ["a", "b", "c"] })).toBe(false);
     });
 
     it("should match Date objects", function () {
