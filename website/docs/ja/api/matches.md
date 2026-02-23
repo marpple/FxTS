@@ -62,4 +62,19 @@ matcher(null); // false
 matcher(undefined); // false
 ```
 
+パターンの Symbol キーはランタイムで無視されます。
+内部的に `matches` は `Object.entries` を使用してパターンのエントリを反復するため、
+文字列キー（および数値キー）のプロパティのみが列挙されます。
+
+```ts
+const sym = Symbol("id");
+// matches({ [sym]: 123 });
+//           ~~~~
+//           Error: Type 'symbol' cannot be used as an index type.
+
+// ランタイムでバイパスした場合、Symbolキーは無視されます:
+const pattern = { [sym]: 123 } as any;
+matches(pattern)({}); // true — Symbolキーは比較されなかった
+```
+
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/matches.ts)

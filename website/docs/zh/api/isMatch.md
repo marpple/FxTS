@@ -30,10 +30,12 @@ isMatch({ user: { name: "John" } }, { user: { name: "Jane" } }); // false
 
 // 数组匹配(必须完全匹配)
 isMatch([1, 2, 3], [1, 2, 3]); // true
+isMatch([1, 2, 3], [1, 2]); // true
 isMatch([1, 2], [1, 2, 3]); // false
 
 // 特殊类型匹配
-isMatch(new Date("2024-01-01"), new Date("2024-01-01")); // true
+const now = Date.now();
+isMatch(new Date(now), new Date(now)); // true
 isMatch(/abc/gi, /abc/gi); // true
 
 // 空 source 始终返回 true

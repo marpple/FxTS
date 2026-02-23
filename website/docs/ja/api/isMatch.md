@@ -32,10 +32,12 @@ isMatch({ user: { name: "John" } }, { user: { name: "Jane" } }); // false
 
 // 配列マッチング（完全に一致する必要がある）
 isMatch([1, 2, 3], [1, 2, 3]); // true
+isMatch([1, 2, 3], [1, 2]); // true
 isMatch([1, 2], [1, 2, 3]); // false
 
 // 特殊型のマッチング
-isMatch(new Date("2024-01-01"), new Date("2024-01-01")); // true
+const now = Date.now();
+isMatch(new Date(now), new Date(now)); // true
 isMatch(/abc/gi, /abc/gi); // true
 
 // 空のsourceは常にtrue

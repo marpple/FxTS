@@ -60,4 +60,19 @@ matcher(null); // false
 matcher(undefined); // false
 ```
 
+模式中的 Symbol 键在运行时会被静默忽略。
+内部实现中，`matches` 通过 `Object.entries` 遍历模式条目，
+因此只会枚举字符串键（和数字键）属性。
+
+```ts
+const sym = Symbol("id");
+// matches({ [sym]: 123 });
+//           ~~~~
+//           Error: Type 'symbol' cannot be used as an index type.
+
+// 如果在运行时绕过类型检查，Symbol 键将被忽略:
+const pattern = { [sym]: 123 } as any;
+matches(pattern)({}); // true — Symbol 键未被比较
+```
+
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/matches.ts)

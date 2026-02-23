@@ -19,7 +19,7 @@ function matches<T>(pattern: Record<Key, any>): (input: T) => boolean;
 
 ## Example
 
-```ts
+````ts
 const users = [
   { name: "John", age: 30, active: true },
   { name: "Jane", age: 25, active: false },
@@ -58,8 +58,24 @@ filter(matches({ tags: ["a", "b"] }), items);
 
 // null/undefined 입력에 대해 false 반환
 const matcher = matches({ a: 1 });
-matcher(null); // false
+matcher(null);      // false
+//      ~~~~
+//      Error: Argument of type null is not assignable to parameter
 matcher(undefined); // false
-```
+//     ~~~~~~~~~~
+//     Error: Argument of type 'undefined' is not assignable to parameter```
+
+패턴의 Symbol 키는 런타임에서 무시됩니다. (문자열 키(및 숫자 키) 속성만 열거됩니다.)
+
+```ts
+const sym = Symbol("id");
+// matches({ [sym]: 123 });
+//           ~~~~
+//           Error: Type 'symbol' cannot be used as an index type.
+
+// 런타임에서 우회할 경우, Symbol 키는 무시됩니다:
+const pattern = { [sym]: 123 } as any;
+matches(pattern)({}); // true — Symbol 키는 비교되지 않음
+````
 
 [Open Source Code](https://github.com/marpple/FxTS/blob/main/src/matches.ts)

@@ -30,12 +30,29 @@ isMatch({ a: 1 }, { a: 1, b: 2 }); // false - object에 'b'가 없음
 isMatch({ user: { name: "John", age: 30 } }, { user: { name: "John" } }); // true
 isMatch({ user: { name: "John" } }, { user: { name: "Jane" } }); // false
 
-// 배열 매칭 (정확히 일치해야 함)
+// 배열 매칭
 isMatch([1, 2, 3], [1, 2, 3]); // true
+isMatch([1, 2, 3], [1, 2]); // true
 isMatch([1, 2], [1, 2, 3]); // false
 
-// 특수 타입 매칭
-isMatch(new Date("2024-01-01"), new Date("2024-01-01")); // true
+// Map 매칭
+const map1 = new Map([
+  ["key1", "value1"],
+  ["key2", "value2"],
+]);
+const map2 = new Map([["key1", "value1"]]);
+isMatch(map1, map2); // true
+
+// Set 매칭
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([1, 2]);
+isMatch(set1, set2); // true
+
+// Date 매칭
+const now = Date.now();
+isMatch(new Date(now), new Date(now)); // true
+
+// RegExp 매칭
 isMatch(/abc/gi, /abc/gi); // true
 
 // 빈 source는 항상 true
