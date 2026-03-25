@@ -1,0 +1,5 @@
+{
+  "missing": [],
+  "stubs": ["ja/api/throttle.md", "ko/api/throttle.md", "zh/api/throttle.md"],
+  "outdated": []
+}
