@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-03-25T14:02:35.004Z",
+  "generatedAt": "2026-03-25T14:24:59.573Z",
   "locales": ["ja", "ko", "zh"],
   "files": {
     "api/add.md": {
@@ -1792,15 +1792,15 @@
       "sourceHash": "3dee719216b52c51",
       "translations": {
         "ja": {
-          "status": "stub",
+          "status": "translated",
           "hash": "3dee719216b52c51"
         },
         "ko": {
-          "status": "stub",
+          "status": "translated",
           "hash": "3dee719216b52c51"
         },
         "zh": {
-          "status": "stub",
+          "status": "translated",
           "hash": "3dee719216b52c51"
         }
       }
