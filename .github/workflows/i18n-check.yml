@@ -1,0 +1,98 @@
+name: i18n check
+on: [pull_request]
+
+jobs:
+  i18n-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install i18n dependencies
+        working-directory: website/i18n
+        run: npm ci
+
+      - name: Run i18n check
+        id: i18n-check
+        working-directory: website/i18n
+        continue-on-error: true
+        run: npm run check
+
+      - name: Comment on PR with i18n report
+        if: steps.i18n-check.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = 'website/i18n-report.json';
+
+            if (!fs.existsSync(reportPath)) {
+              core.setFailed('i18n report not found');
+              return;
+            }
+
+            const report = JSON.parse(fs.readFileSync(reportPath, 'utf-8'));
+
+            // Build a markdown table grouping by file
+            const fileMap = new Map();
+            for (const entry of report.missing) {
+              const [locale, ...rest] = entry.split('/');
+              const file = rest.join('/');
+              if (!fileMap.has(file)) fileMap.set(file, { ja: '✅', ko: '✅', zh: '✅' });
+              fileMap.get(file)[locale] = '❌ Missing';
+            }
+
+            let table = '| File | ja | ko | zh |\n|------|----|----|----|\n';
+            for (const [file, statuses] of fileMap) {
+              table += `| \`${file}\` | ${statuses.ja} | ${statuses.ko} | ${statuses.zh} |\n`;
+            }
+
+            const body = [
+              '## 🌐 Translation Check Failed',
+              '',
+              'The following translation files are missing. Please run `make i18n-sync` to generate stubs:',
+              '',
+              table,
+              '### How to fix',
+              '1. Run `cd website/generate-api-docs && make i18n-sync`',
+              '2. Commit the generated stub files',
+              '3. Push to update this PR',
+              '',
+              '> Stubs contain the English content with a `translated: false` marker.',
+              '> Actual translations will be tracked via separate issues after merge.',
+            ].join('\n');
+
+            // Find and update existing bot comment, or create a new one
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const marker = '## 🌐 Translation Check Failed';
+            const existing = comments.find(c =>
+              c.user.type === 'Bot' && c.body.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Fail if missing translations
+        if: steps.i18n-check.outcome == 'failure'
+        run: exit 1
