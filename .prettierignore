@@ -6,3 +6,4 @@ lib
 website/build
 website/.docusaurus
 website/tsdoc-metadata.json
+website/docs/.vitepress

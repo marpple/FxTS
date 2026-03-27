@@ -1,0 +1,27 @@
+name: i18n issues
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  create-translation-issues:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install i18n dependencies
+        working-directory: website/i18n
+        run: npm ci
+
+      - name: Create translation issues for stubs/outdated
+        working-directory: website/i18n
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run create-issues

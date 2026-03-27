@@ -1,0 +1,2183 @@
+{
+  "version": 1,
+  "generatedAt": "2026-03-25T14:24:59.573Z",
+  "locales": ["ja", "ko", "zh"],
+  "files": {
+    "api/add.md": {
+      "sourceHash": "f38b46fc86ae8fa1",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "f38b46fc86ae8fa1"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "f38b46fc86ae8fa1"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "f38b46fc86ae8fa1"
+        }
+      }
+    },
+    "api/always.md": {
+      "sourceHash": "4d0c3b72731ab5ee",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "4d0c3b72731ab5ee"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "4d0c3b72731ab5ee"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "4d0c3b72731ab5ee"
+        }
+      }
+    },
+    "api/append.md": {
+      "sourceHash": "3a7188811ea9fae1",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "3a7188811ea9fae1"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "3a7188811ea9fae1"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "3a7188811ea9fae1"
+        }
+      }
+    },
+    "api/apply.md": {
+      "sourceHash": "565aa048cb305798",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "565aa048cb305798"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "565aa048cb305798"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "565aa048cb305798"
+        }
+      }
+    },
+    "api/average.md": {
+      "sourceHash": "936b4f22aa546624",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "936b4f22aa546624"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "936b4f22aa546624"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "936b4f22aa546624"
+        }
+      }
+    },
+    "api/cases.md": {
+      "sourceHash": "1d69c4efca86f256",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "1d69c4efca86f256"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "1d69c4efca86f256"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "1d69c4efca86f256"
+        }
+      }
+    },
+    "api/chunk.md": {
+      "sourceHash": "3db1b5986868bab1",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "3db1b5986868bab1"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "3db1b5986868bab1"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "3db1b5986868bab1"
+        }
+      }
+    },
+    "api/compact.md": {
+      "sourceHash": "b706c1b12508ea97",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "b706c1b12508ea97"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "b706c1b12508ea97"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "b706c1b12508ea97"
+        }
+      }
+    },
+    "api/compactObject.md": {
+      "sourceHash": "e2b1dd32a44ca2b5",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "e2b1dd32a44ca2b5"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "e2b1dd32a44ca2b5"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "e2b1dd32a44ca2b5"
+        }
+      }
+    },
+    "api/compress.md": {
+      "sourceHash": "c1bcb3723cef63fd",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "c1bcb3723cef63fd"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "c1bcb3723cef63fd"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "c1bcb3723cef63fd"
+        }
+      }
+    },
+    "api/concat.md": {
+      "sourceHash": "959cd3052a45644c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "959cd3052a45644c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "959cd3052a45644c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "959cd3052a45644c"
+        }
+      }
+    },
+    "api/concurrent.md": {
+      "sourceHash": "161f6a6029682420",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "161f6a6029682420"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "161f6a6029682420"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "161f6a6029682420"
+        }
+      }
+    },
+    "api/concurrentPool.md": {
+      "sourceHash": "bf6e19aeb93c3662",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "bf6e19aeb93c3662"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "bf6e19aeb93c3662"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "bf6e19aeb93c3662"
+        }
+      }
+    },
+    "api/consume.md": {
+      "sourceHash": "6cf6a463251ab91c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "6cf6a463251ab91c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "6cf6a463251ab91c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "6cf6a463251ab91c"
+        }
+      }
+    },
+    "api/countBy.md": {
+      "sourceHash": "37ae702eedfdde29",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "37ae702eedfdde29"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "37ae702eedfdde29"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "37ae702eedfdde29"
+        }
+      }
+    },
+    "api/curry.md": {
+      "sourceHash": "062950f617a1c78d",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "062950f617a1c78d"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "062950f617a1c78d"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "062950f617a1c78d"
+        }
+      }
+    },
+    "api/cycle.md": {
+      "sourceHash": "fb178005f2d12e30",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "fb178005f2d12e30"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "fb178005f2d12e30"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "fb178005f2d12e30"
+        }
+      }
+    },
+    "api/debounce.md": {
+      "sourceHash": "c05566176f1bccdc",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "c05566176f1bccdc"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "c05566176f1bccdc"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "c05566176f1bccdc"
+        }
+      }
+    },
+    "api/delay.md": {
+      "sourceHash": "220aa1abde58d967",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "220aa1abde58d967"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "220aa1abde58d967"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "220aa1abde58d967"
+        }
+      }
+    },
+    "api/difference.md": {
+      "sourceHash": "2caaa04222782005",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "2caaa04222782005"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "2caaa04222782005"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "2caaa04222782005"
+        }
+      }
+    },
+    "api/differenceBy.md": {
+      "sourceHash": "9e8e2e00c01557e7",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "9e8e2e00c01557e7"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "9e8e2e00c01557e7"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "9e8e2e00c01557e7"
+        }
+      }
+    },
+    "api/drop.md": {
+      "sourceHash": "4c2595900e8a494a",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "4c2595900e8a494a"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "4c2595900e8a494a"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "4c2595900e8a494a"
+        }
+      }
+    },
+    "api/dropRight.md": {
+      "sourceHash": "7df8356bf0cecb54",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "7df8356bf0cecb54"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "7df8356bf0cecb54"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "7df8356bf0cecb54"
+        }
+      }
+    },
+    "api/dropUntil.md": {
+      "sourceHash": "27b8435e786d3cd6",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "27b8435e786d3cd6"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "27b8435e786d3cd6"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "27b8435e786d3cd6"
+        }
+      }
+    },
+    "api/dropWhile.md": {
+      "sourceHash": "c46f659a0b4fcd88",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "c46f659a0b4fcd88"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "c46f659a0b4fcd88"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "c46f659a0b4fcd88"
+        }
+      }
+    },
+    "api/each.md": {
+      "sourceHash": "16d2f16a5ca4763b",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "16d2f16a5ca4763b"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "16d2f16a5ca4763b"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "16d2f16a5ca4763b"
+        }
+      }
+    },
+    "api/entries.md": {
+      "sourceHash": "edc085a09a664ab3",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "edc085a09a664ab3"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "edc085a09a664ab3"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "edc085a09a664ab3"
+        }
+      }
+    },
+    "api/every.md": {
+      "sourceHash": "ccdf0fd12aca7b12",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "ccdf0fd12aca7b12"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "ccdf0fd12aca7b12"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "ccdf0fd12aca7b12"
+        }
+      }
+    },
+    "api/evolve.md": {
+      "sourceHash": "067f0b7c0d6d8973",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "067f0b7c0d6d8973"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "067f0b7c0d6d8973"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "067f0b7c0d6d8973"
+        }
+      }
+    },
+    "api/filter.md": {
+      "sourceHash": "4880dc76deb1620b",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "4880dc76deb1620b"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "4880dc76deb1620b"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "4880dc76deb1620b"
+        }
+      }
+    },
+    "api/find.md": {
+      "sourceHash": "3d82eb529637f770",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "3d82eb529637f770"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "3d82eb529637f770"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "3d82eb529637f770"
+        }
+      }
+    },
+    "api/findIndex.md": {
+      "sourceHash": "c0062fbeaca64c73",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "c0062fbeaca64c73"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "c0062fbeaca64c73"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "c0062fbeaca64c73"
+        }
+      }
+    },
+    "api/flat.md": {
+      "sourceHash": "c881d7cc71a7439f",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "c881d7cc71a7439f"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "c881d7cc71a7439f"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "c881d7cc71a7439f"
+        }
+      }
+    },
+    "api/flatMap.md": {
+      "sourceHash": "28ec0fd03b4f18c1",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "28ec0fd03b4f18c1"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "28ec0fd03b4f18c1"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "28ec0fd03b4f18c1"
+        }
+      }
+    },
+    "api/fork.md": {
+      "sourceHash": "b5aaa75e3c84262d",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "b5aaa75e3c84262d"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "b5aaa75e3c84262d"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "b5aaa75e3c84262d"
+        }
+      }
+    },
+    "api/fromEntries.md": {
+      "sourceHash": "5bbc7cdb2c05507b",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "5bbc7cdb2c05507b"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "5bbc7cdb2c05507b"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "5bbc7cdb2c05507b"
+        }
+      }
+    },
+    "api/fx.md": {
+      "sourceHash": "50a3c339a7acaac2",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "50a3c339a7acaac2"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "50a3c339a7acaac2"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "50a3c339a7acaac2"
+        }
+      }
+    },
+    "api/groupBy.md": {
+      "sourceHash": "09d4337ab09b54ce",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "09d4337ab09b54ce"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "09d4337ab09b54ce"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "09d4337ab09b54ce"
+        }
+      }
+    },
+    "api/gt.md": {
+      "sourceHash": "5e5d08be4a5b221e",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "5e5d08be4a5b221e"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "5e5d08be4a5b221e"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "5e5d08be4a5b221e"
+        }
+      }
+    },
+    "api/gte.md": {
+      "sourceHash": "efd9e95befe83d8b",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "efd9e95befe83d8b"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "efd9e95befe83d8b"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "efd9e95befe83d8b"
+        }
+      }
+    },
+    "api/head.md": {
+      "sourceHash": "87c9f969800c52ad",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "87c9f969800c52ad"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "87c9f969800c52ad"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "87c9f969800c52ad"
+        }
+      }
+    },
+    "api/identity.md": {
+      "sourceHash": "beaad0a35ae57c98",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "beaad0a35ae57c98"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "beaad0a35ae57c98"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "beaad0a35ae57c98"
+        }
+      }
+    },
+    "api/includes.md": {
+      "sourceHash": "cdecb2c166fc2e1b",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "cdecb2c166fc2e1b"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "cdecb2c166fc2e1b"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "cdecb2c166fc2e1b"
+        }
+      }
+    },
+    "api/index.md": {
+      "sourceHash": "700162e629f5fd0d",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "700162e629f5fd0d"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "700162e629f5fd0d"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "700162e629f5fd0d"
+        }
+      }
+    },
+    "api/indexBy.md": {
+      "sourceHash": "3752eb43c803d12f",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "3752eb43c803d12f"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "3752eb43c803d12f"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "3752eb43c803d12f"
+        }
+      }
+    },
+    "api/intersection.md": {
+      "sourceHash": "78c5ee09fe5f03bb",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "78c5ee09fe5f03bb"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "78c5ee09fe5f03bb"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "78c5ee09fe5f03bb"
+        }
+      }
+    },
+    "api/intersectionBy.md": {
+      "sourceHash": "b74dc8ed7b7d10c4",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "b74dc8ed7b7d10c4"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "b74dc8ed7b7d10c4"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "b74dc8ed7b7d10c4"
+        }
+      }
+    },
+    "api/isArray.md": {
+      "sourceHash": "b4ec4051793709d8",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "b4ec4051793709d8"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "b4ec4051793709d8"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "b4ec4051793709d8"
+        }
+      }
+    },
+    "api/isBoolean.md": {
+      "sourceHash": "4058a53005d66991",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "4058a53005d66991"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "4058a53005d66991"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "4058a53005d66991"
+        }
+      }
+    },
+    "api/isDate.md": {
+      "sourceHash": "d8fb74c922a61998",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "d8fb74c922a61998"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "d8fb74c922a61998"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "d8fb74c922a61998"
+        }
+      }
+    },
+    "api/isEmpty.md": {
+      "sourceHash": "ccd058e4f87c299c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "ccd058e4f87c299c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "ccd058e4f87c299c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "ccd058e4f87c299c"
+        }
+      }
+    },
+    "api/isNil.md": {
+      "sourceHash": "f00400f18b50b354",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "f00400f18b50b354"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "f00400f18b50b354"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "f00400f18b50b354"
+        }
+      }
+    },
+    "api/isNull.md": {
+      "sourceHash": "759cbe98c21a4e3b",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "759cbe98c21a4e3b"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "759cbe98c21a4e3b"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "759cbe98c21a4e3b"
+        }
+      }
+    },
+    "api/isNumber.md": {
+      "sourceHash": "21d450f1849dcf1c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "21d450f1849dcf1c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "21d450f1849dcf1c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "21d450f1849dcf1c"
+        }
+      }
+    },
+    "api/isObject.md": {
+      "sourceHash": "c10ec8f95cb108f8",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "c10ec8f95cb108f8"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "c10ec8f95cb108f8"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "c10ec8f95cb108f8"
+        }
+      }
+    },
+    "api/isString.md": {
+      "sourceHash": "05c67f4393b21365",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "05c67f4393b21365"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "05c67f4393b21365"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "05c67f4393b21365"
+        }
+      }
+    },
+    "api/isUndefined.md": {
+      "sourceHash": "aafbe4f6552d262f",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "aafbe4f6552d262f"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "aafbe4f6552d262f"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "aafbe4f6552d262f"
+        }
+      }
+    },
+    "api/join.md": {
+      "sourceHash": "abc9942afab5aebd",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "abc9942afab5aebd"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "abc9942afab5aebd"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "abc9942afab5aebd"
+        }
+      }
+    },
+    "api/juxt.md": {
+      "sourceHash": "7fc3826bfcb903bc",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "7fc3826bfcb903bc"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "7fc3826bfcb903bc"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "7fc3826bfcb903bc"
+        }
+      }
+    },
+    "api/keys.md": {
+      "sourceHash": "a3066863ca816bc3",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "a3066863ca816bc3"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "a3066863ca816bc3"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "a3066863ca816bc3"
+        }
+      }
+    },
+    "api/last.md": {
+      "sourceHash": "4862997dfdf22b89",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "4862997dfdf22b89"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "4862997dfdf22b89"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "4862997dfdf22b89"
+        }
+      }
+    },
+    "api/lt.md": {
+      "sourceHash": "dedc50c747d30ec8",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "dedc50c747d30ec8"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "dedc50c747d30ec8"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "dedc50c747d30ec8"
+        }
+      }
+    },
+    "api/lte.md": {
+      "sourceHash": "89bd4483c3fe4a18",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "89bd4483c3fe4a18"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "89bd4483c3fe4a18"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "89bd4483c3fe4a18"
+        }
+      }
+    },
+    "api/map.md": {
+      "sourceHash": "bc4a5048328d1c58",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "bc4a5048328d1c58"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "bc4a5048328d1c58"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "bc4a5048328d1c58"
+        }
+      }
+    },
+    "api/max.md": {
+      "sourceHash": "9aed73b2d4ccff68",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "9aed73b2d4ccff68"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "9aed73b2d4ccff68"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "9aed73b2d4ccff68"
+        }
+      }
+    },
+    "api/memoize.md": {
+      "sourceHash": "0dc5901aab9d507a",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "0dc5901aab9d507a"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "0dc5901aab9d507a"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "0dc5901aab9d507a"
+        }
+      }
+    },
+    "api/min.md": {
+      "sourceHash": "24dd92b3346b876a",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "24dd92b3346b876a"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "24dd92b3346b876a"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "24dd92b3346b876a"
+        }
+      }
+    },
+    "api/negate.md": {
+      "sourceHash": "5e64e7f3668ba2b0",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "5e64e7f3668ba2b0"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "5e64e7f3668ba2b0"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "5e64e7f3668ba2b0"
+        }
+      }
+    },
+    "api/noop.md": {
+      "sourceHash": "cfc22ed1d7df95f0",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "cfc22ed1d7df95f0"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "cfc22ed1d7df95f0"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "cfc22ed1d7df95f0"
+        }
+      }
+    },
+    "api/not.md": {
+      "sourceHash": "fbda18df60fd9d26",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "fbda18df60fd9d26"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "fbda18df60fd9d26"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "fbda18df60fd9d26"
+        }
+      }
+    },
+    "api/nth.md": {
+      "sourceHash": "51bc38963a5d4a12",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "51bc38963a5d4a12"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "51bc38963a5d4a12"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "51bc38963a5d4a12"
+        }
+      }
+    },
+    "api/omit.md": {
+      "sourceHash": "bb8028a9d6d121d4",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "bb8028a9d6d121d4"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "bb8028a9d6d121d4"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "bb8028a9d6d121d4"
+        }
+      }
+    },
+    "api/omitBy.md": {
+      "sourceHash": "ddcf24cd30c117cb",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "ddcf24cd30c117cb"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "ddcf24cd30c117cb"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "ddcf24cd30c117cb"
+        }
+      }
+    },
+    "api/partition.md": {
+      "sourceHash": "f07c0accce2fa279",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "f07c0accce2fa279"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "f07c0accce2fa279"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "f07c0accce2fa279"
+        }
+      }
+    },
+    "api/peek.md": {
+      "sourceHash": "e33b997a5815ee08",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "e33b997a5815ee08"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "e33b997a5815ee08"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "e33b997a5815ee08"
+        }
+      }
+    },
+    "api/pick.md": {
+      "sourceHash": "9f6440acb2041d0d",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "9f6440acb2041d0d"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "9f6440acb2041d0d"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "9f6440acb2041d0d"
+        }
+      }
+    },
+    "api/pickBy.md": {
+      "sourceHash": "f8fbd4abe56447c6",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "f8fbd4abe56447c6"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "f8fbd4abe56447c6"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "f8fbd4abe56447c6"
+        }
+      }
+    },
+    "api/pipe.md": {
+      "sourceHash": "f3a75d76f2a0c2fc",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "f3a75d76f2a0c2fc"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "f3a75d76f2a0c2fc"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "f3a75d76f2a0c2fc"
+        }
+      }
+    },
+    "api/pipeLazy.md": {
+      "sourceHash": "ce81663129bb6073",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "ce81663129bb6073"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "ce81663129bb6073"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "ce81663129bb6073"
+        }
+      }
+    },
+    "api/pluck.md": {
+      "sourceHash": "d1f31d7ea869140c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "d1f31d7ea869140c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "d1f31d7ea869140c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "d1f31d7ea869140c"
+        }
+      }
+    },
+    "api/prepend.md": {
+      "sourceHash": "a7ae53274c698901",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "a7ae53274c698901"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "a7ae53274c698901"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "a7ae53274c698901"
+        }
+      }
+    },
+    "api/prop.md": {
+      "sourceHash": "d3ee1b2ab9b89bd4",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "d3ee1b2ab9b89bd4"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "d3ee1b2ab9b89bd4"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "d3ee1b2ab9b89bd4"
+        }
+      }
+    },
+    "api/props.md": {
+      "sourceHash": "f873abb7e058239c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "f873abb7e058239c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "f873abb7e058239c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "f873abb7e058239c"
+        }
+      }
+    },
+    "api/range.md": {
+      "sourceHash": "2c704299df07dbe4",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "2c704299df07dbe4"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "2c704299df07dbe4"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "2c704299df07dbe4"
+        }
+      }
+    },
+    "api/reduce.md": {
+      "sourceHash": "d4d01e1aed809971",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "d4d01e1aed809971"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "d4d01e1aed809971"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "d4d01e1aed809971"
+        }
+      }
+    },
+    "api/reduceLazy.md": {
+      "sourceHash": "5f8b72e14d1fe4ac",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "5f8b72e14d1fe4ac"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "5f8b72e14d1fe4ac"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "5f8b72e14d1fe4ac"
+        }
+      }
+    },
+    "api/reject.md": {
+      "sourceHash": "1b11356c59097a3c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "1b11356c59097a3c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "1b11356c59097a3c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "1b11356c59097a3c"
+        }
+      }
+    },
+    "api/repeat.md": {
+      "sourceHash": "7604b4e405dd86cc",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "7604b4e405dd86cc"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "7604b4e405dd86cc"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "7604b4e405dd86cc"
+        }
+      }
+    },
+    "api/resolveProps.md": {
+      "sourceHash": "6b5c5a869bccef9c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "6b5c5a869bccef9c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "6b5c5a869bccef9c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "6b5c5a869bccef9c"
+        }
+      }
+    },
+    "api/reverse.md": {
+      "sourceHash": "9f9b1ca12ff7789b",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "9f9b1ca12ff7789b"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "9f9b1ca12ff7789b"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "9f9b1ca12ff7789b"
+        }
+      }
+    },
+    "api/scan.md": {
+      "sourceHash": "5925ad2173229a8a",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "5925ad2173229a8a"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "5925ad2173229a8a"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "5925ad2173229a8a"
+        }
+      }
+    },
+    "api/shuffle.md": {
+      "sourceHash": "8a277d0c42c402c4",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "8a277d0c42c402c4"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "8a277d0c42c402c4"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "8a277d0c42c402c4"
+        }
+      }
+    },
+    "api/size.md": {
+      "sourceHash": "b8f1d4cc2b841e6a",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "b8f1d4cc2b841e6a"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "b8f1d4cc2b841e6a"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "b8f1d4cc2b841e6a"
+        }
+      }
+    },
+    "api/slice.md": {
+      "sourceHash": "f48232cf0bb5be18",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "f48232cf0bb5be18"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "f48232cf0bb5be18"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "f48232cf0bb5be18"
+        }
+      }
+    },
+    "api/some.md": {
+      "sourceHash": "57310ea20e6d40f4",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "57310ea20e6d40f4"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "57310ea20e6d40f4"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "57310ea20e6d40f4"
+        }
+      }
+    },
+    "api/sort.md": {
+      "sourceHash": "2728090d56ec942c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "2728090d56ec942c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "2728090d56ec942c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "2728090d56ec942c"
+        }
+      }
+    },
+    "api/sortBy.md": {
+      "sourceHash": "298194754c228973",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "298194754c228973"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "298194754c228973"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "298194754c228973"
+        }
+      }
+    },
+    "api/split.md": {
+      "sourceHash": "d598d56c7bf41930",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "d598d56c7bf41930"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "d598d56c7bf41930"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "d598d56c7bf41930"
+        }
+      }
+    },
+    "api/sum.md": {
+      "sourceHash": "426eefd3d498e7a0",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "426eefd3d498e7a0"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "426eefd3d498e7a0"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "426eefd3d498e7a0"
+        }
+      }
+    },
+    "api/take.md": {
+      "sourceHash": "6921e6a893c3d651",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "6921e6a893c3d651"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "6921e6a893c3d651"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "6921e6a893c3d651"
+        }
+      }
+    },
+    "api/takeRight.md": {
+      "sourceHash": "59a5e85d9ca9274d",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "59a5e85d9ca9274d"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "59a5e85d9ca9274d"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "59a5e85d9ca9274d"
+        }
+      }
+    },
+    "api/takeUntil.md": {
+      "sourceHash": "a9c25031c06a9170",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "a9c25031c06a9170"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "a9c25031c06a9170"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "a9c25031c06a9170"
+        }
+      }
+    },
+    "api/takeUntilInclusive.md": {
+      "sourceHash": "f0f20bbfd34f5601",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "f0f20bbfd34f5601"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "f0f20bbfd34f5601"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "f0f20bbfd34f5601"
+        }
+      }
+    },
+    "api/takeWhile.md": {
+      "sourceHash": "d88541774f6d8cf1",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "d88541774f6d8cf1"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "d88541774f6d8cf1"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "d88541774f6d8cf1"
+        }
+      }
+    },
+    "api/tap.md": {
+      "sourceHash": "eab9d62d700539c9",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "eab9d62d700539c9"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "eab9d62d700539c9"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "eab9d62d700539c9"
+        }
+      }
+    },
+    "api/throttle.md": {
+      "sourceHash": "3dee719216b52c51",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "3dee719216b52c51"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "3dee719216b52c51"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "3dee719216b52c51"
+        }
+      }
+    },
+    "api/throwError.md": {
+      "sourceHash": "87279a6df95e29f8",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "87279a6df95e29f8"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "87279a6df95e29f8"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "87279a6df95e29f8"
+        }
+      }
+    },
+    "api/throwIf.md": {
+      "sourceHash": "dba9cad80753ad4c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "dba9cad80753ad4c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "dba9cad80753ad4c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "dba9cad80753ad4c"
+        }
+      }
+    },
+    "api/toArray.md": {
+      "sourceHash": "7b4d340ae77402cf",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "7b4d340ae77402cf"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "7b4d340ae77402cf"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "7b4d340ae77402cf"
+        }
+      }
+    },
+    "api/toAsync.md": {
+      "sourceHash": "09a8b637927a6994",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "09a8b637927a6994"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "09a8b637927a6994"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "09a8b637927a6994"
+        }
+      }
+    },
+    "api/transpose.md": {
+      "sourceHash": "7d67c4ad44eab485",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "7d67c4ad44eab485"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "7d67c4ad44eab485"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "7d67c4ad44eab485"
+        }
+      }
+    },
+    "api/unicodeToArray.md": {
+      "sourceHash": "faeb73d149a4cbaa",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "faeb73d149a4cbaa"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "faeb73d149a4cbaa"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "faeb73d149a4cbaa"
+        }
+      }
+    },
+    "api/uniq.md": {
+      "sourceHash": "13b6de07f3f21cc4",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "13b6de07f3f21cc4"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "13b6de07f3f21cc4"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "13b6de07f3f21cc4"
+        }
+      }
+    },
+    "api/uniqBy.md": {
+      "sourceHash": "2883c765b50f5abd",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "2883c765b50f5abd"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "2883c765b50f5abd"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "2883c765b50f5abd"
+        }
+      }
+    },
+    "api/unless.md": {
+      "sourceHash": "9579d7b189ea6942",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "9579d7b189ea6942"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "9579d7b189ea6942"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "9579d7b189ea6942"
+        }
+      }
+    },
+    "api/values.md": {
+      "sourceHash": "350906d10c2a3b65",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "350906d10c2a3b65"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "350906d10c2a3b65"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "350906d10c2a3b65"
+        }
+      }
+    },
+    "api/when.md": {
+      "sourceHash": "362ae724ff64b193",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "362ae724ff64b193"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "362ae724ff64b193"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "362ae724ff64b193"
+        }
+      }
+    },
+    "api/zip.md": {
+      "sourceHash": "d70fc201e3bd8f95",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "d70fc201e3bd8f95"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "d70fc201e3bd8f95"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "d70fc201e3bd8f95"
+        }
+      }
+    },
+    "api/zipWith.md": {
+      "sourceHash": "20a17017d9e92863",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "20a17017d9e92863"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "20a17017d9e92863"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "20a17017d9e92863"
+        }
+      }
+    },
+    "api/zipWithIndex.md": {
+      "sourceHash": "3b807f76952d1bb4",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "3b807f76952d1bb4"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "3b807f76952d1bb4"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "3b807f76952d1bb4"
+        }
+      }
+    },
+    "guide/error-handling.md": {
+      "sourceHash": "b15da7838e1efa5a",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "b15da7838e1efa5a"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "b15da7838e1efa5a"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "b15da7838e1efa5a"
+        }
+      }
+    },
+    "guide/function-composition.md": {
+      "sourceHash": "548072d2c377313f",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "548072d2c377313f"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "548072d2c377313f"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "548072d2c377313f"
+        }
+      }
+    },
+    "guide/getting-started.md": {
+      "sourceHash": "872776beaf53b023",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "872776beaf53b023"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "872776beaf53b023"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "872776beaf53b023"
+        }
+      }
+    },
+    "guide/handle-concurrency.md": {
+      "sourceHash": "ca8ee2e5eb209420",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "ca8ee2e5eb209420"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "ca8ee2e5eb209420"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "ca8ee2e5eb209420"
+        }
+      }
+    },
+    "guide/how-to-debug.md": {
+      "sourceHash": "b4c8c8f018ec27ee",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "b4c8c8f018ec27ee"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "b4c8c8f018ec27ee"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "b4c8c8f018ec27ee"
+        }
+      }
+    },
+    "guide/lazy-evaluation.md": {
+      "sourceHash": "3141d862438d247c",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "3141d862438d247c"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "3141d862438d247c"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "3141d862438d247c"
+        }
+      }
+    },
+    "guide/method-chaining.md": {
+      "sourceHash": "5353c27490eae0ae",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "5353c27490eae0ae"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "5353c27490eae0ae"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "5353c27490eae0ae"
+        }
+      }
+    },
+    "guide/to-async.md": {
+      "sourceHash": "72efcad4f12a5383",
+      "translations": {
+        "ja": {
+          "status": "translated",
+          "hash": "72efcad4f12a5383"
+        },
+        "ko": {
+          "status": "translated",
+          "hash": "72efcad4f12a5383"
+        },
+        "zh": {
+          "status": "translated",
+          "hash": "72efcad4f12a5383"
+        }
+      }
+    }
+  }
+}
