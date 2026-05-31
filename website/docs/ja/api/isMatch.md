@@ -30,7 +30,7 @@ isMatch({ a: 1 }, { a: 1, b: 2 }); // false - objectに'b'がない
 isMatch({ user: { name: "John", age: 30 } }, { user: { name: "John" } }); // true
 isMatch({ user: { name: "John" } }, { user: { name: "Jane" } }); // false
 
-// 配列マッチング（完全に一致する必要がある）
+// 配列マッチング（部分一致, prefixベース）
 isMatch([1, 2, 3], [1, 2, 3]); // true
 isMatch([1, 2, 3], [1, 2]); // true
 isMatch([1, 2], [1, 2, 3]); // false

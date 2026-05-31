@@ -19,7 +19,7 @@ import isNil from "./isNil";
  * isMatch({ user: { name: "John", age: 30 } }, { user: { name: "John" } }); // true
  * isMatch({ user: { name: "John" } }, { user: { name: "Jane" } }); // false
  *
- * // Array matching (must match exactly)
+ * // Array matching (partial, prefix-based)
  * isMatch([1, 2, 3], [1, 2, 3]); // true
  * isMatch([1, 2, 3], [1, 2]); // true
  * isMatch([1, 2], [1, 2, 3]); // false

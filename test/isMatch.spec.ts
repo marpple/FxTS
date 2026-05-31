@@ -50,7 +50,7 @@ describe("isMatch", function () {
   });
 
   describe("array matching", function () {
-    it("should return true for equal arrays", function () {
+    it("should compare arrays by index for matching positions", function () {
       expect(isMatch([1, 2, 3], [1, 2, 3])).toBe(true);
       expect(isMatch([1, 2, 3], [1, 2, 4])).toBe(false);
     });
@@ -159,7 +159,7 @@ describe("isMatch", function () {
   });
 
   describe("Set matching", function () {
-    it("should partially match Set objects", function () {
+    it("should return true for equal Set objects", function () {
       const set1 = new Set([1, 2, 3]);
       const set2 = new Set([1, 2, 3]);
       expect(isMatch(set1, set2)).toBe(true);
