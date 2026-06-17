@@ -1,6 +1,10 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 
 function* sync(sep: string, iterable: Iterable<string>) {
   if (sep === "") {
@@ -53,9 +57,9 @@ function async(
   sep: string,
   iterable: AsyncIterable<string>,
 ): AsyncIterableIterator<string> {
-  let _iterator: AsyncIterator<string>;
+  let _iterator: AsyncIterator<string, unknown, ConcurrentArg>;
   return {
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (_iterator === undefined) {
         _iterator = isConcurrent(_concurrent)
           ? asyncSequential(sep, concurrent(_concurrent.length, iterable))

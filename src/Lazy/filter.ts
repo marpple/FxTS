@@ -5,7 +5,11 @@ import type IterableInfer from "../types/IterableInfer";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
 import type TruthyTypesOf from "../types/TrutyTypesOf";
 import type { Reject, Resolve } from "../types/Utils";
-import concurrent, { isConcurrent, type Concurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 
 async function* asyncSequential<A>(
   f: (a: A) => unknown,
@@ -19,7 +23,8 @@ async function* asyncSequential<A>(
 function asyncConcurrent<A>(
   iterable: AsyncIterable<[boolean, A]>,
 ): AsyncIterableIterator<A> {
-  const iterator = iterable[Symbol.asyncIterator]();
+  const iterator: AsyncIterator<[boolean, A], unknown, ConcurrentArg> =
+    iterable[Symbol.asyncIterator]();
   const settlementQueue: [Resolve<A>, Reject][] = [] as unknown as [
     Resolve<A>,
     Reject,
@@ -30,8 +35,8 @@ function asyncConcurrent<A>(
   let resolvedCount = 0;
   let prevItem = Promise.resolve();
 
-  function fillBuffer(concurrent: Concurrent) {
-    const nextItem = iterator.next(concurrent as any);
+  function fillBuffer(concurrent: ConcurrentArg) {
+    const nextItem = iterator.next(concurrent);
     prevItem = prevItem
       .then(() => nextItem)
       .then(({ done, value }) => {
@@ -72,7 +77,7 @@ function asyncConcurrent<A>(
     }
   }
 
-  function recur(concurrent: Concurrent) {
+  function recur(concurrent: ConcurrentArg) {
     if (finished || nextCallCount === resolvedCount) {
       return;
     } else if (buffer.length > 0) {
@@ -83,14 +88,14 @@ function asyncConcurrent<A>(
   }
 
   return {
-    async next(concurrent: any) {
+    async next(concurrent?: Concurrent) {
       nextCallCount++;
       if (finished) {
         return { done: true, value: undefined };
       }
       return new Promise((resolve, reject) => {
         settlementQueue.push([resolve, reject]);
-        recur(concurrent as Concurrent);
+        recur(concurrent);
       });
     },
     [Symbol.asyncIterator]() {
@@ -103,12 +108,13 @@ function toFilterIterator<A>(
   f: (a: A) => unknown,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<[boolean, A]> {
-  const iterator = iterable[Symbol.asyncIterator]();
+  const iterator: AsyncIterator<A, unknown, ConcurrentArg> =
+    iterable[Symbol.asyncIterator]();
   return {
     [Symbol.asyncIterator]() {
       return this;
     },
-    async next(_concurrent) {
+    async next(_concurrent?: Concurrent) {
       const { done, value } = await iterator.next(_concurrent);
       if (done) {
         return {
@@ -133,9 +139,9 @@ function async<A>(
   f: (a: A) => unknown,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A> {
-  let _iterator: AsyncIterator<A>;
+  let _iterator: AsyncIterator<A, unknown, ConcurrentArg>;
   return {
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (_iterator === undefined) {
         _iterator = isConcurrent(_concurrent)
           ? asyncConcurrent(

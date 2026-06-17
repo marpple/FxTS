@@ -2,6 +2,7 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import type Awaited from "../types/Awaited";
 import type IterableInfer from "../types/IterableInfer";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
+import type { Concurrent, ConcurrentArg } from "./concurrent";
 
 function sync<A, B>(
   f: (a: A) => B,
@@ -34,10 +35,11 @@ function async<A, B>(
   f: (a: A) => B,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<B> {
-  const iterator = iterable[Symbol.asyncIterator]();
+  const iterator: AsyncIterator<A, unknown, ConcurrentArg> =
+    iterable[Symbol.asyncIterator]();
 
   return {
-    async next(_concurrent) {
+    async next(_concurrent?: Concurrent) {
       const { done, value } = await iterator.next(_concurrent);
       if (done) return { done, value } as IteratorReturnResult<void>;
       return {

@@ -6,7 +6,11 @@ import type IterableInfer from "../types/IterableInfer";
 import type { Reject, Resolve } from "../types/Utils";
 import append from "./append";
 import concat from "./concat";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 
 type ReturnFlatType<
   A extends Iterable<unknown> | AsyncIterable<unknown>,
@@ -185,9 +189,9 @@ function async<A>(
   iterable: AsyncIterable<A>,
   depth: number,
 ): AsyncIterableIterator<A> {
-  let _iterator: AsyncIterator<A> | null = null;
+  let _iterator: AsyncIterator<A, unknown, ConcurrentArg> | null = null;
   return {
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (_iterator === null) {
         _iterator = isConcurrent(_concurrent)
           ? asyncConcurrent(concurrent(_concurrent.length, iterable), depth)

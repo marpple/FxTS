@@ -1,6 +1,10 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import type ReturnZipWithIndexType from "../types/ReturnZipWithIndexType";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 import map from "./map";
 
 function _zipWithIndex<T extends Iterable<unknown> | AsyncIterable<unknown>>(
@@ -12,9 +16,9 @@ function _zipWithIndex<T extends Iterable<unknown> | AsyncIterable<unknown>>(
 }
 
 function async<T>(iterable: AsyncIterable<T>) {
-  let _iterator: AsyncIterator<[number, T]>;
+  let _iterator: AsyncIterator<[number, T], unknown, ConcurrentArg>;
   return {
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (_iterator === undefined) {
         _iterator = isConcurrent(_concurrent)
           ? _zipWithIndex(concurrent(_concurrent.length, iterable))

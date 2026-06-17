@@ -4,7 +4,7 @@ import type { LinkedListNode } from "../dataStructure/linkedList/linkedListNode"
 import isNil from "../isNil";
 import type IterableInfer from "../types/IterableInfer";
 import type { Reject, Resolve } from "../types/Utils";
-import type { Concurrent } from "./concurrent";
+import type { Concurrent, ConcurrentArg } from "./concurrent";
 
 type ReturnForkType<A extends Iterable<unknown> | AsyncIterable<unknown>> =
   A extends AsyncIterable<any>
@@ -115,7 +115,7 @@ function sync<T>(iterable: Iterable<T>) {
 
 type ForkAsyncItem = {
   queue: LinkedList<IteratorResult<Value>>;
-  next: (...args: any) => Promise<IteratorResult<Value, any>>;
+  next: AsyncIterator<Value, any, ConcurrentArg>["next"];
   done: boolean;
   error?: any;
   forks: Set<LinkedListNode<IteratorResult<Value>> | null>;
@@ -124,7 +124,8 @@ type ForkAsyncItem = {
 const forkAsyncMap = new WeakMap<AsyncIterator<Value>, ForkAsyncItem>();
 
 function async<T>(iterable: AsyncIterable<T>) {
-  const iterator = iterable[Symbol.asyncIterator]();
+  const iterator: AsyncIterator<T, unknown, ConcurrentArg> =
+    iterable[Symbol.asyncIterator]();
 
   const getNext = (forkItem: ForkAsyncItem) => {
     const settlementQueue: [Resolve<T>, Reject][] = [];

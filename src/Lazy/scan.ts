@@ -5,7 +5,11 @@ import type Arrow from "../types/Arrow";
 import type Awaited from "../types/Awaited";
 import type IterableInfer from "../types/IterableInfer";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 
 function* sync<A, B>(
   f: (a: B, b: A) => B,
@@ -34,9 +38,9 @@ function async<A, B>(
   acc: B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<B> {
-  let _iterator: AsyncIterator<B>;
+  let _iterator: AsyncIterator<B, unknown, ConcurrentArg>;
   return {
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (_iterator === undefined) {
         _iterator = isConcurrent(_concurrent)
           ? asyncSequential(f, acc, concurrent(_concurrent.length, iterable))
@@ -54,9 +58,9 @@ function asyncWithoutSeed<A, B>(
   f: (a: B, b: A) => B,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<B> {
-  let _iterator: AsyncIterator<B>;
+  let _iterator: AsyncIterator<B, unknown, ConcurrentArg>;
   return {
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (_iterator === undefined) {
         if (isConcurrent(_concurrent)) {
           const _iterable = concurrent(_concurrent.length, iterable);

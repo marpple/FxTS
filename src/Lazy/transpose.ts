@@ -7,6 +7,7 @@ import size from "../size";
 import toArray from "../toArray";
 import type ReturnZipType from "../types/ReturnZipType";
 import type { UniversalIterable } from "../types/Utils";
+import type { Concurrent, ConcurrentArg } from "./concurrent";
 import filter from "./filter";
 import map from "./map";
 import toAsync from "./toAsync";
@@ -29,13 +30,15 @@ function* sync(
 function async(
   iterable: Iterable<UniversalIterable>,
 ): AsyncIterableIterator<UniversalIterable> {
-  const iterators = toArray(map(toIterator, iterable as any));
+  const iterators: AsyncIterator<unknown, unknown, ConcurrentArg>[] = toArray(
+    map(toIterator, iterable as any),
+  );
 
   return {
     [Symbol.asyncIterator]() {
       return this;
     },
-    async next(_concurrent) {
+    async next(_concurrent?: Concurrent) {
       const headIterators = await pipe(
         toAsync(iterators),
         map((iterator) => iterator.next(_concurrent)),

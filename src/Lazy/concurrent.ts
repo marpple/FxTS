@@ -18,6 +18,18 @@ export const isConcurrent = (concurrent: unknown): concurrent is Concurrent => {
 };
 
 /**
+ * The concurrency signal that lazy operators thread *backwards* through the
+ * iterator protocol's `next(value)` argument — i.e. the generator's `TNext`
+ * slot. A `Concurrent` instance turns on concurrent evaluation for the
+ * upstream chain; `undefined` means sequential.
+ *
+ * Use this as the third type argument of `AsyncIterator`/`AsyncIterableIterator`
+ * for the upstream iterator an operator pulls from, so the marker can be
+ * forwarded without `as any`.
+ */
+export type ConcurrentArg = Concurrent | undefined;
+
+/**
  * Concurrent is used to balance the load of multiple asynchronous requests.
  * The first argument receives a number that controls the number of loads, and the second argument is an AsyncIterable.
  * See {@link https://fxts.dev/api/toAsync | toAsync} to create an AsyncIterable .
@@ -93,7 +105,8 @@ function concurrent<A>(
     throw new TypeError("'iterable' must be type of AsyncIterable");
   }
 
-  const iterator = iterable[Symbol.asyncIterator]();
+  const iterator: AsyncIterator<A, unknown, ConcurrentArg> =
+    iterable[Symbol.asyncIterator]();
   const buffer: PromiseSettledResult<IteratorResult<A>>[] = [];
   let prev = Promise.resolve();
   let nextCallCount = 0;
@@ -130,9 +143,7 @@ function concurrent<A>(
       );
     } else {
       const nextItems = Promise.allSettled(
-        Array.from({ length }, () =>
-          iterator.next(Concurrent.of(length) as any),
-        ),
+        Array.from({ length }, () => iterator.next(Concurrent.of(length))),
       );
       pending = true;
       prev = prev

@@ -1,7 +1,11 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import isNumber from "../isNumber";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 
 function* sync<T>(
   start: number,
@@ -36,13 +40,13 @@ function async<T>(
   end: number,
   iterable: AsyncIterable<T>,
 ): AsyncIterableIterator<T> {
-  let iterator: AsyncIterator<T>;
+  let iterator: AsyncIterator<T, unknown, ConcurrentArg>;
   return {
     [Symbol.asyncIterator]() {
       return this;
     },
 
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (iterator === undefined) {
         // prettier-ignore
         iterator = isConcurrent(_concurrent)

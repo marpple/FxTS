@@ -2,7 +2,11 @@ import { AsyncFunctionException } from "../_internal/error";
 import { isAsyncIterable, isIterable, isPromise } from "../_internal/utils";
 import type IterableInfer from "../types/IterableInfer";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 
 function* sync<A, B>(f: (a: A) => B, iterable: Iterable<A>) {
   for (const item of iterable) {
@@ -23,13 +27,14 @@ function asyncSequential<A, B>(
   f: (a: A) => B,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A> {
-  const iterator = iterable[Symbol.asyncIterator]();
+  const iterator: AsyncIterator<A, unknown, ConcurrentArg> =
+    iterable[Symbol.asyncIterator]();
   let end = false;
   return {
     [Symbol.asyncIterator]() {
       return this;
     },
-    async next(_concurrent) {
+    async next(_concurrent?: Concurrent) {
       if (end) {
         return { done: true, value: undefined };
       }
@@ -57,9 +62,9 @@ function async<A, B>(
   f: (a: A) => B,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A> {
-  let _iterator: AsyncIterator<A>;
+  let _iterator: AsyncIterator<A, unknown, ConcurrentArg>;
   return {
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (_iterator === undefined) {
         _iterator = isConcurrent(_concurrent)
           ? asyncSequential(f, concurrent(_concurrent.length, iterable))
