@@ -25,6 +25,7 @@ import isArray from "./isArray";
 import isBoolean from "./isBoolean";
 import isDate from "./isDate";
 import isEmpty from "./isEmpty";
+import isMatch from "./isMatch";
 import isNil from "./isNil";
 import isNull from "./isNull";
 import isNumber from "./isNumber";
@@ -36,6 +37,7 @@ import juxt from "./juxt";
 import last from "./last";
 import lt from "./lt";
 import lte from "./lte";
+import matches from "./matches";
 import max from "./max";
 import memoize from "./memoize";
 import min from "./min";
@@ -101,6 +103,7 @@ export {
   isBoolean,
   isDate,
   isEmpty,
+  isMatch,
   isNil,
   isNull,
   isNumber,
@@ -112,6 +115,7 @@ export {
   last,
   lt,
   lte,
+  matches,
   max,
   memoize,
   min,
