@@ -1,7 +1,5 @@
-import every from "./every";
 import isMatch from "./isMatch";
 import isNil from "./isNil";
-import { entries } from "./Lazy";
 
 type DeepPartial<T> = T extends Date | RegExp | Map<any, any> | Set<any>
   ? T
@@ -39,6 +37,15 @@ type RejectSymbolKeys<T> = T extends Date | RegExp | Map<any, any> | Set<any>
         : T[K];
     }
   : T;
+
+const isPlainObjectPattern = (pattern: object): boolean =>
+  !(
+    pattern instanceof Date ||
+    pattern instanceof RegExp ||
+    pattern instanceof Map ||
+    pattern instanceof Set ||
+    Array.isArray(pattern)
+  );
 
 /**
  * Creates a predicate function that checks if an input matches all properties in the given pattern.
@@ -114,10 +121,28 @@ function matches<T>(
 function matches(
   pattern: Record<string | number, any>,
 ): (input: any) => boolean {
-  return (input) =>
-    isNil(input)
-      ? false
-      : every(([key, value]) => isMatch(input[key], value), entries(pattern));
+  // Special-type / primitive patterns (Date, RegExp, Map, Set, Array, nil,
+  // primitives) have no enumerable string keys to compare key-by-key, so
+  // delegate to `isMatch`, which compares them by value.
+  if (
+    isNil(pattern) ||
+    typeof pattern !== "object" ||
+    !isPlainObjectPattern(pattern)
+  ) {
+    return (input) => (isNil(input) ? false : isMatch(input, pattern));
+  }
+
+  // Plain-object pattern: the keys are fixed, so enumerate them once here
+  // instead of on every predicate call (the hot path of `filter`/`find`/...).
+  const keys = Object.keys(pattern);
+  return (input) => {
+    if (isNil(input)) return false;
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      if (!isMatch(input[key], pattern[key])) return false;
+    }
+    return true;
+  };
 }
 
 export default matches;

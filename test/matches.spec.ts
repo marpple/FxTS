@@ -1,4 +1,14 @@
-import { every, filter, find, fx, map, matches, pipe, some } from "../src";
+import {
+  every,
+  filter,
+  find,
+  fx,
+  isMatch,
+  map,
+  matches,
+  pipe,
+  some,
+} from "../src";
 
 describe("matches", function () {
   describe("basic matching", function () {
@@ -213,6 +223,73 @@ describe("matches", function () {
       const result = find(matches({ created: date }), data);
 
       expect(result).toEqual({ id: 1, created: new Date("2024-01-01") });
+    });
+  });
+
+  describe("top-level non-object patterns", function () {
+    it("should compare top-level Date patterns by value, not ignore them", function () {
+      const matcher = matches(new Date("2024-01-01"));
+
+      expect(matcher(new Date("2024-01-01"))).toBe(true);
+      expect(matcher(new Date("2025-01-01"))).toBe(false);
+    });
+
+    it("should compare top-level RegExp patterns by value", function () {
+      const matcher = matches(/abc/gi);
+
+      expect(matcher(/abc/gi)).toBe(true);
+      expect(matcher(/abc/g)).toBe(false);
+    });
+
+    it("should compare top-level primitive patterns by value", function () {
+      expect(matches(1)(1)).toBe(true);
+      expect(matches(1)(2)).toBe(false);
+      expect(matches("a")("a")).toBe(true);
+      expect(matches("a")("b")).toBe(false);
+    });
+
+    it("should compare top-level array patterns by prefix", function () {
+      const matcher = matches([1, 2]);
+
+      expect(matcher([1, 2, 3])).toBe(true);
+      expect(matcher([1, 3])).toBe(false);
+    });
+
+    it("should compare top-level Map patterns by value", function () {
+      const matcher = matches(new Map([["a", 1]]));
+
+      expect(
+        matcher(
+          new Map([
+            ["a", 1],
+            ["b", 2],
+          ]),
+        ),
+      ).toBe(true);
+      expect(matcher(new Map([["a", 2]]))).toBe(false);
+    });
+
+    it("should compare top-level Set patterns by value", function () {
+      const matcher = matches(new Set([1, 2]));
+
+      expect(matcher(new Set([1, 2, 3]))).toBe(true);
+      expect(matcher(new Set([1, 3]))).toBe(false);
+    });
+
+    it("should return false when nil pattern is matched against a non-nil input", function () {
+      expect(matches(null as any)({ a: 1 })).toBe(false);
+      expect(matches(undefined as any)({ a: 1 })).toBe(false);
+    });
+  });
+
+  describe("consistency with isMatch", function () {
+    it("should produce the same result as isMatch(input, pattern)", function () {
+      const superset = { a: 1, b: 2 };
+      expect(matches({ a: 1 })(superset)).toBe(isMatch(superset, { a: 1 }));
+      expect(matches({ a: 1 })({ a: 2 })).toBe(isMatch({ a: 2 }, { a: 1 }));
+      expect(matches(new Date("2024-01-01"))(new Date("2025-01-01"))).toBe(
+        isMatch(new Date("2025-01-01"), new Date("2024-01-01")),
+      );
     });
   });
 });
