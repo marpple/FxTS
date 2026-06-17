@@ -3,7 +3,11 @@ import { isAsyncIterable, isIterable } from "../_internal/utils";
 import pipe from "../pipe";
 import pipe1 from "../pipe1";
 import toArray from "../toArray";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 import filter from "./filter";
 import map from "./map";
 import toAsync from "./toAsync";
@@ -42,9 +46,9 @@ function async<T>(
   iterable1: AsyncIterable<T>,
   iterable2: AsyncIterable<T>,
 ): AsyncIterableIterator<T> {
-  let _iterator: AsyncIterator<T>;
+  let _iterator: AsyncIterator<T, unknown, ConcurrentArg>;
   return {
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (_iterator === undefined) {
         _iterator = isConcurrent(_concurrent)
           ? asyncSequential(

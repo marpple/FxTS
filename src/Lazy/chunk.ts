@@ -7,7 +7,11 @@ import {
 import toArray from "../toArray";
 import type IterableInfer from "../types/IterableInfer";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 import take from "./take";
 
 function* sync<T>(size: number, iterable: Iterable<T>): IterableIterator<T[]> {
@@ -50,9 +54,9 @@ function async<T>(
   size: number,
   iterable: AsyncIterable<T>,
 ): AsyncIterableIterator<T[]> {
-  let _iterator: AsyncIterator<T[]>;
+  let _iterator: AsyncIterator<T[], unknown, ConcurrentArg>;
   return {
-    async next(_concurrent: any) {
+    async next(_concurrent?: Concurrent) {
       if (_iterator === undefined) {
         _iterator = isConcurrent(_concurrent)
           ? asyncSequential(size, concurrent(_concurrent.length, iterable))

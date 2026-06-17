@@ -3,7 +3,11 @@ import isArray from "../isArray";
 import isString from "../isString";
 import toArray from "../toArray";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 
 function* sync<T>(length: number, iterable: Iterable<T>) {
   const arr =
@@ -24,13 +28,13 @@ function async<A>(
   length: number,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A> {
-  let iterator: AsyncIterator<A>;
+  let iterator: AsyncIterator<A, unknown, ConcurrentArg>;
   return {
     [Symbol.asyncIterator]() {
       return this;
     },
 
-    next(_concurrent: any) {
+    next(_concurrent?: Concurrent) {
       if (iterator === undefined) {
         iterator = isConcurrent(_concurrent)
           ? asyncSequential(length, concurrent(_concurrent.length, iterable))

@@ -1,7 +1,11 @@
 import { isAsyncIterable, isIterable } from "../_internal/utils";
 import consume from "../consume";
 import type ReturnIterableIteratorType from "../types/ReturnIterableIteratorType";
-import concurrent, { isConcurrent } from "./concurrent";
+import concurrent, {
+  isConcurrent,
+  type Concurrent,
+  type ConcurrentArg,
+} from "./concurrent";
 
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
   const iterator = iterable[Symbol.iterator]();
@@ -29,13 +33,13 @@ function async<A>(
   length: number,
   iterable: AsyncIterable<A>,
 ): AsyncIterableIterator<A> {
-  let iterator: AsyncIterator<A>;
+  let iterator: AsyncIterator<A, unknown, ConcurrentArg>;
   return {
     [Symbol.asyncIterator]() {
       return this;
     },
 
-    next(_concurrent: any) {
+    next(_concurrent?: Concurrent) {
       if (iterator === undefined) {
         iterator = isConcurrent(_concurrent)
           ? asyncSequential(length, concurrent(_concurrent.length, iterable))
