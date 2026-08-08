@@ -131,8 +131,8 @@ describe("concurrent", function () {
           yield delay(1000, 3);
           yield (async () => {
             throw "err";
-          })(),
-            yield delay(1000, 4);
+          })();
+          yield delay(1000, 4);
           yield delay(1000, 5);
         })(),
       ),

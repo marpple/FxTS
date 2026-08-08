@@ -6,7 +6,11 @@ import type Key from "./types/Key";
 import type ReturnValueType from "./types/ReturnValueType";
 
 function incSel<B extends Key>(parent: { [K in B]: number }, k: B) {
-  parent[k] ? parent[k]++ : (parent[k] = 1);
+  if (parent[k]) {
+    parent[k]++;
+  } else {
+    parent[k] = 1;
+  }
   return parent;
 }
 

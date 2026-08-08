@@ -95,8 +95,8 @@ describe("concurrentPool", function () {
           yield delay(100, 3);
           yield (async () => {
             throw "err";
-          })(),
-            yield delay(100, 4);
+          })();
+          yield delay(100, 4);
           yield delay(1000, 5);
         })(),
       ),

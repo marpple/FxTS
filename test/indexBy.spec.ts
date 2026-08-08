@@ -6,7 +6,6 @@ import {
   indexBy,
   map,
   pipe,
-  reduce,
   toArray,
   toAsync,
 } from "../src";
