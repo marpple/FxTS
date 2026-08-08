@@ -115,3 +115,82 @@ describe("concurrentPool", function () {
     expect(acc).toEqual([1, 2, 3]);
   }, 2050);
 });
+
+describe("concurrentPool regressions", function () {
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  it("should deliver buffered items even when the next upstream fetch hangs", async function () {
+    async function* fastThenHang() {
+      yield 1;
+      yield 2;
+      yield 3;
+      await new Promise(() => undefined); // upstream hangs on the 4th item
+    }
+    const iter = concurrentPool(3, fastThenHang())[Symbol.asyncIterator]();
+
+    expect((await iter.next()).value).toBe(1);
+    // let every pending pull-chain continuation drain
+    await sleep(50);
+    // items 2 and 3 are already buffered - they must not wait for a new fetch
+    const result = await Promise.race([
+      iter.next(),
+      sleep(300).then(() => "TIMEOUT" as const),
+    ]);
+    expect(result).toEqual({ value: 2, done: false });
+  });
+
+  it("should keep prefetch bounded by the pool size with a slow consumer", async function () {
+    let produced = 0;
+    async function* fast() {
+      for (let i = 0; i < 1000; i++) {
+        produced++;
+        yield i;
+      }
+    }
+    const iter = concurrentPool(3, fast())[Symbol.asyncIterator]();
+    let consumed = 0;
+    for (let i = 0; i < 5; i++) {
+      await iter.next();
+      consumed++;
+      await sleep(15);
+    }
+    // in-flight + buffered may run ahead of the consumer by at most the pool size
+    expect(produced).toBeLessThanOrEqual(consumed + 3);
+  });
+
+  it("should not pull the source again after it has thrown", async function () {
+    let pullsAfterThrow = 0;
+    let thrown = false;
+    const source: AsyncIterable<number> = {
+      [Symbol.asyncIterator]() {
+        let n = 0;
+        return {
+          async next() {
+            if (thrown) {
+              pullsAfterThrow++;
+              return { value: undefined, done: true } as IteratorResult<number>;
+            }
+            if (n >= 1) {
+              thrown = true;
+              throw new Error("boom");
+            }
+            return { value: n++, done: false };
+          },
+        };
+      },
+    };
+    const iter = concurrentPool(2, source)[Symbol.asyncIterator]();
+    const results = [];
+    try {
+      for (let i = 0; i < 5; i++) {
+        results.push(await iter.next());
+      }
+    } catch (e) {
+      // first rejection is expected
+    }
+    await sleep(30);
+    await iter.next().catch(() => undefined);
+    await sleep(30);
+    expect(pullsAfterThrow).toBe(0);
+  });
+});
