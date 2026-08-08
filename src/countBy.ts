@@ -40,25 +40,25 @@ function incSel<B extends Key>(parent: { [K in B]: number }, k: B) {
  * {@link https://codesandbox.io/s/fxts-countby-09t7z | Try It}
  */
 
-function countBy<A, B extends Key>(
+function countBy<const A, B extends Key>(
   f: (a: A) => B,
   iterable: Iterable<A>,
 ): { [K in B]: number };
 
-function countBy<A, B extends Key>(
+function countBy<const A, B extends Key>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): Promise<{ [K in B]: number }>;
 
 function countBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  const A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Key,
 >(
   f: (a: IterableInfer<A>) => B | Promise<B>,
 ): (iterable: A) => ReturnValueType<A, { [K in B]: number }>;
 
 function countBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  const A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Key,
 >(
   f: (a: IterableInfer<A>) => B | Promise<B>,

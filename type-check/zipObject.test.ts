@@ -8,5 +8,5 @@ const res2 = zipObject(["a", "b"], [1, 2]);
 
 checks([
   check<typeof res1, Record<"a" | "b", number>, Test.Pass>(),
-  check<typeof res2, Record<string, number>, Test.Pass>(),
+  check<typeof res2, Record<"a" | "b", number>, Test.Pass>(),
 ]);
