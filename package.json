@@ -21,7 +21,7 @@
   "scripts": {
     "build": "npm-run-all cleanup compile webpack generate:extensions generate:exports",
     "cleanup": "rm -rf dist/ && prettier --write package.json",
-    "compile:types": "tsc --project tsconfig.types.json ",
+    "compile:types": "tsc --project tsconfig.types.json",
     "compile:cjs": "tsc --project tsconfig.cjs.json",
     "compile:esm5": "tsc --project tsconfig.esm5.json",
     "compile:esm": "tsc --project tsconfig.esm.json",

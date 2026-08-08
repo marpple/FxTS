@@ -1,16 +1,10 @@
 {
+  "extends": "./tsconfig.base.json",
   "include": ["src", "test", "type-check"],
   "compilerOptions": {
-    "target": "es2018",
     "module": "nodenext",
-    "lib": ["es2020"],
-    "strict": true,
     "moduleResolution": "nodenext",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true
   }
 }
