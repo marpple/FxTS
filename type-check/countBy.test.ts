@@ -39,3 +39,7 @@ checks([
   check<typeof res4, Promise<Res>, Test.Pass>(),
   check<typeof res5, Promise<Res>, Test.Pass>(),
 ]);
+
+const literalKeys = countBy((a) => a.type, [{ type: "x" }, { type: "y" }]);
+
+checks([check<typeof literalKeys, { x: number; y: number }, Test.Pass>()]);

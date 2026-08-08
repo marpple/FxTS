@@ -10,7 +10,7 @@
  * zipObject(["a", "b"], [1, 2, 3]); // { a: 1, b: 2 }
  * ```
  */
-function zipObject<K extends PropertyKey, V>(
+function zipObject<const K extends PropertyKey, V>(
   keys: Iterable<K>,
   values: Iterable<V>,
 ): Record<K, V> {

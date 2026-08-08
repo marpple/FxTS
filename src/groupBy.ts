@@ -36,24 +36,24 @@ import type ReturnValueType from "./types/ReturnValueType";
  * {@link https://codesandbox.io/s/fxts-groupby-v8q3b | Try It}
  */
 
-function groupBy<A extends Key>(
+function groupBy<const A extends Key>(
   f: (a: A) => A,
   iterable: Iterable<A>,
 ): { [K in A]: K[] };
 
-function groupBy<A extends Key>(
+function groupBy<const A extends Key>(
   f: (a: A) => A | Promise<A>,
   iterable: AsyncIterable<A>,
 ): Promise<{ [K in A]: K[] }>;
 
-function groupBy<A extends object, B extends Key & A[keyof A]>(
+function groupBy<const A extends object, B extends Key & A[keyof A]>(
   f: (a: A) => B,
   iterable: Iterable<A>,
 ): {
   [K in B]: A[];
 };
 
-function groupBy<A extends object, B extends Key & A[keyof A]>(
+function groupBy<const A extends object, B extends Key & A[keyof A]>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): Promise<{
@@ -61,7 +61,7 @@ function groupBy<A extends object, B extends Key & A[keyof A]>(
 }>;
 
 function groupBy<
-  I extends Iterable<unknown> | AsyncIterable<unknown>,
+  const I extends Iterable<unknown> | AsyncIterable<unknown>,
   F extends (a: IterableInfer<I>) => any,
 >(
   f: F,
@@ -76,28 +76,28 @@ function groupBy<
       }
 >;
 
-function groupBy<A extends Key, B extends Iterable<A> | AsyncIterable<A>>(
+function groupBy<const A extends Key, B extends Iterable<A> | AsyncIterable<A>>(
   f: (a: A) => A | Promise<A>,
 ): (iterable: B) => ReturnValueType<B, { [K in A]: K[] }>;
-function groupBy<A, B extends Key>(
+function groupBy<const A, B extends Key>(
   f: (a: A) => B,
   iterable: Iterable<A>,
 ): { [K in B]: A[] };
 
-function groupBy<A, B extends Key>(
+function groupBy<const A, B extends Key>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): Promise<{ [K in B]: A[] }>;
 
 function groupBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  const A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Key,
 >(
   f: (a: IterableInfer<A>) => B | Promise<B>,
 ): (iterable: A) => ReturnValueType<A, { [K in B]: IterableInfer<A>[] }>;
 
 function groupBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  const A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Key,
 >(
   f: (a: IterableInfer<A>) => B | Promise<B>,

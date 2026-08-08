@@ -30,24 +30,24 @@ import type ReturnValueType from "./types/ReturnValueType";
  * {@link https://codesandbox.io/s/fxts-indexby-zpeok | Try It}
  */
 
-function indexBy<A extends Key>(
+function indexBy<const A extends Key>(
   f: (a: A) => A,
   iterable: Iterable<A>,
 ): { [K in A]: K };
 
-function indexBy<A extends Key>(
+function indexBy<const A extends Key>(
   f: (a: A) => A | Promise<A>,
   iterable: AsyncIterable<A>,
 ): Promise<{ [K in A]: K }>;
 
-function indexBy<A extends object, B extends Key & A[keyof A]>(
+function indexBy<const A extends object, B extends Key & A[keyof A]>(
   f: (a: A) => B,
   iterable: Iterable<A>,
 ): {
   [K in B]: A;
 };
 
-function indexBy<A extends object, B extends Key & A[keyof A]>(
+function indexBy<const A extends object, B extends Key & A[keyof A]>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): Promise<{
@@ -55,7 +55,7 @@ function indexBy<A extends object, B extends Key & A[keyof A]>(
 }>;
 
 function indexBy<
-  I extends Iterable<unknown> | AsyncIterable<unknown>,
+  const I extends Iterable<unknown> | AsyncIterable<unknown>,
   F extends (a: IterableInfer<I>) => any,
 >(
   f: F,
@@ -70,25 +70,25 @@ function indexBy<
       }
 >;
 
-function indexBy<A, B extends Key>(
+function indexBy<const A, B extends Key>(
   f: (a: A) => B,
   iterable: Iterable<A>,
 ): { [K in B]: A };
 
-function indexBy<A, B extends Key>(
+function indexBy<const A, B extends Key>(
   f: (a: A) => B | Promise<B>,
   iterable: AsyncIterable<A>,
 ): Promise<{ [K in B]: A }>;
 
 function indexBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  const A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Key,
 >(
   f: (a: IterableInfer<A>) => B | Promise<B>,
 ): (iterable: A) => ReturnValueType<A, { [K in B]: IterableInfer<A> }>;
 
 function indexBy<
-  A extends Iterable<unknown> | AsyncIterable<unknown>,
+  const A extends Iterable<unknown> | AsyncIterable<unknown>,
   B extends Key,
 >(
   f: (a: IterableInfer<A>) => B | Promise<B>,
