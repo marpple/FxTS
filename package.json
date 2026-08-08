@@ -7,8 +7,9 @@
   "sideEffects": false,
   "types": "dist/types/index.d.ts",
   "typesVersions": {
-    ">= 4.2": {
+    ">=5.0": {
       "*": [
+        "dist/types/*",
         "dist/types/index.d.ts"
       ]
     }

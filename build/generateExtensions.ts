@@ -1,15 +1,25 @@
-import { readFile, writeFile } from "fs/promises";
+import { cp, readFile, writeFile } from "fs/promises";
 import { glob } from "glob";
 
 const OUTPUT_DIR = "./dist";
 const ESM_ROOT_DIR = `${OUTPUT_DIR}/esm`;
 const ESM5_ROOT_DIR = `${OUTPUT_DIR}/esm5`;
+const TYPES_ROOT_DIR = `${OUTPUT_DIR}/types`;
+const TYPES_ESM_ROOT_DIR = `${OUTPUT_DIR}/types-esm`;
 
 async function main() {
+  // Copy the declarations into an ESM scope (dist/types-esm gets its own
+  // { "type": "module" } package.json in generateExports) so `nodenext`
+  // consumers see ESM typings for the `import` condition instead of the
+  // CJS-scoped dist/types.
+  await cp(TYPES_ROOT_DIR, TYPES_ESM_ROOT_DIR, { recursive: true });
+
   const files = (
     await Promise.all([
       glob(`${ESM_ROOT_DIR}/**/*.js`),
       glob(`${ESM5_ROOT_DIR}/**/*.js`),
+      // ESM-scoped declarations need explicit extensions as well
+      glob(`${TYPES_ESM_ROOT_DIR}/**/*.d.ts`),
     ])
   ).flat();
 
@@ -37,6 +47,11 @@ async function main() {
           );
         }
       }
+
+      // Inline `import("./x")` type references in declaration files
+      acc = acc.replace(/import\("(\.[^"]+?)"\)/g, (match, specifier) =>
+        specifier.endsWith(".js") ? match : `import("${specifier}.js")`,
+      );
 
       return writeFile(path, acc);
     })

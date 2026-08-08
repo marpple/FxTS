@@ -10,17 +10,31 @@ const CJS_ROOT_DIR = `${OUTPUT_DIR}/cjs`;
 const ESM_ROOT_DIR = `${OUTPUT_DIR}/esm`;
 const ESM5_ROOT_DIR = `${OUTPUT_DIR}/esm5`;
 
-const conditionalRootIndex = {
-  types: `${TYPES_ROOT_DIR}/index.d.ts`,
-  import: `${ESM_ROOT_DIR}/index.js`,
-  require: `${CJS_ROOT_DIR}/index.js`,
-};
+const TYPES_ESM_ROOT_DIR = `${OUTPUT_DIR}/types-esm`;
 
-const conditionalRootIndexLazy = {
-  types: `${TYPES_ROOT_DIR}/Lazy/index.d.ts`,
-  import: `${ESM_ROOT_DIR}/Lazy/index.js`,
-  require: `${CJS_ROOT_DIR}/Lazy/index.js`,
-};
+// Format-split typings: the `import` condition resolves ESM-scoped
+// declarations (dist/types-esm) and the `require` condition the CJS-scoped
+// ones (dist/types), so `nodenext` consumers get typings that match the
+// runtime module format.
+const conditionalExports = (name: string) => ({
+  import: {
+    types: `${TYPES_ESM_ROOT_DIR}/${name}.d.ts`,
+    default: `${ESM_ROOT_DIR}/${name}.js`,
+  },
+  require: {
+    types: `${TYPES_ROOT_DIR}/${name}.d.ts`,
+    default: `${CJS_ROOT_DIR}/${name}.js`,
+  },
+});
+
+// dist/esm5 is an ESM scope, so its typings come from the ESM copy as well.
+const esm5Exports = (name: string) => ({
+  types: `${TYPES_ESM_ROOT_DIR}/${name}.d.ts`,
+  default: `${ESM5_ROOT_DIR}/${name}.js`,
+});
+
+const conditionalRootIndex = conditionalExports("index");
+const conditionalRootIndexLazy = conditionalExports("Lazy/index");
 
 const defaultSubPathExports = {
   "./package.json": "./package.json",
@@ -30,12 +44,12 @@ const defaultSubPathExports = {
   "./Lazy": conditionalRootIndexLazy,
   "./Lazy/index": conditionalRootIndexLazy,
   "./Lazy/index.js": conditionalRootIndexLazy,
-  "./esm5": `${ESM5_ROOT_DIR}/index.js`,
-  "./esm5/index": `${ESM5_ROOT_DIR}/index.js`,
-  "./esm5/index.js": `${ESM5_ROOT_DIR}/index.js`,
-  "./esm5/Lazy": `${ESM5_ROOT_DIR}/Lazy/index.js`,
-  "./esm5/Lazy/index": `${ESM5_ROOT_DIR}/Lazy/index.js`,
-  "./esm5/Lazy/index.js": `${ESM5_ROOT_DIR}/Lazy/index.js`,
+  "./esm5": esm5Exports("index"),
+  "./esm5/index": esm5Exports("index"),
+  "./esm5/index.js": esm5Exports("index"),
+  "./esm5/Lazy": esm5Exports("Lazy/index"),
+  "./esm5/Lazy/index": esm5Exports("Lazy/index"),
+  "./esm5/Lazy/index.js": esm5Exports("Lazy/index"),
 };
 
 async function generateExports() {
@@ -56,16 +70,12 @@ async function generateExports() {
     fileNames,
     filter(identity),
     map((name) => {
-      const conditionalSubPaths = {
-        types: `${TYPES_ROOT_DIR}/${name}.d.ts`,
-        import: `${ESM_ROOT_DIR}/${name}.js`,
-        require: `${CJS_ROOT_DIR}/${name}.js`,
-      };
+      const conditionalSubPaths = conditionalExports(name);
       return {
         [`./${name}`]: conditionalSubPaths,
         [`./${name}.js`]: conditionalSubPaths,
-        [`./esm5/${name}`]: `${ESM5_ROOT_DIR}/${name}.js`,
-        [`./esm5/${name}.js`]: `${ESM5_ROOT_DIR}/${name}.js`,
+        [`./esm5/${name}`]: esm5Exports(name),
+        [`./esm5/${name}.js`]: esm5Exports(name),
       };
     }),
     (iter) => reduce((acc, field) => Object.assign(acc, field), {}, iter),
@@ -92,9 +102,10 @@ async function generateExports() {
 
 (async function main() {
   await Promise.all([
-    // Add package.json file to esm/esm5 directory
+    // Add package.json file to esm/esm5/types-esm directory
     writeFile(`${ESM_ROOT_DIR}/package.json`, '{ "type": "module" }'),
     writeFile(`${ESM5_ROOT_DIR}/package.json`, '{ "type": "module" }'),
+    writeFile(`${TYPES_ESM_ROOT_DIR}/package.json`, '{ "type": "module" }'),
     // Generate and add 'exports' field to root package.json
     generateExports(),
   ]);
