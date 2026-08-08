@@ -22,3 +22,4 @@ website/docs/api/
 # Misc
 .DS_Store
 *.local
+website/docs/public/llms-full.txt

@@ -1,0 +1,20 @@
+{
+  "projectTitle": "FxTS",
+  "description": "Functional library for TypeScript/JavaScript with lazy evaluation, AsyncIterable pipelines, and pooled concurrency control (concurrent, concurrentPool).",
+  "folders": ["website/docs/guide", "src"],
+  "excludeFolders": [
+    "website/docs/.vitepress",
+    "website/docs/ko",
+    "website/docs/ja",
+    "website/docs/zh",
+    "node_modules",
+    "dist"
+  ],
+  "rules": [
+    "Compose with pipe and curried, data-last functions: pipe(data, map(f), filter(g), toArray).",
+    "Wrap sources with toAsync before using asynchronous callbacks in map/filter/reduce.",
+    "Use concurrentPool(n) for p-map-style pooled concurrency; concurrent(n) evaluates in fixed windows of n.",
+    "Lazy functions return Iterable/AsyncIterable - materialize with toArray, or consume with each/reduce.",
+    "TypeScript 5.5+ is required; dist targets es2018."
+  ]
+}
