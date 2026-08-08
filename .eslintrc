@@ -2,9 +2,6 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
-  "parserOptions": {
-    "warnOnUnsupportedTypeScriptVersion": false
-  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -16,5 +13,13 @@
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/consistent-type-imports": 2
   },
+  "overrides": [
+    {
+      "files": ["type-check/**/*.ts"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    }
+  ],
   "ignorePatterns": ["src/type/**/*.ts"]
 }
