@@ -2,17 +2,23 @@ name: release
 
 on: workflow_dispatch
 
+permissions:
+  contents: read
+
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 24
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - run: npm run build
+      # Auth via npm Trusted Publishing (OIDC) — no NPM_TOKEN needed,
+      # provenance attestations are published automatically.
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
