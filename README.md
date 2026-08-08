@@ -13,6 +13,20 @@ FxTS is a functional programming library for TypeScript.
 - Offers excellent TypeScript support with strong type inference.
 - Follows standard [iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) (Iterable/AsyncIterable).
 
+## Why FxTS?
+
+|                                               | FxTS                                                       | lodash            | Native (Array + [Iterator Helpers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator)) |
+| --------------------------------------------- | ---------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Lazy evaluation                               | ✅                                                         | 🔶 `_.chain` only | ✅ ES2025                                                                                                                      |
+| AsyncIterable pipelines                       | ✅                                                         | ❌                | ❌ (proposal stage)                                                                                                            |
+| Concurrency control with backpressure         | ✅ [`concurrentPool`](https://fxts.dev/api/concurrentPool) | ❌                | ❌                                                                                                                             |
+| Curried, data-last composition (`pipe`)       | ✅                                                         | 🔶 `lodash/fp`    | ❌                                                                                                                             |
+| Early termination across async work (`take`)  | ✅                                                         | ❌                | 🔶 sync only                                                                                                                   |
+| Literal-preserving inference (`Record<"a"…>`) | ✅                                                         | ❌                | —                                                                                                                              |
+| Deep utils (`isEqual`, `cloneDeep`, `merge`)  | ✅                                                         | ✅                | ❌                                                                                                                             |
+
+Migrating from `p-limit`/`p-map`? See the [migration guide](https://fxts.dev/guide/migrate-from-p-map).
+
 ## Installation
 
 ```
