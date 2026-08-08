@@ -150,3 +150,37 @@ describe("concurrent", function () {
     expect(acc).toEqual([1, 2, 3]);
   }, 2050);
 });
+
+describe("concurrent regressions", function () {
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  it("should return a Promise from next() after the iterator is finished", async function () {
+    const iter = concurrent(
+      2,
+      toAsync(
+        (function* () {
+          yield 1;
+        })(),
+      ),
+    )[Symbol.asyncIterator]();
+    await iter.next(); // 1
+    await iter.next(); // done - marks the iterator finished
+    const result = iter.next();
+    expect(typeof (result as Promise<unknown>).then).toBe("function");
+    expect(await result).toEqual({ done: true, value: undefined });
+  });
+
+  it("should settle every pending consumer when the source throws", async function () {
+    async function* source() {
+      yield 1;
+      throw new Error("boom");
+    }
+    const iter = concurrent(2, source())[Symbol.asyncIterator]();
+    const pendings = [iter.next(), iter.next(), iter.next()];
+    const outcome = await Promise.race([
+      Promise.allSettled(pendings).then(() => "SETTLED" as const),
+      sleep(500).then(() => "TIMEOUT" as const),
+    ]);
+    expect(outcome).toBe("SETTLED");
+  });
+});
