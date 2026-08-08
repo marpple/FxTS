@@ -4,12 +4,14 @@ import apply from "./apply";
 import average from "./average";
 import cases from "./cases";
 import castArray from "./castArray";
+import cloneDeep from "./cloneDeep";
 import compactObject from "./compactObject";
 import consume from "./consume";
 import countBy from "./countBy";
 import curry from "./curry";
 import delay from "./delay";
 import each from "./each";
+import escapeRegExp from "./escapeRegExp";
 import every from "./every";
 import evolve from "./evolve";
 import find from "./find";
@@ -27,8 +29,10 @@ import isBoolean from "./isBoolean";
 import isDate from "./isDate";
 import isEmpty from "./isEmpty";
 import isEqual from "./isEqual";
+import isFunction from "./isFunction";
 import isMatch from "./isMatch";
 import isNil from "./isNil";
+import isNotNil from "./isNotNil";
 import isNull from "./isNull";
 import isNumber from "./isNumber";
 import isObject from "./isObject";
@@ -43,6 +47,7 @@ import lte from "./lte";
 import matches from "./matches";
 import max from "./max";
 import memoize from "./memoize";
+import merge from "./merge";
 import min from "./min";
 import negate from "./negate";
 import noop from "./noop";
@@ -50,6 +55,7 @@ import not from "./not";
 import nth from "./nth";
 import omit from "./omit";
 import omitBy from "./omitBy";
+import once from "./once";
 import partition from "./partition";
 import pick from "./pick";
 import pickBy from "./pickBy";
@@ -82,6 +88,7 @@ export {
   average as mean,
   cases,
   castArray,
+  cloneDeep,
   compactObject,
   consume,
   countBy,
@@ -89,6 +96,7 @@ export {
   delay,
   each,
   each as forEach,
+  escapeRegExp,
   every,
   evolve,
   find,
@@ -108,8 +116,10 @@ export {
   isDate,
   isEmpty,
   isEqual,
+  isFunction,
   isMatch,
   isNil,
+  isNotNil,
   isNull,
   isNumber,
   isObject,
@@ -124,6 +134,7 @@ export {
   matches,
   max,
   memoize,
+  merge,
   min,
   negate,
   noop,
@@ -131,6 +142,7 @@ export {
   nth,
   omit,
   omitBy,
+  once,
   partition,
   pick,
   pickBy,
