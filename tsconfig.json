@@ -1,13 +1,11 @@
 {
   "include": ["src", "test", "type-check"],
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "target": "es2018",
+    "module": "nodenext",
     "lib": ["es2020"],
-    "importHelpers": true,
-    "downlevelIteration": true,
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,

@@ -80,7 +80,7 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-**Note: `esm5` and `cjs` submodules were built targeting `es5`, and also does not include polyfill.**
+**Note: The `cjs` submodule is built targeting `es2018` (Node.js 10+ and modern JS engines), and the `esm5` submodule targeting `es5`. Neither includes polyfill.**
 
 ### CDN
 

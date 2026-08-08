@@ -20,12 +20,12 @@
   ],
   "scripts": {
     "build": "npm-run-all cleanup compile webpack generate:extensions generate:exports",
-    "cleanup": "rm -rf dist/cjs/types/ dist/esm/types/ dist/esm5/types/ && prettier --write package.json",
+    "cleanup": "rm -rf dist/ && prettier --write package.json",
     "compile:types": "tsc --project tsconfig.types.json ",
     "compile:cjs": "tsc --project tsconfig.cjs.json",
     "compile:esm5": "tsc --project tsconfig.esm5.json",
     "compile:esm": "tsc --project tsconfig.esm.json",
-    "compile": "npm-run-all -p compile:cjs compile:esm compile:esm5 -s compile:types",
+    "compile": "npm-run-all -p compile:cjs compile:esm compile:esm5 compile:types",
     "compile:check": "tsc --project tsconfig.json",
     "generate:extensions": "ts-node build/generateExtensions.ts",
     "generate:exports": "ts-node build/generateExports.ts",
@@ -55,6 +55,9 @@
     "url": "https://github.com/marpple/FxTS/issues"
   },
   "homepage": "https://fxts.dev",
+  "engines": {
+    "node": ">=10"
+  },
   "devDependencies": {
     "@babel/cli": "^7.22.5",
     "@babel/core": "^7.22.5",
@@ -67,7 +70,7 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.0.2",
     "@types/glob": "^8.1.0",
     "@types/jest": "^29.5.2",
-    "@types/node": "^18.16.18",
+    "@types/node": "^24.13.3",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "babel-loader": "^9.1.2",
@@ -81,7 +84,7 @@
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6",
+    "typescript": "^5.9.2",
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4"
   },

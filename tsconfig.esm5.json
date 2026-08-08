@@ -9,14 +9,9 @@
     "inlineSources": true,
     "outDir": "./dist/esm5/",
     "rootDir": "./src/",
-    "baseUrl": "./",
-    "paths": {
-      "tslib": ["node_modules/tslib/index.d.ts"]
-    },
     "importHelpers": true,
     "downlevelIteration": true,
     "isolatedModules": true,
-    "importsNotUsedAsValues": "remove",
     "strict": true,
     "moduleResolution": "node",
     "skipLibCheck": true,
