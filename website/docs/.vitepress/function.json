@@ -55,12 +55,14 @@
     "average",
     "cases",
     "castArray",
+    "cloneDeep",
     "compactObject",
     "consume",
     "countBy",
     "curry",
     "delay",
     "each",
+    "escapeRegExp",
     "every",
     "evolve",
     "find",
@@ -78,8 +80,10 @@
     "isDate",
     "isEmpty",
     "isEqual",
+    "isFunction",
     "isMatch",
     "isNil",
+    "isNotNil",
     "isNull",
     "isNumber",
     "isObject",
@@ -94,6 +98,7 @@
     "matches",
     "max",
     "memoize",
+    "merge",
     "min",
     "negate",
     "noop",
@@ -101,6 +106,7 @@
     "nth",
     "omit",
     "omitBy",
+    "once",
     "partition",
     "pick",
     "pickBy",
@@ -123,5 +129,9 @@
     "unless",
     "when"
   ],
-  "Util": ["debounce", "shuffle", "throttle"]
+  "Util": [
+    "debounce",
+    "shuffle",
+    "throttle"
+  ]
 }
