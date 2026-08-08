@@ -130,6 +130,14 @@ function concurrent<A>(
       } else {
         reject(p.reason);
         finished = true;
+        // Remaining waiters can never receive a value - settle them as done
+        // instead of leaving their promises pending forever.
+        while (settlementQueue.length > 0) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const [resolve] = settlementQueue.shift()!;
+          resolve({ value: undefined, done: true });
+        }
+        buffer.length = 0;
         break;
       }
     }
@@ -173,7 +181,8 @@ function concurrent<A>(
     next() {
       nextCallCount++;
       if (finished) {
-        return { done: true, value: undefined };
+        // next() must return a Promise to satisfy the AsyncIterator protocol
+        return Promise.resolve({ done: true, value: undefined });
       }
       return new Promise((resolve, reject) => {
         settlementQueue.push([resolve, reject]);
