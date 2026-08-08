@@ -185,7 +185,7 @@ describe("concurrentPool regressions", function () {
       for (let i = 0; i < 5; i++) {
         results.push(await iter.next());
       }
-    } catch (e) {
+    } catch {
       // first rejection is expected
     }
     await sleep(30);
