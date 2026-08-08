@@ -1,0 +1,108 @@
+# p-limit / p-map からの移行
+
+コレクションに同時実行数の制限をかけて非同期処理を実行するために `p-map` や
+`p-limit` を使っているなら、FxTS の `concurrentPool` が同じ役割を果たします —
+さらに、配列ベースのマッパーでは表現できないストリーミング、早期終了、
+AsyncIterable ソースも得られます。
+
+## p-map → concurrentPool
+
+```typescript
+// p-map
+import pMap from "p-map";
+const results = await pMap(urls, (url) => fetchItem(url), { concurrency: 5 });
+
+// FxTS
+import { concurrentPool, map, pipe, toArray, toAsync } from "@fxts/core";
+const results = await pipe(
+  toAsync(urls),
+  map((url) => fetchItem(url)),
+  concurrentPool(5),
+  toArray,
+);
+```
+
+`concurrentPool` は `p-map` と同じセマンティクスです: 最大 `n` 個のタスクが実行中の
+プールで、1 つが完了するとすぐ次のタスクが開始され、結果は入力順で返り、最初の失敗が
+実行を中断します。
+
+**移行の際は `concurrent` ではなく `concurrentPool` を選んでください。**
+`concurrent` は `n` 個単位の固定ウィンドウで評価します(前のウィンドウが終わってから
+次が始まる)。バッチのセマンティクスが必要な場合には有用ですが、処理時間が不均一な
+ワークロードでは `p-map` 方式のプールとスループット特性が異なります。
+
+## コレクションに対する p-limit → concurrentPool
+
+最も一般的な `p-limit` パターン — マッピングされたコレクションへの制限 — も同じ
+方法で移行できます:
+
+```typescript
+// p-limit
+import pLimit from "p-limit";
+const limit = pLimit(5);
+const results = await Promise.all(ids.map((id) => limit(() => loadUser(id))));
+
+// FxTS
+const results = await pipe(
+  toAsync(ids),
+  map((id) => loadUser(id)),
+  concurrentPool(5),
+  toArray,
+);
+```
+
+## 対応しないもの
+
+境界を正直に述べると:
+
+- **共有される ad-hoc リミッター** — 1 つの `limit` インスタンスでコードベース各所の
+  無関係な呼び出しを制限するパターン — はパイプラインライブラリがモデル化する対象では
+  ありません。その用途には `p-limit` を使い続けてください。
+- **`stopOnError: false`**(`AggregateError` への収集)の直接の対応物はありません。
+  FxTS は最初のエラーを伝播します。結果を収集したい場合はマッパーで結果オブジェクトを
+  返してください:
+  `map(async (url) => fetchItem(url).then((v) => ({ ok: true as const, v }), (e) => ({ ok: false as const, e })))`.
+- **`AbortSignal`** オプションはありません。一般的なケースは遅延評価がカバーします:
+  消費を止めればパイプラインも止まります。
+
+## p-map に対して得られるもの
+
+配列全体を待たずに、結果を**ストリームとして消費**できます:
+
+```typescript
+import { concurrentPool, each, map, pipe, toAsync } from "@fxts/core";
+
+await pipe(
+  toAsync(urls),
+  map((url) => fetchItem(url)),
+  concurrentPool(5),
+  each((item) => render(item)), // 結果が届くたびに、順序どおりに処理
+);
+```
+
+パイプラインは**早期終了**します — `take` と組み合わせれば、十分な数が揃った時点で
+タスクのスケジューリング自体が止まります:
+
+```typescript
+import {
+  concurrentPool,
+  filter,
+  map,
+  pipe,
+  take,
+  toArray,
+  toAsync,
+} from "@fxts/core";
+
+const firstThree = await pipe(
+  toAsync(candidates),
+  map((c) => probe(c)),
+  concurrentPool(5),
+  filter((r) => r.alive),
+  take(3), // 3 つ得られたら取得を止め、残りの処理は開始されません
+  toArray,
+);
+```
+
+そしてソースは配列である必要はありません — どんな `AsyncIterable` でも動作するため
+(ページネーション API、ストリーム)、入力全体をメモリに実体化する必要がありません。
