@@ -380,7 +380,7 @@ class MarkdownFeature extends MarkdownDocumenterFeature {
   }
 
   private escapeYamlString(str: string): string {
-    return str.replace(/"/g, '\\"').replace(/\n/g, " ");
+    return str.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, " ");
   }
 }
 
