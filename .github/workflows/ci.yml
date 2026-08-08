@@ -25,8 +25,11 @@ jobs:
       - name: Test(type)
         run: npm run compile:check
 
-      - name: Compile
-        run: npm run compile
+      - name: Build
+        run: npm run build
+
+      - name: Check package types (arethetypeswrong)
+        run: npx --yes @arethetypeswrong/cli --pack .
 
       - name: Test
         run: npm run test

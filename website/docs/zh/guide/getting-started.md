@@ -65,12 +65,6 @@ const sum = pipe(
 import { filter, map, pipe, range, reduce, take } from "@fxts/core";
 ```
 
-如果使用的 JavaScript 运行时不支持 `es2018`，请使用 `esm5` 子模块代替，如下所示。
-
-```javascript
-import { filter, map, pipe, range, reduce, take } from "@fxts/core/esm5";
-```
-
 #### CJS
 
 ```javascript
@@ -80,7 +74,7 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-**注意：`cjs` 子模块是针对 `es2018`（Node.js 10+ 及现代 JS 引擎）构建的，`esm5` 子模块是针对 `es5` 构建的，同样不包含 polyfill。**
+**注意：`cjs` 和 `esm` 子模块是针对 `es2018`（Node.js 10+ 及现代 JS 引擎）构建的，不包含 polyfill。**
 
 ### CDN
 
