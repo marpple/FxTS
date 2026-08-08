@@ -40,9 +40,11 @@ import takeUntilInclusive from "./takeUntilInclusive";
 import takeWhile from "./takeWhile";
 import toAsync from "./toAsync";
 import transpose from "./transpose";
+import union from "./union";
 import uniq from "./uniq";
 import uniqBy from "./uniqBy";
 import values from "./values";
+import windowed from "./windowed";
 import zip from "./zip";
 import zipWith from "./zipWith";
 import zipWithIndex from "./zipWithIndex";
@@ -90,10 +92,12 @@ export {
   takeRight,
   takeWhile,
   toAsync,
+  union,
   uniq,
   uniqBy,
   transpose,
   values,
+  windowed,
   zip,
   zipWith,
   zipWithIndex,

@@ -44,6 +44,8 @@ import juxt from "./juxt";
 import last from "./last";
 import lt from "./lt";
 import lte from "./lte";
+import mapKeys from "./mapKeys";
+import mapValues from "./mapValues";
 import matches from "./matches";
 import max from "./max";
 import memoize from "./memoize";
@@ -131,6 +133,8 @@ export {
   last,
   lt,
   lte,
+  mapKeys,
+  mapValues,
   matches,
   max,
   memoize,
