@@ -6,6 +6,8 @@
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "outDir": "./dist/types/",
-    "rootDir": "./src/"
+    "rootDir": "./src/",
+    "module": "esnext",
+    "moduleResolution": "bundler"
   }
 }

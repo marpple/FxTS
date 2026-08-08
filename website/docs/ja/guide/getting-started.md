@@ -65,12 +65,6 @@ const sum = pipe(
 import { filter, map, pipe, range, reduce, take } from "@fxts/core";
 ```
 
-使用する JavaScript ランタイムが`es2018`をサポートしていない場合は、以下のように`esm5`サブモジュールを代わりに使用してください。
-
-```javascript
-import { filter, map, pipe, range, reduce, take } from "@fxts/core/esm5";
-```
-
 #### CJS
 
 ```javascript
@@ -80,7 +74,7 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-**注意: `cjs`サブモジュールは`es2018`(Node.js 10+およびモダンな JS エンジン)、`esm5`サブモジュールは`es5`をターゲットにビルドされており、同様にポリフィルは含まれていません。**
+**注意: `cjs`と`esm`サブモジュールは`es2018`(Node.js 10+およびモダンな JS エンジン)をターゲットにビルドされており、ポリフィルは含まれていません。**
 
 ### CDN
 

@@ -7,6 +7,7 @@
     "rootDir": "./src/",
     "sourceMap": true,
     "inlineSources": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "moduleResolution": "bundler"
   }
 }

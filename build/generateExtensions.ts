@@ -3,7 +3,6 @@ import { glob } from "glob";
 
 const OUTPUT_DIR = "./dist";
 const ESM_ROOT_DIR = `${OUTPUT_DIR}/esm`;
-const ESM5_ROOT_DIR = `${OUTPUT_DIR}/esm5`;
 const TYPES_ROOT_DIR = `${OUTPUT_DIR}/types`;
 const TYPES_ESM_ROOT_DIR = `${OUTPUT_DIR}/types-esm`;
 
@@ -17,7 +16,6 @@ async function main() {
   const files = (
     await Promise.all([
       glob(`${ESM_ROOT_DIR}/**/*.js`),
-      glob(`${ESM5_ROOT_DIR}/**/*.js`),
       // ESM-scoped declarations need explicit extensions as well
       glob(`${TYPES_ESM_ROOT_DIR}/**/*.d.ts`),
     ])

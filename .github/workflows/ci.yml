@@ -28,10 +28,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      # esm5 is a legacy ESM-only escape hatch, so requiring it from CJS is
-      # expected to fail on old Node - ignore that rule only.
       - name: Check package types (arethetypeswrong)
-        run: npx --yes @arethetypeswrong/cli --pack . --ignore-rules cjs-resolves-to-esm
+        run: npx --yes @arethetypeswrong/cli --pack .
 
       - name: Test
         run: npm run test

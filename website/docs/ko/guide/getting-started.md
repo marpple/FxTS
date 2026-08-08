@@ -65,12 +65,6 @@ const sum = pipe(
 import { filter, map, pipe, range, reduce, take } from "@fxts/core";
 ```
 
-사용하는 JavaScript 런타임이 `es2018`을 지원하지 않는다면, 아래와 같이 `esm5` 서브모듈을 대신 사용하세요.
-
-```javascript
-import { filter, map, pipe, range, reduce, take } from "@fxts/core/esm5";
-```
-
 #### CJS
 
 ```javascript
@@ -80,7 +74,7 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-**참고: `cjs` 서브모듈은 `es2018`(Node.js 10+ 및 모던 JS 엔진), `esm5` 서브모듈은 `es5`를 대상으로 빌드되었으며, 마찬가지로 폴리필을 포함하지 않습니다.**
+**참고: `cjs`와 `esm` 서브모듈은 `es2018`(Node.js 10+ 및 모던 JS 엔진)을 대상으로 빌드되었으며, 폴리필을 포함하지 않습니다.**
 
 ### CDN
 

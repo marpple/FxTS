@@ -2,13 +2,14 @@
   "extends": "./tsconfig.base.json",
   "include": ["./src/"],
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "node16",
     "outDir": "./dist/cjs/",
     "rootDir": "./src/",
     "sourceMap": true,
     "inlineSources": true,
     "importHelpers": true,
     "isolatedModules": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node16"
   }
 }

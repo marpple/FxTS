@@ -65,12 +65,6 @@ As shown in the example code below, the module imported by default was built tar
 import { filter, map, pipe, range, reduce, take } from "@fxts/core";
 ```
 
-If JavaScript runtime you use does not support `es2018`, use `esm5` submodule instead as shown below.
-
-```javascript
-import { filter, map, pipe, range, reduce, take } from "@fxts/core/esm5";
-```
-
 #### CJS
 
 ```javascript
@@ -80,7 +74,7 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-**Note: The `cjs` submodule is built targeting `es2018` (Node.js 10+ and modern JS engines), and the `esm5` submodule targeting `es5`. Neither includes polyfill.**
+**Note: The `cjs` and `esm` submodules are built targeting `es2018` (Node.js 10+ and modern JS engines) and do not include polyfill.**
 
 ### CDN
 
