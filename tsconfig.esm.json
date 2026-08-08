@@ -10,7 +10,6 @@
     "outDir": "./dist/esm/",
     "rootDir": "./src/",
     "isolatedModules": true,
-    "importsNotUsedAsValues": "remove",
     "strict": true,
     "moduleResolution": "node",
     "skipLibCheck": true,

@@ -188,7 +188,8 @@ const res25 = pipe(
 checks([
   check<typeof res0, [never[], never[]], Test.Pass>(),
   check<typeof res1, [number[], number[]], Test.Pass>(),
-  check<typeof res2, Res1, Test.Pass>(),
+  // TS 5.5+ infers the type predicate `a is number`, narrowing the result
+  check<typeof res2, [number[], string[]], Test.Pass>(),
   check<typeof res3, Res1, Test.Pass>(),
   check<typeof res4, Res1, Test.Pass>(),
   check<typeof res5, Promise<Res1>, Test.Pass>(),

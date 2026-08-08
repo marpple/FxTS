@@ -80,7 +80,7 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-**참고: `esm5`와 `cjs` 서브모듈은 `es5`를 대상으로 빌드되었으며, 마찬가지로 폴리필을 포함하지 않습니다.**
+**참고: `cjs` 서브모듈은 `es2018`(Node.js 10+ 및 모던 JS 엔진), `esm5` 서브모듈은 `es5`를 대상으로 빌드되었으며, 마찬가지로 폴리필을 포함하지 않습니다.**
 
 ### CDN
 

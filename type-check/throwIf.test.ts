@@ -1,4 +1,4 @@
-import { randomInt } from "crypto";
+import { randomInt } from "node:crypto";
 
 import { isNil, pipe, throwIf } from "../src";
 import * as Test from "../src/types/Test";

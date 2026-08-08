@@ -2,21 +2,15 @@
   "include": ["./src/"],
   "exclude": ["./node_modules/", "./test/"],
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2018",
     "module": "commonjs",
     "lib": ["es2020"],
     "sourceMap": true,
     "inlineSources": true,
     "outDir": "./dist/cjs/",
     "rootDir": "./src/",
-    "baseUrl": "./",
-    "paths": {
-      "tslib": ["node_modules/tslib/index.d.ts"]
-    },
     "importHelpers": true,
-    "downlevelIteration": true,
     "isolatedModules": true,
-    "importsNotUsedAsValues": "remove",
     "strict": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,

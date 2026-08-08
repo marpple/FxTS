@@ -80,7 +80,7 @@ const { filter, map, pipe, range, reduce } = require("@fxts/core");
 const take = require("@fxts/core/Lazy/take").default;
 ```
 
-**注意：`esm5` 和 `cjs` 子模块是针对 `es5` 构建的，同样不包含 polyfill。**
+**注意：`cjs` 子模块是针对 `es2018`（Node.js 10+ 及现代 JS 引擎）构建的，`esm5` 子模块是针对 `es5` 构建的，同样不包含 polyfill。**
 
 ### CDN
 

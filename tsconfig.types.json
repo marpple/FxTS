@@ -1,12 +1,12 @@
 {
   "include": ["./src/"],
   "compilerOptions": {
+    "target": "es2018",
     "lib": ["es2020"],
     "declaration": true,
     "declarationMap": true,
     "outDir": "./dist/types/",
     "rootDir": "./src/",
-    "downlevelIteration": true,
     "emitDeclarationOnly": true,
     "strict": true,
     "moduleResolution": "node",
