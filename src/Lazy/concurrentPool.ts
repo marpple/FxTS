@@ -69,7 +69,14 @@ function concurrentPool<A>(
   let prev = Promise.resolve();
 
   async function fetchNextItem() {
-    if (idleWorkers <= 0) {
+    if (idleWorkers <= 0 || finished) {
+      return;
+    }
+    // While a consumer is waiting, keep the pool saturated regardless of the
+    // buffer (order-preserving pools must buffer past a slow head item, as
+    // p-map does). Only when nobody is waiting is prefetch capped at the
+    // pool size, so a slow consumer cannot grow the buffer unboundedly.
+    if (consumer.length === 0 && itemMap.size >= idleWorkers) {
       return;
     }
 
@@ -114,7 +121,7 @@ function concurrentPool<A>(
     }
   }
 
-  async function pullItem(item: Item<A>): Promise<void> {
+  function deliverFromBuffer() {
     while (consumer.length > 0) {
       const id = consumer[0][2];
       if (!itemMap.has(id)) {
@@ -132,10 +139,11 @@ function concurrentPool<A>(
         resolve(value.success);
       }
     }
+  }
 
-    /**
-     * @TODO ppeeou: If an error occurs, the next iterator should not be executed
-     */
+  async function pullItem(item: Item<A>): Promise<void> {
+    deliverFromBuffer();
+
     if (!item.success.done && consumer.length > 0) {
       fetchNextItem();
     }
@@ -152,12 +160,10 @@ function concurrentPool<A>(
   }
 
   function slide() {
-    if (finished && fillId === consumeId) {
-      while (consumer.length > 0) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const [resolve] = consumer.shift()!;
-        resolve({ value: undefined, done: true });
-      }
+    // After a failure, once nothing is in flight and the buffer is drained,
+    // remaining consumers can only ever receive `done`.
+    if (finished && idleWorkers === length && itemMap.size === 0) {
+      doneQueue();
     } else {
       processQueue();
     }
@@ -174,6 +180,9 @@ function concurrentPool<A>(
         const task: [Resolve<A>, Reject, number] = [resolve, reject, id];
 
         consumer.push(task);
+        // Serve already-buffered results immediately - delivery must not
+        // depend on a future fetch settling.
+        deliverFromBuffer();
         slide();
       });
     },
