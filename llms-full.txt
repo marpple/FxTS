@@ -1,0 +1,7780 @@
+# FxTS
+
+> A functional programming library for TypeScript/JavaScript with lazy evaluation and concurrency support.
+
+FxTS is a functional library that provides lazy evaluation, concurrent processing, and strong type inference for TypeScript/JavaScript programmers. It follows the Iterable/AsyncIterable protocols.
+
+## Core Concepts
+
+- **Lazy Evaluation**: Defers computation until values are actually needed
+- **Pipe Composition**: Compose functions using `pipe()` for readable data transformations
+- **Concurrent Processing**: Handle async operations in parallel with `concurrent()`
+- **Iteration Protocols**: Full support for Iterable/AsyncIterable standards
+
+## Usage Patterns
+
+### Pipe Style
+```ts
+import { pipe, map, filter, take, toArray } from "@fxts/core";
+
+pipe(
+  [1, 2, 3, 4, 5],
+  map(a => a * 2),
+  filter(a => a > 4),
+  take(2),
+  toArray
+); // [6, 8]
+```
+
+### Chaining Style
+```ts
+import { fx } from "@fxts/core";
+
+fx([1, 2, 3, 4, 5])
+  .map(a => a * 2)
+  .filter(a => a > 4)
+  .take(2)
+  .toArray(); // [6, 8]
+```
+
+### Async with Concurrency
+```ts
+import { pipe, toAsync, map, concurrent, toArray } from "@fxts/core";
+
+await pipe(
+  [1, 2, 3, 4],
+  toAsync,
+  map(async a => await fetchData(a)),
+  concurrent(2), // Process 2 items in parallel
+  toArray
+);
+```
+
+## Project Structure
+
+- `src/Lazy/` - Lazy evaluation functions (map, filter, take, etc.)
+- `src/*.ts` - Strict/eager evaluation functions (reduce, each, find, etc.)
+- `src/Util/` - Utility functions
+- `src/types/` - TypeScript type definitions
+- `test/` - Test files
+
+## Code Conventions
+
+- All functions support currying (iterable as the last argument)
+- Dual implementation supporting both Iterable and AsyncIterable
+- JSDoc-style documentation with example code
+- Apache 2.0 License
+
+## Key Functions
+
+### Lazy Functions (returns Iterator)
+
+- [append](https://fxts.dev/api/append)
+- [chunk](https://fxts.dev/api/chunk)
+- [compact](https://fxts.dev/api/compact)
+- [compress](https://fxts.dev/api/compress)
+- [concat](https://fxts.dev/api/concat)
+- [concurrent](https://fxts.dev/api/concurrent)
+- [concurrentPool](https://fxts.dev/api/concurrentPool)
+- [cycle](https://fxts.dev/api/cycle)
+- [difference](https://fxts.dev/api/difference)
+- [differenceBy](https://fxts.dev/api/differenceBy)
+- [drop](https://fxts.dev/api/drop)
+- [dropRight](https://fxts.dev/api/dropRight)
+- [dropUntil](https://fxts.dev/api/dropUntil)
+- [dropWhile](https://fxts.dev/api/dropWhile)
+- [entries](https://fxts.dev/api/entries)
+- [filter](https://fxts.dev/api/filter)
+- [flat](https://fxts.dev/api/flat)
+- [flatMap](https://fxts.dev/api/flatMap)
+- [fx](https://fxts.dev/api/fx)
+- [intersection](https://fxts.dev/api/intersection)
+- [intersectionBy](https://fxts.dev/api/intersectionBy)
+- [keys](https://fxts.dev/api/keys)
+- [map](https://fxts.dev/api/map)
+- [peek](https://fxts.dev/api/peek)
+- [pipeLazy](https://fxts.dev/api/pipeLazy)
+- [pluck](https://fxts.dev/api/pluck)
+- [prepend](https://fxts.dev/api/prepend)
+- [range](https://fxts.dev/api/range)
+- [reject](https://fxts.dev/api/reject)
+- [repeat](https://fxts.dev/api/repeat)
+- [reverse](https://fxts.dev/api/reverse)
+- [scan](https://fxts.dev/api/scan)
+- [slice](https://fxts.dev/api/slice)
+- [split](https://fxts.dev/api/split)
+- [take](https://fxts.dev/api/take)
+- [takeRight](https://fxts.dev/api/takeRight)
+- [takeUntil](https://fxts.dev/api/takeUntil)
+- [takeUntilInclusive](https://fxts.dev/api/takeUntilInclusive)
+- [takeWhile](https://fxts.dev/api/takeWhile)
+- [toAsync](https://fxts.dev/api/toAsync)
+- [transpose](https://fxts.dev/api/transpose)
+- [uniq](https://fxts.dev/api/uniq)
+- [uniqBy](https://fxts.dev/api/uniqBy)
+- [values](https://fxts.dev/api/values)
+- [zip](https://fxts.dev/api/zip)
+- [zipWith](https://fxts.dev/api/zipWith)
+- [zipWithIndex](https://fxts.dev/api/zipWithIndex)
+
+### Strict Functions (returns value)
+
+- [add](https://fxts.dev/api/add)
+- [always](https://fxts.dev/api/always)
+- [apply](https://fxts.dev/api/apply)
+- [average](https://fxts.dev/api/average) (alias: mean)
+- [compactObject](https://fxts.dev/api/compactObject)
+- [consume](https://fxts.dev/api/consume)
+- [countBy](https://fxts.dev/api/countBy)
+- [curry](https://fxts.dev/api/curry)
+- [delay](https://fxts.dev/api/delay)
+- [each](https://fxts.dev/api/each) (alias: forEach)
+- [every](https://fxts.dev/api/every)
+- [evolve](https://fxts.dev/api/evolve)
+- [find](https://fxts.dev/api/find)
+- [findIndex](https://fxts.dev/api/findIndex)
+- [fromEntries](https://fxts.dev/api/fromEntries)
+- [groupBy](https://fxts.dev/api/groupBy)
+- [gt](https://fxts.dev/api/gt)
+- [gte](https://fxts.dev/api/gte)
+- [head](https://fxts.dev/api/head) (alias: first)
+- [identity](https://fxts.dev/api/identity)
+- [includes](https://fxts.dev/api/includes) (alias: contains)
+- [indexBy](https://fxts.dev/api/indexBy)
+- [join](https://fxts.dev/api/join)
+- [juxt](https://fxts.dev/api/juxt)
+- [last](https://fxts.dev/api/last)
+- [lt](https://fxts.dev/api/lt)
+- [lte](https://fxts.dev/api/lte)
+- [max](https://fxts.dev/api/max)
+- [memoize](https://fxts.dev/api/memoize)
+- [min](https://fxts.dev/api/min)
+- [negate](https://fxts.dev/api/negate)
+- [noop](https://fxts.dev/api/noop)
+- [not](https://fxts.dev/api/not)
+- [nth](https://fxts.dev/api/nth)
+- [omit](https://fxts.dev/api/omit)
+- [omitBy](https://fxts.dev/api/omitBy)
+- [partition](https://fxts.dev/api/partition)
+- [pick](https://fxts.dev/api/pick)
+- [pickBy](https://fxts.dev/api/pickBy)
+- [pipe](https://fxts.dev/api/pipe)
+- [pipe1](https://fxts.dev/api/pipe1)
+- [prop](https://fxts.dev/api/prop)
+- [props](https://fxts.dev/api/props)
+- [reduce](https://fxts.dev/api/reduce)
+- [reduceLazy](https://fxts.dev/api/reduceLazy)
+- [resolveProps](https://fxts.dev/api/resolveProps)
+- [size](https://fxts.dev/api/size)
+- [some](https://fxts.dev/api/some)
+- [sort](https://fxts.dev/api/sort)
+- [sortBy](https://fxts.dev/api/sortBy)
+- [sum](https://fxts.dev/api/sum)
+- [tap](https://fxts.dev/api/tap)
+- [throwError](https://fxts.dev/api/throwError)
+- [throwIf](https://fxts.dev/api/throwIf)
+- [toArray](https://fxts.dev/api/toArray)
+- [unicodeToArray](https://fxts.dev/api/unicodeToArray)
+- [unless](https://fxts.dev/api/unless)
+- [when](https://fxts.dev/api/when)
+
+### Type Guard Functions
+
+- [isArray](https://fxts.dev/api/isArray)
+- [isBoolean](https://fxts.dev/api/isBoolean)
+- [isDate](https://fxts.dev/api/isDate)
+- [isEmpty](https://fxts.dev/api/isEmpty)
+- [isNil](https://fxts.dev/api/isNil)
+- [isNull](https://fxts.dev/api/isNull)
+- [isNumber](https://fxts.dev/api/isNumber)
+- [isObject](https://fxts.dev/api/isObject)
+- [isString](https://fxts.dev/api/isString)
+- [isUndefined](https://fxts.dev/api/isUndefined)
+
+### Utility Functions
+
+- [debounce](https://fxts.dev/api/debounce)
+- [shuffle](https://fxts.dev/api/shuffle)
+
+## Docs
+
+- [Official Documentation](https://fxts.dev/api/)
+- [Getting Started](https://fxts.dev/getting-started)
+- [API Reference](https://fxts.dev/api/)
+
+---
+
+# Guide
+
+# Error handling
+
+Error handling is an essential part of any programming.
+
+Unlike other libraries, error handling in FxTS does not need to know a specific error handling part.
+Since FxTS follows the protocol of standard, you can easily handle errors with `try-catch`.
+This means that synchronous/asynchronous error propagation is possible,
+so it is good to use with [sentry](https://sentry.io/) or various 3rd party error logging and debugging tools.
+
+### Synchronous error handling
+
+```typescript
+import { map, pipe, take, toArray, toAsync } from "@fxts/core";
+
+const syncError = (a) => {
+  throw new Error(`err ${a}`);
+};
+
+try {
+  pipe(
+    [1, 2, 3, 4, 5],
+    map(syncError),
+    filter((a) => a % 2 === 0),
+    toArray,
+  );
+} catch (err) {
+  // handle err
+}
+```
+
+### Asynchronous error handling
+
+```typescript
+import { filter, map, pipe, toArray, toAsync } from "@fxts/core";
+
+const fetchAsyncError = (a) => Promise.reject(`err ${a}`);
+
+try {
+  await pipe(
+    Promise.resolve([1, 2, 3, 4, 5]),
+    toAsync,
+    map(fetchAsyncError),
+    filter((a) => a % 2 === 0),
+    toArray,
+  );
+} catch (err) {
+  // handle err
+}
+
+try {
+  await pipe(
+    [
+      Promise.resolve(1),
+      Promise.resolve(2),
+      Promise.resolve(3),
+      Promise.resolve(4),
+    ],
+    toAsync,
+    map(fetchAsyncError),
+    filter((a) => a % 2 === 0),
+    toArray,
+  );
+} catch (err) {
+  // handle err
+}
+```
+
+### Concurrency error handling (using Concurrent)
+
+In the state of concurrent requests, `AsyncIterable` is evaluated as many as the number of `concurrent` requests, even if an error occurred earlier.
+This is the same case where asynchronous requests are executed with [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all),
+`Promise.all` is all executed even if one fails.
+
+```typescript
+import { concurrent, filter, map, pipe, toArray, toAsync } from "@fxts/core";
+
+const fetchAsyncError = (a) => {
+  if (a === 3) {
+    return Promise.reject(`err ${a}`);
+  }
+  return a;
+};
+
+try {
+  await pipe(
+    [
+      Promise.resolve(1),
+      Promise.resolve(2),
+      Promise.resolve(3), // When this item is evaluated, `map` function throws an error.
+      Promise.resolve(4), // This item is also evaluated.
+      Promise.resolve(5), // Is is not evaluated from this item.
+      Promise.resolve(6),
+    ],
+    toAsync,
+    map(fetchAsyncError),
+    filter((a) => a % 2 === 0),
+    concurrent(2), // request 2
+    toArray,
+  );
+} catch (err) {
+  // handle err
+}
+```
+
+---
+
+# Function Composition
+
+We are going to introduce [pipe](/api/pipe).
+
+A function named `pipe` is already provided by several libraries, so you may be familiar with it.
+
+- flow in [lodash](https://lodash.com/)
+- pipe in [ramda](https://ramdajs.com/)
+- pipe in [rxjs](https://rxjs.dev/).
+
+`pipe` is a function that connects functions by passing the output of a function to the arguments of another function.
+
+Let's take a moment to see why we need `pipe`.
+
+There is an array, and you want to get the final result by doing `filter` -> `map` -> `reduce` on this array.
+
+```typescript
+const sum = (a: number, b: number) => a + b;
+const arr = [1, 2, 3, 4, 5];
+// filter
+// map
+// reduce
+```
+
+All of the code is pure functions, so it's easy to create a function composition, but it seems to be very difficult to read.
+
+```typescript
+reduce(
+  sum,
+  map(
+    (a) => a + 10,
+    filter((a) => a % 2 === 0, arr);
+  ),
+)
+```
+
+We are providing `pipe` to solve the above problem.
+
+```typescript
+import { filter, map, pipe, reduce } from "@fxts/core";
+
+pipe(
+  arr,
+  filter((a) => a % 2 === 0),
+  map((a) => a + 10),
+  reduce(sum),
+);
+```
+
+It looks easy to read when used with `pipe`.
+
+> Check out [this article](/guide/lazy-evaluation) for a comparison with `Array.prototype.[Function]`
+
+<br/>
+
+Also, you don't have to deal with `Promise` values directly.
+
+```typescript
+await pipe(
+  Promise.resolve(1),
+  (a /*: Awaited<number>*/) => a + 1,
+  async (b /*: Awaited<number>*/) => b + 1,
+  (c /*: Awaited<number>*/) => c + 1,
+); // 4
+```
+
+- a : `a` is inferred as number, and the actual value is also number, not `Promise<number>`.
+- c : Even if the previous function is an asynchronous function, the argument is not c `Promise<number>`.
+
+If you're not dealing with async values directly, it doesn't mean that errors can not be handled when occur.
+To check for error handling, see the [Error Handling](/guide/error-handling)
+
+---
+
+# Getting Started
+
+## Introduction
+
+FxTS is a library for functional programming using iterable/asyncIterable.
+It provides users to write more declarative code, as well as to handle asynchronous data and functions.
+
+To build the above, we have many features such as:
+
+- Lazy evaluation
+  - It is a useful way to represent large or possibly infinite enumerable data.
+- Handling concurrent requests
+  - It can handle multiple asynchronous requests and also control the count of requests.
+- Type inference
+  - Function composition can be inferred.
+- Follow [iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) Iterable / AsyncIterable
+  - FxTS follows the protocol of the language standard.
+    This means that it matches well with existing functions and functions that will be added in the future.
+
+## Installation
+
+### NPM
+
+```shell
+npm install @fxts/core
+```
+
+### Yarn
+
+```shell
+yarn add @fxts/core
+```
+
+## Usage
+
+### TypeScript
+
+```ts
+import { filter, map, pipe, range, reduce, take } from "@fxts/core";
+
+const sum = pipe(
+  range(Infinity),
+  filter((a) => a % 5 === 0),
+  map((a) => a * 10),
+  take(10),
+  reduce((a, b) => a + b),
+); // typeof 'sum' inferred as the number
+```
+
+**Note: It is recommended to enable [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes), [strictNullChecks](https://www.typescriptlang.org/tsconfig#strictNullChecks) tsc option. If not, type inference does not work as we expected. For example, in the example above, `sum` is not inferred as a number type if the option is turned off.**
+
+### JavaScript
+
+Usage is the same as TypeScript, but there are several points to note.
+
+#### ESM
+
+As shown in the example code below, the module imported by default was built targeting `es2018` and **does not include polyfill**.
+
+```javascript
+import { filter, map, pipe, range, reduce, take } from "@fxts/core";
+```
+
+#### CJS
+
+```javascript
+const { filter, map, pipe, range, reduce } = require("@fxts/core");
+
+// It can be loaded as an individual function
+const take = require("@fxts/core/Lazy/take").default;
+```
+
+**Note: The `cjs` and `esm` submodules are built targeting `es2018` (Node.js 10+ and modern JS engines) and do not include polyfill.**
+
+### CDN
+
+This script was built targeting `es5` and contains polyfill.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@fxts/core/dist/fx.min.js"></script>
+```
+
+---
+
+# Handle Concurrency
+
+> `concurrent` is a function that can handle multiple asynchronous values at once.
+
+In javascript, there is a function to evaluate multiple promise values at the same time with [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all).
+However, it cannot handle the load of concurrent requests and cannot handle requests for infinite enumerable data sets.
+[concurrent](/api/concurrent) can handle asynchronous requests of infinite datasets and can control the request size of the load.
+
+```ts
+// prettier-ignore
+import { pipe, toAsync, range, map, filter, take, each, concurrent } from "@fxts/core";
+
+const fetchApi = (page) =>
+  new Promise((resolve) => setTimeout(() => resolve(page), 1000));
+
+await pipe(
+  range(Infinity),
+  toAsync,
+  map(fetchApi), // 0,1,2,3,4,5
+  filter((a) => a % 2 === 0),
+  take(3), // 0,2,4
+  concurrent(3), // If this line does not exist, it will take a total of 6 seconds.
+  each(console.log), // 2 seconds
+);
+```
+
+You can see that it takes 6 seconds when requesting one by one but takes 2 seconds when requesting using `concurrent`
+
+### Useful Example
+
+A more practical code is below.
+
+<iframe src="https://codesandbox.io/embed/fxts-concurrent-useful-0frg2?fontsize=14&hidenavigation=1&theme=dark"
+     style="height:800px; width:100%; border:0; border-radius:4px; overflow:hidden"
+     title="fxts-concurrent-useful"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+If the position of `concurrent` in the code above is as follows, would the result be different?
+No, It would be same! Note that `concurrent` always applies to `Iterable` before the length is changed.
+
+```ts
+await pipe(
+  range(Infinity),
+  toAsync,
+  map(fetchApi),
+  concurrent(3),
+  filter((a) => a % 2 === 0),
+  take(3),
+  each(console.log),
+);
+```
+
+If you want to sequentially evaluate up to `map` one by one,
+and evaluate the asynchronous predicate of `filter` three at the same time, you should write the code below:
+
+```ts
+await pipe(
+  range(Infinity),
+  toAsync,
+  map(fetchApi),
+  toArray,
+  filter((a) => delay(100, a % 2 === 0)),
+  take(3),
+  concurrent(3),
+  each(console.log),
+);
+```
+
+---
+
+# How to debug in pipeline easily?
+
+## Strict evaluation
+
+In strictly-evaluated pipeline, you can track changing of the value in the middle of the pipeline by using the `tap` function.
+If you want to know more about the `tap` function, see [here](/api/tap).
+
+```typescript
+pipe(
+  "2021/11/25",
+  (str) => str.split("/"),
+  tap((a) => console.log(a)), // ['2021', '11', '25']
+  (date) => date.map(Number),
+  tap((a) => console.log(a)), // [2021, 11, 25]
+  (date) => date.map((n) => (n === 1 ? 1 : n - 1)),
+  tap((a) => console.log(a)), // [2020, 10, 24]
+  (date) => new Date(...date),
+);
+```
+
+## Lazy evaluation
+
+The code below creates a list of the 13th of Fridays, starting from January 1, 2000. Each function in the pipeline returns an `IterableIterator`, Which means nothing happens until the `toArray` function iterates through the `iterable` and evaluates the value.
+
+```typescript
+const addDate = (from: Date, n: number) => {
+  const clone = new Date(from);
+  clone.setDate(n);
+  return clone;
+};
+const addDateFrom = (from: Date) => (n: number) => addDate(from, n);
+const is13thOfFriday = (date: Date) =>
+  date.getDate() === 13 && date.getDay() === 5;
+const formatYYYYMMDD = (date: Date) => {
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+};
+
+pipe(
+  range(1, Infinity),
+  map(addDateFrom(new Date(2000, 0, 1))),
+  filter(is13thOfFriday),
+  map(formatYYYYMMDD),
+  take(5),
+  toArray,
+  console.log,
+);
+// ['2000-10-13', '2001-4-13', '2001-7-13', '2002-9-13', '2002-12-13']
+```
+
+Therefore, even if the logs are in the middle of the pipeline using the `tap` function, It is hard to trace the actual evaluation process. Maybe you will only know that type of value is `IterableIterator`.
+
+```typescript
+pipe(
+  range(1, Infinity),
+  map(addDateFrom(new Date(2000, 0, 1))),
+  filter(is13thOfFriday),
+  tap(console.log), // IterableIterator
+  map(formatYYYYMMDD),
+  tap(console.log), // IterableIterator
+  take(5),
+  toArray,
+);
+```
+
+If you want to track the progress of this lazy evaluation, you can use the [peek](/api/peek) function.
+
+```typescript
+pipe(
+  range(1, Infinity),
+  map(addDateFrom(new Date(2000, 0, 1))),
+  filter(is13thOfFriday),
+  peek(console.log),
+  map(formatYYYYMMDD),
+  peek(console.log),
+  take(5),
+  toArray,
+);
+```
+
+[The entire code is here.](https://codesandbox.io/s/how-to-debug-t2tmb?file=/src/index.ts)
+
+To check for lazy evaluation in FxTS, see the [Lazy evaluation](/guide/lazy-evaluation)
+
+---
+
+# Lazy Evaluation
+
+FxTS provides [lazy evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation).
+Let me explain through code why lazy evaluation is useful.
+
+We often see code like the one below. By writing code declaratively, we want to make code that is maintainable and easy to read.
+
+```ts
+const sum = (a: number, b: number) => a + b;
+
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  .filter((a) => a % 2 === 0)
+  .map((a) => a * a)
+  .reduce(sum);
+```
+
+It looks very readable. Now let's see how it works.
+
+To treat it as [immutable](https://en.wikipedia.org/wiki/Immutable_object), each time the method proceeds,
+an array of a new size is created and the array is traversed.
+
+```typescript
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  .filter((a) => a % 2 === 0) // [0, 2, 4, 6, 8]
+  .map((a) => a * a) // [0, 4, 16, 36, 64]
+  .reduce(sum); // 120
+```
+
+Because it iterates through all the array values,
+the logic that reduces the size of the array, such as `slice` and `filter`, is usually placed in front of the logic
+(That way you can have fewer traversals).
+
+```typescript
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  .filter((a) => a % 2 === 0) // [0, 2, 4, 6, 8]
+  .slice(0, 2); // [0, 2]
+  .map((a) => a * a) // [0, 4]
+  .reduce(sum); // 4
+```
+
+Currently, the size of array is very small, so it doesn't seem like a problem.
+But if the size gets really big, do we have to go back to imperative programming?
+
+FxTS can be used as a combination of functions that deal with `Iterable`/`AsyncIterble`,
+in which case it evaluates the value from the `Iterable`/`AsyncIterable` only as needed.
+
+`take(2)`(only 2 values) are evaluated and no further values are evaluated after that.
+In addition, the above code `Array.prototype.filter` needs to traverse all values,
+while the code below only evaluates the values it needs. Even the `filter`.
+
+```typescript
+pipe(
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  filter((a) => a % 2 === 0), // [0, 2]
+  map((a) => a * a), // [0, 4]
+  take(2), // [0, 4]
+  reduce(sum), // 4
+);
+```
+
+FxTS are a useful way to represent large or possibly infinite enumerable data sets
+
+```typescript
+pipe(
+  range(Infinity),
+  filter((a) => a % 2 === 0), // [0, 2]
+  map((a) => a * a), // [0, 4]
+  take(2), // [0, 4]
+  reduce(sum), // 4
+);
+```
+
+Combinations of `Lazy` functions don't evaluate actual values like [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator).
+It can be evaluated with a [for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) or
+[await for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of),
+`Strict` functions. `Strict` functions can be found [here](https://fxts.dev/api#strict)
+
+```typescript
+const squareNums = pipe(
+  range(Infinity),
+  map((a) => a * a),
+); // not evaluated not yet
+
+const result = pipe(
+  squareNums,
+  filter((a) => a % 2 === 0),
+  take(10),
+  toArray, // Strict function
+);
+```
+
+Lazy functions can be found [here](https://fxts.dev/api#lazy)
+
+### Useful Example
+
+The code below shows a more useful situation.
+
+```typescript
+/**
+ * [{
+ *   title: string,
+ *   director: string,
+ *   language: string,
+ *   genre: string,
+ *   rating: number,
+ *   ...
+ * }]
+ */
+const fetchMovie = async (year: number) =>
+  fetch(`https://api.movie.xxx/${year}`);
+
+const recommendMovie = async (year: number, rating: number) =>
+  pipe(
+    range(year, Infinity),
+    toAsync,
+    map(fetchMovie),
+    map((res) => res.json()),
+    filter((movie) => movie.rating >= rating),
+    head,
+  );
+
+await recommendMovie(2020, 9);
+```
+
+---
+
+# Method Chaining
+
+You can handle Iterable/AsyncIterable through a [pipe](/api/pipe), but `fxts` also provides data change in the form of method chaining.
+
+```ts
+fx([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+  .filter((a) => a % 2 === 0) // [0, 2]
+  .map((a) => a * a) // [0, 4]
+  .take(2) // [0, 4]
+  .reduce(sum); // 4
+
+fx("abc")
+  .map((a) => a.toUpperCase()) // ["A", "B"]
+  .take(2)
+  .toArray(); // ["A", "B"]
+```
+
+**Note: Since `fx` defaults to lazy evaluation, it is not actually evaluated until strict evaluation methods such as `toArray`, `groupBy`, `indexBy`, and `some` are executed.**
+
+For details on lazy evaluation, please refer to /guide/lazy-evaluation.
+
+### Support for handling AsyncIterable
+
+`fx` can also handle [AsyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncIterator) values. `toAsync` is used in the example below to create an `AsyncIterator` value.
+
+```ts
+await fx(toAsync([1, 2, 3, 4]))
+  .filter(async (a) => a % 2 === 0)
+  .map(async (a) => a * a)
+  .reduce(sum);
+
+await fx([1, 2, 3, 4])
+  .filter((a) => a % 2 === 0)
+  .toAsync() // if async function returns
+  .map(async (a) => a * a)
+  .reduce(sum);
+```
+
+### Handle Concurrency
+
+`fx` supports concurrent operation. As we saw in concurrent, concurrent can only be used in asyncIterable.
+
+For details on handling concurrent with `fxts`, please refer to /guide/handle-concurrency
+
+```ts
+/**
+ *
+ *  evaluation
+ *               ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐
+ *               │  1  │──│  2  │──│  3  │──│  4  │──│  5  │──│  6  │
+ *               └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘
+ *       map        │        │        │        │        │        │
+ *  concurrent(2)  (1)      (1)      (2)      (2)      (3)      (3)
+ *                  │        │        │        │        │        │
+ *                  ▼        ▼        ▼        ▼        ▼        ▼
+ */
+await fx(toAsync(range(1, 7)))
+  // async function returns
+  .map(async (a) => delay(100, a))
+  .concurrent(2)
+  .consume(); // It takes approximately 300ms.
+```
+
+### Etc
+
+`fx` does not provide all the functions of `fxts` as methods.
+
+If you want to use the `fxts` function which is not provided or additional functions, you can use the `chain` method.
+
+```ts
+fx([1, 2, 3, 4])
+  .chain(append(5))
+  .map((a) => a + 10)
+  .toArray(); // [11, 12, 13, 14, 15]
+```
+
+---
+
+# Migrate from p-limit / p-map
+
+If you use `p-map` or `p-limit` to run async work with a concurrency limit over a
+collection, FxTS covers the same job with `concurrentPool` — plus streaming,
+early termination, and AsyncIterable sources that array-based mappers cannot
+express.
+
+## p-map → concurrentPool
+
+```typescript
+// p-map
+import pMap from "p-map";
+const results = await pMap(urls, (url) => fetchItem(url), { concurrency: 5 });
+
+// FxTS
+import { concurrentPool, map, pipe, toArray, toAsync } from "@fxts/core";
+const results = await pipe(
+  toAsync(urls),
+  map((url) => fetchItem(url)),
+  concurrentPool(5),
+  toArray,
+);
+```
+
+`concurrentPool` has the same semantics as `p-map`: a pool of at most `n`
+in-flight tasks where a new task starts as soon as one settles, results in input
+order, and the first rejection aborts the run.
+
+**Pick `concurrentPool`, not `concurrent`, when migrating.** `concurrent`
+evaluates in fixed windows of `n` (the next window starts after the previous one
+finishes), which is useful for batch semantics but has different throughput
+characteristics than a `p-map`-style pool on uneven workloads.
+
+## p-limit over a collection → concurrentPool
+
+The common `p-limit` pattern — limiting a mapped collection — is the same
+migration:
+
+```typescript
+// p-limit
+import pLimit from "p-limit";
+const limit = pLimit(5);
+const results = await Promise.all(ids.map((id) => limit(() => loadUser(id))));
+
+// FxTS
+const results = await pipe(
+  toAsync(ids),
+  map((id) => loadUser(id)),
+  concurrentPool(5),
+  toArray,
+);
+```
+
+## What does not map
+
+Being honest about the boundaries:
+
+- **A shared ad-hoc limiter** — one `limit` instance throttling unrelated call
+  sites across a codebase — is not what a pipeline library models. Keep
+  `p-limit` for that.
+- **`stopOnError: false`** (collecting an `AggregateError`) has no direct
+  equivalent; FxTS propagates the first error. To collect outcomes instead,
+  return result objects from the mapper:
+  `map(async (url) => fetchItem(url).then((v) => ({ ok: true as const, v }), (e) => ({ ok: false as const, e })))`.
+- **`AbortSignal`** is not taken as an option. Laziness covers the usual cases:
+  stopping consumption stops the pipeline.
+
+## What you gain over p-map
+
+Results can be **consumed as a stream** instead of waiting for the whole array:
+
+```typescript
+import { concurrentPool, each, map, pipe, toAsync } from "@fxts/core";
+
+await pipe(
+  toAsync(urls),
+  map((url) => fetchItem(url)),
+  concurrentPool(5),
+  each((item) => render(item)), // handled as each result arrives, in order
+);
+```
+
+Pipelines **terminate early** — combine with `take` to stop scheduling work once
+you have enough:
+
+```typescript
+import {
+  concurrentPool,
+  filter,
+  map,
+  pipe,
+  take,
+  toArray,
+  toAsync,
+} from "@fxts/core";
+
+const firstThree = await pipe(
+  toAsync(candidates),
+  map((c) => probe(c)),
+  concurrentPool(5),
+  filter((r) => r.alive),
+  take(3), // stops pulling once three passed - remaining work is not started
+  toArray,
+);
+```
+
+And the source does not have to be an array — any `AsyncIterable` works
+(paginated APIs, streams), so the whole input never needs to be materialized.
+
+---
+
+# When to use the `toAsync` function?
+
+Many functions in FxTS can handle both `Iterable` and `AsyncIterable`. For example, the `find` function can be used as follows.
+
+```typescript
+const numbers = function* () {
+  yield 1;
+  yield 2;
+  yield 3;
+};
+
+const asyncNumbers = async function* () {
+  yield 1;
+  yield 2;
+  yield 3;
+};
+
+find((num) => num === 2, numbers()); // 2
+find((num) => num === 2, asyncNumbers()); // Promise<2>
+```
+
+There is a special point to note. `AsyncIterable` can work fine whether the callback function is running synchronously/asynchronously,
+but **You can not iterate over `Iterable` using asynchronous callback functions or manipulate types `Iterable<Promise<T>>`.**
+
+```typescript
+const promiseNumbers = function* () {
+  yield Promise.resolve(1);
+  yield Promise.resolve(2);
+  yield Promise.resolve(3);
+};
+
+find((num) => Promise.resolve(num === 2), numbers()); // not work
+find((num) => num === 2, promiseNumbers()); // not work
+```
+
+In order to handle async using FxTS, the value to iterate must be type of `AsyncIterable`.
+If the callback function is asynchronous or should handle `Iterable<Promise<T>>`, use the `toAsync` function to convert it to `AsyncIterable`.
+
+```typescript
+await pipe(
+  numbers(), // Iterable<number>
+  toAsync, // AsyncIterable<number>
+  find((num) => Promise.resolve(num === 2)),
+);
+
+await pipe(
+  promiseNumbers(), // Iterable<Promise<number>>
+  toAsync, // AsyncIterable<number>
+  find((num) => Promise.resolve(num === 2)),
+);
+```
+
+---
+
+# API Reference
+
+---
+id: add
+description: "Adds two values."
+---
+
+
+## add() function
+
+Adds two values.
+
+**Signature:**
+
+```typescript
+declare function add<A extends number | Promise<number>, B extends number | Promise<number>>(a: A, b: B): ReturnAddType<number | Promise<number>, A, B>;
+```
+
+
+
+## Example
+
+
+```ts
+add(1, 2); // 3
+await add(1, Promise.resolve(2)); // 3
+await add(Promise.resolve(1), 2); // 3
+await add(Promise.resolve(1), Promise.resolve(2)); // 3
+
+add('a', 'b'); // 'ab'
+await add('a', Promise.resolve('b')); // 'ab'
+await add(Promise.resolve('a'), 'b'); // 'ab'
+await add(Promise.resolve('a'), Promise.resolve('b')); // 'ab'
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/add.ts)
+
+---
+
+---
+id: always
+description: "Returns a function that always returns the given value."
+---
+
+
+## always() function
+
+Returns a function that always returns the given value.
+
+**Signature:**
+
+```typescript
+declare function always<T>(value: T): (...args: any[]) => T;
+```
+
+
+
+## Example
+
+
+```ts
+const alwaysFive = always(5);
+alwaysFive(); // 5
+
+const defaultToEmpty = always("");
+await Promise.reject("error during operation").catch(defaultToEmpty); // ""
+
+// with pipe
+const excludeNegatives = false;
+pipe(
+ [-1, 1, 2, 0 ,-3],
+ filter(excludeNegatives ? lt(0) : always(true)),
+ toArray,
+); // [-1, 1, 2, 0 ,-3]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/always.ts)
+
+---
+
+---
+id: append
+description: "Returns Iterable/AsyncIterable containing the contents of the given iterable, followed by the given element."
+---
+
+
+## append() function
+
+Returns Iterable/AsyncIterable containing the contents of the given iterable, followed by the given element.
+
+**Signature:**
+
+```typescript
+declare function append<A, B extends Iterable<A> | AsyncIterable<Awaited<A>>>(a: A): (iterable: B) => ReturnIterableIteratorType<B, Awaited<A>>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = append(4, [1,2,3]);
+iter.next() // {done: false, value: 1}
+iter.next() // {done: false, value: 2}
+iter.next() // {done: false, value: 3}
+iter.next() // {done: false, value: 4}
+iter.next() // {done: true, value: undefined}
+
+// with pipe
+pipe(
+ [1,2,3],
+ append(4),
+ toArray,
+); // [1,2,3,4]
+
+await pipe(
+ Promise.resolve([1, 2, 3]),
+ append(4),
+ toArray,
+); // [1, 2, 3, 4]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
+ toAsync,
+ append(4),
+ toArray,
+); // [1, 2, 3, 4]
+```
+[Try It](https://codesandbox.io/s/fxts-append-civf7)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/append.ts)
+
+---
+
+---
+id: apply
+description: "Applies function f to the argument list args."
+---
+
+
+## apply() function
+
+Applies function `f` to the argument list `args`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function apply<F extends Arrow, T extends Parameters<F>>(f: F): (args: T) => ReturnType<typeof f>;
+```
+
+
+
+## Example
+
+
+```ts
+apply(Math.max, [1, 2, 3, 4, 5]); // 5
+
+pipe(
+  repeat(10),
+  map(a => a * Math.random())
+  take(5),
+  apply(max)
+);
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/apply.ts)
+
+---
+
+---
+id: average
+description: "Returns the average of the given (Iterable/AsyncIterable) (mean)"
+---
+
+
+## average() function
+
+Returns the average of the given (Iterable/AsyncIterable) (mean)
+
+**Signature:**
+
+```typescript
+declare function average<T extends Iterable<number> | AsyncIterable<number>>(iterable: T): ReturnValueType<T>;
+```
+
+
+
+## Example
+
+
+```ts
+average([]); // NaN
+average([1, 2, 3, 4, 5]); // 3
+await average(toAsync([1, 2, 3, 4, 5])); // 3
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5],
+ average,
+); // 3
+```
+see [pipe](https://fxts.dev/api/pipe)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/average.ts)
+
+---
+
+---
+id: camelCase
+description: "Converts str to camel case."
+---
+
+
+## camelCase() function
+
+Converts `str` to camel case.
+
+Word boundaries are detected from spaces, punctuation, digits, case changes, and acronyms.
+
+**Signature:**
+
+```typescript
+declare function camelCase(str: string): string;
+```
+
+
+
+## Example
+
+
+```ts
+camelCase("foo bar"); // "fooBar"
+camelCase("foo-bar"); // "fooBar"
+camelCase("foo_bar"); // "fooBar"
+camelCase("FooBar"); // "fooBar"
+camelCase("XMLHttpRequest"); // "xmlHttpRequest"
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/camelCase.ts)
+
+---
+
+---
+id: capitalize
+description: "Converts the first character of str to upper case and the remaining characters to lower case."
+---
+
+
+## capitalize() function
+
+Converts the first character of `str` to upper case and the remaining characters to lower case.
+
+**Signature:**
+
+```typescript
+declare function capitalize(str: string): string;
+```
+
+
+
+## Example
+
+
+```ts
+capitalize("fred"); // "Fred"
+capitalize("FRED"); // "Fred"
+capitalize(""); // ""
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/capitalize.ts)
+
+---
+
+---
+id: cases
+description: "Returns a mapped value based on the first matching predicate. The predicates can return boolean or be type refinements."
+---
+
+
+## cases() function
+
+Returns a mapped value based on the first matching predicate. The predicates can return boolean or be type refinements.
+
+If the predicate is a type refinement, the corresponding mapper will receive the narrowed type. Else, the mapper will receive the original type. If there's no match, the input value is returned as is. (if the number of functions is even) Or the `default` function (the last function without paired predicate) is executed if provided. (if the number of functions is odd)
+
+**Signature:**
+
+```typescript
+declare function cases(): (value: unknown) => typeof value;
+```
+**Returns:**
+
+(value: unknown) =&gt; typeof value
+
+## Example 1
+
+
+```ts
+pipe(
+  [10, 20, 30],
+  map(cases(
+    lt(15), (n) => n + 20,
+    lt(25), (n) => n + 10,
+  )),
+  toArray,
+) // [30, 30, 30]
+```
+
+## Example 2
+
+with type refinement
+
+```ts
+type A = { a: string; }
+type B = A & { b: string; }
+
+pipe(
+  [{ a: "A", b: "B" }, { a: "A" }] as A[],
+  map(cases(
+   (n): n is B => "b" in n, (n) => n.b,
+   (n) => n.a,
+  )),
+ toArray,
+) // ["B", "A"]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/cases.ts)
+
+---
+
+---
+id: castArray
+description: "Casts value as an array if it's not one. If value is already an array, the same reference is returned as-is. null and undefined are wrapped like any oth..."
+---
+
+
+## castArray() function
+
+Casts `value` as an array if it's not one. If `value` is already an array, the same reference is returned as-is. `null` and `undefined` are wrapped like any other value.
+
+**Signature:**
+
+```typescript
+declare function castArray<T>(value: T | T[]): T[];
+```
+
+
+
+## Example
+
+
+```ts
+castArray(1); // [1]
+castArray("a"); // ["a"]
+castArray({ a: 1 }); // [{ a: 1 }]
+castArray(null); // [null]
+castArray(undefined); // [undefined]
+
+const arr = [1, 2, 3];
+castArray(arr) === arr; // true - same reference
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/castArray.ts)
+
+---
+
+---
+id: chunk
+description: "Returns Iterable/AsyncIterable of elements split into groups the length of size. If iterableIterator can't be split evenly, the final chunk will be the ..."
+---
+
+
+## chunk() function
+
+Returns Iterable/AsyncIterable of elements split into groups the length of size. If iterableIterator can't be split evenly, the final chunk will be the remaining elements.
+
+**Signature:**
+
+```typescript
+declare function chunk<T>(size: number, iterable: Iterable<T>): IterableIterator<T[]>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = chunk(2, [1, 2, 3, 4]);
+iter.next() // {done:false, value:[1, 2]}
+iter.next() // {done:false, value:[3, 4]}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4],
+ chunk(2),
+ toArray,
+); // [[1, 2],[3, 4]]
+
+await pipe(
+ Promise.resolve([1, 2, 3 ,4]),
+ chunk(2),
+ toArray,
+); // [[1, 2],[3, 4]]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ toAsync,
+ chunk(2),
+ toArray,
+); // [[1, 2],[3, 4]]
+```
+[Try It](https://codesandbox.io/s/fxts-chunk-gksly)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/chunk.ts)
+
+---
+
+---
+id: cloneDeep
+description: "Creates a deep clone of value."
+---
+
+
+## cloneDeep() function
+
+Creates a deep clone of `value`<!-- -->.
+
+Supported types: primitives, Array, plain objects (including `Object.create(null)`<!-- -->), Date, RegExp (`lastIndex` preserved), Map, Set, ArrayBuffer, TypedArray, and DataView. Class instances are cloned with their prototype preserved and own enumerable properties (string and symbol keys) copied. Circular references are supported.
+
+Unlike `structuredClone`<!-- -->, functions are kept by reference instead of throwing, and prototypes of class instances are preserved. `WeakMap`<!-- -->/`WeakSet`<!-- -->/`Promise` cannot be cloned and are returned as-is.
+
+**Signature:**
+
+```typescript
+declare function cloneDeep<T>(value: T): T;
+```
+
+
+
+## Example
+
+
+```ts
+const obj = { a: 1, b: { c: 2 }, d: [1, 2, 3] };
+const cloned = cloneDeep(obj);
+cloned.b === obj.b; // false
+cloned.d === obj.d; // false
+
+// circular references
+const circular = { a: 1, self: null as unknown };
+circular.self = circular;
+const clonedCircular = cloneDeep(circular);
+clonedCircular.self === clonedCircular; // true
+
+// class instances keep their prototype
+class Point {
+  constructor(public x: number) {}
+}
+cloneDeep(new Point(1)) instanceof Point; // true
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/cloneDeep.ts)
+
+---
+
+---
+id: compact
+description: "Returns Iterable/AsyncIterable with all null and undefined values removed."
+---
+
+
+## compact() function
+
+Returns Iterable/AsyncIterable with all `null` and `undefined` values removed.
+
+**Signature:**
+
+```typescript
+declare function compact<T extends Iterable<unknown> | AsyncIterable<unknown>>(iterable: T): ReturnIterableIteratorType<T, NonNullable<IterableInfer<T>>>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = compact([0, 1, undefined, 3, null]);
+iter.next() // {done:false, value: 0}
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 3}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [0, 1, undefined, 3, null],
+ compact,
+ toArray,
+); // [0, 1, 3]
+
+await pipe(
+ Promise.resolve([0, 1, undefined, 3, null]),
+ compact,
+ toArray,
+); // [0, 1, 3]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(0), Promise.resolve(1), Promise.resolve(undefined),
+   Promise.resolve(3), Promise.resolve(null)],
+ toAsync,
+ compact,
+ toArray,
+); // [0, 1, 3]
+```
+[Try It](https://codesandbox.io/s/fxts-compact-lnvmd)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/compact.ts)
+
+---
+
+---
+id: compactObject
+description: "Returns an object with all nullable values removed."
+---
+
+
+## compactObject() function
+
+Returns an object with all nullable values removed.
+
+**Signature:**
+
+```typescript
+export default function compactObject<T extends object>(obj: T): Merge<{
+    [K in Extract<keyof T, RequiredKeys<T>>]: Extract<NonNullableEntries<T>, [
+        K,
+        any
+    ]>[1];
+}, {
+    [K in Extract<keyof T, OptionalKeys<T>>]?: Extract<NonNullableEntries<T>, [
+        K,
+        any
+    ]>[1];
+}>;
+```
+
+
+
+## Example
+
+
+```ts
+const compacted = compactObject({ a: 1, b: "b", c: null, d: undefined });
+// {a: 1, b: "b"}
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/compactObject.ts)
+
+---
+
+---
+id: compress
+description: "Returns Iterable/AsyncIterable that filters elements from 'iterable' returning only those that have a corresponding element in 'selectors' that evaluate..."
+---
+
+
+## compress() function
+
+Returns Iterable/AsyncIterable that filters elements from 'iterable' returning only those that have a corresponding element in 'selectors' that evaluates to 'true'. Stops when either 'iterable' or 'selectors' has been exhausted.
+
+**Signature:**
+
+```typescript
+declare function compress<A, B>(selector: Array<A>, iterable: Iterable<B>): IterableIterator<B>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter1 = compress([false,true,false,false,true],  [1, 2, 3, 4, 5]);
+iter1.next(); // {value: 2, done:false}
+iter1.next(); // {value: 5, done:false}
+iter1.next(); // {value: undefined, done:true }
+
+const iter2 = compress([1,0,0,1,0],  "abcde");
+iter2.next(); // {value: "a", done:false}
+iter2.next(); // {value: "d", done:false}
+iter2.next(); // {value: undefined, done:true }
+
+// with pipe
+pipe(
+  [1, 2, 3],
+  compress([false, true, true]),
+  toArray,
+); // [2, 3]
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/compress.ts)
+
+---
+
+---
+id: concat
+description: "Returns the result of concatenating the given iterable."
+---
+
+
+## concat() function
+
+Returns the result of concatenating the given iterable.
+
+**Signature:**
+
+```typescript
+declare function concat<A extends Iterable<unknown> | AsyncIterable<unknown>, B extends Iterable<unknown> | AsyncIterable<unknown>>(iterable1: A, iterable2: B): ReturnConcatType<A, B>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = concat([1, 2], [3, 4]);
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:false, value: 3}
+iter.next() // {done:false, value: 4}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [3, 4],
+ concat([1, 2]),
+ toArray,
+); // [1, 2, 3, 4]
+
+await pipe(
+ Promise.resolve([3, 4]),
+ concat([1, 2]),
+ toArray,
+); // [1, 2, 3, 4]
+
+ await pipe(
+ [Promise.resolve(3), Promise.resolve(4)],
+ toAsync,
+ concat([1, 2]),
+ toArray,
+); // [1, 2, 3, 4]
+```
+[Try It](https://codesandbox.io/s/fxts-concat-mhd7d)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/concat.ts)
+
+---
+
+---
+id: concurrent
+description: "Concurrent is used to balance the load of multiple asynchronous requests. The first argument receives a number that controls the number of loads, and th..."
+---
+
+
+## concurrent() function
+
+Concurrent is used to balance the load of multiple asynchronous requests. The first argument receives a number that controls the number of loads, and the second argument is an AsyncIterable. See [toAsync](https://fxts.dev/api/toAsync) to create an AsyncIterable .
+
+**Signature:**
+
+```typescript
+declare function concurrent<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+await pipe(
+  [1, 2, 3, 4, 5, 6],
+  toAsync,
+  map((a) => delay(1000, a)),
+  concurrent(3),
+  each(console.log), // log 1, 2, 3, 4, 5, 6
+); // 2 seconds
+
+// evaluation
+//              ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐
+//              │  1  │──│  2  │──│  3  │──│  4  │──│  5  │──│  6  │
+//              └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘
+//      map        │        │        │        │        │        │
+// concurrent(3)  (1)      (1)      (1)      (2)      (2)      (2)
+//                 │        │        │        │        │        │
+//                 ▼        ▼        ▼        ▼        ▼        ▼
+
+await pipe(
+  [1, 2, 3, 4, 5, 6],
+  toAsync,
+  map((a) => delay(1000, a)),
+  each(console.log), // log 1, 2, 3, 4, 5, 6
+); // 6 seconds
+
+// evaluation
+//              ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐
+//              │  1  │──│  2  │──│  3  │──│  4  │──│  5  │──│  6  │
+//              └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘
+//      map        │        │        │        │        │        │
+//                (1)      (2)      (3)      (4)      (5)      (6)
+//                 │        │        │        │        │        │
+//                 ▼        ▼        ▼        ▼        ▼        ▼
+```
+[Try It](https://codesandbox.io/s/fxts-concurrent-4x58c)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray) [each](https://fxts.dev/api/each)<!-- -->, [map](https://fxts.dev/api/map)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/concurrent.ts)
+
+---
+
+---
+id: concurrentPool
+description: "Ensures consistency in the level of concurrency based on the given number of concurrent tasks."
+---
+
+
+## concurrentPool() function
+
+Ensures consistency in the level of concurrency based on the given number of concurrent tasks.
+
+**Signature:**
+
+```typescript
+declare function concurrentPool<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+await pipe(
+  [1, 2, 3, 4, 5, 6],
+  toAsync,
+  map((a) => delay(100 * a, a)),
+  concurrentPool(3),
+  each(console.log), // log 1, 2, 3, 4, 5, 6
+); // 0.9 seconds
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/concurrentPool.ts)
+
+---
+
+---
+id: consume
+description: "Consumes the given number of Iterable/AsyncIterable. If the number is empty, all is consumed."
+---
+
+
+## consume() function
+
+Consumes the given number of Iterable/AsyncIterable. If the number is empty, all is consumed.
+
+**Signature:**
+
+```typescript
+declare function consume<A extends Iterable<unknown> | AsyncIterable<unknown>, B extends number>(iterator: A, n?: B): ReturnValueType<A, void>;
+```
+
+
+
+## Example
+
+
+```ts
+const iterator = (function *(){
+  yield 1;
+  yield 2;
+  yield 3;
+})();
+consume(iterator, 2);
+iterator.next(); // {value:3, done:false}
+iterator.next(); // {value:undefined, done:true}
+
+// with pipe
+pipe(
+  range(10),
+  peek(updateApi),
+  concurrent(5),
+  consume,
+);
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/consume.ts)
+
+---
+
+---
+id: countBy
+description: "Returns a count for the number of objects in each group. Similar to groupBy, but instead of returning a list of values, it returns a count for the numbe..."
+---
+
+
+## countBy() function
+
+Returns a count for the number of objects in each group. Similar to groupBy, but instead of returning a list of values, it returns a count for the number of values in that group.
+
+**Signature:**
+
+```typescript
+declare function countBy<const A, B extends Key>(f: (a: A) => B, iterable: Iterable<A>): {
+    [K in B]: number;
+};
+```
+
+
+
+## Example
+
+
+```ts
+const given = [
+  { category: "clothes", desc: "good" },
+  { category: "pants", desc: "bad" },
+  { category: "shoes", desc: "not bad" },
+  { category: "shoes", desc: "great" },
+  { category: "pants", desc: "good" },
+];
+
+countBy((a) => a.category, given);
+//{
+//  clothes: 1,
+//  pants: 2,
+//  shoes: 2,
+// };
+```
+[Try It](https://codesandbox.io/s/fxts-countby-09t7z)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/countBy.ts)
+
+---
+
+---
+id: curry
+description: "Returns a curried function of f"
+---
+
+
+## curry() function
+
+Returns a curried function of `f`
+
+**Signature:**
+
+```typescript
+declare function curry<F extends (...args: any[]) => any>(f: F): Curry<F>;
+```
+
+
+
+## Example
+
+
+```ts
+const add = (a: number, b: number): number => a + b
+
+const curried = curry(add)
+const add10 = curried(10)
+console.log(add10(5)) // 15
+console.log(curried(3, 4)) // 7
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/curry.ts)
+
+---
+
+---
+id: cycle
+description: "Returns Iterable/AsyncIterable that infinitely repeats the given Iterable/AsyncIterable"
+---
+
+
+## cycle() function
+
+Returns Iterable/AsyncIterable that infinitely repeats the given Iterable/AsyncIterable
+
+**Signature:**
+
+```typescript
+declare function cycle<A extends Iterable<unknown> | AsyncIterable<unknown>>(iter: A): ReturnIterableIteratorType<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = cycle("abc")
+iter.next(); // {value:"a", done: false}
+iter.next(); // {value:"b", done: false}
+iter.next(); // {value:"c", done: false}
+iter.next(); // {value:"a", done: false}
+iter.next(); // {value:"b", done: false}
+
+// with pipe
+pipe(
+  cycle([1,2,3,4]),
+  take(5),
+  toArray,
+); // [1,2,3,4,1]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/cycle.ts)
+
+---
+
+---
+id: debounce
+description: "debounce function is used to delay the execution of a provided function until after a specified time period has passed since the last time the debounced..."
+---
+
+
+## debounce() function
+
+`debounce` function is used to delay the execution of a provided function until after a specified time period has passed since the last time the debounced function was invoked. The function is useful to optimize performance by limiting the rate at which a function is executed, especially in scenarios like handling user input events, scrolling, or resizing. Additionally, the debounce function allows you to execute the function immediately on the first call (when leading is set to true), and it can be canceled manually using the `.cancel()` method.
+
+**Signature:**
+
+```typescript
+declare function debounce<T extends (...args: any[]) => void>(func: T, wait: number, options?: {
+    leading: boolean;
+}): ((...args: Parameters<T>) => void) & {
+    cancel: () => void;
+};
+```
+
+
+
+## Example
+
+
+```ts
+const debounced1 = debounce((val: number)=>{
+  console.log('val', val);
+}, 100);
+
+debounced1();
+debounced1();
+debounced1(); // invoke func after 100ms
+
+const debounced2 = debounce((val: number)=>{
+  console.log('val', val);
+}, 100, { leading:true });
+debounced2(); // immediately invoked func
+debounced2();
+debounced2(); // invoked func after 100ms
+
+
+const debounced3 = debounce((val: number)=>{
+  console.log('val', val);
+}, 100);
+debounced3();
+debounced3();
+debounced3.cancel(); // cancel func
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Util/debounce.ts)
+
+---
+
+---
+id: delay
+description: "Delays the value by given wait time"
+---
+
+
+## delay() function
+
+Delays the value by given `wait` time
+
+**Signature:**
+
+```typescript
+declare function delay(wait: number): Promise<void>;
+```
+
+
+
+## Example
+
+
+```ts
+await delay(1000);
+console.log('hello'); // after 1000 milliseconds log hello
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/delay.ts)
+
+---
+
+---
+id: difference
+description: "Returns Iterable/AsyncIterable of all elements in the iterable2 not contained in the iterable1."
+---
+
+
+## difference() function
+
+Returns Iterable/AsyncIterable of all elements in the `iterable2` not contained in the `iterable1`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function difference<T>(iterable1: Iterable<T>, iterable2: Iterable<T>): IterableIterator<T>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = difference([2, 1], [2, 3, 4]);
+iter.next(); // {value: 3, done:false}
+iter.next(); // {value: 4, done:false}
+iter.next(); // {value: undefined, done: true}
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/difference.ts)
+
+---
+
+---
+id: differenceBy
+description: "Returns Iterable/AsyncIterable(i.e no duplicate) of all elements in the iterable2 not contained in the iterable1."
+---
+
+
+## differenceBy() function
+
+Returns Iterable/AsyncIterable(i.e no duplicate) of all elements in the `iterable2` not contained in the `iterable1`<!-- -->. Duplication is determined according to the value returned by applying the supplied `f` to `iterable2`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function differenceBy<A, B = unknown>(f: (a: A) => B, iterable1: Iterable<A>, iterable2: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = differenceBy(a => a.x, [{ x: 1 }, { x: 4 }], [{ x: 1 },  { x: 2 },  { x: 3 }])
+iter.next(); // {value: {x: 2}, done: false}
+iter.next(); // {value: {x: 3}, done: false}
+iter.next(); // {value: undefined, done: true}
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/differenceBy.ts)
+
+---
+
+---
+id: drop
+description: "Returns all but the first length elements of the given iterable."
+---
+
+
+## drop() function
+
+Returns all but the first `length` elements of the given iterable.
+
+**Signature:**
+
+```typescript
+declare function drop<A>(length: number, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = drop(2, [1, 2, 3, 4]);
+iter.next() // {done:false, value: 3}
+iter.next() // {done:false, value: 4}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4],
+ drop(2),
+ toArray,
+); // [3, 4]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4]),
+ drop(2),
+ toArray,
+); // [3, 4]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ toAsync,
+ drop(2),
+ toArray,
+); // [3, 4]
+```
+[Try It](https://codesandbox.io/s/fxts-drop-2t0h0)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/drop.ts)
+
+---
+
+---
+id: dropRight
+description: "Returns all but the last length elements of the given iterable."
+---
+
+
+## dropRight() function
+
+Returns all but the last `length` elements of the given iterable.
+
+**Signature:**
+
+```typescript
+declare function dropRight<A>(length: number, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = dropRight(2, [1, 2, 3, 4]);
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4],
+ dropRight(2),
+ toArray,
+); // [1, 2]
+
+pipe(
+ "abcde",
+ dropRight(2),
+ toArray,
+); // ["a", "b", "c"]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4]),
+ dropRight(2),
+ toArray,
+); // [1, 2]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ toAsync,
+ dropRight(2),
+ toArray,
+); // [1, 2]
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/dropRight.ts)
+
+---
+
+---
+id: dropUntil
+description: "Returns Iterable/AsyncIterable excluding elements dropped from the beginning. Elements are deleted until the value applied to f returns truly. (It is de..."
+---
+
+
+## dropUntil() function
+
+Returns Iterable/AsyncIterable excluding elements dropped from the beginning. Elements are deleted until the value applied to f returns truly. (It is deleted including the first value applied as true)
+
+**Signature:**
+
+```typescript
+declare function dropUntil<A, B = unknown>(f: (a: A) => B, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = dropUntil((a) => a > 3, [1, 2, 3, 4, 5, 1, 2]);
+iter.next(); // {done:false, value: 5}
+iter.next(); // {done:false, value: 1}
+iter.next(); // {done:false, value: 2}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5, 1, 2],
+ dropUntil((a) => a > 3),
+ toArray,
+); // [5, 1, 2]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5, 1, 2]),
+ dropUntil((a) => a > 3),
+ toArray,
+); // [5, 1, 2]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5, 1, 2]),
+ toAsync,
+ dropUntil(async (a) => a > 3),
+ toArray,
+); // [5, 1, 2]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4),
+Promise.resolve(5), Promise.resolve(1), Promise.resolve(2)],
+ toAsync,
+ dropUntil((a) => a > 3),
+ toArray,
+); // [5, 1, 2]
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/dropUntil.ts)
+
+---
+
+---
+id: dropWhile
+description: "Returns Iterable/AsyncIterable excluding elements dropped from the beginning. Elements are dropped until the value applied to f returns falsey."
+---
+
+
+## dropWhile() function
+
+Returns Iterable/AsyncIterable excluding elements dropped from the beginning. Elements are dropped until the value applied to `f` returns falsey.
+
+**Signature:**
+
+```typescript
+declare function dropWhile<A, B = unknown>(f: (a: A) => B, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = dropWhile((a) => a < 3, [1, 2, 3, 4, 5]);
+iter.next(); // {done:false, value: 3}
+iter.next(); // {done:false, value: 4}
+iter.next(); // {done:false, value: 5}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5],
+ dropWhile((a) => a < 3),
+ toArray,
+); // [3, 4, 5]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5]),
+ dropWhile((a) => a < 3),
+ toArray,
+); // [3, 4, 5]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5]),
+ toAsync,
+ dropWhile(async (a) => a < 3),
+ toArray,
+); // [3, 4, 5]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4), Promise.resolve(5)],
+ toAsync,
+ dropWhile((a) => a < 3),
+ toArray,
+); // [3, 4, 5]
+
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/dropWhile.ts)
+
+---
+
+---
+id: each
+description: "Iterates over Iterable/AsyncIterable, applying each in turn to f. (forEach)"
+---
+
+
+## each() function
+
+Iterates over Iterable/AsyncIterable, applying each in turn to `f`<!-- -->. (forEach)
+
+**Signature:**
+
+```typescript
+declare function each<A, B = unknown>(f: (a: A) => B, iterable: Iterable<A>): void;
+```
+
+
+
+## Example
+
+
+```ts
+each(console.log, [1, 2, 3]); // log 1, 2, 3
+```
+[Try It](https://codesandbox.io/s/fxts-each-kvz6w)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/each.ts)
+
+---
+
+---
+id: entries
+description: "Returns an iterator of key-value pairs."
+---
+
+
+## entries() function
+
+Returns an iterator of key-value pairs.
+
+Supports plain objects, Map, and Set: - For objects: returns own enumerable string keyed-value pairs - For Map: returns \[key, value\] pairs - For Set: returns \[value, value\] pairs
+
+**Signature:**
+
+```typescript
+declare function entries<T extends Map<any, any> | Set<any> | Record<Key, any>>(obj: T): EntriesResult<T>;
+```
+
+
+
+## Example
+
+
+```ts
+[...entries({ a: 1, b: "2", c: true })]
+// [["a", 1], ["b", "2"], ["c", true]]
+
+[...entries(new Map([["a", 1], ["b", 2]]))]
+// [["a", 1], ["b", 2]]
+
+[...entries(new Set([1, 2, 3]))]
+// [[1, 1], [2, 2], [3, 3]]
+```
+see [fromEntries](https://fxts.dev/api/fromEntries)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/entries.ts)
+
+---
+
+---
+id: escapeRegExp
+description: "Escapes the RegExp special characters ^, \\, *, ?, ), ], }, so the result can be used as a literal pattern inside new RegExp."
+---
+
+
+## escapeRegExp() function
+
+Escapes the RegExp special characters `^`<!-- -->, `$`<!-- -->, `\`<!-- -->, `.`<!-- -->, `*`<!-- -->, `+`<!-- -->, `?`<!-- -->, `(`<!-- -->, `)`<!-- -->, `[`<!-- -->, `]`<!-- -->, `{`<!-- -->, `}`<!-- -->, and `|` in `str`<!-- -->, so the result can be used as a literal pattern inside `new RegExp`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function escapeRegExp(str: string): string;
+```
+
+
+
+## Example
+
+
+```ts
+escapeRegExp("[fxts](https://fxts.dev/)"); // "\\[fxts\\]\\(https://fxts\\.dev/\\)"
+
+const re = new RegExp(escapeRegExp("$1.00"));
+re.test("price: $1.00"); // true
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/escapeRegExp.ts)
+
+---
+
+---
+id: every
+description: "Returns true if all of the values in Iterable/AsyncIterable pass the f truth test."
+---
+
+
+## every() function
+
+Returns true if all of the values in Iterable/AsyncIterable pass the `f` truth test.
+
+**Signature:**
+
+```typescript
+declare function every<A extends readonly []>(f: Arrow, iterable: A): true;
+```
+
+
+
+## Example
+
+
+```ts
+every((a) => a % 2 === 0, [2, 4, 6, 8, 10]);
+// true
+
+every((a) => a % 2 === 0, [2, 4, 6, 7, 10]);
+// false
+```
+[Try It](https://codesandbox.io/s/fxts-every-g91dh)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/every.ts)
+
+---
+
+---
+id: evolve
+description: "Creates a new object by recursively evolving a shallow copy of object, according to the transformation functions."
+---
+
+
+## evolve() function
+
+Creates a new object by recursively evolving a shallow copy of object, according to the transformation functions.
+
+**Signature:**
+
+```typescript
+declare function evolve<O extends Record<string, any>, T extends Transformation<O>>(transformation: T): (obj: O) => EvolveReturnType<O, T>;
+```
+
+
+
+## Example
+
+
+```ts
+const add1String = (a: number) => String(a + 1);
+const obj = { a: 1, b: 2, c: { d: 3, e: 4 }, f: true };
+const transformation = {
+  a: add1String,
+  b: add1String,
+  c: (obj: { d: number; e: number }) =>
+    evolve({ d: add1String, e: add1String }, obj),
+};
+evolve(transformation, obj);
+// { a: "2", b: "3", c: { d: "4", e: "5" }, f: true }
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/evolve.ts)
+
+---
+
+---
+id: filter
+description: "Return Iterable/AsyncIterable of all elements f returns truthy for"
+---
+
+
+## filter() function
+
+Return Iterable/AsyncIterable of all elements `f` returns truthy for
+
+**Signature:**
+
+```typescript
+declare function filter<A>(f: BooleanConstructor, iterable: Iterable<A>): IterableIterator<TruthyTypesOf<A>>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = filter((a)=> a % 2 === 0, [0, 1, 2, 3, 4, 5, 6]);
+iter.next() // {done:false, value: 0}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:false, value: 4}
+iter.next() // {done:false, value: 6}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [0, 1, 2, 3, 4, 5, 6],
+ filter(a => a % 2 === 0),
+ toArray,
+); // [0, 2, 4, 6]
+
+await pipe(
+ Promise.resolve([0, 1, 2, 3, 4, 5, 6]),
+ filter(a => a % 2 === 0),
+ toArray,
+); // [0, 2, 4, 6]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([0, 1, 2, 3, 4, 5, 6]),
+ toAsync,
+ filter(async a => a % 2 === 0),
+ toArray,
+); // [0, 2, 4, 6]
+
+// toAsync
+await pipe(
+ [Promise.resolve(0), Promise.resolve(1), Promise.resolve(2), Promise.resolve(3),
+  Promise.resolve(4), Promise.resolve(5), Promise.resolve(6)],
+ toAsync,
+ filter(a => a % 2 === 0),
+ toArray,
+); // [0, 2, 4, 6]
+```
+[Try It](https://codesandbox.io/s/fxts-filter-2ibz2)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/filter.ts)
+
+---
+
+---
+id: find
+description: "Looks through each value in Iterable/AsyncIterable, returning the first one that passes a truth test f, or undefined if no value passes the test."
+---
+
+
+## find() function
+
+Looks through each value in Iterable/AsyncIterable, returning the first one that passes a truth test `f`<!-- -->, or `undefined` if no value passes the test.
+
+**Signature:**
+
+```typescript
+declare function find<T>(f: (a: T) => unknown, iterable: Iterable<T>): T | undefined;
+```
+
+
+
+## Example
+
+
+```ts
+find((a) => a === 2, [1, 2, 3, 4]); // 2
+
+find((a) => a === "r", "marpple"); // 'r'
+```
+[Try It](https://codesandbox.io/s/fxts-find-uhl0o)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/find.ts)
+
+---
+
+---
+id: findIndex
+description: "Returns the index of the first element of Iterable/AsyncIterable which matches f, or -1 if no element matches."
+---
+
+
+## findIndex() function
+
+Returns the index of the first element of Iterable/AsyncIterable which matches f, or -1 if no element matches.
+
+**Signature:**
+
+```typescript
+declare function findIndex<T extends readonly []>(f: Arrow, iterable: T): -1;
+```
+
+
+
+## Example
+
+
+```ts
+const arr = [{a:1}, {a:2}, {a:3}]
+findIndex((obj) =>  obj.a === 1, arr); // 0
+findIndex((obj) =>  obj.a === 2, arr); // 1
+findIndex((obj) =>  obj.a === 4, arr); // -1
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/findIndex.ts)
+
+---
+
+---
+id: flat
+description: "Returns flattened Iterable/AsyncIterable. If first argument is number, more perform flatten flat([[[1,2]]], 2) // [1,2]"
+---
+
+
+## flat() function
+
+Returns flattened Iterable/AsyncIterable. If first argument is number, more perform flatten `flat([[[1,2]]], 2) // [1,2]`
+
+**Signature:**
+
+```typescript
+declare function flat<A extends Iterable<unknown> | AsyncIterable<unknown>, B extends number = 1>(iterator: A, depth?: B): ReturnFlatType<A, B>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = flat([1,[2,3],[[4,5]]]);
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:false, value: 3}
+iter.next() // {done:false, value: [4, 5]}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [1,[2, 3],[[4, 5]]],
+ flat,
+ toArray,
+); // [1, 2, 3, [4, 5]]
+
+await pipe(
+ Promise.resolve([1,[2, 3],[[4, 5]]]),
+ flat,
+ toArray,
+); // [1, 2, 3, [4, 5]]
+```
+[Try It](https://codesandbox.io/s/fxts-flat-6t2in)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/flat.ts)
+
+---
+
+---
+id: flatMap
+description: "Returns flattened Iterable/AsyncIterable of values by running each element flattening the mapped results."
+---
+
+
+## flatMap() function
+
+Returns flattened Iterable/AsyncIterable of values by running each element flattening the mapped results.
+
+**Signature:**
+
+```typescript
+declare function flatMap<A, B = unknown>(f: (a: A) => B, iterable: Iterable<A>): IterableIterator<DeepFlatSync<B, 1>>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = flatMap(s => s.split(" "), ["It is", "a good", "day"]);
+iter.next() // {done:false, value: "It"}
+iter.next() // {done:false, value: "is"}
+iter.next() // {done:false, value: "a"}
+iter.next() // {done:false, value: "good"},
+iter.next() // {done:false, value: "day"},
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ ["It is", "a good", "day"],
+ flatMap(s => s.split(" ")),
+ toArray,
+); // ["It", "is", "a", "good", "day"]
+
+await pipe(
+ Promise.resolve(["It is", "a good", "day"]),
+ flatMap(s => s.split(" ")),
+ toArray,
+); // ["It", "is", "a", "good", "day"]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve(["It is", "a good", "day"]),
+ toAsync,
+ flatMap(async (s) => s.split(" ")),
+ toArray,
+); // ["It", "is", "a", "good", "day"]
+```
+[Try It](https://codesandbox.io/s/fxts-flatmap-3g9k8)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/flatMap.ts)
+
+---
+
+---
+id: fork
+description: "Returns an iterable of forks of original source. Each fork contains the same values as source, and can be consumed independently."
+---
+
+
+## fork() function
+
+Returns an iterable of forks of original source. Each fork contains the same values as source, and can be consumed independently.
+
+**Signature:**
+
+```typescript
+declare function fork<A extends Iterable<unknown> | AsyncIterable<unknown>>(iterable: A): ReturnForkType<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const arr = [1, 2, 3];
+const iter1 = fork(arr);
+const iter2 = fork(arr);
+
+iter1.next() // {done:false, value: 1}
+iter1.next() // {done:false, value: 2}
+iter2.next() // {done:false, value: 1}
+iter2.next() // {done:false, value: 2}
+
+const str = 'abc'
+const strIter1 = fork(str);
+const strIter2 = fork(str);
+
+strIter1.next() // {done:false, value: 'a'}
+strIter1.next() // {done:false, value: 'b'}
+strIter2.next() // {done:false, value: 'a'}
+strIter2.next() // {done:false, value: 'b'}
+
+// with pipe
+const arrAdd10 = pipe(
+  [1, 2, 3],
+  map((a) => a + 10),
+);
+
+const arrAdd10Iter1 = fork(arrAdd10);
+const arrAdd10Iter2 = fork(arrAdd10);
+arrAdd10Iter1.next() // { value: 11, done: false }
+arrAdd10Iter2.next() // { value: 11, done: false }
+
+const arrAdd10Iter3 = fork(arrAdd10Iter1);
+arrAdd10Iter1.next() // { value: 12, done: false }
+arrAdd10Iter1.next() // { value: 13, done: false }
+arrAdd10Iter2.next() // { value: 12, done: false }
+arrAdd10Iter3.next() // { value: 12, done: false }
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/fork.ts)
+
+---
+
+---
+id: fromEntries
+description: "Returns an object from string keyed-value pairs."
+---
+
+
+## fromEntries() function
+
+Returns an object from string keyed-value pairs.
+
+**Signature:**
+
+```typescript
+declare function fromEntries<U extends [Key, any] | readonly [Key, any], T extends Iterable<U> | AsyncIterable<U>>(iterable: T): ReturnValueType<T, {
+    [K in IterableInfer<T> as K[0]]: K[1];
+}>;
+```
+
+
+
+## Example
+
+
+```ts
+const arr = [
+    ["a", 1],
+    ["b", true],
+    ["c", "hello"],
+    ["d", { d1: 1, d2: 3 }],
+] as (
+    | ["a", number]
+    | ["b", boolean]
+    | ["c", string]
+    | ["d", { d1: number, d2: number; }]
+)[];
+fromEntries(arr); // { a: 1, b: true, c: 'hello', d: { d1: 1, d2: 3 } }
+```
+see [entries](https://fxts.dev/api/entries)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/fromEntries.ts)
+
+---
+
+---
+id: fx
+description: "fx allows functions provided by existing fxts to be used in a method chaining. Not all functions are provided as methods and can be connected through ch..."
+---
+
+
+## fx() function
+
+`fx` allows functions provided by existing `fxts` to be used in a method chaining. Not all functions are provided as methods and can be connected through `chain` if necessary.
+
+see [guide](https://fxts.dev/guide/method-chaining)
+
+**Signature:**
+
+```typescript
+declare function fx<T extends Iterable<unknown> | AsyncIterable<unknown>>(a: T): T extends Iterable<unknown> ? FxIterable<IterableInfer<T>> : FxAsyncIterable<IterableInfer<T>>;
+```
+
+
+
+## Example
+
+
+```ts
+const syncArr1 = fx([1, 2, 3, 4])
+  .map((a) => a + 10)
+  .toArray(); // [11, 12, 13, 14]
+
+// If you want to use another function that is not provided for the method, use `chain`.
+const syncArr2 = fx([1, 2, 3, 4])
+  .chain(append(5))
+  .map((a) => a + 10)
+  .toArray(); // [11, 12, 13, 14, 15]
+
+const asyncArr1 = await fx([1, 2, 3, 4])
+  .toAsync()
+  .map((a) => a + 10)
+  .toArray(); // [11, 12, 13, 14]
+
+const asyncArr2 = await fx(toAsync([1, 2, 3, 4]))
+  .map((a) => a + 10)
+  .toArray(); // [11, 12, 13, 14]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/fx.ts)
+
+---
+
+---
+id: groupBy
+description: "Splits Iterable/AsyncIterable into sets, grouped by the result of running each value through f."
+---
+
+
+## groupBy() function
+
+Splits Iterable/AsyncIterable into sets, grouped by the result of running each value through `f`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function groupBy<const A extends Key>(f: (a: A) => A, iterable: Iterable<A>): {
+    [K in A]: K[];
+};
+```
+
+
+
+## Example
+
+
+```ts
+const given = [
+  { category: "clothes", desc: "good" },
+  { category: "pants", desc: "bad" },
+  { category: "shoes", desc: "not bad" },
+  { category: "shoes", desc: "great" },
+  { category: "pants", desc: "good" },
+];
+
+groupBy((a) => a.category, given);
+// {
+//   clothes: [{ category: "clothes", desc: "good" }],
+//   pants: [
+//     { category: "pants", desc: "bad" },
+//     { category: "pants", desc: "good" },
+//   ],
+//   shoes: [
+//     { category: "shoes", desc: "not bad" },
+//     { category: "shoes", desc: "great" },
+//   ],
+// };
+```
+[Try It](https://codesandbox.io/s/fxts-groupby-v8q3b)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/groupBy.ts)
+
+---
+
+---
+id: gt
+description: "Returns true if the first argument is greater than the second; false otherwise."
+---
+
+
+## gt() function
+
+Returns true if the first argument is greater than the second; false otherwise.
+
+**Signature:**
+
+```typescript
+declare function gt(a: string): (b: string) => boolean;
+```
+
+
+
+## Example
+
+
+```ts
+gt(5, 1) // expected true
+gt(1, 5) // expected false
+gt("a", "b") // expected false
+gt("b", "a") // expected true
+
+filter(gt(5), [1, 2, 4, 5, 8, 9]) // Iterable<[1, 2, 4]>
+filter(gt(1), [1, 2, 3, 4, 5]) // Iterable<[]>
+filter(gt("b"), ["a", "b", "c"]) // Iterable<["a"]>
+filter(gt("a"), ["a", "b"]) // Itreable<[]>
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/gt.ts)
+
+---
+
+---
+id: gte
+description: "Returns true if the first argument is greater or equal than the second; false otherwise."
+---
+
+
+## gte() function
+
+Returns true if the first argument is greater or equal than the second; false otherwise.
+
+**Signature:**
+
+```typescript
+declare function gte(a: string): (b: string) => boolean;
+```
+
+
+
+## Example
+
+
+```ts
+gte(5, 1) // expected true
+gte(1, 1) // expected true
+gte(1, 5) // expected false
+gte("a", "b") // expected false
+gte("b", "a") // expected true
+
+filter(gte(5), [1, 2, 4, 5, 8, 9]) // Iterable<[1, 2, 4, 5]>
+filter(gte(1), [2, 3, 4]) // Iterable<[]>
+filter(gte("b"), ["a", "b", "c"]) // Iterable<["a", "b"]>
+filter(gte("a"), ["b"]) // Itreable<[]>
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/gte.ts)
+
+---
+
+---
+id: head
+description: "Returns the first element of Iterable/AsyncIterable."
+---
+
+
+## head() function
+
+Returns the first element of Iterable/AsyncIterable.
+
+There is another alias function called `first`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function head<T extends Iterable<unknown> | AsyncIterable<unknown>>(iterable: T): HeadReturnType<T>;
+```
+
+
+
+## Example
+
+
+```ts
+head([1, 2, 3, 4, 5]); // 1
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5],
+ head,
+); // 1
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5]),
+ head,
+); // 1
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
+ toAsync,
+ head,
+); // 1
+```
+[Try It](https://codesandbox.io/s/fxts-head-4sh8u)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/head.ts)
+
+---
+
+---
+id: identity
+description: "Returns the same value as the given argument."
+---
+
+
+## identity() function
+
+Returns the same value as the given argument.
+
+**Signature:**
+
+```typescript
+declare function identity<T>(a: T): T;
+```
+
+
+
+## Example
+
+
+```ts
+identity(5); // 5
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/identity.ts)
+
+---
+
+---
+id: includes
+description: "Checks if the specified value is equal."
+---
+
+
+## includes() function
+
+Checks if the specified value is equal.
+
+There is another alias function called `contains`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function includes<T extends readonly []>(value: unknown, iterable: T): false;
+```
+
+
+
+## Example
+
+
+```ts
+includes('c', 'abcd'); // true
+includes('e', 'abcd'); // false
+includes(3, [1,2,3,4]); // true
+includes(5, [1,2,3,4]); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/includes.ts)
+
+---
+
+## Lazy
+  - [append](/api/append)
+  - [chunk](/api/chunk)
+  - [compact](/api/compact)
+  - [compress](/api/compress)
+  - [concat](/api/concat)
+  - [concurrent](/api/concurrent)
+  - [concurrentPool](/api/concurrentPool)
+  - [cycle](/api/cycle)
+  - [drop](/api/drop)
+  - [dropRight](/api/dropRight)
+  - [difference](/api/difference)
+  - [differenceBy](/api/differenceBy)
+  - [dropUntil](/api/dropUntil)
+  - [dropWhile](/api/dropWhile)
+  - [entries](/api/entries)
+  - [filter](/api/filter)
+  - [flat](/api/flat)
+  - [flatMap](/api/flatMap)
+  - [fork](/api/fork)
+  - [fx](/api/fx)
+  - [intersection](/api/intersection)
+  - [intersectionBy](/api/intersectionBy)
+  - [keys](/api/keys)
+  - [map](/api/map)
+  - [peek](/api/peek)
+  - [pipeLazy](/api/pipeLazy)
+  - [pluck](/api/pluck)
+  - [prepend](/api/prepend)
+  - [range](/api/range)
+  - [reject](/api/reject)
+  - [repeat](/api/repeat)
+  - [reverse](/api/reverse)
+  - [scan](/api/scan)
+  - [slice](/api/slice)
+  - [split](/api/split)
+  - [take](/api/take)
+  - [takeRight](/api/takeRight)
+  - [takeUntilInclusive](/api/takeUntilInclusive)
+  - [takeWhile](/api/takeWhile)
+  - [toAsync](/api/toAsync)
+  - [transpose](/api/transpose)
+  - [union](/api/union)
+  - [uniq](/api/uniq)
+  - [uniqBy](/api/uniqBy)
+  - [values](/api/values)
+  - [windowed](/api/windowed)
+  - [zip](/api/zip)
+  - [zipWith](/api/zipWith)
+  - [zipWithIndex](/api/zipWithIndex)
+## Strict
+  - [add](/api/add)
+  - [always](/api/always)
+  - [apply](/api/apply)
+  - [average](/api/average)
+  - [camelCase](/api/camelCase)
+  - [capitalize](/api/capitalize)
+  - [cases](/api/cases)
+  - [castArray](/api/castArray)
+  - [cloneDeep](/api/cloneDeep)
+  - [compactObject](/api/compactObject)
+  - [consume](/api/consume)
+  - [countBy](/api/countBy)
+  - [curry](/api/curry)
+  - [delay](/api/delay)
+  - [each](/api/each)
+  - [escapeRegExp](/api/escapeRegExp)
+  - [every](/api/every)
+  - [evolve](/api/evolve)
+  - [find](/api/find)
+  - [findIndex](/api/findIndex)
+  - [fromEntries](/api/fromEntries)
+  - [groupBy](/api/groupBy)
+  - [gt](/api/gt)
+  - [gte](/api/gte)
+  - [head](/api/head)
+  - [identity](/api/identity)
+  - [includes](/api/includes)
+  - [indexBy](/api/indexBy)
+  - [isArray](/api/isArray)
+  - [isBoolean](/api/isBoolean)
+  - [isDate](/api/isDate)
+  - [isEmpty](/api/isEmpty)
+  - [isEqual](/api/isEqual)
+  - [isFunction](/api/isFunction)
+  - [isMatch](/api/isMatch)
+  - [isNil](/api/isNil)
+  - [isNotNil](/api/isNotNil)
+  - [isNull](/api/isNull)
+  - [isNumber](/api/isNumber)
+  - [isObject](/api/isObject)
+  - [isPlainObject](/api/isPlainObject)
+  - [isString](/api/isString)
+  - [isUndefined](/api/isUndefined)
+  - [join](/api/join)
+  - [juxt](/api/juxt)
+  - [kebabCase](/api/kebabCase)
+  - [last](/api/last)
+  - [lt](/api/lt)
+  - [lte](/api/lte)
+  - [mapKeys](/api/mapKeys)
+  - [mapValues](/api/mapValues)
+  - [matches](/api/matches)
+  - [max](/api/max)
+  - [maxBy](/api/maxBy)
+  - [meanBy](/api/meanBy)
+  - [memoize](/api/memoize)
+  - [merge](/api/merge)
+  - [min](/api/min)
+  - [minBy](/api/minBy)
+  - [negate](/api/negate)
+  - [noop](/api/noop)
+  - [not](/api/not)
+  - [nth](/api/nth)
+  - [omit](/api/omit)
+  - [omitBy](/api/omitBy)
+  - [once](/api/once)
+  - [partition](/api/partition)
+  - [pick](/api/pick)
+  - [pickBy](/api/pickBy)
+  - [pipe](/api/pipe)
+  - [prop](/api/prop)
+  - [props](/api/props)
+  - [reduce](/api/reduce)
+  - [reduceLazy](/api/reduceLazy)
+  - [resolveProps](/api/resolveProps)
+  - [size](/api/size)
+  - [snakeCase](/api/snakeCase)
+  - [some](/api/some)
+  - [sort](/api/sort)
+  - [sortBy](/api/sortBy)
+  - [sum](/api/sum)
+  - [sumBy](/api/sumBy)
+  - [tap](/api/tap)
+  - [throwError](/api/throwError)
+  - [throwIf](/api/throwIf)
+  - [toArray](/api/toArray)
+  - [toSorted](/api/toSorted)
+  - [unicodeToArray](/api/unicodeToArray)
+  - [unless](/api/unless)
+  - [when](/api/when)
+  - [zipObject](/api/zipObject)
+## Util
+  - [debounce](/api/debounce)
+  - [shuffle](/api/shuffle)
+
+---
+
+---
+id: indexBy
+description: "Given f that generates a key, turns a list of objects into an object indexing the objects by the given key. Note that if multiple objects generate the s..."
+---
+
+
+## indexBy() function
+
+Given `f` that generates a key, turns a list of objects into an object indexing the objects by the given key. Note that if multiple objects generate the same value for the indexing key only the last value will be included in the generated object.
+
+**Signature:**
+
+```typescript
+declare function indexBy<const A extends Key>(f: (a: A) => A, iterable: Iterable<A>): {
+    [K in A]: K;
+};
+```
+
+
+
+## Example
+
+
+```ts
+const given = [
+  { category: "clothes", desc: "good" },
+  { category: "pants", desc: "bad" },
+  { category: "shoes", desc: "not bad" },
+];
+
+indexBy(a => a.category, given);
+// {
+//   clothes: { category: "clothes", desc: "good" },
+//   pants: { category: "pants", desc: "bad" },
+//   shoes: { category: "shoes", desc: "not bad" },
+// };
+```
+[Try It](https://codesandbox.io/s/fxts-indexby-zpeok)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/indexBy.ts)
+
+---
+
+---
+id: intersection
+description: "Returns Iterable/AsyncIterable of all elements in the iterable2 contained in the iterable1."
+---
+
+
+## intersection() function
+
+Returns Iterable/AsyncIterable of all elements in the `iterable2` contained in the `iterable1`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function intersection<T>(iterable1: Iterable<T>, iterable2: Iterable<T>): IterableIterator<T>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = intersection([2, 1], [2, 3, 4]);
+iter.next(); // {value: 2, done:false}
+iter.next(); // {value: undefined, done: true}
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/intersection.ts)
+
+---
+
+---
+id: intersectionBy
+description: "Returns Iterable/AsyncIterable(i.e no duplicate) of all elements in the iterable2 contained in the iterable1."
+---
+
+
+## intersectionBy() function
+
+Returns Iterable/AsyncIterable(i.e no duplicate) of all elements in the `iterable2` contained in the `iterable1`<!-- -->. Duplication is determined according to the value returned by applying the supplied `f` to `iterable2`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function intersectionBy<A, B = unknown>(f: (a: A) => B, iterable1: Iterable<A>, iterable2: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = intersectionBy(a => a.x, [{ x: 1 }, { x: 4 }], [{ x: 1 },  { x: 2 },  { x: 3 }])
+iter.next(); // {value: {x: 1, done: false}
+iter.next(); // {value: undefined, done: true}
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/intersectionBy.ts)
+
+---
+
+---
+id: isArray
+description: "Returns true if a is an Array."
+---
+
+
+## isArray() function
+
+Returns true if `a` is an Array.
+
+**Signature:**
+
+```typescript
+isArray: <T>(input: T) => input is Extract<T, unknown[] | Readonly<unknown[]>>
+```
+
+
+
+## Example
+
+
+```ts
+isArray([1, 2, 3]); // true
+isArray(2); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isArray.ts)
+
+---
+
+---
+id: isBoolean
+description: "Returns true if n is a Boolean."
+---
+
+
+## isBoolean() function
+
+Returns true if `n` is a Boolean.
+
+**Signature:**
+
+```typescript
+isBoolean: <T>(input: T) => input is T & boolean
+```
+
+
+
+## Example
+
+
+```ts
+isBoolean(true); // true
+isBoolean(null); // false
+isBoolean("FxTS"); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isBoolean.ts)
+
+---
+
+---
+id: isDate
+description: "Returns true if input is a Date object."
+---
+
+
+## isDate() function
+
+Returns true if `input` is a Date object.
+
+**Signature:**
+
+```typescript
+isDate: <T>(input: T) => input is Extract<T, Date>
+```
+
+
+
+## Example
+
+
+```ts
+isDate(new Date()); // true
+isDate("2024-01-01"); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isDate.ts)
+
+---
+
+---
+id: isEmpty
+description: "Returns true if the given value is empty value, false otherwise."
+---
+
+
+## isEmpty() function
+
+Returns true if the given value is empty value, false otherwise.
+
+**Signature:**
+
+```typescript
+isEmpty: <T>(value: T) => boolean
+```
+
+
+
+## Example
+
+
+```ts
+isEmpty({}) // true
+isEmpty([]) // true
+isEmpty(null) // true
+isEmpty(undefined) // true
+isEmpty("") // true
+isEmpty(new Map()) // true
+isEmpty(new Set()) // true
+
+isEmpty(0) // false
+isEmpty(false) // false
+isEmpty(function(){}) // false
+isEmpty(Symbol("")) // false
+isEmpty(new Date()) // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isEmpty.ts)
+
+---
+
+---
+id: isEqual
+description: "Performs a deep equality comparison between a and b."
+---
+
+
+## isEqual() function
+
+Performs a deep equality comparison between `a` and `b`<!-- -->.
+
+Unlike `isMatch`<!-- -->, which performs a partial comparison where `source` only needs to match a subset of properties, `isEqual` requires complete equality in both directions: objects must have the same set of keys, arrays the same length and order, and Map/Set the same size.
+
+Supported types: primitives (`NaN` is treated as equal to `NaN`<!-- -->), Object (nested, key order irrelevant), Array (order sensitive), Date (compared by `getTime`<!-- -->), RegExp (compared by `source` and `flags`<!-- -->), Map (keys and values are deeply compared), Set (order irrelevant). Values of different types are never equal, and functions are compared by reference only.
+
+**Signature:**
+
+```typescript
+declare function isEqual(a: unknown, b: unknown): boolean;
+```
+
+
+
+## Example
+
+
+```ts
+// Primitives (NaN equals NaN)
+isEqual(1, 1); // true
+isEqual(NaN, NaN); // true
+isEqual("a", "b"); // false
+
+// Full equality, unlike isMatch's partial matching
+isEqual({ a: 1, b: 2 }, { a: 1 }); // false - key counts differ
+isMatch({ a: 1, b: 2 }, { a: 1 }); // true - subset is enough
+
+// Nested objects (key order irrelevant)
+isEqual({ a: 1, b: { c: 2 } }, { b: { c: 2 }, a: 1 }); // true
+isEqual({ a: 1 }, { a: 1, b: undefined }); // false - key counts differ
+
+// Arrays (order sensitive)
+isEqual([1, 2, 3], [1, 2, 3]); // true
+isEqual([1, 2, 3], [3, 2, 1]); // false
+
+// Date and RegExp
+isEqual(new Date(1000), new Date(1000)); // true
+isEqual(/abc/gi, /abc/gi); // true
+
+// Map (keys and values are deeply compared)
+isEqual(new Map([[{ a: 1 }, 1]]), new Map([[{ a: 1 }, 1]])); // true
+
+// Set (order irrelevant)
+isEqual(new Set([1, 2, 3]), new Set([3, 2, 1])); // true
+
+// Different types are never equal
+isEqual(new Date(0), {}); // false
+isEqual(null, {}); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isEqual.ts)
+
+---
+
+---
+id: isFunction
+description: "Checks if value is a function."
+---
+
+
+## isFunction() function
+
+Checks if `value` is a function.
+
+As a type guard it extracts the function members from a union type, so `number | (() => void)` is narrowed to `() => void`<!-- -->.
+
+**Signature:**
+
+```typescript
+isFunction: <T>(input: T) => input is Extract<T, FunctionLike> extends never ? T & FunctionLike : Extract<T, FunctionLike>
+```
+
+
+
+## Example
+
+
+```ts
+isFunction(() => null); // true
+isFunction(function () {}); // true
+isFunction(class A {}); // true
+isFunction({}); // false
+isFunction(null); // false
+isFunction("function"); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isFunction.ts)
+
+---
+
+---
+id: isMatch
+description: "Performs a partial deep comparison between object and source to determine if object contains all property values from source."
+---
+
+
+## isMatch() function
+
+Performs a partial deep comparison between `object` and `source` to determine if `object` contains all property values from `source`<!-- -->.
+
+Used as the internal comparison logic for the `matches` function. `source` only needs to match a subset of `object`<!-- -->'s properties.
+
+Supported types: primitives, Object (including nested), Array, Date, RegExp, Map, Set.
+
+**Signature:**
+
+```typescript
+declare function isMatch(object: unknown, source: unknown): boolean;
+```
+
+
+
+## Example
+
+
+```ts
+// Partial object matching
+isMatch({ a: 1, b: 2 }, { a: 1 }); // true
+isMatch({ a: 1 }, { a: 1, b: 2 }); // false - object is missing 'b'
+
+// Nested object matching
+isMatch({ user: { name: "John", age: 30 } }, { user: { name: "John" } }); // true
+isMatch({ user: { name: "John" } }, { user: { name: "Jane" } }); // false
+
+// Array matching (partial, prefix-based)
+isMatch([1, 2, 3], [1, 2, 3]); // true
+isMatch([1, 2, 3], [1, 2]); // true
+isMatch([1, 2], [1, 2, 3]); // false
+
+// Map matching
+const map1 = new Map([["key1", "value1"], ["key2", "value2"]]);
+const map2 = new Map([["key1", "value1"]]);
+isMatch(map1, map2); // true
+
+// Set matching
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([1, 2]);
+isMatch(set1, set2); // true
+
+// Date type matching
+const now = Date.now();
+isMatch(new Date(now), new Date(now)); // true
+
+// RegExp type matching
+isMatch(/abc/gi, /abc/gi); // true
+
+// Empty source always returns true
+isMatch({ a: 1, b: 2 }, {}); // true
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isMatch.ts)
+
+---
+
+---
+id: isNil
+description: "Checks if the given value is null or undefined."
+---
+
+
+## isNil() function
+
+Checks if the given value is `null` or `undefined`<!-- -->.
+
+**Signature:**
+
+```typescript
+isNil: <T>(input: T) => input is T & (null | undefined)
+```
+
+
+
+## Example
+
+
+```ts
+isNil(1); // false
+isNil('1'); // false
+isNil(undefined); // true
+isNil(null); // true
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isNil.ts)
+
+---
+
+---
+id: isNotNil
+description: "Checks if the given value is not null or undefined."
+---
+
+
+## isNotNil() function
+
+Checks if the given value is not `null` or `undefined`<!-- -->.
+
+The opposite of `isNil`<!-- -->. As a type guard it narrows `T | null | undefined` to `NonNullable<T>`<!-- -->, which makes it useful with `filter`<!-- -->.
+
+**Signature:**
+
+```typescript
+isNotNil: <T>(input: T) => input is NonNullable<T>
+```
+
+
+
+## Example
+
+
+```ts
+isNotNil(1); // true
+isNotNil("1"); // true
+isNotNil(undefined); // false
+isNotNil(null); // false
+
+// with filter
+pipe(
+  [1, null, 2, undefined, 3],
+  filter(isNotNil),
+  toArray,
+); // [1, 2, 3] - narrowed to number[]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isNotNil.ts)
+
+---
+
+---
+id: isNull
+description: "Checks if the given value is null."
+---
+
+
+## isNull() function
+
+Checks if the given value is `null`<!-- -->.
+
+**Signature:**
+
+```typescript
+isNull: <T>(input: T) => input is T & null
+```
+
+
+
+## Example
+
+
+```ts
+isNull(1); // false
+isNull('1'); // false
+isNull(undefined); // false
+isNull(null); // true
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isNull.ts)
+
+---
+
+---
+id: isNumber
+description: "Returns true if n is a Number."
+---
+
+
+## isNumber() function
+
+Returns true if `n` is a Number.
+
+**Signature:**
+
+```typescript
+isNumber: <T>(input: T) => input is T & number
+```
+
+
+
+## Example
+
+
+```ts
+isNumber(2); // true
+isNumber("a"); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isNumber.ts)
+
+---
+
+---
+id: isObject
+description: "Checks if value is the type of object."
+---
+
+
+## isObject() function
+
+Checks if value is the type of object.
+
+**Signature:**
+
+```typescript
+isObject: <T>(input: T) => input is T & object
+```
+
+
+
+## Example
+
+
+```ts
+isObject({}); // true
+isObject([1, 2, 3]); // true
+isObject(() => {}); // true
+isObject(null); // false
+isObject(123); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isObject.ts)
+
+---
+
+---
+id: isPlainObject
+description: "Checks if value is a plain object, that is, an object whose prototype is Object.prototype (e.g. object literals, new Object())."
+---
+
+
+## isPlainObject() function
+
+Checks if `value` is a plain object, that is, an object whose prototype is `Object.prototype` (e.g. object literals, `new Object()`<!-- -->) or `null` (`Object.create(null)`<!-- -->).
+
+Unlike `isObject`<!-- -->, which returns `true` for any non-primitive value including arrays and functions, `isPlainObject` returns `false` for arrays, functions, class instances and built-in objects such as `Date`<!-- -->, `Map` and `Set`<!-- -->.
+
+**Signature:**
+
+```typescript
+isPlainObject: (value: unknown) => value is Record<PropertyKey, unknown>
+```
+
+
+
+## Example
+
+
+```ts
+isPlainObject({}); // true
+isPlainObject({ a: 1 }); // true
+isPlainObject(Object.create(null)); // true
+isPlainObject([1, 2, 3]); // false
+isPlainObject(() => {}); // false
+isPlainObject(new Date()); // false
+isPlainObject(null); // false
+isPlainObject(123); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isPlainObject.ts)
+
+---
+
+---
+id: isString
+description: "Returns true if s is a String."
+---
+
+
+## isString() function
+
+Returns true if `s` is a String.
+
+**Signature:**
+
+```typescript
+isString: <T>(input: T) => input is T & string
+```
+
+
+
+## Example
+
+
+```ts
+isString("a"); // true
+isString(2); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isString.ts)
+
+---
+
+---
+id: isUndefined
+description: "Checks if the given value is undefined."
+---
+
+
+## isUndefined() function
+
+Checks if the given value is `undefined`<!-- -->.
+
+**Signature:**
+
+```typescript
+isUndefined: <T>(input: T) => input is T & undefined
+```
+
+
+
+## Example
+
+
+```ts
+isUndefined(undefined); // true
+isUndefined(2); // false
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/isUndefined.ts)
+
+---
+
+---
+id: join
+description: "Returns all elements in the given iterable into a string separated by separator."
+---
+
+
+## join() function
+
+Returns all elements in the given iterable into a string separated by separator.
+
+**Signature:**
+
+```typescript
+declare function join<A extends readonly []>(sep: string, iterable: A): "";
+```
+
+
+
+## Example
+
+
+```ts
+const joined = join('~', ['a', 'b', 'c']); // 'a~b~c'
+
+// with pipe
+pipe(
+ [1, 2, 3, 4],
+ map(a => a + 10),
+ filter(a => a % 2 === 0)
+ join('-'),
+); // '12-14'
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4]),
+ join('-'),
+); // '1-2-3-4'
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ toAsync,
+ join('-'),
+); // '1-2-3-4'
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/join.ts)
+
+---
+
+---
+id: juxt
+description: "juxt applies a list of functions to a list of values."
+---
+
+
+## juxt() function
+
+`juxt` applies a list of functions to a list of values.
+
+**Signature:**
+
+```typescript
+declare function juxt<FS extends Array<Arrow>>(fs: readonly [...FS]): (...args: JuxtArgs<FS>) => JuxtReturnTypes<FS>;
+```
+
+
+
+## Example
+
+
+```ts
+const range = juxt([Math.min, Math.max])(1, 2, 3, 4); // [1, 4]
+
+// with pipe
+const entries = (obj: { a: number; b: number }) =>
+  pipe(
+    [Object.keys, Object.values] as const,
+    juxt,
+    (f) => f(obj),
+    apply(zip),
+    toArray,
+  );
+
+entries({ a: 1, b: 2 }); // [ ["a", 1], ["b", 2] ]
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [apply](https://fxts.dev/api/apply)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/juxt.ts)
+
+---
+
+---
+id: kebabCase
+description: "Converts str to kebab case."
+---
+
+
+## kebabCase() function
+
+Converts `str` to kebab case.
+
+Word boundaries are detected from spaces, punctuation, digits, case changes, and acronyms.
+
+**Signature:**
+
+```typescript
+declare function kebabCase(str: string): string;
+```
+
+
+
+## Example
+
+
+```ts
+kebabCase("foo bar"); // "foo-bar"
+kebabCase("fooBar"); // "foo-bar"
+kebabCase("foo_bar"); // "foo-bar"
+kebabCase("XMLHttpRequest"); // "xml-http-request"
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/kebabCase.ts)
+
+---
+
+---
+id: keys
+description: "Returns an iterator of keys."
+---
+
+
+## keys() function
+
+Returns an iterator of keys.
+
+Supports plain objects, Map, and Set: - For objects: returns own enumerable string keyed property names - For Map: returns keys - For Set: returns values (Set keys are the same as values)
+
+**Signature:**
+
+```typescript
+declare function keys<T extends Map<any, any> | Set<any> | Record<Key, any>>(obj: T): KeysResult<T>;
+```
+
+
+
+## Example
+
+
+```ts
+[...keys({ a: 1, b: "2", c: true })]
+// ["a", "b", "c"]
+
+[...keys(new Map([["a", 1], ["b", 2]]))]
+// ["a", "b"]
+
+[...keys(new Set([1, 2, 3]))]
+// [1, 2, 3]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/keys.ts)
+
+---
+
+---
+id: last
+description: "Returns the last element of Iterable/AsyncIterable"
+---
+
+
+## last() function
+
+Returns the last element of Iterable/AsyncIterable
+
+**Signature:**
+
+```typescript
+declare function last<T extends Iterable<unknown> | AsyncIterable<unknown>>(iterable: T): LastReturnType<T>;
+```
+
+
+
+## Example
+
+
+```ts
+last([1, 2, 3, 4, 5]); // 5
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5],
+ last,
+); // 5
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5]),
+ last,
+); // 5
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
+ toAsync,
+ last,
+); // 3
+```
+[Try It](https://codesandbox.io/s/fxts-last-zbvq8)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/last.ts)
+
+---
+
+---
+id: lt
+description: "Returns true if the first argument is less than the second; false otherwise."
+---
+
+
+## lt() function
+
+Returns true if the first argument is less than the second; false otherwise.
+
+**Signature:**
+
+```typescript
+declare function lt(a: string): (b: string) => boolean;
+```
+
+
+
+## Example
+
+
+```ts
+lt(5, 1) // expected false
+lt(1, 5) // expected true
+lt("a", "b") // expected true
+lt("b", "a") // expected false
+
+filter(lt(5), [1, 2, 4, 5, 8, 9]) // Iterable<[8, 9]>
+filter(lt(7), [5, 6, 7]) // Iterable<[]>
+filter(lt("b"), ["a", "b", "c"]) // Iterable<["c"]>
+filter(lt("e"), ["b", "c", "d"]) // Itreable<[]>
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/lt.ts)
+
+---
+
+---
+id: lte
+description: "Returns true if the first argument is less or equal than the second; false otherwise."
+---
+
+
+## lte() function
+
+Returns true if the first argument is less or equal than the second; false otherwise.
+
+**Signature:**
+
+```typescript
+declare function lte(a: string): (b: string) => boolean;
+```
+
+
+
+## Example
+
+
+```ts
+lte(5, 1) // expected false
+lte(1, 1) // expected true
+lte(1, 5) // expected true
+lte("a", "b") // expected true
+lte("b", "a") // expected false
+
+filter(lte(5), [1, 2, 4, 5, 8, 9]) // Iterable<[5, 8, 9]>
+filter(lte(9), [6, 7, 8]) // Iterable<[]>
+filter(lte("b"), ["a", "b", "c"]) // Iterable<["b", "c"]>
+filter(lte("e"), ["c", "d"]) // Itreable<[]>
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/lte.ts)
+
+---
+
+---
+id: map
+description: "Returns Iterable/AsyncIterable of values by running each applying f."
+---
+
+
+## map() function
+
+Returns Iterable/AsyncIterable of values by running each applying `f`<!-- -->.
+
+If the `map` causes side effects, it is recommended to use `mapEffect` instead.
+
+**Signature:**
+
+```typescript
+declare function map<A, B>(f: (a: A) => B, iterable: Iterable<A>): IterableIterator<B>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = map(a => a + 10, [1, 2, 3, 4]);
+iter.next() // {done:false, value: 11}
+iter.next() // {done:false, value: 12}
+iter.next() // {done:false, value: 13}
+iter.next() // {done:false, value: 14},
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4],
+ map(a => a + 10),
+ toArray,
+); // [11, 12, 13, 14]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4]),
+ map(a => a + 10),
+ toArray,
+); // [11, 12, 13, 14]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4]),
+ toAsync,
+ map(async (a) => a + 10),
+ toArray,
+); // [11, 12, 13, 14]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ toAsync,
+ map(a => a + 10),
+ toArray,
+); // [11, 12, 13, 14]
+```
+[Try It](https://codesandbox.io/s/fxts-map-j68jv)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/map.ts)
+
+---
+
+---
+id: mapKeys
+description: "Returns a new object with the same values as obj, where each key is the result of applying f to the original value and key. When multiple keys map to th..."
+---
+
+
+## mapKeys() function
+
+Returns a new object with the same values as `obj`<!-- -->, where each key is the result of applying `f` to the original value and key. When multiple keys map to the same new key, the last one wins.
+
+**Signature:**
+
+```typescript
+declare function mapKeys<T extends object, K2 extends PropertyKey>(f: (value: T[keyof T], key: keyof T & string) => Promise<K2>, obj: T): Promise<Record<K2, T[keyof T]>>;
+```
+
+
+
+## Example
+
+
+```ts
+mapKeys((v, k) => k.toUpperCase(), { a: 1, b: 2 }); // { A: 1, B: 2 }
+mapKeys((v) => String(v), { a: 1 }); // { "1": 1 }
+
+// asynchronous callback
+await mapKeys(async (v, k) => k.toUpperCase(), { a: 1 }); // { A: 1 }
+
+// with pipe
+pipe(
+  { a: 1, b: 2 },
+  mapKeys((v, k) => k.toUpperCase()),
+); // { A: 1, B: 2 }
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/mapKeys.ts)
+
+---
+
+---
+id: mapValues
+description: "Returns a new object with the same keys as obj, where each value is the result of applying f to the original value (and its key)."
+---
+
+
+## mapValues() function
+
+Returns a new object with the same keys as `obj`<!-- -->, where each value is the result of applying `f` to the original value (and its key).
+
+**Signature:**
+
+```typescript
+declare function mapValues<T extends object, B>(f: (value: T[keyof T], key: keyof T) => Promise<B>, obj: T): Promise<{
+    [K in keyof T]: B;
+}>;
+```
+
+
+
+## Example
+
+
+```ts
+mapValues((v) => v * 2, { a: 1, b: 2 }); // { a: 2, b: 4 }
+mapValues((v, k) => `${k}:${v}`, { a: 1 }); // { a: "a:1" }
+
+// asynchronous callback
+await mapValues(async (v) => v * 2, { a: 1, b: 2 }); // { a: 2, b: 4 }
+
+// with pipe
+pipe(
+  { a: 1, b: 2 },
+  mapValues((v) => v * 2),
+); // { a: 2, b: 4 }
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/mapValues.ts)
+
+---
+
+---
+id: matches
+description: "Creates a predicate function that checks if an input matches all properties in the given pattern."
+---
+
+
+## matches() function
+
+Creates a predicate function that checks if an input matches all properties in the given pattern.
+
+Performs deep comparison for nested objects and arrays. Useful for replacing callback functions with object patterns in `find`<!-- -->, `filter`<!-- -->, `some`<!-- -->, `every`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function matches<T>(pattern: DeepPartial<T> & RejectSymbolKeys<T>): (input: DeepWiden<T>) => boolean;
+```
+
+
+
+## Example
+
+
+```ts
+const users = [
+  { name: "John", age: 30, active: true },
+  { name: "Jane", age: 25, active: false },
+  { name: "Bob", age: 30, active: true },
+];
+
+// Use with filter
+filter(matches({ age: 30, active: true }), users);
+// [{ name: "John", age: 30, active: true }, { name: "Bob", age: 30, active: true }]
+
+// Use with find
+find(matches({ active: true }), users);
+// { name: "John", age: 30, active: true }
+
+// Use with pipe
+pipe(users, filter(matches({ active: true })), toArray);
+// [{ name: "John", age: 30, active: true }, { name: "Bob", age: 30, active: true }]
+
+// Deep matching with nested objects
+const data = [
+  { id: 1, user: { profile: { age: 30 } } },
+  { id: 2, user: { profile: { age: 25 } } },
+  { id: 3, user: { profile: { age: 30 } } },
+];
+filter(matches({ user: { profile: { age: 30 } } }), data);
+// [{ id: 1, user: { profile: { age: 30 } } }, { id: 3, user: { profile: { age: 30 } } }]
+
+// Array value matching
+const items = [
+  { id: 1, tags: ["a", "b"] },
+  { id: 2, tags: ["c", "d"] },
+  { id: 3, tags: ["a", "b"] },
+];
+filter(matches({ tags: ["a", "b"] }), items);
+// [{ id: 1, tags: ["a", "b"] }, { id: 3, tags: ["a", "b"] }]
+
+// Returns false for null/undefined input
+const matcher = matches({ a: 1 });
+matcher(null);      // false
+//      ~~~~
+//      Error: Argument of type null is not assignable to parameter
+matcher(undefined); // false
+//     ~~~~~~~~~~
+//     Error: Argument of type 'undefined' is not assignable to parameter
+```
+Symbol keys in the pattern are silently ignored at runtime. (which only enumerates string-keyed (and numeric-keyed) properties.)
+
+```ts
+const sym = Symbol("id");
+// matches({ [sym]: 123 });
+//           ~~~~
+//           Error: Argument of type { [sym]: number } is not assignable to parameter
+
+// If bypassed at runtime, the symbol key is ignored:
+const pattern = { [sym]: 123 } as any;
+matches(pattern)({}); // true — symbol key was not compared
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/matches.ts)
+
+---
+
+---
+id: max
+description: "Returns the largest of the given iterable/AsyncIterable"
+---
+
+
+## max() function
+
+Returns the largest of the given iterable/AsyncIterable
+
+**Signature:**
+
+```typescript
+declare function max<A extends Iterable<number> | AsyncIterable<number>>(iterable: A): ReturnValueType<A, number>;
+```
+
+
+
+## Example
+
+
+```ts
+max([1, 3, 5]); // 5;
+max([1, NaN, 2]); // NaN;
+max([1, Infinity, 2]); // Infinity;
+max([]); // -Infinity
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/max.ts)
+
+---
+
+---
+id: maxBy
+description: "Returns the element of the given Iterable/AsyncIterable for which f returns the largest value. Returns undefined for an empty iterable. When multiple el..."
+---
+
+
+## maxBy() function
+
+Returns the element of the given Iterable/AsyncIterable for which `f` returns the largest value. Returns `undefined` for an empty iterable. When multiple elements produce the same largest value, the first one wins.
+
+**Signature:**
+
+```typescript
+declare function maxBy<A>(f: (a: A) => number, iterable: Iterable<A>): A | undefined;
+```
+
+
+
+## Example
+
+
+```ts
+maxBy((a) => a.age, [
+  { name: "a", age: 21 },
+  { name: "b", age: 41 },
+  { name: "c", age: 31 },
+]); // { name: "b", age: 41 }
+
+maxBy((a) => a.length, []); // undefined
+
+// with pipe
+pipe(
+  [{ score: 1 }, { score: 3 }, { score: 2 }],
+  maxBy((a) => a.score),
+); // { score: 3 }
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/maxBy.ts)
+
+---
+
+---
+id: meanBy
+description: "Returns the average of the values produced by applying f to each element of the given Iterable/AsyncIterable. Returns NaN for an empty iterable."
+---
+
+
+## meanBy() function
+
+Returns the average of the values produced by applying `f` to each element of the given Iterable/AsyncIterable. Returns `NaN` for an empty iterable.
+
+**Signature:**
+
+```typescript
+declare function meanBy<A>(f: (a: A) => number, iterable: Iterable<A>): number;
+```
+
+
+
+## Example
+
+
+```ts
+meanBy((a) => a.score, [
+  { name: "a", score: 80 },
+  { name: "b", score: 100 },
+]); // 90
+
+meanBy((a) => a.score, []); // NaN
+
+// with pipe
+pipe(
+  [{ score: 80 }, { score: 100 }],
+  meanBy((a) => a.score),
+); // 90
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/meanBy.ts)
+
+---
+
+---
+id: memoize
+description: "Creates a new function that, stores the results of its calculations in a [Map](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-pro..."
+---
+
+
+## memoize() function
+
+Creates a new function that, stores the results of its calculations in a [Map](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)<!-- -->. When the function is called with same input again, it retrieves the cached result instead of recalculating it. If resolver is provided, it determines the cache key for storing the result based on the arguments provided to the memoized function. By default, the first argument provided to the memoized function is used as the map cache key
+
+**Signature:**
+
+```typescript
+declare function memoize<F extends (...args: any[]) => any, K extends Parameters<F>[0], Return extends F & {
+    cache: K extends object ? WeakMap<K, ReturnType<F>> : Map<K, ReturnType<F>>;
+}>(f: F): Return;
+```
+
+
+
+## Example
+
+
+```ts
+const add10 = (a: number): number => a + 10;
+
+const memoized = memoize(add10);
+console.log(memoized(5)); // 15
+console.log(memoized(10)) // 20
+console.log(memoized(5)); // 15 (cached)
+
+memoized.cache.clear(); // clear cache
+console.log(memoized(5)); // 15 (no cache)
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/memoize.ts)
+
+---
+
+---
+id: merge
+description: "Recursively merges source into target and returns a new object. Neither input is modified."
+---
+
+
+## merge() function
+
+Recursively merges `source` into `target` and returns a new object. Neither input is modified.
+
+- Plain objects are merged recursively; `source` properties win. - Arrays are merged index by index (`[1, 2, 3]` merged with `[9]` is `[9, 2, 3]`<!-- -->). - `undefined` in `source` does not overwrite an existing `target` value. - Any other value (Date, Map, Set, class instances, ...) replaces the `target` value as-is, and when the two sides are different kinds of containers, `source` replaces `target`<!-- -->. - `__proto__` keys are skipped, so merging untrusted input cannot pollute the prototype chain. - Circular structures are not supported.
+
+**Signature:**
+
+```typescript
+declare function merge<T extends object, S extends object>(target: T, source: S): T & S;
+```
+
+
+
+## Example
+
+
+```ts
+merge({ a: 1, b: { c: 2 } }, { b: { d: 3 } }); // { a: 1, b: { c: 2, d: 3 } }
+merge({ a: [1, 2, 3] }, { a: [9] }); // { a: [9, 2, 3] }
+merge({ a: 1 }, { a: undefined }); // { a: 1 }
+
+// with pipe - the piped object wins over the given defaults
+pipe(
+  { port: 3000 },
+  merge({ host: "localhost", port: 80 }),
+); // { host: "localhost", port: 3000 }
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/merge.ts)
+
+---
+
+---
+id: min
+description: "Returns the smallest of the given iterable/AsyncIterable"
+---
+
+
+## min() function
+
+Returns the smallest of the given iterable/AsyncIterable
+
+**Signature:**
+
+```typescript
+declare function min<A extends Iterable<number> | AsyncIterable<number>>(iterable: A): ReturnValueType<A, number>;
+```
+
+
+
+## Example
+
+
+```ts
+min([1, 3, 5]); // 1;
+min([1, NaN, 2]); // NaN;
+min([1, Infinity, 3]); // 1;
+min([1, -Infinity, 3]); // -Infinity;
+min([]); // Infinity
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/min.ts)
+
+---
+
+---
+id: minBy
+description: "Returns the element of the given Iterable/AsyncIterable for which f returns the smallest value. Returns undefined for an empty iterable. When multiple e..."
+---
+
+
+## minBy() function
+
+Returns the element of the given Iterable/AsyncIterable for which `f` returns the smallest value. Returns `undefined` for an empty iterable. When multiple elements produce the same smallest value, the first one wins.
+
+**Signature:**
+
+```typescript
+declare function minBy<A>(f: (a: A) => number, iterable: Iterable<A>): A | undefined;
+```
+
+
+
+## Example
+
+
+```ts
+minBy((a) => a.age, [
+  { name: "a", age: 21 },
+  { name: "b", age: 41 },
+  { name: "c", age: 31 },
+]); // { name: "a", age: 21 }
+
+minBy((a) => a.length, []); // undefined
+
+// with pipe
+pipe(
+  [{ score: 1 }, { score: 3 }, { score: 2 }],
+  minBy((a) => a.score),
+); // { score: 1 }
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/minBy.ts)
+
+---
+
+---
+id: negate
+description: "Create a function that returns the opposite result of a predicate function"
+---
+
+
+## negate() function
+
+Create a function that returns the opposite result of a predicate function
+
+**Signature:**
+
+```typescript
+declare function negate<T, N extends T>(predicate: (input: T) => input is N): (input: T) => input is Exclude<T, N>;
+```
+
+
+
+## Example
+
+
+```ts
+const isDefined: (input: string | undefined) => input is string = negate(isUndefined)<string | undefined>
+
+const isDefined: (input: unknown) => boolean = negate((input) => input === undefined)
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/negate.ts)
+
+---
+
+---
+id: noop
+description: "Returns undefined"
+---
+
+
+## noop() function
+
+Returns `undefined`
+
+**Signature:**
+
+```typescript
+declare function noop(): void;
+```
+**Returns:**
+
+void
+
+## Example
+
+
+```ts
+noop() // undefined
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/noop.ts)
+
+---
+
+---
+id: not
+description: "Returns the ! of its argument. It will return true when passed falsy value, and false when passed a truth value."
+---
+
+
+## not() function
+
+Returns the `!` of its argument. It will return `true` when passed falsy value, and `false` when passed a truth value.
+
+**Signature:**
+
+```typescript
+declare function not(a: unknown): boolean;
+```
+
+
+
+## Example
+
+
+```ts
+not(true); // false
+not(1); // false
+not(NaN); // true
+```
+[Try It](https://codesandbox.io/s/fxts-not-37xmk)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/not.ts)
+
+---
+
+---
+id: nth
+description: "Returns the nth element of the given Iterable/AsyncIterable"
+---
+
+
+## nth() function
+
+Returns the nth element of the given Iterable/AsyncIterable
+
+**Signature:**
+
+```typescript
+declare function nth(index: number, iterable: readonly []): undefined;
+```
+
+
+
+## Example
+
+
+```ts
+nth(2, [1,2,3,4]); // 3
+nth(5, [1,2,3,4]); // undefined
+nth(2, ['name', 'gender', 'age']); // 'age'
+nth(3, ['name', 'gender', 'age']); // undefined
+nth(2, 'abcdefg'); // 'c'
+nth(10, 'abcdefg'); // undefined
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/nth.ts)
+
+---
+
+---
+id: omit
+description: "Returns a partial copy of an object omitting the keys specified."
+---
+
+
+## omit() function
+
+Returns a partial copy of an object omitting the keys specified.
+
+**Signature:**
+
+```typescript
+declare function omit<T extends object, U extends Iterable<keyof T>>(iterable: U, obj: T): Omit<T, IterableInfer<U>>;
+```
+
+
+
+## Example
+
+
+```ts
+const person = {
+  name: "james",
+  age: 40,
+  numberOfKids: 2,
+  team: "Software Development",
+  preferredLanguage: "Rust",
+};
+
+const dad = omit(["team", "preferredLanguage"], person);
+// { name: "james", age: 40, numberOfKids: 2 }
+
+const developer = omit(["age", "numberOfKids"], person);
+// { name: "james", team: "Software Development", preferredLanguage: "Rust" }
+
+// with pipe
+pipe(
+ person,
+ omit(["team", "preferredLanguage"]),
+);
+
+// if you want to use AsyncIterable as the list of property names
+const anonymous = await omit(toAsync(["name"] as const), person);
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [pick](https://fxts.dev/api/pick)<!-- -->,
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/omit.ts)
+
+---
+
+---
+id: omitBy
+description: "Returns a partial copy of an object containing only the keys that satisfy the supplied predicate."
+---
+
+
+## omitBy() function
+
+Returns a partial copy of an object containing only the keys that satisfy the supplied predicate.
+
+**Signature:**
+
+```typescript
+declare function omitBy<T extends object, F extends AsyncEntryPredicate<T>>(f: F, obj: T): Promise<Partial<T>>;
+```
+
+
+
+## Example
+
+
+```ts
+const obj = { a: 1, b: "2", c: true };
+omitBy(([key, value]) => key === "a" || value === true, obj); // { b: "2" }
+
+// asynchronous predicate
+await omitBy(async ([key, value]) => key === "a" || value === true, obj); // { b: "2" }
+
+// Using with the `pipe` function
+pipe(
+  obj,
+  omitBy(([key, value]) => key === "a" || value === true)
+);
+
+await pipe(
+  obj,
+  omitBy(async ([key, value]) => key === "a" || value === true)
+);
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [omit](https://fxts.dev/api/omit)<!-- -->,
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/omitBy.ts)
+
+---
+
+---
+id: once
+description: "Creates a function that invokes f only on its first call. Subsequent calls return the result of the first invocation without calling f again."
+---
+
+
+## once() function
+
+Creates a function that invokes `f` only on its first call. Subsequent calls return the result of the first invocation without calling `f` again.
+
+The returned function preserves `this` and the arguments of `f`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function once<F extends (...args: any[]) => any>(f: F): F;
+```
+
+
+
+## Example
+
+
+```ts
+let count = 0;
+const init = once((a: number) => {
+  count += 1;
+  return a * 10;
+});
+
+init(1); // 10 - `f` is called
+init(2); // 10 - `f` is not called again, first result is returned
+count; // 1
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/once.ts)
+
+---
+
+---
+id: partition
+description: "Split Iterable/AsyncIterable into two arrays: one with all elements which satisfies f and the other with all elements that does not."
+---
+
+
+## partition() function
+
+Split Iterable/AsyncIterable into two arrays: one with all elements which satisfies `f` and the other with all elements that does not.
+
+**Signature:**
+
+```typescript
+declare function partition<A, L extends A, R extends A = A extends object ? ExcludeObject<A, L> : Exclude<A, L>>(f: (a: A) => a is L, iterable: Iterable<A>): [L[], R[]];
+```
+
+
+
+## Example
+
+
+```ts
+partition((a) => a % 2 === 0, [1, 2, 3, 4, 5]); // [[2, 4], [1, 3, 5]]
+
+// with pipe
+pipe(
+  [1, 2, 3, 4, 5],
+  partition((a) => a % 2 === 0), // [[2, 4], [1, 3, 5]]
+);
+
+await pipe(
+  Promise.resolve([1, 2, 3, 4, 5]),
+  partition((a) => a % 2 === 0), // [[2, 4], [1, 3, 5]]
+);
+
+// if you want to use asynchronous callback
+await pipe(
+  Promise.resolve([1, 2, 3, 4, 5]),
+  toAsync,
+  partition(async (a) => a % 2 === 0), // [[2, 4], [1, 3, 5]]
+);
+
+// with toAsync
+await pipe(
+  [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4), Promise.resolve(5)],
+  toAsync,
+  partition((a) => a % 2 === 0), // [[2, 4], [1, 3, 5]]
+);
+```
+[Try It](https://codesandbox.io/s/fxts-partition-7vns0)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/partition.ts)
+
+---
+
+---
+id: peek
+description: "Iterate over an input list, calling a provided f for each element in the Iterable/AsyncIterable. Use it when you want to create an effect inside pipe."
+---
+
+
+## peek() function
+
+Iterate over an input list, calling a provided `f` for each element in the Iterable/AsyncIterable. Use it when you want to create an effect inside `pipe`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function peek<T>(f: (a: T) => unknown, iterable: Iterable<T>): IterableIterator<T>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = peek(a => console.log(a), [1, 2, 3, 4]);
+iter.next() // {done:false, value: 1} // log 1
+iter.next() // {done:false, value: 2} // log 2
+iter.next() // {done:false, value: 3} // log 3
+iter.next() // {done:false, value: 4} // log 4
+
+// with pipe
+pipe(
+ [1, 2, 3, 4],
+ peek(a => console.log(a)),
+ toArray,
+); // [1, 2, 3, 4] // log 1,2,3,4
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4]),
+ peek(a => console.log(a)),
+ toArray,
+); // [1, 2, 3, 4] // log 1,2,3,4
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4]),
+ toAsync,
+ peek(async (a) => console.log(a)),
+ toArray,
+); // [1, 2, 3, 4] // log 1,2,3,4
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ toAsync,
+ peek(a => console.log(a)),
+ toArray,
+); // [1, 2, 3, 4] // log 1,2,3,4
+```
+[Try It](https://codesandbox.io/s/fxts-peek-xm1jh)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/peek.ts)
+
+---
+
+---
+id: pick
+description: "Returns a partial copy of an object containing given keys."
+---
+
+
+## pick() function
+
+Returns a partial copy of an object containing given keys.
+
+**Signature:**
+
+```typescript
+declare function pick<T extends object, U extends readonly []>(iterable: U, obj: T): Record<string, never>;
+```
+
+
+
+## Example
+
+
+```ts
+const person = {
+  name: "james",
+  age: 40,
+  numberOfKids: 2,
+  team: "Software Development",
+  preferredLanguage: "Rust",
+};
+
+const dad = pick(["name", "age", "numberOfKids"], person);
+// { name: "james", age: 40, numberOfKids: 2 }
+
+const developer = pick(["name", "team", "preferredLanguage"], person);
+// { name: "james", team: "Software Development", preferredLanguage: "Rust" }
+
+// with pipe
+pipe(
+ person,
+ pick(["name", "age", "numberOfKids"]),
+);
+
+// if you want to use AsyncIterable as the list of property names
+const anonymousDeveloper = await pick(toAsync(["preferredLanguage"] as const), person);
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [omit](https://fxts.dev/api/omit)<!-- -->,
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/pick.ts)
+
+---
+
+---
+id: pickBy
+description: "Returns a partial copy of an object which contains only the keys that satisfy the supplied predicate."
+---
+
+
+## pickBy() function
+
+Returns a partial copy of an object which contains only the keys that satisfy the supplied predicate.
+
+**Signature:**
+
+```typescript
+declare function pickBy<T extends object, F extends AsyncEntryPredicate<T>>(f: F, obj: T): Promise<Partial<T>>;
+```
+
+
+
+## Example
+
+
+```ts
+const obj = { a: 1, b: "2", c: true };
+pickBy(([key, value]) => key === "a" || value === true, obj); // { a: 1, c: true }
+
+// asynchronous predicate
+await pickBy(async ([key, value]) => key === "a" || value === true, obj); // { a: 1, c: true }
+
+// Using with the `pipe` function
+pipe(
+  obj,
+  pickBy(([key, value]) => key === "a" || value === true)
+);
+
+await pipe(
+  obj,
+  pickBy(async ([key, value]) => key === "a" || value === true)
+);
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [pick](https://fxts.dev/api/pick)<!-- -->,
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/pickBy.ts)
+
+---
+
+---
+id: pipe
+description: "Performs left to right function composition. The first argument can have any value; the remaining arguments must be unary."
+---
+
+
+## pipe() function
+
+Performs left to right function composition. The first argument can have any value; the remaining arguments must be unary.
+
+**Signature:**
+
+```typescript
+declare function pipe<T1, R>(a: T1, f1: (a: Awaited<T1>) => R): ReturnPipeType<[T1, R]>;
+```
+
+
+
+## Example
+
+
+```ts
+pipe(
+ [1, 2, 3, 4, 5],
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ toArray,
+); // [12, 14]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5]),
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ toArray,
+); // [12, 14]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5]),
+ toAsync,
+ map(async (a) => a + 10),
+ filter((a) => a % 2 === 0),
+ toArray,
+); // [12, 14]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4), Promise.resolve(5)],
+ toAsync,
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ toArray,
+); // [12, 14]
+```
+[Try It](https://codesandbox.io/s/fxts-toarray-fy84i)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [map](https://fxts.dev/api/map)<!-- -->, [filter](https://fxts.dev/api/filter)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/pipe.ts)
+
+---
+
+---
+id: pipeLazy
+description: "Make function, that performs left to right function composition. All arguments must be unary."
+---
+
+
+## pipeLazy() function
+
+Make function, that performs left to right function composition. All arguments must be unary.
+
+**Signature:**
+
+```typescript
+declare function pipeLazy<T1, R>(f1: (a: Awaited<T1>) => R): ((a: T1) => ReturnPipeType<[T1, R]>) & ((a: Promise<T1>) => ReturnPipeType<[Promise<T1>, R]>);
+```
+
+
+
+## Example
+
+
+```ts
+pipeLazy(
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ toArray,
+)([1, 2, 3, 4, 5]); // [12, 14]
+
+await pipeLazy(
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ toArray,
+)(Promise.resolve([1, 2, 3, 4, 5])); // [12, 14]
+
+// if you want to use asynchronous callback
+await pipeLazy(
+ toAsync,
+ map(async (a) => a + 10),
+ filter((a) => a % 2 === 0),
+ toArray,
+)(Promise.resolve([1, 2, 3, 4, 5])); // [12, 14]
+
+// with toAsync
+await pipeLazy(
+ toAsync,
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ toArray,
+)([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4), Promise.resolve(5)]); // [12, 14]
+```
+see [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [map](https://fxts.dev/api/map)<!-- -->, [filter](https://fxts.dev/api/filter)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/pipeLazy.ts)
+
+---
+
+---
+id: pluck
+description: "Returns Iterable/AsyncIterable by plucking the same named property off all objects in Iterable/AsyncIterable supplied."
+---
+
+
+## pluck() function
+
+Returns Iterable/AsyncIterable by plucking the same named property off all objects in Iterable/AsyncIterable supplied.
+
+**Signature:**
+
+```typescript
+declare function pluck<O extends object, K extends keyof O>(key: K, iterable: Iterable<O>): IterableIterator<O[K]>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = pluck('age', [{age:21}, {age:22}, {age:23}]);
+iter.next(); // {done:false, value: 21}
+iter.next(); // {done:false, value: 22}
+iter.next(); // {done:false, value: 23}
+
+// with pipe
+pipe(
+ [{age:21}, {age:22}, {age:23}],
+ pluck('age'),
+ toArray,
+); // [21, 22 ,23]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([{age:21}, {age:22}, {age:23}]),
+ toAsync,
+ pluck('age'),
+ toArray,
+); // [21, 22 ,23]
+
+// with toAsync
+await pipe(
+ [Promise.resolve({age:21}), Promise.resolve({age:22}), Promise.resolve({age:23})],
+ toAsync,
+ pluck('age'),
+ toArray,
+); // [21, 22 ,23]
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/pluck.ts)
+
+---
+
+---
+id: prepend
+description: "Returns Iterable/AsyncIterable with the given element at the front, followed by the contents of iterable."
+---
+
+
+## prepend() function
+
+Returns Iterable/AsyncIterable with the given element at the front, followed by the contents of iterable.
+
+**Signature:**
+
+```typescript
+declare function prepend<A>(a: A, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = prepend(4, [1, 2, 3]);
+iter.next() // {done:false, value: 4}
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:false, value: 3}
+
+// with pipe
+pipe(
+ [1, 2, 3],
+ prepend(4),
+ toArray,
+); // [4, 1, 2, 3]
+
+await pipe(
+ Promise.resolve([1, 2, 3]),
+ prepend(4),
+ toArray,
+); // [4, 1, 2, 3]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
+ toAsync,
+ prepend(4),
+ toArray,
+); // [4, 1, 2, 3]
+```
+[Try It](https://codesandbox.io/s/fxts-prepend-70ymx)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/prepend.ts)
+
+---
+
+---
+id: prop
+description: "Get the value of a property from an object, or return undefined if the property does not exist on the object."
+---
+
+
+## prop() function
+
+Get the value of a property from an object, or return undefined if the property does not exist on the object.
+
+**Signature:**
+
+```typescript
+declare function prop<K extends Key, T>(key: K, obj: T): Prop<T, K>;
+```
+
+
+
+## Example
+
+
+```ts
+// get the `name` property from an object
+const person = { name: "John", age: 30 };
+const name = prop("name", person); // "John"
+
+// with pipe
+pipe(
+ person,
+ prop("name"),
+);
+
+// get the `address` property from an object that may be null or undefined
+const maybePerson = null;
+const address = prop("address", maybePerson); // undefined
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/prop.ts)
+
+---
+
+---
+id: props
+description: "Returns an array containing the values of the specified props in the given object."
+---
+
+
+## props() function
+
+Returns an array containing the values of the specified props in the given object.
+
+**Signature:**
+
+```typescript
+declare function props<K extends readonly Key[], T>(key: K, obj: T): PropsReturnType<K, T>;
+```
+
+
+
+## Example
+
+
+```ts
+// get the `name` and `age` properties from an object
+const person = { name: "John", age: 30, address: "123 Main St" };
+const [name, age, phone] = props(["name", "age", "phone"], person); // ["John", 30, undefined]
+
+// with pipe
+pipe(
+ person,
+ props(["name", "age", "phone"]),
+);
+
+// get the `address` and `phone` properties from an object that may be null or undefined
+const maybePerson = null;
+const [address, phone] = props(["address", "phone"], maybePerson); // [undefined, undefined]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/props.ts)
+
+---
+
+---
+id: range
+description: "Returns Iterable/AsyncIterable of numbers (positive and/or negative) progressing from start-up to, but not including, end. it's set to start with a star..."
+---
+
+
+## range() function
+
+Returns Iterable/AsyncIterable of numbers (positive and/or negative) progressing from start-up to, but not including, end. it's set to start with a start then set to 0.
+
+**Signature:**
+
+```typescript
+declare function range(length: number): IterableIterator<number>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = range(4);
+iter.next() // {done:false, value: 0}
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:false, value: 3}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ range(4),
+ toArray,
+); // [0, 1, 2, 3]
+
+pipe(
+ range(1, 4),
+ toArray,
+); // [1, 2, 3]
+
+// with toAsync
+await pipe(
+ range(4),
+ toAsync,
+ toArray,
+); // [0, 1, 2, 3]
+```
+[Try It](https://codesandbox.io/s/fxts-range-3phyd)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/range.ts)
+
+---
+
+---
+id: reduce
+description: "Also known as foldl, this method boils down a list of values into a single value."
+---
+
+
+## reduce() function
+
+Also known as foldl, this method boils down a list of values into a single value.
+
+**Signature:**
+
+```typescript
+declare function reduce<T extends readonly [], Acc>(f: Arrow, seed: Acc, iterable: T): Acc;
+```
+
+
+
+## Example
+
+You can reduce values into homogeneous type.
+
+```ts
+const sum = (a:number, b:number) => a + b;
+
+// with implicit seed with first element
+reduce(sum, [1, 2, 3, 4]); // 10
+
+// with explicit seed
+reduce(sum, 0, [1, 2, 3, 4]); // 10
+```
+You can reduce values into heterogeneous type.
+
+```ts
+// reduce { id: number; score: number; } to number
+reduce((acc, value) => acc + value.score, 0, [
+ { id: 0, score: 1 },
+ { id: 5, score: 2 },
+ { id: 9, score: 3 },
+ { id: 3, score: 4 }
+])
+```
+Omitting iterable will returns function, useful when using with pipe.
+
+```ts
+pipe(
+ [1, 2, 3, 4],
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ reduce(sum),
+); // 26
+```
+For backward compatibility, `reduce` can support partial lazy form. You may want to use `reduceLazy` to use `seed`<!-- -->.
+
+```ts
+await pipe(
+ Promise.resolve([1, 2, 3, 4]),
+ map((a) => a + 10),
+ filter(a => a % 2 === 0),
+ reduce(sum),
+); // 26
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4]),
+ toAsync,
+ map(async (a) => a + 10),
+ filter(a => a % 2 === 0),
+ reduce(sum),
+); // 26
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3), Promise.resolve(4)],
+ toAsync,
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ reduce(sum),
+); // 26
+```
+[Try It](https://codesandbox.io/s/fxts-reduce-tf56j)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [map](https://fxts.dev/api/map)<!-- -->, [filter](https://fxts.dev/api/filter)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/reduce.ts)
+
+---
+
+---
+id: reduceLazy
+description: "High order functional version of reduce, which behaves identical to it."
+---
+
+
+## reduceLazy() function
+
+High order functional version of `reduce`<!-- -->, which behaves identical to it.
+
+**Signature:**
+
+```typescript
+declare function reduceLazy<T extends Iterable<unknown> | AsyncIterable<unknown>, Acc>(f: SyncReducer<Acc, IterableInfer<T>> | AsyncReducer<Acc, IterableInfer<T>>, seed: Acc): (iterable: InferCarrier<T>) => ReturnValueType<T, Acc>;
+```
+
+
+
+## Example
+
+Type must be provided for stand alone call.
+
+```ts
+const reduce = reduceLazy((a: number, b: number) => a + b, 5)
+
+reduce([1, 2, 3]) // number
+reduce(toAsync([1, 2, 3])) // Promise<number>
+```
+Fit perfectly with `pipe`
+
+```ts
+pipe(
+  [1, 2, 3, 4],
+  reduceLazy((a, b) => a + b, 5)
+); // 15
+```
+You can use asynchronous callback
+
+```ts
+await pipe(
+  [1, 2, 3, 4],
+  reduceLazy(async (a, b) => a + b, 5)
+); // 15
+```
+`AsyncIterable` doesn't matter.
+
+```ts
+await pipe(
+  [1, 2, 3, 4],
+  toAsync,
+  reduceLazy((a, b) => a + b, 5)
+); // 15
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/reduceLazy.ts)
+
+---
+
+---
+id: reject
+description: "The opposite of [filter](https://fxts.dev/api/filter) Iterable/AsyncIterable of all elements f returns falsy for"
+---
+
+
+## reject() function
+
+The opposite of [filter](https://fxts.dev/api/filter) Iterable/AsyncIterable of all elements `f` returns falsy for
+
+**Signature:**
+
+```typescript
+declare function reject<A, B extends A>(f: (a: A) => a is B, iterable: Iterable<A>): IterableIterator<A extends object ? ExcludeObject<A, B> : Exclude<A, B>>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = reject((a)=> a % 2 === 0, [0, 1, 2, 3, 4, 5, 6]);
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 3}
+iter.next() // {done:false, value: 5}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [0, 1, 2, 3, 4, 5, 6],
+ reject(a => a % 2 === 0),
+ toArray,
+); // [1, 3, 5]
+
+await pipe(
+ Promise.resolve([0, 1, 2, 3, 4, 5, 6]),
+ reject(a => a % 2 === 0),
+ toArray,
+); // [1, 3, 5]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([0, 1, 2, 3, 4, 5, 6]),
+ toAsync,
+ reject(async a => a % 2 === 0),
+ toArray,
+); // [1, 3, 5]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(0), Promise.resolve(1), Promise.resolve(2),
+  Promise.resolve(3), Promise.resolve(4), Promise.resolve(5), Promise.resolve(6)],
+ toAsync,
+ reject(a => a % 2 === 0),
+ toArray,
+); // [1, 3, 5]
+```
+[Try It](https://codesandbox.io/s/fxts-reject-vrc7d)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/reject.ts)
+
+---
+
+---
+id: repeat
+description: "Returns a Iterable/AsyncIterable of size n containing a specified value."
+---
+
+
+## repeat() function
+
+Returns a Iterable/AsyncIterable of size n containing a specified value.
+
+**Signature:**
+
+```typescript
+declare function repeat<T>(n: number, value: T): IterableIterator<T>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = repeat(2, 10);
+iter.next(); // {value: 10, done:false}
+iter.next(); // {value: 10, done:false}
+iter.next(); // {value: undefined, done:true}
+
+// with pipe
+pipe(
+  repeat(2, 10),
+  toArray,
+); // [10, 10]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/repeat.ts)
+
+---
+
+---
+id: resolveProps
+description: "Resolve all properties of an object that may be promises."
+---
+
+
+## resolveProps() function
+
+Resolve all properties of an object that may be promises.
+
+**Signature:**
+
+```typescript
+declare function resolveProps<T extends object, Key = Exclude<keyof T, symbol>>(obj: T): Promise<{
+    [K in keyof T]: K extends Key ? Awaited<T[K]> : never;
+}>;
+```
+
+
+
+## Example
+
+
+```ts
+const obj = {
+ a: Promise.resolve(1),
+ b: 2,
+ c: Promise.resolve(3),
+}
+
+const result = await resolveProps(obj);
+console.log(result); // { a: 1, b: 2, c: 3 }
+```
+Also, with this function, you can define `asyncEvolve` simply.
+
+```ts
+
+const asyncEvolve = <T extends object>(transformation:Transformation<T>) =>
+  (obj:T) => pipe(obj, evolve(transformation), resolveProps)
+
+const a = await asyncEvolve({ a: async (a) => a + 1 })({ a: 1 });
+console.log(a); // { a: 2 }
+
+const resultByFormat = await asyncEvolve<Request>({
+  foo: async (foo) => await fetch(`https://example.com/foo/${foo}`).json(),
+  bar: async (bar) => await fetch(`https://example.com/bar/${bar}`).text(),
+})
+const result = await resultByFormat({foo: "foo", bar: "bar"});
+
+console.log({
+ foo: result.foo,
+ bar: result.bar,
+})
+```
+see [pipe](https://fxts.dev/api/pipe) and [evolve](https://fxts.dev/api/evolve)<!-- -->.
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/resolveProps.ts)
+
+---
+
+---
+id: reverse
+description: "Returns Iterable/AsyncIterable of the given elements in reverse order. Note:Evaluates all Iterable, except for array, and returns a lazy-reversed iterator."
+---
+
+
+## reverse() function
+
+Returns Iterable/AsyncIterable of the given elements in reverse order. Note:Evaluates all Iterable, except for array, and returns a lazy-reversed iterator.
+
+**Signature:**
+
+```typescript
+declare function reverse<T extends Iterable<unknown> | AsyncIterable<unknown>>(iterable: T): ReturnIterableIteratorType<T>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter1 = reverse([1, 2, 3]);
+iter1.next(); // {value: 3, done: false}
+iter1.next(); // {value: 2, done: false}
+iter1.next(); // {value: 1, done: false}
+iter1.next(); // {value: undefined, done: true}
+
+const iter2 = reverse("abc");
+iter2.next(); // {value: "c", done: false}
+iter2.next(); // {value: "b", done: false}
+iter2.next(); // {value: "a", done: false}
+iter2.next(); // {value: undefined, done: true}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5],
+ reverse,
+ toArray,
+); // [5, 4, 3, 2, 1]
+
+pipe(
+ "abcde",
+ reverse,
+ toArray,
+); // "edcba"
+```
+see [pipe](https://fxts.dev/api/pipe) [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/reverse.ts)
+
+---
+
+---
+id: scan
+description: "Returns a Iterable/AsyncIterable of successively reduced values from the left. It's similar to reduce"
+---
+
+
+## scan() function
+
+Returns a Iterable/AsyncIterable of successively reduced values from the left. It's similar to reduce
+
+**Signature:**
+
+```typescript
+declare function scan<A extends readonly []>(f: Arrow, iterable: A): IterableIterator<never>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = scan((acc, cur) => acc * cur, 1, [1, 2, 3, 4 ]);
+iter.next(); // {value: 1, done:false}
+iter.next(); // {value: 1, done:false}
+iter.next(); // {value: 2, done:false}
+iter.next(); // {value: 6, done:false}
+iter.next(); // {value: 24, done:false}
+iter.next(); // {value: undefined, done: true}
+
+// with pipe
+pipe(
+  [1, 2, 3, 4],
+  scan((acc, cur) => acc * cur),
+  toArray,
+); // [1, 2, 6, 24]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/scan.ts)
+
+---
+
+---
+id: shuffle
+description: "Returns a new array with the elements of the input array shuffled randomly using Fisher-Yates algorithm."
+---
+
+
+## shuffle() function
+
+Returns a new array with the elements of the input array shuffled randomly using Fisher-Yates algorithm.
+
+**Signature:**
+
+```typescript
+declare function shuffle<T extends Iterable<unknown> | AsyncIterable<unknown>>(iterable: T, seed?: number): ReturnArrayType<T>;
+```
+
+
+
+## Example
+
+
+```ts
+shuffle([1, 2, 3, 4, 5]); // [3, 1, 5, 2, 4] (random order)
+shuffle("hello"); // ["o", "e", "l", "h", "l"] (random order) Only ASCII codes are shuffled in the case of a string.
+shuffle([1, 2, 3, 4, 5], 42); // [2, 4, 1, 5, 3] (deterministic with seed 42)
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Util/shuffle.ts)
+
+---
+
+---
+id: size
+description: "Returns the size of Iterable/AsyncIterable"
+---
+
+
+## size() function
+
+Returns the size of Iterable/AsyncIterable
+
+**Signature:**
+
+```typescript
+declare function size<A extends Iterable<unknown> | AsyncIterable<unknown>>(iterable: A): ReturnValueType<A, number>;
+```
+
+
+
+## Example
+
+
+```ts
+size([1, 2, 3, 4]); // 4
+size("abcde"); // 5
+
+await size(toAsync([1, 2, 3, 4])); // 4
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/size.ts)
+
+---
+
+---
+id: slice
+description: "Returns Iterable/AsyncIterable of the given elements from startIndex(inclusive) to endIndex(exclusive)."
+---
+
+
+## slice() function
+
+Returns Iterable/AsyncIterable of the given elements from startIndex(inclusive) to endIndex(exclusive).
+
+**Signature:**
+
+```typescript
+declare function slice<T>(start: number, iterable: Iterable<T>): IterableIterator<T>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter1 = slice(1, 3, ['a', 'b', 'c', 'd', 'e']);
+iter1.next(); // {value: 'b', done: false};
+iter1.next(); // {value: 'c', done: false};
+iter1.next(); // {value: undefined, done: true};
+
+const iter2 = slice(3, ['a', 'b', 'c', 'd', 'e']);
+iter2.next(); // {value: 'd', done: false};
+iter2.next(); // {value: 'e', done: false};
+iter2.next(); // {value: undefined, done: true};
+
+const iter3 = slice(3, "abcde");
+iter3.next(); // {value: 'd', done: false};
+iter3.next(); // {value: 'e', done: false};
+iter3.next(); // {value: undefined, done: true};
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5],
+ slice(3),
+ toArray,
+); // [4, 5]
+
+pipe(
+ [1, 2, 3, 4, 5],
+ slice(1, 3),
+ toArray,
+); // [2, 3]
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/slice.ts)
+
+---
+
+---
+id: snakeCase
+description: "Converts str to snake case."
+---
+
+
+## snakeCase() function
+
+Converts `str` to snake case.
+
+Word boundaries are detected from spaces, punctuation, digits, case changes, and acronyms.
+
+**Signature:**
+
+```typescript
+declare function snakeCase(str: string): string;
+```
+
+
+
+## Example
+
+
+```ts
+snakeCase("foo bar"); // "foo_bar"
+snakeCase("fooBar"); // "foo_bar"
+snakeCase("foo-bar"); // "foo_bar"
+snakeCase("XMLHttpRequest"); // "xml_http_request"
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/snakeCase.ts)
+
+---
+
+---
+id: some
+description: "Returns true if any of the values in Iterable/AsyncIterable pass f truth test"
+---
+
+
+## some() function
+
+Returns true if any of the values in Iterable/AsyncIterable pass `f` truth test
+
+**Signature:**
+
+```typescript
+declare function some<A extends readonly []>(f: Arrow, iterable: A): false;
+```
+
+
+
+## Example
+
+
+```ts
+some(a=> a, [null, 0, 1, false]); // true
+
+// with pipe
+pipe(
+ [{id:1, age: 27}, {id:2, age: 36}, {id:3, age: 42}],
+ map(user => user.age),
+ some(age => age > 40),
+); // true
+
+await pipe(
+ Promise.resolve([{id:1, age: 27}, {id:2, age: 36}, {id:3, age: 42}]),
+ map(user => user.age),
+ some(age => age > 40),
+); // true
+
+// with toAsync
+await pipe(
+ [Promise.resolve({id:1, age: 27}), Promise.resolve({id:2, age: 36}), Promise.resolve({id:3, age: 42})],
+ toAsync,
+ map(user => user.age),
+ some(age => age > 40),
+); // true
+```
+[Try It](https://codesandbox.io/s/fxts-some-inp3l)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [map](https://fxts.dev/api/map)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/some.ts)
+
+---
+
+---
+id: sort
+description: "Returns an array, sorted according to the comparator f, which should accept two values"
+---
+
+
+## sort() function
+
+Returns an array, sorted according to the comparator `f`<!-- -->, which should accept two values
+
+**Signature:**
+
+```typescript
+declare function sort(f: (a: any, b: any) => unknown, iterable: readonly []): any[];
+```
+
+
+
+## Example
+
+
+```ts
+sort((a, b) => a > b, [3, 4, 1, 2, 5, 2]); // [1, 2, 2, 3, 4, 5]
+sort((a, b) => a.localeCompare(b), "bcdaef"); // ["a", "b", "c", "d", "e", "f"]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/sort.ts)
+
+---
+
+---
+id: sortBy
+description: "Returns an array which sorted according to the f."
+---
+
+
+## sortBy() function
+
+Returns an array which sorted according to the `f`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function sortBy(f: (a: any) => unknown, iterable: readonly []): any[];
+```
+
+
+
+## Example
+
+
+```ts
+sortBy(a => a, [3, 4, 1, 2, 5, 2]);
+// [1, 2, 2, 3, 4, 5]
+sortBy((a) => a.id, [{id:4,name:'foo'}, {id:2,name:'bar'},{id:3, name:'lee'}]);
+// [{id:2,name:'bar'}, {id:3, name:'lee'}, {id:4,name:'foo'}]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/sortBy.ts)
+
+---
+
+---
+id: split
+description: "Splits string by separator."
+---
+
+
+## split() function
+
+Splits string by separator.
+
+**Signature:**
+
+```typescript
+declare function split(sep: string, iterable: Iterable<string>): IterableIterator<string>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = split(',', '1,2,3,4');
+iter.next(); // 1
+iter.next(); // 2
+iter.next(); // 3
+iter.next(); // 4
+iter.next(); // undefined
+
+// with pipe
+pipe(
+ "1,2,3,4,5",
+ split(','),
+ toArray,
+); // ["1", "2", "3", "4", "5"]
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/split.ts)
+
+---
+
+---
+id: sum
+description: "Adds all the elements of a Iterable/AsyncIterable."
+---
+
+
+## sum() function
+
+Adds all the elements of a Iterable/AsyncIterable.
+
+**Signature:**
+
+```typescript
+declare function sum<A extends Iterable<number> | AsyncIterable<number>>(iterable: A): A extends Iterable<number> ? number : A extends AsyncIterable<number> ? Promise<number> : never;
+```
+
+
+
+## Example
+
+
+```ts
+sum([]); // 0
+sum([1, 2, 3, 4]); // 10
+await sum(toAsync([1, 2, 3, 4])); // 10
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/sum.ts)
+
+---
+
+---
+id: sumBy
+description: "Returns the sum of the values produced by applying f to each element of the given Iterable/AsyncIterable. Returns 0 for an empty iterable."
+---
+
+
+## sumBy() function
+
+Returns the sum of the values produced by applying `f` to each element of the given Iterable/AsyncIterable. Returns `0` for an empty iterable.
+
+**Signature:**
+
+```typescript
+declare function sumBy<A>(f: (a: A) => number, iterable: Iterable<A>): number;
+```
+
+
+
+## Example
+
+
+```ts
+sumBy((a) => a.price, [
+  { name: "apple", price: 100 },
+  { name: "banana", price: 200 },
+]); // 300
+
+sumBy((a) => a.price, []); // 0
+
+// with pipe
+pipe(
+  [{ price: 100 }, { price: 200 }],
+  sumBy((a) => a.price),
+); // 300
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/sumBy.ts)
+
+---
+
+---
+id: take
+description: "Returns Iterable/AsyncIterable that taken the first argument l values from iterable"
+---
+
+
+## take() function
+
+Returns Iterable/AsyncIterable that taken the first argument `l` values from iterable
+
+**Signature:**
+
+```typescript
+declare function take<A>(l: number, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = take(2, [0, 1, 2, 3, 4, 5, 6]);
+iter.next() // {done:false, value: 0}
+iter.next() // {done:false, value: 1}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [0, 1, 2, 3, 4, 5, 6],
+ take(2),
+ toArray,
+); // [0, 1]
+
+await pipe(
+ Promise.resolve([0, 1, 2, 3, 4, 5, 6]),
+ take(2),
+ toArray,
+); // [0, 1]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(0), Promise.resolve(1), Promise.resolve(2),
+  Promise.resolve(3), Promise.resolve(4), Promise.resolve(5), Promise.resolve(6)],
+ toAsync,
+ take(2),
+ toArray,
+); // [0, 1]
+```
+[Try It](https://codesandbox.io/s/fxts-take-372bs)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/take.ts)
+
+---
+
+---
+id: takeRight
+description: "Returns Iterable/AsyncIterable that taken the last argument l values from iterable"
+---
+
+
+## takeRight() function
+
+Returns Iterable/AsyncIterable that taken the last argument `l` values from iterable
+
+**Signature:**
+
+```typescript
+declare function takeRight<A>(l: number, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = takeRight(2, [0, 1, 2, 3, 4, 5, 6]);
+iter.next() // {done:false, value: 5}
+iter.next() // {done:false, value: 6}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [0, 1, 2, 3, 4, 5, 6],
+ takeRight(2),
+ toArray,
+); // [5, 6]
+
+await pipe(
+ Promise.resolve([0, 1, 2, 3, 4, 5, 6]),
+ takeRight(2),
+ toArray,
+); // [5, 6]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(0), Promise.resolve(1), Promise.resolve(2),
+  Promise.resolve(3), Promise.resolve(4), Promise.resolve(5), Promise.resolve(6)],
+ toAsync,
+ takeRight(2),
+ toArray,
+); // [5, 6]
+```
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/takeRight.ts)
+
+---
+
+---
+id: takeUntil
+description: "> Warning: This API is now obsolete."
+---
+
+
+## takeUntil() function
+
+> Warning: This API is now obsolete.
+> 
+> Use `takeUntilInclusive` instead of this function.
+> 
+
+Returns Iterable/AsyncIterable that taken values until truthy when given `f` is applied.
+
+**Signature:**
+
+```typescript
+declare function takeUntil<A, B>(f: (a: A) => B, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = takeUntil(a => a % 2 === 0, [1, 2, 3, 4, 5, 6]);
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5, 6],
+ takeUntil(a => a % 2 === 0),
+ toArray,
+); // [1, 2]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5, 6]),
+ takeUntil(a => a % 2 === 0),
+ toArray,
+); // [1, 2]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5, 6]),
+ toAsync,
+ takeUntil(async (a) => a % 2 === 0),
+ toArray,
+); // [1, 2]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3),
+Promise.resolve(4), Promise.resolve(5), Promise.resolve(6)],
+ toAsync,
+ takeUntil(a => a % 2 === 0),
+ toArray,
+); // [1, 2]
+```
+[Try It](https://codesandbox.io/s/fxts-takeuntil-gv1jk)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/takeUntil.ts)
+
+---
+
+---
+id: takeUntilInclusive
+description: "Returns Iterable/AsyncIterable that taken values until truthy when given f is applied."
+---
+
+
+## takeUntilInclusive() function
+
+Returns Iterable/AsyncIterable that taken values until truthy when given `f` is applied.
+
+**Signature:**
+
+```typescript
+declare function takeUntilInclusive<A, B>(f: (a: A) => B, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = takeUntilInclusive(a => a % 2 === 0, [1, 2, 3, 4, 5, 6]);
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5, 6],
+ takeUntilInclusive(a => a % 2 === 0),
+ toArray,
+); // [1, 2]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5, 6]),
+ takeUntilInclusive(a => a % 2 === 0),
+ toArray,
+); // [1, 2]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5, 6]),
+ toAsync,
+ takeUntilInclusive(async (a) => a % 2 === 0),
+ toArray,
+); // [1, 2]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3),
+Promise.resolve(4), Promise.resolve(5), Promise.resolve(6)],
+ toAsync,
+ takeUntilInclusive(a => a % 2 === 0),
+ toArray,
+); // [1, 2]
+```
+[Try It](https://codesandbox.io/s/fxts-takeuntil-gv1jk)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/takeUntilInclusive.ts)
+
+---
+
+---
+id: takeWhile
+description: "Returns Iterable/AsyncIterable that taken values as long as each value satisfies the give f."
+---
+
+
+## takeWhile() function
+
+Returns Iterable/AsyncIterable that taken values as long as each value satisfies the give `f`<!-- -->.
+
+**Signature:**
+
+```typescript
+declare function takeWhile<A, B>(f: (a: A) => B, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = takeWhile(a => a < 3, [1, 2, 3, 4, 5, 6]);
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [1, 2, 3, 4, 5, 6],
+ takeWhile(a => a < 3),
+ toArray,
+); // [1, 2]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5, 6]),
+ takeWhile(a => a < 3),
+ toArray,
+); // [1, 2]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5, 6]),
+ toAsync,
+ takeWhile(async (a) => a < 3),
+ toArray,
+); // [1, 2]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3),
+Promise.resolve(4), Promise.resolve(5), Promise.resolve(6)],
+ toAsync,
+ takeWhile(a => a < 3),
+ toArray,
+); // [1, 2]
+
+```
+[Try It](https://codesandbox.io/s/fxts-takewhile-e6gqt)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/takeWhile.ts)
+
+---
+
+---
+id: tap
+description: "This method invokes interceptor and returns a value. The interceptor is invoked with one argument."
+---
+
+
+## tap() function
+
+This method invokes interceptor and returns a value. The interceptor is invoked with one argument.
+
+**Signature:**
+
+```typescript
+declare function tap<T, U>(f: (arg: Awaited<T>) => U, v: T): U extends Promise<any> ? Promise<Awaited<T>> : T;
+```
+
+
+
+## Example
+
+
+```ts
+tap(console.log, [1,2,3,4,5])
+// log [1, 2, 3, 4, 5]
+// return [1, 2, 3, 4, 5]
+
+tap(async (a) => console.log(a), [1,2,3,4,5]);
+// log [1, 2, 3, 4, 5]
+// return Promise<[1, 2, 3, 4, 5]>
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/tap.ts)
+
+---
+
+---
+id: throttle
+description: "throttle function creates a throttled version of a function that can only be invoked at most once per specified time period. Unlike debounce, throttle e..."
+---
+
+
+## throttle() function
+
+`throttle` function creates a throttled version of a function that can only be invoked at most once per specified time period. Unlike `debounce`<!-- -->, throttle ensures the function is called at regular intervals during continuous invocations, rather than waiting for a pause. This is useful for rate-limiting expensive operations like scroll handlers, window resizing, or API calls.
+
+The throttled function supports `leading` and `trailing` edge execution: - `leading`<!-- -->: Execute immediately on the first call - `trailing`<!-- -->: Execute at the end of the throttle period with the latest arguments
+
+The throttled function includes a `.cancel()` method to cancel any pending trailing invocations.
+
+**Signature:**
+
+```typescript
+declare function throttle<T extends (...args: any[]) => void>(func: T, wait: number, options?: {
+    leading: boolean;
+    trailing: boolean;
+}): ((...args: Parameters<T>) => void) & {
+    cancel: () => void;
+};
+```
+
+
+
+## Example
+
+
+```ts
+// Basic usage (default options - both leading and trailing)
+const throttled = throttle((val: number) => {
+  console.log('val', val);
+}, 1000);
+
+throttled(1); // immediately logs: val 1
+throttled(2); // ignored
+throttled(3); // ignored
+// After 1000ms, logs: val 3 (trailing call with latest args)
+
+// Leading edge only (useful for preventing rapid repeated actions)
+const throttled2 = throttle((val: number) => {
+  console.log('val', val);
+}, 1000, { leading: true, trailing: false });
+
+throttled2(1); // immediately logs: val 1
+throttled2(2); // ignored
+throttled2(3); // ignored
+// After 1000ms, nothing happens
+
+// Trailing edge only (useful for batch processing)
+const throttled3 = throttle((val: number) => {
+  console.log('val', val);
+}, 1000, { leading: false, trailing: true });
+
+throttled3(1); // delayed
+throttled3(2); // delayed
+throttled3(3); // delayed
+// After 1000ms, logs: val 3 (only the latest value)
+
+// Canceling pending throttled invocations
+const throttled4 = throttle((val: number) => {
+  console.log('val', val);
+}, 1000);
+
+throttled4(1); // immediately logs: val 1
+throttled4(2);
+throttled4(3);
+throttled4.cancel(); // cancels pending trailing invocation
+// Nothing happens after 1000ms
+
+// Real-world use case - throttling scroll events
+const handleScroll = throttle(() => {
+  console.log('Scroll position:', window.scrollY);
+}, 200);
+
+window.addEventListener('scroll', handleScroll);
+
+// The handler will fire immediately on first scroll,
+// then at most once every 200ms during continuous scrolling,
+// and once more after scrolling stops (trailing edge)
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/throttle.ts)
+
+---
+
+---
+id: throwError
+description: "throw result of toError"
+---
+
+
+## throwError() function
+
+throw result of `toError`
+
+**Signature:**
+
+```typescript
+throwError: <T, E extends Error>(toError: (input: T) => E) => (input: T) => never
+```
+
+
+
+## Example
+
+
+```ts
+const result: never = pipe(
+  0,
+
+  throwError((input) => Error(`input is ${input}`)),
+
+  (input: never) => {
+    // unreachable point
+  },
+);
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/throwError.ts)
+
+---
+
+---
+id: throwIf
+description: "throw return of err if predicate function return true"
+---
+
+
+## throwIf() function
+
+throw return of `err` if predicate function return true
+
+default throw function is [identity](https://fxts.dev/api/identity)
+
+**Signature:**
+
+```typescript
+declare function throwIf<T, N extends T>(predicate: (input: T) => input is N, err?: (input: N) => unknown): (input: T) => Exclude<T, N>;
+```
+
+
+
+## Example
+
+
+```ts
+ pipe(
+   fn(), // return type is string | undefined
+
+   throwIf(isUndefined, (err) => Error("return of fn() is undefined")),
+   // err is undefined, and it is return of fn
+
+   (input) => input, // input is string
+ )
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/throwIf.ts)
+
+---
+
+---
+id: toArray
+description: "Takes item from Iterable/AsyncIterable and returns an array. It is recommended to use [pipe](https://fxts.dev/api/pipe) together."
+---
+
+
+## toArray() function
+
+Takes item from Iterable/AsyncIterable and returns an array. It is recommended to use [pipe](https://fxts.dev/api/pipe) together.
+
+**Signature:**
+
+```typescript
+declare function toArray<A extends Iterable<unknown> | AsyncIterable<unknown>>(iter: A): ReturnArrayType<A>;
+```
+
+
+
+## Example
+
+
+```ts
+pipe(
+ [1, 2, 3, 4, 5],
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ toArray,
+); // [12, 14]
+
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5]),
+ map(a => a + 10),
+ filter(a => a % 2 === 0),
+ toArray,
+); // [12, 14]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([1, 2, 3, 4, 5]),
+ toAsync,
+ map(async (a) => a + 10),
+ filter(a => a % 2 === 0),
+ toArray,
+); // [12, 14]
+
+// with toAsync
+await pipe(
+ [
+   Promise.resolve(1),
+   Promise.resolve(2),
+   Promise.resolve(3),
+   Promise.resolve(4),
+   Promise.resolve(5)
+ ],
+ toAsync,
+ map((a) => a + 10),
+ filter((a) => a % 2 === 0),
+ toArray
+);
+```
+[Try It](https://codesandbox.io/s/fxts-toarray-fy84i)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [map](https://fxts.dev/api/map)<!-- -->, [filter](https://fxts.dev/api/filter)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/toArray.ts)
+
+---
+
+---
+id: toAsync
+description: "Returns AsyncIterable, toAsync used when you want to handle Promise values inside Iterable."
+---
+
+
+## toAsync() function
+
+Returns AsyncIterable, `toAsync` used when you want to handle Promise values inside Iterable.
+
+**Signature:**
+
+```typescript
+declare function toAsync<T>(iter: Iterable<T | Promise<T>>): AsyncIterableIterator<T>;
+```
+
+
+
+## Example
+
+
+```ts
+let acc = 0;
+for await (const item of toAsync([1, 2, 3, 4, 5])) {
+  acc += item;
+}
+// acc: 15
+
+// with pipe
+await pipe(
+ [Promise.resolve(1),Promise.resolve(2),Promise.resolve(3)],
+ toAsync,
+ map(a => a + 10),
+ toArray, // [11, 12, 13]
+);
+```
+[Try It](https://codesandbox.io/s/fxts-toasync-00nxr)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/toAsync.ts)
+
+---
+
+---
+id: toSorted
+description: "Returns a new array, sorted according to the comparator f, this function does not mutate the original array."
+---
+
+
+## toSorted() function
+
+Returns a new array, sorted according to the comparator `f`<!-- -->, which should accept two values. Unlike `sort`<!-- -->, this function does not mutate the original array.
+
+**Signature:**
+
+```typescript
+declare function toSorted(f: (a: any, b: any) => unknown, iterable: readonly []): any[];
+```
+
+
+
+## Example
+
+
+```ts
+const arr = [3, 4, 1, 2, 5, 2];
+toSorted((a, b) => a > b, arr); // [1, 2, 2, 3, 4, 5]
+arr; // [3, 4, 1, 2, 5, 2] - original array is unchanged
+
+toSorted((a, b) => a.localeCompare(b), "bcdaef"); // ["a", "b", "c", "d", "e", "f"]
+
+// Can be used in a pipeline
+pipe(
+  [3, 4, 1, 2, 5, 2],
+  filter((a) => a % 2 !== 0),
+  toSorted((a, b) => a > b),
+); // [1, 3, 5]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/toSorted.ts)
+
+---
+
+---
+id: transpose
+description: "The transpose function takes multiple iterators as input and returns a transposed 2D array—swapping rows with columns."
+---
+
+
+## transpose() function
+
+The transpose function takes multiple iterators as input and returns a transposed 2D array—swapping rows with columns.
+
+Unlike the existing zip function, transpose behaves as shown in the example below:
+
+**Signature:**
+
+```typescript
+declare function transpose<T extends UniversalIterable, R extends UniversalIterable[]>(iterables: T): (...args: R) => ReturnZipType<[T, ...R]>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = transpose([1, 'a'], [2, 'b'], [3, 'c']);
+iter.next() // {done:false, value: [1, 2, 3]}
+iter.next() // {done:false, value: ['a', 'b', 'c']}
+iter.next() // {done:true, value: undefined}
+
+const iter = transpose([1, 2, 3], ['a', 'b', 'c']);
+iter.next() // {done:false, value: [1, 'a']}
+iter.next() // {done:false, value: [2, 'b']}
+iter.next() // {done:false, value: [3, 'c']}
+iter.next() // {done:true, value: undefined}
+
+// How transpose differs from `zip`
+const iter = zip([1, 2], [3], [], [4, 5, 6], [7], [8, 9]);
+iter.next() // {done:true, value: undefined}
+// Because zip stops at the shortest input, passing an empty array causes it to exit immediately.
+
+// with pipe
+pipe(
+  [4, 5, 6, 7],
+  transpose([1, 2, 3]),
+  toArray,
+) // [[ 1, 4 ], [ 2, 5 ], [ 3, 6 ], [7]]
+
+pipe(
+  Promise.resolve([4, 5, 6, 7]),
+  transpose([1, 2, 3]),
+  toArray,
+) // [[ 1, 4 ], [ 2, 5 ], [ 3, 6 ], [7]]
+
+// with toAsync
+pipe(
+  [Promise.resolve(4), Promise.resolve(5), Promise.resolve(6), Promise.resolve(7)],
+  toAsync,
+  transpose([1, 2, 3]),
+  toArray,
+) // [[ 1, 4 ], [ 2, 5 ], [ 3, 6 ], [7]]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/transpose.ts)
+
+---
+
+---
+id: unicodeToArray
+description: "Converts a Unicode string to an array."
+---
+
+
+## unicodeToArray() function
+
+Converts a Unicode `string` to an array.
+
+**Signature:**
+
+```typescript
+declare function unicodeToArray(string: string): [] | RegExpMatchArray;
+```
+
+
+
+## Example
+
+
+```ts
+ unicodeToArray('🙇‍♂️🤩😭'); // ['🙇‍♂️','🤩','😭'];
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/unicodeToArray.ts)
+
+---
+
+---
+id: union
+description: "Returns Iterable/AsyncIterable of the union of the two given iterables - the elements of iterable1 followed by the elements of iterable2 that have not a..."
+---
+
+
+## union() function
+
+Returns Iterable/AsyncIterable of the union of the two given iterables - the elements of `iterable1` followed by the elements of `iterable2` that have not appeared yet, with duplicates removed.
+
+**Signature:**
+
+```typescript
+declare function union<T>(iterable1: Iterable<T>, iterable2: Iterable<T>): IterableIterator<T>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = union([1, 2], [2, 3, 4]);
+iter.next(); // {value: 1, done: false}
+iter.next(); // {value: 2, done: false}
+iter.next(); // {value: 3, done: false}
+iter.next(); // {value: 4, done: false}
+iter.next(); // {value: undefined, done: true}
+
+// with pipe
+pipe(
+  [2, 3, 4],
+  union([1, 2]),
+  toArray,
+); // [1, 2, 3, 4]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/union.ts)
+
+---
+
+---
+id: uniq
+description: "Returns Iterable/AsyncIterable with duplicate values removed inside the given Iterable/AsyncIterable. Only primitive values can be compared. The order o..."
+---
+
+
+## uniq() function
+
+Returns Iterable/AsyncIterable with duplicate values removed inside the given Iterable/AsyncIterable. Only primitive values can be compared. The order of result values is determined by the order they occur in the array.
+
+**Signature:**
+
+```typescript
+declare function uniq<A extends Iterable<unknown> | AsyncIterable<unknown>>(iterable: A): ReturnIterableIteratorType<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = uniq([1, 2, 1, 3, 2]);
+iter.next() // {done:false, value: 1}
+iter.next() // {done:false, value: 2}
+iter.next() // {done:false, value: 3}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [1, 2, 1, 3],
+ uniq,
+ toArray,
+); // [1, 2, 3]
+
+await pipe(
+ Promise.resolve([1, 2, 1, 3]),
+ uniq,
+ toArray,
+); // [1, 2, 3]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(1), Promise.resolve(2), Promise.resolve(1), Promise.resolve(3)],
+ toAsync,
+ uniq,
+ toArray,
+); // [1, 2, 3]
+```
+[Try It](https://codesandbox.io/s/fxts-uniq-uljmk)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/uniq.ts)
+
+---
+
+---
+id: uniqBy
+description: "Unlike [uniq](https://fxts.dev/api/uniq) returns Iterable/AsyncIterable with duplicate values removed by applying with f inside the given Iterable/Async..."
+---
+
+
+## uniqBy() function
+
+Unlike [uniq](https://fxts.dev/api/uniq) returns Iterable/AsyncIterable with duplicate values removed by applying with `f` inside the given Iterable/AsyncIterable. The order of result values is determined by the order they occur in the array.
+
+**Signature:**
+
+```typescript
+declare function uniqBy<A, B>(f: (a: A) => B, iterable: Iterable<A>): IterableIterator<A>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = uniqBy(a => a.age, [{age: 21}, {age: 23}, {age: 21}, {age: 34}]);
+iter.next() // {done:false, value: {age: 21}}
+iter.next() // {done:false, value: {age: 23}}
+iter.next() // {done:false, value: {age: 34}}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [{age: 21}, {age: 23}, {age: 21}, {age: 34}],
+ uniqBy(a => a.age),
+ toArray,
+); // [{age: 21}, {age: 23}, {age: 34}]
+
+await pipe(
+ Promise.resolve([{age: 21}, {age: 23}, {age: 21}, {age: 34}]),
+ uniqBy(a => a.age),
+ toArray,
+); // [{age: 21}, {age: 23}, {age: 34}]
+
+// if you want to use asynchronous callback
+await pipe(
+ Promise.resolve([{age: 21}, {age: 23}, {age: 21}, {age: 34}]),
+ toAsync,
+ uniqBy(async (a) => a.age),
+ toArray,
+); // [{age: 21}, {age: 23}, {age: 34}]
+
+// toAsync
+await pipe(
+ [Promise.resolve({age: 21}), Promise.resolve({age: 23}), Promise.resolve({age: 21}), Promise.resolve({age: 34})],
+ toAsync,
+ uniqBy(a => a.age),
+ toArray,
+); // [{age: 21}, {age: 23}, {age: 34}]
+```
+[Try It](https://codesandbox.io/s/fxts-uniqby-zb5d9)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/uniqBy.ts)
+
+---
+
+---
+id: unless
+description: "If the result of predicate is true, process will not be executed. unless return the result of process if it is executed, and if the process is not execu..."
+---
+
+
+## unless() function
+
+If the result of `predicate` is true, `process` will not be executed. `unless` return the result of `process` if it is executed, and if the `process` is not executed, it returns the function argument as is.
+
+**Signature:**
+
+```typescript
+declare function unless<T, N extends T, U>(predicate: (input: T) => input is N, process: (input: Exclude<T, N>) => U): (input: T) => N | (U extends void ? undefined : U);
+```
+
+
+
+## Example
+
+
+```ts
+// it will return only string
+const unlessIsString: (input: string | undefined) => string = unless(isString, (input) => {
+   throw Error("input is undefiend.")
+});
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/unless.ts)
+
+---
+
+---
+id: values
+description: "Returns an iterator of values."
+---
+
+
+## values() function
+
+Returns an iterator of values.
+
+Supports plain objects, Map, and Set: - For objects: returns own enumerable string keyed property values - For Map: returns values - For Set: returns values
+
+**Signature:**
+
+```typescript
+declare function values<T extends Map<any, any> | Set<any> | Record<Key, any>>(obj: T): ValuesResult<T>;
+```
+
+
+
+## Example
+
+
+```ts
+[...values({ a: 1, b: "2", c: true })]
+// [1, "2", true]
+
+[...values(new Map([["a", 1], ["b", 2]]))]
+// [1, 2]
+
+[...values(new Set([1, 2, 3]))]
+// [1, 2, 3]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/values.ts)
+
+---
+
+---
+id: when
+description: "It returns the original value based on the condition of the first argument or the result of executing the function passed as the second argument."
+---
+
+
+## when() function
+
+It returns the original value based on the condition of the first argument or the result of executing the function passed as the second argument.
+
+**Signature:**
+
+```typescript
+declare function when<T, S extends T, R>(predicate: (input: T) => input is S, callback: (input: S) => R): (a: T) => R | Exclude<T, S>;
+```
+
+
+
+## Example
+
+
+```typescript
+when(
+  isNumber,
+  () => `This is number`
+  100,
+); // This is number
+```
+with pipe
+
+```typescript
+pipe(
+  100,
+  when(
+    isNumber,
+    () => `This is number`
+  )
+) // This is number
+
+pipe(
+  100,
+  when(
+    isNumber,
+    (value) => value * 2
+  )
+) // 200
+
+pipe(
+  100,
+  when(
+    isString,
+    () => `This is number` // not work
+  ),
+) // 100
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/when.ts)
+
+---
+
+---
+id: windowed
+description: "Returns Iterable/AsyncIterable of sliding windows of the given size over the iterable. Windows overlap: each one starts one element after the previous o..."
+---
+
+
+## windowed() function
+
+Returns Iterable/AsyncIterable of sliding windows of the given size over the iterable. Windows overlap: each one starts one element after the previous one. When the iterable has fewer elements than `size`<!-- -->, nothing is yielded.
+
+Unlike `chunk`<!-- -->, which splits into non-overlapping groups, `windowed` yields every consecutive run of `size` elements.
+
+**Signature:**
+
+```typescript
+declare function windowed<T>(size: number, iterable: Iterable<T>): IterableIterator<T[]>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = windowed(2, [1, 2, 3, 4]);
+iter.next(); // {done: false, value: [1, 2]}
+iter.next(); // {done: false, value: [2, 3]}
+iter.next(); // {done: false, value: [3, 4]}
+iter.next(); // {done: true, value: undefined}
+
+// with pipe
+pipe(
+  [1, 2, 3, 4, 5],
+  windowed(3),
+  toArray,
+); // [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/windowed.ts)
+
+---
+
+---
+id: zip
+description: "Merges the values of each of the arrays with the values at the corresponding position together. Useful when you have separate data sources that are coor..."
+---
+
+
+## zip() function
+
+Merges the values of each of the arrays with the values at the corresponding position together. Useful when you have separate data sources that are coordinated through matching array indices.
+
+**Signature:**
+
+```typescript
+declare function zip<T extends UniversalIterable, TS extends UniversalIterable[]>(a: T): (...args: TS) => ReturnZipType<[T, ...TS]>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = zip([1, 2, 3, 4], [5, 6, 7, 8]);
+iter.next() // {done:false, value: [1, 5]}
+iter.next() // {done:false, value: [2, 6]}
+iter.next() // {done:false, value: [3, 7]}
+iter.next() // {done:false, value: [4, 8]}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ [5, 6, 7, 8],
+ zip([1, 2, 3, 4]),
+ toArray,
+); // [[1, 5], [2, 6], [3, 7], [4, 8]]
+
+await pipe(
+ Promise.resolve([5, 6, 7, 8]),
+ zip([1, 2, 3, 4]),
+ toArray,
+);  // [[1, 5], [2, 6], [3, 7], [4, 8]]
+
+// with toAsync
+await pipe(
+ [Promise.resolve(5), Promise.resolve(6), Promise.resolve(7), Promise.resolve(8)],
+ toAsync,
+ zip([1, 2, 3, 4]),
+ toArray,
+);  // [[1, 5], [2, 6], [3, 7], [4, 8]]
+```
+[Try It](https://codesandbox.io/s/fxts-zip-81jnh)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/zip.ts)
+
+---
+
+---
+id: zipObject
+description: "Creates an object by pairing keys with values position by position. Keys without a matching value get undefined, and extra values are ignored."
+---
+
+
+## zipObject() function
+
+Creates an object by pairing `keys` with `values` position by position. Keys without a matching value get `undefined`<!-- -->, and extra values are ignored.
+
+**Signature:**
+
+```typescript
+declare function zipObject<const K extends PropertyKey, V>(keys: Iterable<K>, values: Iterable<V>): Record<K, V>;
+```
+
+
+
+## Example
+
+
+```ts
+zipObject(["a", "b"], [1, 2]); // { a: 1, b: 2 }
+zipObject(["a", "b", "c"], [1, 2]); // { a: 1, b: 2, c: undefined }
+zipObject(["a", "b"], [1, 2, 3]); // { a: 1, b: 2 }
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/zipObject.ts)
+
+---
+
+---
+id: zipWith
+description: "Returns Iterable/AsyncIterable out of the two supplied by applying f to each same positioned pair in Iterable/AsyncIterable."
+---
+
+
+## zipWith() function
+
+Returns Iterable/AsyncIterable out of the two supplied by applying `f` to each same positioned pair in Iterable/AsyncIterable.
+
+**Signature:**
+
+```typescript
+declare function zipWith<A, B, C>(f: (a: A, b: B) => C, iterable1: Iterable<A>, iterable2: Iterable<B>): IterableIterator<C>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = zipWith((a,b) => [a,b], [1,2,3], ['a','b','c']);
+iter.next(); // {value: [1, 'a'] , done: false}
+iter.next(); // {value: [2, 'b'] , done: false}
+iter.next(); // {value: [3, 'c'] , done: false}
+iter.next(); // {value: undefined , done: true}
+```
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/zipWith.ts)
+
+---
+
+---
+id: zipWithIndex
+description: "Returns Iterable/AsyncIterable including an index to the existing Iterable/AsyncIterable value."
+---
+
+
+## zipWithIndex() function
+
+Returns Iterable/AsyncIterable including an index to the existing Iterable/AsyncIterable value.
+
+**Signature:**
+
+```typescript
+declare function zipWithIndex<T extends Iterable<unknown> | AsyncIterable<unknown>>(iterable: T): ReturnZipWithIndexType<T>;
+```
+
+
+
+## Example
+
+
+```ts
+const iter = zipWithIndex(["a", "b", "c", "d"]);
+iter.next() // {done:false, value: [0, "a"]}
+iter.next() // {done:false, value: [1, "b"]}
+iter.next() // {done:false, value: [2, "c"]}
+iter.next() // {done:false, value: [3, "d"]}
+iter.next() // {done:true, value: undefined}
+
+// with pipe
+pipe(
+ ["a", "b", "c", "d"],
+ zipWithIndex,
+ toArray,
+); // [[0, "a"], [1, "b"], [2, "c"], [3, "d"]]
+
+await pipe(
+ Promise.resolve(["a", "b", "c", "d"]),
+ zipWithIndex,
+ toArray,
+); // [[0, "a"], [1, "b"], [2, "c"], [3, "d"]]
+
+// with toAsync
+await pipe(
+ [Promise.resolve("a"), Promise.resolve("b"), Promise.resolve("c"), Promise.resolve("d")],
+ toAsync,
+ zipWithIndex,
+ toArray,
+); // [[0, "a"], [1, "b"], [2, "c"], [3, "d"]]
+```
+[Try It](https://codesandbox.io/s/fxts-zipwithindex-p1k31)
+
+see [pipe](https://fxts.dev/api/pipe)<!-- -->, [toAsync](https://fxts.dev/api/toAsync)<!-- -->, [toArray](https://fxts.dev/api/toArray)
+
+
+[Open Source Code](https://github.com/marpple/FxTS/blob/main/src/Lazy/zipWithIndex.ts)
