@@ -1,16 +1,11 @@
 {
+  "extends": "./tsconfig.base.json",
   "include": ["./src/"],
   "compilerOptions": {
-    "target": "es2018",
-    "lib": ["es2020"],
     "declaration": true,
     "declarationMap": true,
-    "outDir": "./dist/types/",
-    "rootDir": "./src/",
     "emitDeclarationOnly": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "outDir": "./dist/types/",
+    "rootDir": "./src/"
   }
 }

@@ -1,20 +1,15 @@
 {
+  "extends": "./tsconfig.base.json",
   "include": ["./src/"],
-  "exclude": ["./node_modules/", "./test/"],
   "compilerOptions": {
     "target": "es5",
     "module": "es2015",
-    "lib": ["es2020"],
-    "sourceMap": true,
-    "inlineSources": true,
     "outDir": "./dist/esm5/",
     "rootDir": "./src/",
+    "sourceMap": true,
+    "inlineSources": true,
     "importHelpers": true,
     "downlevelIteration": true,
-    "isolatedModules": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "isolatedModules": true
   }
 }
