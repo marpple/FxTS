@@ -2,6 +2,8 @@ import add from "./add";
 import always from "./always";
 import apply from "./apply";
 import average from "./average";
+import camelCase from "./camelCase";
+import capitalize from "./capitalize";
 import cases from "./cases";
 import castArray from "./castArray";
 import cloneDeep from "./cloneDeep";
@@ -41,14 +43,18 @@ import isString from "./isString";
 import isUndefined from "./isUndefined";
 import join from "./join";
 import juxt from "./juxt";
+import kebabCase from "./kebabCase";
 import last from "./last";
 import lt from "./lt";
 import lte from "./lte";
 import matches from "./matches";
 import max from "./max";
+import maxBy from "./maxBy";
+import meanBy from "./meanBy";
 import memoize from "./memoize";
 import merge from "./merge";
 import min from "./min";
+import minBy from "./minBy";
 import negate from "./negate";
 import noop from "./noop";
 import not from "./not";
@@ -67,10 +73,12 @@ import reduce from "./reduce";
 import reduceLazy from "./reduceLazy";
 import resolveProps from "./resolveProps";
 import size from "./size";
+import snakeCase from "./snakeCase";
 import some from "./some";
 import sort from "./sort";
 import sortBy from "./sortBy";
 import sum from "./sum";
+import sumBy from "./sumBy";
 import tap from "./tap";
 import throwError from "./throwError";
 import throwIf from "./throwIf";
@@ -79,6 +87,7 @@ import toSorted from "./toSorted";
 import unicodeToArray from "./unicodeToArray";
 import unless from "./unless";
 import when from "./when";
+import zipObject from "./zipObject";
 
 export {
   add,
@@ -86,6 +95,8 @@ export {
   apply,
   average,
   average as mean,
+  camelCase,
+  capitalize,
   cases,
   castArray,
   cloneDeep,
@@ -128,14 +139,18 @@ export {
   isUndefined,
   join,
   juxt,
+  kebabCase,
   last,
   lt,
   lte,
   matches,
   max,
+  maxBy,
+  meanBy,
   memoize,
   merge,
   min,
+  minBy,
   negate,
   noop,
   not,
@@ -154,10 +169,12 @@ export {
   reduceLazy,
   resolveProps,
   size,
+  snakeCase,
   some,
   sort,
   sortBy,
   sum,
+  sumBy,
   tap,
   throwError,
   throwIf,
@@ -166,6 +183,7 @@ export {
   unicodeToArray,
   unless,
   when,
+  zipObject,
 };
 
 export * from "./Lazy/index";
