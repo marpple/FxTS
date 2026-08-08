@@ -3,6 +3,7 @@ import always from "./always";
 import apply from "./apply";
 import average from "./average";
 import cases from "./cases";
+import castArray from "./castArray";
 import compactObject from "./compactObject";
 import consume from "./consume";
 import countBy from "./countBy";
@@ -25,11 +26,13 @@ import isArray from "./isArray";
 import isBoolean from "./isBoolean";
 import isDate from "./isDate";
 import isEmpty from "./isEmpty";
+import isEqual from "./isEqual";
 import isMatch from "./isMatch";
 import isNil from "./isNil";
 import isNull from "./isNull";
 import isNumber from "./isNumber";
 import isObject from "./isObject";
+import isPlainObject from "./isPlainObject";
 import isString from "./isString";
 import isUndefined from "./isUndefined";
 import join from "./join";
@@ -78,6 +81,7 @@ export {
   average,
   average as mean,
   cases,
+  castArray,
   compactObject,
   consume,
   countBy,
@@ -103,11 +107,13 @@ export {
   isBoolean,
   isDate,
   isEmpty,
+  isEqual,
   isMatch,
   isNil,
   isNull,
   isNumber,
   isObject,
+  isPlainObject,
   isString,
   isUndefined,
   join,
