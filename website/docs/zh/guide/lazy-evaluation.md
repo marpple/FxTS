@@ -125,3 +125,13 @@ const recommendMovie = async (year: number, rating: number) =>
 
 await recommendMovie(2020, 9);
 ```
+
+## 已经有原生 Iterator Helpers 了,为什么还需要 FxTS?
+
+ES2025 带来了惰性的 [Iterator Helpers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator)(`Iterator.prototype.map`、`filter`、`take` 等)— 就同步序列而言,本页描述的事情平台已经能做了。FxTS 是站在这个地基之上的层:
+
+- **异步惰性求值** — async iterator helpers 仍处于提案阶段,而 FxTS 今天就能在 `AsyncIterable` 上运行同样的操作符,包括贯穿异步工作的提前终止。
+- **并发** — 原生 helpers 一次只求值一个值;[`concurrent`](/api/concurrent) 和 [`concurrentPool`](/api/concurrentPool) 控制同时求值多少个异步值。
+- **组合** — 柯里化的 data-last 函数在 [`pipe`](/api/pipe) 中组合,并带有自动解包 Promise 的类型推断,而不是迭代器实例上的方法链。
+
+这些差异体现得最明显的地方是[并发处理](/zh/guide/handle-concurrency)和[处理 LLM 令牌流](/zh/guide/llm-streaming)。

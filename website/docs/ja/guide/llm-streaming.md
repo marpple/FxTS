@@ -92,3 +92,8 @@ const summaries = await pipe(
 
 FxTS は学ぶべき独自のストリーム抽象を発明しません — プラットフォームとすべての
 LLM SDK がすでに使っているプロトコルを組み合わせるだけです。
+
+あわせて読む:
+
+- [並行処理](/ja/guide/handle-concurrency) — `concurrent` と `concurrentPool` の詳細
+- [p-limit/p-map からの移行](/ja/guide/migrate-from-p-map) — 既存のプール並行コードを FxTS へ移す

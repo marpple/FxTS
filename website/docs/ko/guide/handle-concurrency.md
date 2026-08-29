@@ -71,3 +71,23 @@ await pipe(
   each(console.log),
 );
 ```
+
+## 윈도우 vs 풀: `concurrent`와 `concurrentPool`
+
+`concurrent(n)`은 고정 윈도우 단위로 평가합니다: `n`개의 요청을 발사하고, 윈도우가 끝나기를 기다린 뒤 다음 윈도우를 시작합니다 — 비슷한 크기의 배치형 작업에 이상적입니다.
+
+작업 시간이 제각각이면 윈도우는 가장 느린 멤버를 기다리게 됩니다. [`concurrentPool(n)`](/api/concurrentPool)은 대신 롤링 풀을 유지합니다 — 하나가 끝나는 즉시 다음이 시작되며, 결과는 여전히 입력 순서대로 내보냅니다:
+
+```ts
+await pipe(
+  toAsync(urls),
+  map(fetchItem),
+  concurrentPool(5), // 최대 5개 동시 실행, 하나가 끝날 때마다 충원
+  toArray,
+);
+```
+
+함께 보기:
+
+- [p-limit/p-map에서 마이그레이션](/ko/guide/migrate-from-p-map) — p-map과의 풀 의미론 비교(측정 포함)
+- [LLM 토큰 스트림 처리](/ko/guide/llm-streaming) — AsyncIterable 소스의 스트리밍 소비와 제한 팬아웃

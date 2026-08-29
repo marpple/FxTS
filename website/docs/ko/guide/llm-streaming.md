@@ -89,3 +89,8 @@ _스케줄링_ 자체가 멈춥니다 — 시작되지 않은 호출은 실행�
 
 FxTS는 배워야 할 자체 스트림 추상화를 발명하지 않습니다 — 플랫폼과 모든 LLM
 SDK가 이미 쓰고 있는 그 프로토콜을 조합할 뿐입니다.
+
+함께 보기:
+
+- [동시성 처리](/ko/guide/handle-concurrency) — `concurrent` vs `concurrentPool` 심화
+- [p-limit/p-map에서 마이그레이션](/ko/guide/migrate-from-p-map) — 기존 풀 동시성 코드를 FxTS로 옮기기

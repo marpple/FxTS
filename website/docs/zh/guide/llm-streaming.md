@@ -86,3 +86,8 @@ const summaries = await pipe(
 
 FxTS 不发明需要额外学习的流抽象 — 它只是组合平台和所有 LLM SDK 已经在用的那个
 协议。
+
+另请参阅:
+
+- [并发处理](/zh/guide/handle-concurrency) — 深入了解 `concurrent` 与 `concurrentPool`
+- [从 p-limit/p-map 迁移](/zh/guide/migrate-from-p-map) — 将现有的池化并发代码迁移到 FxTS

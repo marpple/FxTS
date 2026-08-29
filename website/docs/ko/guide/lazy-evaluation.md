@@ -125,3 +125,13 @@ const recommendMovie = async (year: number, rating: number) =>
 
 await recommendMovie(2020, 9);
 ```
+
+## 네이티브 Iterator Helpers가 있는데요?
+
+ES2025에 지연 평가 [Iterator Helpers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator)(`Iterator.prototype.map`, `filter`, `take` 등)가 들어왔습니다 — 동기 시퀀스에 한해서는, 이 문서가 설명하는 일을 이제 플랫폼이 해줍니다. FxTS는 그 바닥 위의 계층입니다:
+
+- **비동기 지연 평가** — async iterator helpers는 아직 제안 단계지만, FxTS는 같은 연산자들을 오늘 `AsyncIterable` 위에서 실행합니다. 비동기 작업을 관통하는 조기 종료까지 포함해서요.
+- **동시성** — 네이티브 헬퍼는 값을 하나씩 평가합니다. [`concurrent`](/api/concurrent)와 [`concurrentPool`](/api/concurrentPool)은 비동기 값을 몇 개씩 동시에 평가할지 제어합니다.
+- **조합** — 커리된 data-last 함수들이 [`pipe`](/api/pipe) 안에서 Promise를 자동으로 벗겨내는 타입 추론과 함께 조합됩니다. 이터레이터 인스턴스의 메서드 체인이 아니라요.
+
+이 차이가 가장 크게 드러나는 곳은 [동시성 처리](/ko/guide/handle-concurrency)와 [LLM 토큰 스트림 처리](/ko/guide/llm-streaming)입니다.

@@ -71,3 +71,23 @@ await pipe(
   each(console.log),
 );
 ```
+
+## Window or pool: `concurrent` vs `concurrentPool`
+
+`concurrent(n)` evaluates in fixed windows: it fires `n` requests, waits for the window to settle, then starts the next one — ideal for batch-style workloads of similar size.
+
+When task durations vary, a window waits for its slowest member. [`concurrentPool(n)`](/api/concurrentPool) keeps a rolling pool instead — the moment one task settles, the next begins — while still yielding results in input order:
+
+```ts
+await pipe(
+  toAsync(urls),
+  map(fetchItem),
+  concurrentPool(5), // at most 5 in flight, refilled as each settles
+  toArray,
+);
+```
+
+See also:
+
+- [Migrate from p-limit/p-map](/guide/migrate-from-p-map) — pool semantics compared with p-map, with measurements
+- [Process LLM Token Streams](/guide/llm-streaming) — streaming consumption and bounded fan-out over AsyncIterable sources

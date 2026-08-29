@@ -91,3 +91,8 @@ The same pipelines work over anything that speaks the iteration protocol:
 
 FxTS does not invent its own stream abstraction to learn — it composes the one
 the platform, and every LLM SDK, already uses.
+
+See also:
+
+- [Handle Concurrency](/guide/handle-concurrency) — `concurrent` vs `concurrentPool` in depth
+- [Migrate from p-limit/p-map](/guide/migrate-from-p-map) — moving existing pooled-concurrency code to FxTS

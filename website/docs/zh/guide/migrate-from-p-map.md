@@ -96,5 +96,4 @@ const firstThree = await pipe(
 );
 ```
 
-而且数据源不必是数组 — 任何 `AsyncIterable` 都可以(分页 API、流),因此永远不需要
-把全部输入物化到内存中。
+而且数据源不必是数组 — 任何说 `AsyncIterable` 协议的东西都可以。协议层面的说明请参阅[处理 LLM 令牌流](/zh/guide/llm-streaming):LLM SDK 流、Node.js 流和分页 API 都是数据源。

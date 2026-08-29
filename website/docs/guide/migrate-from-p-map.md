@@ -104,5 +104,4 @@ const firstThree = await pipe(
 );
 ```
 
-And the source does not have to be an array — any `AsyncIterable` works
-(paginated APIs, streams), so the whole input never needs to be materialized.
+And the source does not have to be an array — anything that speaks the `AsyncIterable` protocol works. See [Process LLM Token Streams](/guide/llm-streaming) for the protocol-level view: LLM SDK streams, Node.js streams, and paginated APIs are all sources.

@@ -125,3 +125,13 @@ const recommendMovie = async (year: number, rating: number) =>
 
 await recommendMovie(2020, 9);
 ```
+
+## ネイティブの Iterator Helpers があるのでは?
+
+ES2025 で遅延評価の [Iterator Helpers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator)(`Iterator.prototype.map`、`filter`、`take` など)が導入されました — 同期シーケンスに限れば、このページが説明することをプラットフォームがやってくれます。FxTS はその土台の上の層です:
+
+- **非同期の遅延評価** — async iterator helpers はまだ提案段階ですが、FxTS は同じオペレーターを今日 `AsyncIterable` の上で実行します。非同期処理を貫く早期終了も含めて。
+- **並行性** — ネイティブヘルパーは値を 1 つずつ評価します。[`concurrent`](/api/concurrent) と [`concurrentPool`](/api/concurrentPool) は、非同期の値をいくつ同時に評価するかを制御します。
+- **合成** — カリー化された data-last 関数が [`pipe`](/api/pipe) の中で、Promise を自動的に剥がす型推論とともに合成されます。イテレーターインスタンスのメソッドチェーンではなく。
+
+この違いが最も効くのは[並行処理](/ja/guide/handle-concurrency)と [LLM トークンストリームの処理](/ja/guide/llm-streaming)です。
