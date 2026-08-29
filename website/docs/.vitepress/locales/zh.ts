@@ -31,6 +31,7 @@ export const zhConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
             { text: "惰性求值", link: "/zh/guide/lazy-evaluation" },
             { text: "并发处理", link: "/zh/guide/handle-concurrency" },
             { text: "从 p-limit/p-map 迁移", link: "/zh/guide/migrate-from-p-map" },
+            { text: "LLM 令牌流式处理", link: "/zh/guide/llm-streaming" },
             { text: "错误处理", link: "/zh/guide/error-handling" },
             { text: "方法链", link: "/zh/guide/method-chaining" },
           ],

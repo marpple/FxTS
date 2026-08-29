@@ -27,6 +27,7 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
             { text: "Lazy Evaluation", link: "/guide/lazy-evaluation" },
             { text: "Handle Concurrency", link: "/guide/handle-concurrency" },
             { text: "Migrate from p-limit/p-map", link: "/guide/migrate-from-p-map" },
+            { text: "LLM Token Streaming", link: "/guide/llm-streaming" },
             { text: "Error Handling", link: "/guide/error-handling" },
             { text: "Method Chaining", link: "/guide/method-chaining" },
           ],
