@@ -31,6 +31,7 @@ export const jaConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
             { text: "遅延評価", link: "/ja/guide/lazy-evaluation" },
             { text: "並行処理", link: "/ja/guide/handle-concurrency" },
             { text: "p-limit/p-mapからの移行", link: "/ja/guide/migrate-from-p-map" },
+            { text: "LLMトークンストリーミング", link: "/ja/guide/llm-streaming" },
             { text: "エラー処理", link: "/ja/guide/error-handling" },
             { text: "メソッドチェーン", link: "/ja/guide/method-chaining" },
           ],

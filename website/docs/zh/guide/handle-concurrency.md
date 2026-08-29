@@ -71,3 +71,23 @@ await pipe(
   each(console.log),
 );
 ```
+
+## 窗口还是池:`concurrent` 与 `concurrentPool`
+
+`concurrent(n)` 以固定窗口为单位求值:发出 `n` 个请求,等窗口全部完成后再开始下一批 — 适合任务规模相近的批处理型负载。
+
+当任务耗时不均时,窗口会等待其中最慢的成员。[`concurrentPool(n)`](/api/concurrentPool) 则维护一个滚动池 — 一个任务完成的瞬间下一个就会开始,同时结果仍按输入顺序产出:
+
+```ts
+await pipe(
+  toAsync(urls),
+  map(fetchItem),
+  concurrentPool(5), // 最多 5 个同时进行,每完成一个就补充一个
+  toArray,
+);
+```
+
+另请参阅:
+
+- [从 p-limit/p-map 迁移](/zh/guide/migrate-from-p-map) — 与 p-map 的池语义对比(附测量数据)
+- [处理 LLM 令牌流](/zh/guide/llm-streaming) — AsyncIterable 数据源的流式消费与有界扇出

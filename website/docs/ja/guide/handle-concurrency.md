@@ -71,3 +71,23 @@ await pipe(
   each(console.log),
 );
 ```
+
+## ウィンドウかプールか: `concurrent` と `concurrentPool`
+
+`concurrent(n)` は固定ウィンドウ単位で評価します: `n` 個のリクエストを発行し、ウィンドウが完了するのを待ってから次を開始します — 同程度のサイズのバッチ型ワークロードに最適です。
+
+タスクの所要時間がばらつく場合、ウィンドウは最も遅いメンバーを待つことになります。[`concurrentPool(n)`](/api/concurrentPool) は代わりにローリングプールを維持します — 1 つが完了した瞬間に次が始まり、結果は入力順のまま返されます:
+
+```ts
+await pipe(
+  toAsync(urls),
+  map(fetchItem),
+  concurrentPool(5), // 同時実行は最大 5 件、完了するたびに補充
+  toArray,
+);
+```
+
+あわせて読む:
+
+- [p-limit/p-map からの移行](/ja/guide/migrate-from-p-map) — p-map とのプールセマンティクス比較(測定付き)
+- [LLM トークンストリームの処理](/ja/guide/llm-streaming) — AsyncIterable ソースのストリーミング消費と制限付きファンアウト

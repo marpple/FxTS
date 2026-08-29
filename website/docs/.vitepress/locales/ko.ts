@@ -31,6 +31,7 @@ export const koConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
             { text: "지연 평가", link: "/ko/guide/lazy-evaluation" },
             { text: "동시성 처리", link: "/ko/guide/handle-concurrency" },
             { text: "p-limit/p-map에서 마이그레이션", link: "/ko/guide/migrate-from-p-map" },
+            { text: "LLM 토큰 스트리밍", link: "/ko/guide/llm-streaming" },
             { text: "에러 처리", link: "/ko/guide/error-handling" },
             { text: "메서드 체이닝", link: "/ko/guide/method-chaining" },
           ],

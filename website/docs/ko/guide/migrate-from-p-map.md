@@ -102,5 +102,4 @@ const firstThree = await pipe(
 );
 ```
 
-그리고 소스가 배열일 필요가 없습니다 — 어떤 `AsyncIterable`이든 동작하므로
-(페이지네이션 API, 스트림), 전체 입력을 메모리에 실체화할 필요가 없습니다.
+그리고 소스가 배열일 필요가 없습니다 — `AsyncIterable` 프로토콜을 말하는 것이라면 무엇이든 동작합니다. 프로토콜 관점의 설명은 [LLM 토큰 스트림 처리](/ko/guide/llm-streaming)를 보세요: LLM SDK 스트림, Node.js 스트림, 페이지네이션 API 모두가 소스입니다.

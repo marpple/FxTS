@@ -125,3 +125,13 @@ const recommendMovie = async (year: number, rating: number) =>
 
 await recommendMovie(2020, 9);
 ```
+
+## What about native Iterator Helpers?
+
+ES2025 shipped lazy [Iterator Helpers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator) (`Iterator.prototype.map`, `filter`, `take`, ...) — for synchronous sequences, the platform now does what this page describes. FxTS is the layer above that floor:
+
+- **Async laziness** — async iterator helpers are still a proposal, while FxTS runs the same operators over `AsyncIterable` today, including early termination across asynchronous work.
+- **Concurrency** — native helpers evaluate one value at a time; [`concurrent`](/api/concurrent) and [`concurrentPool`](/api/concurrentPool) control how many asynchronous values are evaluated at once.
+- **Composition** — curried, data-last functions compose in [`pipe`](/api/pipe) with Promise-unwrapping type inference, instead of method chains on iterator instances.
+
+See [Handle Concurrency](/guide/handle-concurrency) and [Process LLM Token Streams](/guide/llm-streaming) for where this matters most.
